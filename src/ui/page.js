@@ -63,9 +63,9 @@ function getDescription(path) {
 function getImage(path) {
   const piece = getPieceFromPath(path);
   if (piece) {
-    return `https://thecapturedproject.com${config.IMAGES_URL}/${piece.image}.jpg?w=900&h=900`;
+    return `${config.IMAGES[piece.image + '.jpg']}=w900-h900-c`;
   } else {
-    return `https://thecapturedproject.com${config.IMAGES_URL}/${data[0].image}.jpg?w=900&h=900`;
+    return `${config.IMAGES[data[0].image + '.jpg']}=w900-h900-c`;
   }
 }
 
