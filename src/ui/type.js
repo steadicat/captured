@@ -2,13 +2,13 @@ import React from 'react';
 import {ResetElement} from 'stylistic-elements';
 import component from '../lib/component';
 
-const REGULAR = 'yantramanav, sans-serif';
-const CONDENSED = 'oswald, "roboto condensed", sans-serif';
+const REGULAR = 'roboto, sans-serif';
+const CONDENSED = '"roboto condensed", sans-serif';
 
 export const DefaultFont = component('DefaultFont', ({children, ...props}) =>
   React.cloneElement(React.Children.only(children), {
     fontFamily: REGULAR,
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 300,
     lineHeight: 24,
     textRendering: 'optimizeLegibility',

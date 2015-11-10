@@ -79,8 +79,8 @@ export const Page = component('Page', ({$, store, children}) =>
     <head>
       <title>{getTitle($('path'))}</title>
       <link rel="prefetch" href={`${config.ASSETS_URL}${$('main')}`} />
-      <link rel="prefetch" href="https://fonts.googleapis.com/css?family=Yantramanav:300,700|Oswald:300,700" />
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Yantramanav:300,700|Oswald:300,700" type="text/css" />
+      <link rel="prefetch" href="https://fonts.googleapis.com/css?family=Roboto:300,700|Roboto+Condensed:300,700" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,700|Roboto+Condensed:300,700" type="text/css" />
       <meta name="description" content={getDescription($('path'))} />
       <link rel="canonical" href={trailingSlash(`https://thecapturedproject.com${$('path')}`)} />
       <meta property="og:site_name" content="The Captured Project" />
