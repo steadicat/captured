@@ -44,14 +44,10 @@ func getSoldCounter(c context.Context) int {
 	return sold.Value
 }
 
-func incrementSoldCounter(c context.Context) (int, error) {
+func incrementSoldCounter(c context.Context) error {
 	_, err := memcache.IncrementExisting(c, "counter", 1)
 	if err != nil {
-		if err == datastore.ErrNoSuchEntity {
-			log.Infof(c, "[counter] Cache miss when incrementing")
-		} else {
-			return err
-		}
+		log.Infof(c, "[counter] Error incrementing cached counter")
 	}
 
 	sold := new(Counter)
@@ -70,5 +66,5 @@ func incrementSoldCounter(c context.Context) (int, error) {
 		return nil
 	}, nil)
 
-	return sold.Value, err
+	return err
 }

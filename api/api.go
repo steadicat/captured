@@ -1,13 +1,15 @@
 package api
 
 import (
+	"github.com/zenazn/goji"
 	"images"
-	"net/http"
 	"store"
 )
 
 func init() {
-	http.HandleFunc("/api/sold", store.SoldHandler)
-	http.HandleFunc("/api/pay", store.PaymentHandler)
-	http.HandleFunc("/api/images", images.ImageListHandler)
+	goji.Get("/api/sold", store.SoldHandler)
+	goji.Post("/api/pay", store.PaymentHandler)
+	goji.Get("/api/orders", store.OrdersHandler)
+	goji.Get("/api/images", images.ImageListHandler)
+	goji.Serve()
 }

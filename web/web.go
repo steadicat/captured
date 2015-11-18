@@ -3,10 +3,13 @@ package web
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/zenazn/goji/web"
 	"golang.org/x/net/context"
 	"google.golang.org/appengine/log"
 	"net/http"
 )
+
+type Context web.C
 
 func LogError(c context.Context, err error, message string) {
 	log.Warningf(c, "[error] %s (%v)", message, err)

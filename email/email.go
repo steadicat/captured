@@ -33,18 +33,18 @@ type PostmarkMessage struct {
 	TrackOpens    bool
 }
 
-func SendReceipt(c context.Context, email string, billingName string, shippingName string, address stripe.Address) error {
+func SendReceipt(c context.Context, name string, email string, shipping *stripe.ShippingParams) error {
 
 	message := PostmarkMessage{
 		From:       "The Captured Project <info@thecapturedproject.com>",
-		To:         fmt.Sprintf("%s <%s>", billingName, email),
+		To:         fmt.Sprintf("%s <%s>", name, email),
 		TemplateId: 5705,
 		TemplateModel: map[string]interface{}{
-			"total":         "$40",
-			"billing_name":  billingName,
-			"shipping_name": shippingName,
 			"date":          time.Now().Format("1/2/2006"),
-			"address":       address,
+			"total":         "$40",
+			"billing_name":  name,
+			"shipping_name": shipping.Name,
+			"address":       shipping.Address,
 		},
 	}
 
