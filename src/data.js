@@ -56,7 +56,7 @@ module.exports = [
       },
       {
         title: 'Treason',
-        description: 'violated sanctions by doing business with enemy countries such as Iran and Sudan',
+        description: 'Violated sanctions by doing business with enemy countries such as Iran and Sudan',
       },
     ],
     artist: 'Jerry Lee Jenkins',

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Block, InlineBlock} from 'stylistic-elements';
+import {Block, InlineBlock, Inline} from 'stylistic-elements';
 import component from '../lib/component';
 import {track} from '../lib/behaviors';
 import {Image} from '../ui/image';
@@ -10,22 +10,12 @@ import {SocialButtons} from '../ui/social';
 
 export const Charges = component('Charges', ({charges, ...props}) =>
   <Block {...props}>
-    <Column width="50%" paddingRight={6}>
-      {charges.slice(0, Math.ceil(charges.length / 2)).map((c, i) =>
-        <Block key={i} marginTop={24}>
-          <Text fontWeight="bold">{c.title}</Text>
-          <Text>{c.description}.</Text>
-        </Block>
-      )}
-    </Column>
-    <Column width="50%" paddingLeft={6}>
-      {charges.slice(Math.ceil(charges.length / 2)).map((c, i) =>
-        <Block key={i} marginTop={24}>
-          <Text fontWeight="bold">{c.title}</Text>
-          <Text>{c.description}.</Text>
-        </Block>
-      )}
-    </Column>
+    {charges.map((c, i) =>
+      <Block key={i} marginTop={24}>
+        <Text fontWeight="bold">{c.title}</Text>
+        <Text>{c.description}.</Text>
+      </Block>
+    )}
   </Block>
 );
 
@@ -42,38 +32,39 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
       width={get('browser.known') ? getImageSize(get) : '100%'}
       height={get('browser.known') ? getImageSize(get) : null}
       maxWidth="100vh"
+      marginBottom={24}
     />
-    <Block marginTop={36} textAlign="center">
+
+    <Column textAlign="left" width="60%" paddingRight={24}>
       {/*<SocialButtons display="block" textAlign="right" url={`https://thecapturedproject.com/${piece.id}/`} />*/}
-      <PageHeading marginTop={24} marginBottom={12}>
-        {piece.name}, {piece.title} of {piece.company}
+      <LightCondensedText fontSize={24} textTransform="uppercase">
+        {piece.company}
+      </LightCondensedText>
+      <PageHeading marginTop={6}>
+        {piece.name}, {piece.title}
       </PageHeading>
+      <Text marginTop={6}>Oversees a company engaged in:</Text>
       <Charges
         charge={piece}
         charges={piece.charges}
         textAlign="left"
         marginBottom={24}
       />
-      <Block fontSize={14}>
-        <InlineBlock paddingRight={4} fontWeight="bold">More info:</InlineBlock>
-        <InlineBlock>
-          {(piece.links || []).map((link, i) =>
-          <Link key={i} href={link} fontWeight="normal" paddingLeft={4} paddingRight={4}>{i + 1}</Link>
-        )}
-        </InlineBlock>
-      </Block>
-      <LightCondensedText
-        marginTop={28}
-        marginBottom={6}
-        fontSize={20}
-        textTransform="uppercase">
-          Captured by
-        </LightCondensedText>
-      <PageHeading marginBottom={6} fontSize={20}>
-        {piece.artist}, prison ID# {piece.artistID}
+    </Column>
+    <Column textAlign="left" width="40%">
+      <LightCondensedText fontSize={24} textTransform="uppercase">Captured by</LightCondensedText>
+      <PageHeading marginTop={6}>
+        {piece.artist}
       </PageHeading>
-      <Text>{piece.artistBio} {piece.artistCharges}</Text>
-      <Text marginTop={48}>{piece.materials}</Text>
-    </Block>
+      <Text marginTop={6}>Prison ID# {piece.artistID}</Text>
+      <Text marginTop={24}>{piece.artistBio} <Inline fontWeight="bold">{piece.artistCharges}</Inline>.</Text>
+      <Text marginTop={24}>{piece.materials}</Text>
+    </Column>
+    <Link display="block" paddingRight={4} fontWeight="bold" textAlign="left">More Info</Link>
+    <InlineBlock display="none">
+      {(piece.links || []).map((link, i) =>
+      <Link key={i} href={link} fontWeight="normal" paddingLeft={4} paddingRight={4}>{i + 1}</Link>
+    )}
+    </InlineBlock>
   </Block>
 ));

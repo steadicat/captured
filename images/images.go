@@ -2,7 +2,6 @@ package images
 
 import (
 	"config"
-	"encoding/json"
 	"fmt"
 	"golang.org/x/oauth2/google"
 	"golang.org/x/oauth2/jwt"
@@ -62,7 +61,5 @@ func ImageListHandler(w http.ResponseWriter, r *http.Request) {
 		response.Images[object.Name] = url.String()
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	encoder := json.NewEncoder(w)
-	encoder.Encode(response)
+	web.SendJSON(c, w, response)
 }

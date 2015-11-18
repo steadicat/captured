@@ -7,17 +7,11 @@ import (
 	"github.com/stripe/stripe-go"
 	"github.com/stripe/stripe-go/charge"
 	"github.com/stripe/stripe-go/customer"
-	"golang.org/x/net/context"
 	"google.golang.org/appengine"
-	"google.golang.org/appengine/datastore"
 	"google.golang.org/appengine/urlfetch"
 	"net/http"
 	"web"
 )
-
-type Counter struct {
-	Value int
-}
 
 type SoldResponse struct {
 	Sold int `json:"sold"`
@@ -43,35 +37,6 @@ type PaymentResponse struct {
 	Ok bool `json:"ok"`
 }
 
-func getSoldCounter(c context.Context) (int, error) {
-	sold := new(Counter)
-	key := datastore.NewKey(c, "Counter", "sold", 0, nil)
-	err := datastore.Get(c, key, sold)
-	if err != nil && err != datastore.ErrNoSuchEntity {
-		return 0, err
-	}
-	return sold.Value, nil
-}
-
-func incrementSoldCounter(c context.Context) (int, error) {
-	sold := new(Counter)
-	err := datastore.RunInTransaction(c, func(c context.Context) error {
-		key := datastore.NewKey(c, "Counter", "sold", 0, nil)
-		err := datastore.Get(c, key, sold)
-		if err != nil && err != datastore.ErrNoSuchEntity {
-			return err
-		}
-		sold.Value++
-		_, err = datastore.Put(c, key, sold)
-		if err != nil {
-			sold.Value--
-			return err
-		}
-		return nil
-	}, nil)
-	return sold.Value, err
-}
-
 func SoldHandler(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
 	if r.Method != "GET" {
@@ -79,19 +44,30 @@ func SoldHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	sold, err := getSoldCounter(c)
-	if err != nil {
-		web.SendError(c, w, err, 500, "Error counting books sold")
-		return
-	}
-	response := SoldResponse{Sold: sold}
-
-	w.Header().Set("Content-Type", "application/json")
-	encoder := json.NewEncoder(w)
-	encoder.Encode(response)
+	sold := getSoldCounter(c)
+	web.SendJSON(c, w, SoldResponse{Sold: sold})
 }
 
-func saveCustomer(c context.Context, token stripe.Token, args PaymentArgs, immediateCharge bool) error {
+func PaymentHandler(w http.ResponseWriter, r *http.Request) {
+	c := appengine.NewContext(r)
+	if r.Method != "POST" {
+		web.SendError(c, w, nil, 405, "Method not supported")
+		return
+	}
+
+	decoder := json.NewDecoder(r.Body)
+	body := new(PaymentRequestBody)
+	err := decoder.Decode(&body)
+	if err != nil {
+		web.SendError(c, w, err, 400, "Could not parse payment information")
+		return
+	}
+
+	sold := getSoldCounter(c)
+	token := body.Token
+	args := body.Args
+	immediateCharge := sold > 300
+
 	stripe.Key = config.Get(c, "STRIPE_KEY")
 	stripe.SetHTTPClient(urlfetch.Client(c))
 
@@ -119,77 +95,38 @@ func saveCustomer(c context.Context, token stripe.Token, args PaymentArgs, immed
 
 	customer, err := customer.New(customerParams)
 	if err != nil {
-		return err
+		web.SendError(c, w, err, 500, "Error saving customer to Stripe")
+		return
 	}
-	err = onSuccessfulPurchase(c, token.Email, args.BillingName, args.ShippingName, address)
+
+	_, err = incrementSoldCounter(c)
 	if err != nil {
-		return err
+		web.LogError(c, err, "Error incrementing sold counter")
 	}
 
 	if immediateCharge {
-		err := saveCharge(customer, args.ShippingName, address)
+		chargeParams := stripe.ChargeParams{
+			Amount:    4000,
+			Currency:  "usd",
+			Customer:  customer.ID,
+			NoCapture: true,
+			Statement: "Captured Project Book",
+			Shipping: &stripe.ShippingDetails{
+				Name:    args.ShippingName,
+				Address: address,
+			},
+		}
+		_, err := charge.New(&chargeParams)
 		if err != nil {
-			return err
+			web.SendError(c, w, err, 500, "Error charging card")
+			return
 		}
 	}
 
-	return nil
-}
-
-func onSuccessfulPurchase(c context.Context, emailAddress string, billingName string, shippingName string, address stripe.Address) error {
-	_, err := incrementSoldCounter(c)
+	err = email.SendReceipt(c, token.Email, args.BillingName, args.ShippingName, address)
 	if err != nil {
-		return err
+		web.LogError(c, err, "Error sending receipt")
 	}
 
-	return email.SendReceipt(c, emailAddress, billingName, shippingName, address)
-}
-
-func saveCharge(customer *stripe.Customer, name string, address stripe.Address) error {
-	chargeParams := stripe.ChargeParams{
-		Amount:    4000,
-		Currency:  "usd",
-		Customer:  customer.ID,
-		NoCapture: true,
-		Statement: "Captured Project Book",
-		Shipping: &stripe.ShippingDetails{
-			Name:    name,
-			Address: address,
-		},
-	}
-	_, err := charge.New(&chargeParams)
-	return err
-}
-
-func PaymentHandler(w http.ResponseWriter, r *http.Request) {
-	c := appengine.NewContext(r)
-	if r.Method != "POST" {
-		web.SendError(c, w, nil, 405, "Method not supported")
-		return
-	}
-
-	decoder := json.NewDecoder(r.Body)
-	body := new(PaymentRequestBody)
-	err := decoder.Decode(&body)
-	if err != nil {
-		web.SendError(c, w, nil, 400, "Could not parse payment information")
-		return
-	}
-
-	sold, err := getSoldCounter(c)
-	if err != nil {
-		web.SendError(c, w, nil, 500, "Could not count books sold")
-		return
-	}
-
-	err = saveCustomer(c, body.Token, body.Args, sold > 300)
-	if err != nil {
-		web.SendError(c, w, nil, 500, "Error saving purchase")
-		return
-	}
-
-	response := PaymentResponse{Ok: true}
-	w.Header().Set("Content-Type", "application/json")
-	encoder := json.NewEncoder(w)
-	encoder.Encode(response)
+	web.SendJSON(c, w, PaymentResponse{Ok: true})
 }

@@ -2,9 +2,11 @@ NODE_BIN=./node_modules/.bin
 NODE=node --harmony
 JS_DIR=src
 
-deps:
-	mkdir -p assets
+node_modules: package.json
 	npm install
+
+deps: node_modules
+	mkdir -p assets
 
 clean:
 	rm -rf assets/*.js assets/**/*.html

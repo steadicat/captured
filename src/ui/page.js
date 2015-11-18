@@ -52,7 +52,7 @@ function getTitle(path) {
 function getDescription(path) {
   const piece = getPieceFromPath(path);
   if (piece) {
-    return `${piece.materials}, by ${piece.artist}. ${piece.artistBio}.`;
+    return `${piece.materials}, by ${piece.artist}. ${piece.artistBio} ${piece.artistCharges}.`;
   } else if (path === '/act/') {
     return 'Limited edition of 1000 copies. All proceeds will be donated to the Bernie 2016 campaign.';
   } else {
