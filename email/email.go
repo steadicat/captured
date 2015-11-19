@@ -33,21 +33,7 @@ type PostmarkMessage struct {
 	TrackOpens    bool
 }
 
-func SendReceipt(c context.Context, name string, email string, shipping *stripe.ShippingParams) error {
-
-	message := PostmarkMessage{
-		From:       "The Captured Project <info@thecapturedproject.com>",
-		To:         fmt.Sprintf("%s <%s>", name, email),
-		TemplateId: 5705,
-		TemplateModel: map[string]interface{}{
-			"date":          time.Now().Format("1/2/2006"),
-			"total":         "$40",
-			"billing_name":  name,
-			"shipping_name": shipping.Name,
-			"address":       shipping.Address,
-		},
-	}
-
+func send(c context.Context, message *PostmarkMessage) error {
 	client := urlfetch.Client(c)
 	requestBody, err := json.Marshal(message)
 	if err != nil {
@@ -70,7 +56,41 @@ func SendReceipt(c context.Context, name string, email string, shipping *stripe.
 
 	defer res.Body.Close()
 	resBody, err := ioutil.ReadAll(res.Body)
-	log.Infof(c, "Postmark response: %v", resBody)
+	log.Infof(c, "Postmark response: %s", string(resBody))
 
 	return nil
+}
+
+func SendReceipt(c context.Context, name string, email string, shipping stripe.Shipping) error {
+
+	message := PostmarkMessage{
+		From:       "The Captured Project <info@thecapturedproject.com>",
+		To:         fmt.Sprintf("%s <%s>", name, email),
+		TemplateId: 5705,
+		TemplateModel: map[string]interface{}{
+			"date":          time.Now().Format("1/2/2006"),
+			"total":         "$40",
+			"billing_name":  name,
+			"shipping_name": shipping.Name,
+			"address":       shipping.Address,
+		},
+	}
+	return send(c, &message)
+}
+
+func SendShippingNotification(c context.Context, name string, email string, shipping stripe.Shipping, trackingNumber string) error {
+	message := PostmarkMessage{
+		From:       "The Captured Project <info@thecapturedproject.com>",
+		To:         fmt.Sprintf("%s <%s>", name, email),
+		TemplateId: 216881,
+		TemplateModel: map[string]interface{}{
+			"date":            time.Now().Format("1/2/2006"),
+			"total":           "$40",
+			"billing_name":    name,
+			"shipping_name":   shipping.Name,
+			"address":         shipping.Address,
+			"tracking_number": trackingNumber,
+		},
+	}
+	return send(c, &message)
 }

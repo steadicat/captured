@@ -82,6 +82,7 @@ export class Orders extends React.Component {
           <PageHeading textAlign="center" marginTop={24} marginBottom={24}>Orders</PageHeading>
           <Block textAlign="center" marginBottom={48}>
             <StatusSelector status="created">New</StatusSelector>
+            <StatusSelector status="paid">Paid</StatusSelector>
             <StatusSelector status="fulfilled">Shipped</StatusSelector>
             <StatusSelector status="all">All</StatusSelector>
           </Block>

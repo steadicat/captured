@@ -226,7 +226,7 @@ export function orderShipped(get, actions, orderID, trackingNumber, err, res) {
     return get().remove(`orders.${orderID}.status`, 'paid');
   }
   return get()
-    .set(`orders.${orderID}.meta.tracking_number`, trackingNumber)
+    .set(`orders.${orderID}.metadata.tracking_number`, trackingNumber)
     .set(`orders.${orderID}.status`, 'fulfilled');
 }
 
