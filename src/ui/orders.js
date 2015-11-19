@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'ducts';
-import {Block, InlineBlock} from 'stylistic-elements';
+import {Block} from 'stylistic-elements';
 import component from '../lib/component';
 import {DefaultFont, PageHeading, BoldText, Text, LightCondensedText} from '../ui/type';
 import {Column} from '../ui/layout';
 import {MainButton, Input, Button} from '../ui/core';
 
-const StatusSelector = connect(component('StatusSelector', ({get, actions, status, ...props}) =>
+const StatusSelector = component('StatusSelector', ({get, actions, status, ...props}) =>
   <Button
     fontWeight="bold"
     borderWidth={0}
@@ -16,7 +16,7 @@ const StatusSelector = connect(component('StatusSelector', ({get, actions, statu
     onClick={() => actions.selectOrders(status)}
     {...props}
   />
-));
+);
 
 const Message = component('Message', (props) =>
   <Block textAlign="center" {...props} padding={48} />);
@@ -43,7 +43,7 @@ class Tracking extends React.Component {
   }
 }
 
-const Order = connect(component('Order', ({order: {id, created, status, shipping: {name, address}, customer, metadata}, get, actions}) =>
+const Order = component('Order', ({order: {id, created, status, shipping: {name, address}, customer, metadata}, get, actions}) =>
   <Block marginBottom={12}>
     <Column width="20%">
       <LightCondensedText fontSize={12}>{new Date(created * 1000).toLocaleString()}</LightCondensedText>
@@ -65,7 +65,7 @@ const Order = connect(component('Order', ({order: {id, created, status, shipping
 
     </Column>
   </Block>
-));
+);
 
 @connect
 export class Orders extends React.Component {

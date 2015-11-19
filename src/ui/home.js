@@ -1,12 +1,11 @@
 import React from 'react';
-import {connect} from 'ducts';
 import {Block} from 'stylistic-elements';
 import component from '../lib/component';
 import {track} from '../lib/behaviors';
 import {linear} from '../lib/math';
 import {Link} from '../ui/core';
 import {Image} from '../ui/image';
-import {DefaultFont, PageTitle, PageSubtitle, Text} from '../ui/type';
+import {DefaultFont, PageTitle, PageSubtitle, Text, CondensedText} from '../ui/type';
 import {SocialButtons} from '../ui/social';
 import {Toolbar} from '../ui/toolbar';
 import {Piece} from '../ui/piece';
@@ -14,11 +13,11 @@ import {BuyButton} from '../ui/buy';
 import {Orders} from '../ui/orders';
 import data from '../data';
 
-export const Router = connect(component('Router', ({get}) => {
+export const Router = component('Router', ({get}) => {
   if (!get('shown')) return <Placeholder />;
   if (get('path') === '/orders') return <Orders />;
   return <Home />;
-}));
+});
 
 export const Placeholder = component('Placeholder', () =>
   <DefaultFont>
@@ -42,7 +41,7 @@ function getImageSize(get) {
   return Math.ceil(Math.min(get('browser.width') * 0.6, get('browser.height') - 360));
 }
 
-export const Header = track(connect(component('Header', ({get, actions, ...props}) =>
+export const Header = track(component('Header', ({get, actions, ...props}) =>
   <Block paddingTop={48} paddingBottom={96} {...props}>
     <Image
       src="pencils.jpg"
@@ -55,9 +54,9 @@ export const Header = track(connect(component('Header', ({get, actions, ...props
     <PageTitle marginTop={24} marginBottom={24} fontSize={getTitleSize(get)} lineHeight={getTitleSize(get)}>CAPTURED</PageTitle>
     <PageSubtitle fontSize={getSubtitleSize(get)} lineHeight={getSubtitleSize(get)}>People in prison drawing people who should be</PageSubtitle>
   </Block>
-)));
+));
 
-export const Footer = track(connect(component('Footer', ({get, actions, ...props}) =>
+export const Footer = track(component('Footer', ({get, actions, ...props}) =>
   <Block {...props}>
     <Block marginBottom={24}>
       <Image
@@ -66,7 +65,7 @@ export const Footer = track(connect(component('Footer', ({get, actions, ...props
         height={250}
       />
     </Block>
-    <BuyButton />
+    {get('sold') >= 1000 ? <CondensedText fontWeight="bold" fontSize={24}>SOLD OUT</CondensedText> : <BuyButton /> }
     <Text marginTop={12}>
       {get('sold') > 0
       ? `Limited edition. ${get('sold')} of ${get('total')} copies sold.`
@@ -81,7 +80,7 @@ export const Footer = track(connect(component('Footer', ({get, actions, ...props
     </Text>
     <SocialButtons url="https://thecapturedproject.com/" marginBottom={96} />
   </Block>
-)));
+));
 
 export const Home = component('Home', ({get, actions, ...props}) =>
   <DefaultFont>
@@ -99,7 +98,7 @@ export const Home = component('Home', ({get, actions, ...props}) =>
         />
       )}
       <Footer trackKey="act" />
-      <Toolbar />
+      {get('sold') < 1000 && <Toolbar />}
     </Block>
   </DefaultFont>
 );

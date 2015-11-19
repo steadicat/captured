@@ -1,12 +1,11 @@
 import React from 'react';
-import {connect} from 'ducts';
 import {Animate} from 'react-rebound';
 import component from '../lib/component';
 import {hover} from '../lib/behaviors';
 import {CondensedText} from '../ui/type';
 import {Pay} from '../ui/pay';
 
-export const BuyButton = hover(connect(component('BuyButton', ({hovered, get, ...props}) =>
+export const BuyButton = hover(component('BuyButton', ({hovered, get, ...props}) =>
   <Animate scaleX={hovered ? 1.1 : 1} scaleY={hovered ? 1.1 : 1}>
     <Pay
       lineHeight={12}
@@ -43,4 +42,4 @@ export const BuyButton = hover(connect(component('BuyButton', ({hovered, get, ..
       </CondensedText>
     </Pay>
   </Animate>
-)));
+));

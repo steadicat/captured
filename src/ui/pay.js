@@ -1,6 +1,5 @@
 import React from 'react';
 import superagent from 'superagent';
-import {connect} from 'ducts';
 import component from '../lib/component';
 import * as script from '../lib/script';
 import {Button} from '../ui/core';
@@ -37,10 +36,10 @@ function onClick(get, actions, event) {
   });
 };
 
-export const Pay = connect(component('Pay', ({get, actions, children, ...props}) => (
+export const Pay = component('Pay', ({get, actions, children, ...props}) => (
   <Button onClick={onClick.bind(this, get, actions)} {...props}>
     {get('stripeDialogRequested') && !get('stripeDialogShown') ? '...' : children}
   </Button>
-)));
+));
 
 
