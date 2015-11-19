@@ -24,6 +24,8 @@ export function init(path) {
       known: false,
     },
     positions: {},
+    orders: {},
+    orderStatus: 'created',
   });
 }
 
@@ -166,4 +168,69 @@ export function stripeDialogHidden(get, actions) {
 
 export function purchaseCompleted(get, actions) {
   setTimeout(actions.requestSoldUpdate, 1000);
+}
+
+function keyBy(key, list) {
+  const res = {};
+  list.forEach(el => {
+    res[el[key]] = el;
+  });
+  return mutatis(res);
+}
+
+/* global alert */
+
+export function fetchOrders(get, actions) {
+  if (get('ordersLoaded')) return;
+  superagent.get(`${config.API_URL}/orders`, {status: get('orderStatus')}, (err, res) => {
+    if (err) return alert(err);
+    actions.updateOrders(res.body.orders);
+  });
+  return get().set('ordersLoading', true);
+}
+
+export function updateOrders(get, actions, orders) {
+  return get()
+    .set('orders', keyBy('id', orders))
+    .remove('ordersLoading')
+    .set('ordersLoaded', true);
+}
+
+export function chargeOrder(get, actions, orderID, customerID) {
+  superagent
+    .post(`${config.API_URL}/charge`)
+    .query({orderID, customerID})
+    .end((err, res) => actions.orderCharged(orderID, err, res));
+  return get().set(`orders.${orderID}.status`, 'charging');
+}
+
+export function orderCharged(get, actions, orderID, err, res) {
+  if (err) {
+    alert(err);
+    return get().set(`orders.${orderID}.status`, 'created')
+  }
+  return get().set(`orders.${orderID}.status`, 'paid');
+}
+
+export function shipOrder(get, actions, orderID, trackingNumber) {
+  superagent
+    .post(`${config.API_URL}/ship`)
+    .query({orderID, trackingNumber})
+    .end((err, res) => actions.orderShipped(orderID, trackingNumber, err, res));
+  return get().set(`orders.${orderID}.status`, 'shipping');
+}
+
+export function orderShipped(get, actions, orderID, trackingNumber, err, res) {
+  if (err) {
+    alert(err);
+    return get().remove(`orders.${orderID}.status`, 'paid');
+  }
+  return get()
+    .set(`orders.${orderID}.meta.tracking_number`, trackingNumber)
+    .set(`orders.${orderID}.status`, 'fulfilled');
+}
+
+export function selectOrders(get, actions, status) {
+  setTimeout(actions.fetchOrders, 0);
+  return get().set('orders', {}).set('ordersLoaded', false).set('orderStatus', status);
 }

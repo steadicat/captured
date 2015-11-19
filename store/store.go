@@ -53,10 +53,8 @@ func PaymentHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	sold := getSoldCounter(c)
 	token := body.Token
 	args := body.Args
-	immediateCharge := sold > 300
 
 	stripe.Key = config.Get(c, "STRIPE_KEY")
 	stripe.SetHTTPClient(urlfetch.Client(c))
@@ -84,14 +82,14 @@ func PaymentHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ord, err := order.New(&stripe.OrderParams{
+	_, err = order.New(&stripe.OrderParams{
 		Currency: "usd",
 		Customer: customer.ID,
 		Shipping: shipping,
 		Items: []*stripe.OrderItemParams{
 			&stripe.OrderItemParams{
 				Type:   "sku",
-				Parent: "sku_7NOfzm0jL1hzKa",
+				Parent: "book",
 			},
 		},
 	})
@@ -105,17 +103,6 @@ func PaymentHandler(w http.ResponseWriter, r *http.Request) {
 		web.LogError(c, err, "Error incrementing sold counter")
 	}
 
-	if immediateCharge {
-		ord, err = order.Pay(ord.ID, &stripe.OrderPayParams{
-			Customer: customer.ID,
-		})
-
-		if err != nil {
-			web.SendError(c, w, err, 500, "Error charging card")
-			return
-		}
-	}
-
 	err = email.SendReceipt(c, args.BillingName, token.Email, shipping)
 	if err != nil {
 		web.LogError(c, err, "Error sending receipt")
@@ -125,7 +112,7 @@ func PaymentHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 type OrdersResponse struct {
-	Orders []*stripe.Order
+	Orders []*stripe.Order `json:"orders"`
 }
 
 func OrdersHandler(w http.ResponseWriter, r *http.Request) {
@@ -133,15 +120,69 @@ func OrdersHandler(w http.ResponseWriter, r *http.Request) {
 	stripe.Key = config.Get(c, "STRIPE_KEY")
 	stripe.SetHTTPClient(urlfetch.Client(c))
 
-	i := order.List(&stripe.OrderListParams{
-		Status: "created",
-	})
+	params := &stripe.OrderListParams{}
+
+	r.ParseForm()
+	status := r.Form.Get("status")
+	if status != "" && status != "all" {
+		params = &stripe.OrderListParams{Status: stripe.OrderStatus(status)}
+	}
+
+	i := order.List(params)
 
 	var response OrdersResponse
+	response.Orders = []*stripe.Order{}
 
 	for i.Next() {
 		response.Orders = append(response.Orders, i.Order())
 	}
 
 	web.SendJSON(c, w, response)
+}
+
+type ChargeResponse struct {
+	Success bool `json:"success"`
+}
+
+func ChargeHandler(w http.ResponseWriter, r *http.Request) {
+	c := appengine.NewContext(r)
+	stripe.Key = config.Get(c, "STRIPE_KEY")
+	stripe.SetHTTPClient(urlfetch.Client(c))
+
+	r.ParseForm()
+	orderID := r.Form.Get("orderID")
+	customerID := r.Form.Get("customerID")
+
+	_, err := order.Pay(orderID, &stripe.OrderPayParams{
+		Customer: customerID,
+	})
+	if err != nil {
+		web.SendError(c, w, err, 500, "Error charging card")
+		return
+	}
+
+	web.SendJSON(c, w, ChargeResponse{Success: true})
+}
+
+func ShipHandler(w http.ResponseWriter, r *http.Request) {
+	c := appengine.NewContext(r)
+	stripe.Key = config.Get(c, "STRIPE_KEY")
+	stripe.SetHTTPClient(urlfetch.Client(c))
+
+	r.ParseForm()
+	orderID := r.Form.Get("orderID")
+	trackingNumber := r.Form.Get("trackingNumber")
+
+	_, err := order.Update(orderID, &stripe.OrderUpdateParams{
+		Status: stripe.StatusFulfilled,
+		Params: stripe.Params{
+			Meta: map[string]string{"tracking_number": trackingNumber},
+		},
+	})
+	if err != nil {
+		web.SendError(c, w, err, 500, "Error marking order as fulfilled")
+		return
+	}
+
+	web.SendJSON(c, w, ChargeResponse{Success: true})
 }

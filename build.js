@@ -13,7 +13,8 @@ var config = require('./etc/config');
 
 var paths = {
   '/': 'assets/index.html',
-  '/act/': 'assets/act/index.html',
+  '/act': 'assets/act/index.html',
+  '/orders': 'assets/orders/index.html',
 };
 
 paths['/unlock/' + config.UNLOCK_CODE] = 'assets/unlock/' + config.UNLOCK_CODE + '/index.html';

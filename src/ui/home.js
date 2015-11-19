@@ -11,11 +11,14 @@ import {SocialButtons} from '../ui/social';
 import {Toolbar} from '../ui/toolbar';
 import {Piece} from '../ui/piece';
 import {BuyButton} from '../ui/buy';
+import {Orders} from '../ui/orders';
 import data from '../data';
 
-export const Router = connect(component('Router', ({get}) =>
-  get('shown') ? <Home /> : <Placeholder />
-));
+export const Router = connect(component('Router', ({get}) => {
+  if (!get('shown')) return <Placeholder />;
+  if (get('path') === '/orders') return <Orders />;
+  return <Home />;
+}));
 
 export const Placeholder = component('Placeholder', () =>
   <DefaultFont>

@@ -9,6 +9,9 @@ export function init(data) {
   /* global document */
   ReactDOM.render(createPage(get, boundActions), document);
   boundActions.clientInit();
+  /* global window */
+  window.get = get;
+  window.actions = actions;
 }
 
 const Captured = {init};
