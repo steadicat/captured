@@ -6,23 +6,28 @@ api_version: go1
 handlers:
 - url: /api/.*
   script: _go_app
+  secure: always
 - url: /(.*\.js)
   static_files: assets/\1
   upload: assets/.*\.js
   mime_type: text/javascript; charset=UTF-8
   expiration: 1m
+  secure: always
 - url: /
   static_files: assets/index.html
   upload: assets/index.html
   mime_type: text/html; charset=UTF-8
+  secure: always
 - url: /(.*)/
   static_files: assets/\1/index.html
   upload: assets/.*\.html
   mime_type: text/html; charset=UTF-8
+  secure: always
 - url: /(.*)
   static_files: assets/\1/index.html
   upload: assets/.*\.html
   mime_type: text/html; charset=UTF-8
+  secure: always
 
 error_handlers:
   - file: assets/error.html
