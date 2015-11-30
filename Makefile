@@ -12,7 +12,7 @@ clean:
 	rm -rf assets/*.js assets/**/*.html
 
 devhtml:
-	NODE_ENV=production LOCAL_ASSETS=true $(NODE_BIN)/supervisor --harmony -n exit -w build.js -w $(JS_DIR) -- build.js
+	NODE_ENV=build $(NODE_BIN)/supervisor --harmony -n exit -w build.js -w $(JS_DIR) -- build.js
 
 devassets:
 	node assetserver.js
