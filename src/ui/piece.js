@@ -26,7 +26,7 @@ function getImageSize(get) {
 export const Piece = track(component('Piece', ({get, piece, ...props}) =>
   <Block maxWidth={get('browser.height')} {...props}>
     <Image
-      src={`${piece.image}.jpg`}
+      src={`${piece.id}.jpg`}
       pxWidth={getImageSize(get)}
       pxHeight={getImageSize(get)}
       width={get('browser.known') ? getImageSize(get) : '100%'}
@@ -56,8 +56,8 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
       <PageHeading marginTop={6}>
         {piece.artist}
       </PageHeading>
-      <Text marginTop={6}>Prison ID# {piece.artistID}</Text>
-      <Text marginTop={24}>{piece.artistBio} <Inline fontWeight="bold">{piece.artistCharges}</Inline>.</Text>
+      <Text marginTop={6}>Prison ID# {piece.artistPrisonID}</Text>
+      <Text marginTop={24}>Serving {piece.artistSentence} at {piece.artistPrison} for <Inline fontWeight="bold">{piece.artistCharges}</Inline>.</Text>
       <Text marginTop={24}>{piece.materials}</Text>
     </Column>
     <Link display="block" paddingRight={4} fontWeight="bold" textAlign="left">More Info</Link>
