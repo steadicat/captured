@@ -4,6 +4,10 @@ runtime: go
 api_version: go1
 
 handlers:
+- url: /api/orders
+  script: _go_app
+  secure: always
+  login: admin
 - url: /api/.*
   script: _go_app
   secure: always
@@ -18,6 +22,18 @@ handlers:
   upload: assets/index.html
   mime_type: text/html; charset=UTF-8
   secure: always
+- url: /orders/
+  static_files: assets/orders/index.html
+  upload: assets/orders/index\.html
+  mime_type: text/html; charset=UTF-8
+  secure: always
+  login: admin
+- url: /orders
+  static_files: assets/orders/index.html
+  upload: assets/orders/index\.html
+  mime_type: text/html; charset=UTF-8
+  secure: always
+  login: admin
 - url: /(.*)/
   static_files: assets/\1/index.html
   upload: assets/.*\.html
