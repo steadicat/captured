@@ -3,7 +3,7 @@ import {Block, InlineBlock, Inline} from 'stylistic-elements';
 import component from '../lib/component';
 import {track} from '../lib/behaviors';
 import {Image} from '../ui/image';
-import {Column} from '../ui/layout';
+import {ResponsiveColumn} from '../ui/layout';
 import {Link} from '../ui/core';
 import {Text, LightCondensedText, PageHeading} from '../ui/type';
 import {SocialButtons} from '../ui/social';
@@ -11,16 +11,21 @@ import {SocialButtons} from '../ui/social';
 export const Charges = component('Charges', ({charges, ...props}) =>
   <Block {...props}>
     {charges.map((c, i) =>
-      <Block key={i} marginTop={24}>
+      <Block key={i} marginTop={get('browser.width') > 740 ? 24 : 6}>
         <Text fontWeight="bold">{c.title}</Text>
-        <Text>{c.description}.</Text>
+        {get('browser.width') > 740 && <Text>{c.description}.</Text>}
       </Block>
     )}
   </Block>
 );
 
 function getImageSize(get) {
-  return Math.ceil(Math.min(get('browser.width') * 0.8, get('browser.height')));
+  const browser = get('browser');
+  const maxWidth = browser.width * 0.8;
+  const maxAspectRatio = 0.7;
+  const width = Math.min(maxWidth, browser.height);
+  const height = Math.min(browser.height, width / maxAspectRatio);
+  return [width, height].map(Math.ceil);
 }
 
 function choose(seed, list, preferred) {
@@ -32,15 +37,15 @@ export const Piece = track(component('Piece', ({get, piece, style, ...props}) =>
   <Block maxWidth={get('browser.height')} top={style.top} position={style.position} {...props}>
     <Image
       src={`${choose(piece.artistCharges, ['corbat', 'dougan', 'mcmillon', 'koch', 'read'], piece.id) || piece.id}.jpg`}
-      pxWidth={getImageSize(get)}
-      pxHeight={getImageSize(get)}
-      width={get('browser.known') ? getImageSize(get) : '100%'}
-      height={get('browser.known') ? getImageSize(get) : null}
+      pxWidth={getImageSize(get)[0]}
+      pxHeight={getImageSize(get)[1]}
+      width={get('browser.known') ? getImageSize(get)[0] : '100%'}
+      height={get('browser.known') ? getImageSize(get)[1] : null}
       maxWidth="100vh"
       marginBottom={24}
     />
 
-    <Column textAlign="left" width="60%" paddingRight={24}>
+    <ResponsiveColumn textAlign="left" width="60%" paddingRight={24}>
       {/*<SocialButtons display="block" textAlign="right" url={`https://thecapturedproject.com/${piece.id}/`} />*/}
       <LightCondensedText fontSize={24} textTransform="uppercase">
         {piece.company}
@@ -55,17 +60,18 @@ export const Piece = track(component('Piece', ({get, piece, style, ...props}) =>
         textAlign="left"
         marginBottom={24}
       />
-    </Column>
-    <Column textAlign="left" width="40%">
+      <Link display="block" paddingBottom={24} fontWeight="bold" textAlign="left">More Info</Link>
+    </ResponsiveColumn>
+    <ResponsiveColumn textAlign="left" width="40%">
       <LightCondensedText fontSize={24} textTransform="uppercase">Captured by</LightCondensedText>
       <PageHeading marginTop={6}>
         {piece.artist}
       </PageHeading>
       <Text marginTop={6}>Prison ID# {piece.artistPrisonID}</Text>
       <Text marginTop={24}>Serving {piece.artistSentence} at {piece.artistPrison} for <Inline fontWeight="bold">{piece.artistCharges}</Inline>.</Text>
+      <Link display="block" paddingTop={24} fontWeight="bold" textAlign="left">Contact Info</Link>
       <Text marginTop={24}>{piece.materials}</Text>
-    </Column>
-    <Link display="block" paddingRight={4} fontWeight="bold" textAlign="left">More Info</Link>
+    </ResponsiveColumn>
     <InlineBlock display="none">
       {(piece.links || []).map((link, i) =>
       <Link key={i} href={link} fontWeight="normal" paddingLeft={4} paddingRight={4}>{i + 1}</Link>

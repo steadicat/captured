@@ -19,14 +19,19 @@ export class Scroll extends React.Component {
 
   componentDidMount() {
     window.addEventListener('scroll', this.update);
-    window.addEventListener('resize', this.update);
+    window.addEventListener('resize', this.onResize);
     this.update();
     this.componentDidUpdate();
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.update);
-    window.removeEventListener('resize', this.update);
+    window.removeEventListener('resize', this.onResize);
+  }
+
+  onResize = () => {
+    this._heightsValid = false;
+    this.update();
   }
 
   update = throttle(() => {
@@ -34,24 +39,27 @@ export class Scroll extends React.Component {
   }, 1000/15)
 
   updateFrame = () => {
+    const elTop = ReactDOM.findDOMNode(this).offsetTop;
     this.setState({
-      screenTop: window.scrollY,
-      screenBottom: window.scrollY + window.innerHeight,
+      screenTop: window.scrollY - elTop,
+      screenBottom: window.scrollY + window.innerHeight - elTop,
     });
   }
 
   componentDidUpdate() {
-    const heights = [...this.state.heights];
+    const heights = this._heightsValid ? [...this.state.heights] : [];
     let changed = false;
     for (var i = 0, l = this.props.data.length; i < l; i++) {
       const el = ReactDOM.findDOMNode(this.refs[i])
       if (!el) continue;
+      if (heights[i]) continue;
       const h = el.offsetHeight;
       if (h !== heights[i]) {
         heights[i] = h;
         changed = true;
       }
     }
+    this._heightsValid = changed;
     changed && this.setState({heights});
   }
 
@@ -91,7 +99,7 @@ export class Scroll extends React.Component {
     const knownHeights = heights.filter(h => h > 0);
     const averageHeight = knownHeights.length ? knownHeights.reduce((a, b) => a + b, 0) / knownHeights.length : 0;
     const totalHeight = averageHeight * data.length;
-    const averageOnScreen = Math.ceil((2 * margin + screenBottom - screenTop) / averageHeight);
+    const averageOnScreen = Math.ceil((2 * margin + screenBottom - screenTop) / averageHeight) + 1;
     const firstOnScreen = this.getFirstOnScreen(this.props, this.state);
 
     let top = 0;

@@ -87,7 +87,7 @@ export const Home = component('Home', ({get, actions, ...props}) =>
   <DefaultFont>
     <Block textAlign="center" onClick={actions.toggleClick}>
       <Header trackKey="" />
-      <Scroll data={data} margin={600}>
+      <Scroll data={data} margin={200}>
         {(piece, i) =>
           <Piece
             key={piece.id}
