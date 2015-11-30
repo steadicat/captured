@@ -11,6 +11,7 @@ import {Toolbar} from '../ui/toolbar';
 import {Piece} from '../ui/piece';
 import {BuyButton} from '../ui/buy';
 import {Orders} from '../ui/orders';
+import {Scroll} from '../ui/scroll';
 import data from '../data';
 
 export const Router = component('Router', ({get}) => {
@@ -82,32 +83,23 @@ export const Footer = track(component('Footer', ({get, actions, ...props}) =>
   </Block>
 ));
 
-import Infinite from 'react-infinite';
-
 export const Home = component('Home', ({get, actions, ...props}) =>
   <DefaultFont>
     <Block textAlign="center" onClick={actions.toggleClick}>
       <Header trackKey="" />
-      <Infinite
-        containerHeight={get('browser.height')}
-        elementHeight={data.map(piece => {
-          const pos = get(`positions.${piece.id}`) || {top: 0, bottom: 0};
-          return pos.bottom - pos.top;
-        })}
-        useWindowAsScrollContainer
-        timeScrollStateLastsForAfterUserScrolls={0}>
-      {data.map((piece, i) =>
-        <Piece
-          key={piece.id}
-          trackKey={piece.id}
-          piece={piece}
-          marginLeft="auto"
-          marginRight="auto"
-          width="80%"
-          paddingBottom={96}
-        />
-      )}
-      </Infinite>
+      <Scroll data={data} margin={600}>
+        {(piece, i) =>
+          <Piece
+            key={piece.id}
+            trackKey={piece.id}
+            piece={piece}
+            width="80%"
+            left="50%"
+            translateX="-50%"
+            paddingBottom={96}
+          />
+        }
+      </Scroll>
       <Footer trackKey="act" />
       {get('sold') < 1000 && <Toolbar />}
     </Block>
