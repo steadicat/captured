@@ -22,7 +22,13 @@ const Message = component('Message', (props) =>
   <Block textAlign="center" {...props} padding={48} />);
 
 const AdminButton = component('AdminButton', (props) =>
-  <MainButton paddingTop={7} paddingBottom={6} paddingLeft={12} paddingRight={12} {...props} />
+  <MainButton
+    paddingTop={7}
+    paddingBottom={6}
+    paddingLeft={12}
+    paddingRight={12}
+    {...props}
+  />
 );
 
 class Tracking extends React.Component {
@@ -70,14 +76,15 @@ const Order = component('Order', ({order: {id, created, status, shipping: {name,
 
 @connect
 export class Orders extends React.Component {
-  static pure = true;
 
   componentDidMount() {
     this.props.actions.fetchOrders();
   }
 
+  static pure = true;
+
   render() {
-    const {get, actions} = this.props;
+    const {get} = this.props;
     return (
       <DefaultFont>
         <Block padding={24}>

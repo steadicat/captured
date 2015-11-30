@@ -12,12 +12,13 @@ function getImageOptions(get, w, h) {
 
 @connect
 export class Image extends React.Component {
-  static pure = true;
 
   constructor() {
     super();
     this.state = {loaded: false};
   }
+
+  static pure = true;
 
   onLoad = () => {
     this.setState({loaded: true});

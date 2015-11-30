@@ -4,12 +4,12 @@ import {connect} from 'ducts';
 
 export function hover(Component) {
   return class Hover extends React.Component {
-    static pure = true;
-
     constructor() {
       super();
       this.state = {hovered: false};
     }
+
+    static pure = true;
 
     onMouseEnter = () => {
       this.setState({hovered: true});
@@ -34,7 +34,6 @@ export function hover(Component) {
 
 export function track(Component) {
   class Track extends React.Component {
-    static pure = true;
 
     componentDidMount() {
       this.componentDidUpdate();
@@ -50,6 +49,8 @@ export function track(Component) {
         bottom: window.scrollY + bottom,
       });
     }
+
+    static pure = true;
 
     render() {
       return <Component {...this.props} />;

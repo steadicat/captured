@@ -24,6 +24,7 @@ class InitScript extends React.Component {
   }
 
   render() {
+    /* eslint react/no-danger:0 */
     return (
       <script dangerouslySetInnerHTML={{__html: `Captured.init(${inlineJSON(this.props.get(''))});`}} />
     );

@@ -1,16 +1,8 @@
 import React from 'react';
 import {Animate} from 'react-rebound';
-import {ResetElement, InlineBlock} from 'stylistic-elements';
+import {ResetElement} from 'stylistic-elements';
 import component from '../lib/component';
 import {hover} from '../lib/behaviors';
-
-/*
-function onClick(event) {
-  if (event.shiftKey || event.ctrlKey || event.altKey || event.metaKey) return;
-  event.preventDefault();
-  this.props.actions.navigation.navigate(this.props.href);
-}
-*/
 
 export const Link = hover(component('Link', ({hovered, ...props}) =>
   <Animate color={hovered ? [238, 85, 34] : [0, 0, 0]}>

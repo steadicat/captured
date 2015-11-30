@@ -66,7 +66,7 @@ export const Footer = track(component('Footer', ({get, actions, ...props}) =>
         height={250}
       />
     </Block>
-    {get('sold') >= 1000 ? <CondensedText fontWeight="bold" fontSize={24}>SOLD OUT</CondensedText> : <BuyButton /> }
+    {get('sold') >= 1000 ? <CondensedText fontWeight="bold" fontSize={24}>SOLD OUT</CondensedText> : <BuyButton />}
     <Text marginTop={12}>
       {get('sold') > 0
       ? `Limited edition. ${get('sold')} of ${get('total')} copies sold.`

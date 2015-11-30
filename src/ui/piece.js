@@ -6,9 +6,8 @@ import {Image} from '../ui/image';
 import {ResponsiveColumn} from '../ui/layout';
 import {Link} from '../ui/core';
 import {Text, LightCondensedText, PageHeading} from '../ui/type';
-import {SocialButtons} from '../ui/social';
 
-export const Charges = component('Charges', ({charges, ...props}) =>
+export const Charges = component('Charges', ({get, charges, ...props}) =>
   <Block {...props}>
     {charges.map((c, i) =>
       <Block key={i} marginTop={get('browser.width') > 740 ? 24 : 6}>
@@ -74,7 +73,14 @@ export const Piece = track(component('Piece', ({get, piece, style, ...props}) =>
     </ResponsiveColumn>
     <InlineBlock display="none">
       {(piece.links || []).map((link, i) =>
-      <Link key={i} href={link} fontWeight="normal" paddingLeft={4} paddingRight={4}>{i + 1}</Link>
+      <Link
+        key={i}
+        href={link}
+        fontWeight="normal"
+        paddingLeft={4}
+        paddingRight={4}>
+        {i + 1}
+      </Link>
     )}
     </InlineBlock>
   </Block>

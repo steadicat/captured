@@ -26,7 +26,7 @@ scrollSpring.addListener({
   if ((lastSet !== null) && (lastSet !== actual)) {
     scrollEventsFiredElsewhere++;
     // We skip the first one which is probably the browser scrolling on load
-    if (scrollEventsFiredElsewhere == 2) {
+    if (scrollEventsFiredElsewhere === 2) {
       // User interrupted scroll animation
       scrollSpring.setEndValue(actual).setAtRest();
     }

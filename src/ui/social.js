@@ -5,7 +5,11 @@ import component from '../lib/component';
 import {hover} from '../lib/behaviors';
 
 export const Icon = component('Icon', ({width, height, color, children}) =>
-  <svg width={`${width}px`} height={`${height}px`} viewBox="0 0 24 24" fill={color} version="1.1">
+  <svg
+    width={`${width}px`}
+    height={`${height}px`}
+    viewBox="0 0 24 24"
+    fill={color}>
     {children}
   </svg>
 );

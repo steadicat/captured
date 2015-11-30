@@ -13,43 +13,29 @@ export class Scroll extends React.Component {
     this.state = {
       screenTop: 0,
       screenBottom: 1000,
-      heights: []
+      heights: [],
     };
   }
 
   componentDidMount() {
+    /* global window */
     window.addEventListener('scroll', this.update);
     window.addEventListener('resize', this.onResize);
     this.update();
     this.componentDidUpdate();
   }
 
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.update);
-    window.removeEventListener('resize', this.onResize);
-  }
-
-  onResize = () => {
-    this._heightsValid = false;
-    this.update();
-  }
-
-  update = throttle(() => {
-    raf(this.updateFrame);
-  }, 1000/15)
-
-  updateFrame = () => {
-    const elTop = ReactDOM.findDOMNode(this).offsetTop;
-    this.setState({
-      screenTop: window.scrollY - elTop,
-      screenBottom: window.scrollY + window.innerHeight - elTop,
-    });
+  shouldComponentUpdate(nextProps, nextState) {
+    const firstOnScreen = this.getFirstOnScreen(nextProps, nextState);
+    const should = this.lastFirstOnScreen !== firstOnScreen;
+    this.lastFirstOnScreen = firstOnScreen;
+    return should;
   }
 
   componentDidUpdate() {
-    const heights = this._heightsValid ? [...this.state.heights] : [];
+    const heights = this.heightsValid ? [...this.state.heights] : [];
     let changed = false;
-    for (var i = 0, l = this.props.data.length; i < l; i++) {
+    for (let i = 0, l = this.props.data.length; i < l; i++) {
       const el = ReactDOM.findDOMNode(this.refs[i])
       if (!el) continue;
       if (heights[i]) continue;
@@ -59,15 +45,29 @@ export class Scroll extends React.Component {
         changed = true;
       }
     }
-    this._heightsValid = changed;
+    this.heightsValid = changed;
     changed && this.setState({heights});
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    const firstOnScreen = this.getFirstOnScreen(nextProps, nextState);
-    const should = this._lastFirstOnScreen !== firstOnScreen;
-    this._lastFirstOnScreen = firstOnScreen;
-    return should;
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.update);
+    window.removeEventListener('resize', this.onResize);
+  }
+  onResize = () => {
+    this.heightsValid = false;
+    this.update();
+  }
+
+  update = throttle(() => {
+    raf(this.updateFrame);
+  }, 1000 / 15)
+
+  updateFrame = () => {
+    const elTop = ReactDOM.findDOMNode(this).offsetTop;
+    this.setState({
+      screenTop: window.scrollY - elTop,
+      screenBottom: window.scrollY + window.innerHeight - elTop,
+    });
   }
 
   onScreen = (i, top) => {
@@ -122,7 +122,7 @@ export class Scroll extends React.Component {
             style: {
               top: top - (heights[i] || 0),
               position: top > 0 ? 'absolute' : null,
-            }
+            },
           });
         }).filter(item => item !== null)}
       </div>
