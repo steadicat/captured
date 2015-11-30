@@ -117,7 +117,6 @@ export class Scroll extends React.Component {
             top = -1;
           }
           return React.cloneElement(childGen(item, i), {
-            key: i % averageOnScreen,
             ref: i,
             style: {
               top: top - (heights[i] || 0),
