@@ -26,6 +26,7 @@ const AdminButton = component('AdminButton', (props) =>
 );
 
 class Tracking extends React.Component {
+  static pure = true;
 
   onSubmit = (event) => {
     event.preventDefault();
@@ -69,6 +70,7 @@ const Order = component('Order', ({order: {id, created, status, shipping: {name,
 
 @connect
 export class Orders extends React.Component {
+  static pure = true;
 
   componentDidMount() {
     this.props.actions.fetchOrders();

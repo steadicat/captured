@@ -12,7 +12,7 @@ function getImageOptions(get, w, h) {
 
 @connect
 export class Image extends React.Component {
-  static displayName = 'Image';
+  static pure = true;
 
   constructor() {
     super();

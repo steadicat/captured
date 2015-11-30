@@ -6,7 +6,9 @@ export default function component(displayName, func) {
     displayName = func.name;
   }
 
-  return connect(function(props) {
+  const f = function(props) {
     return func({...props, $: props.get});
-  });
+  }
+  f.pure = true;
+  return connect(f);
 }

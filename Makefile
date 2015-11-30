@@ -12,10 +12,10 @@ clean:
 	rm -rf assets/*.js assets/**/*.html
 
 devhtml:
-	$(NODE_BIN)/supervisor --harmony -n exit -w build.js -w $(JS_DIR) -- build.js
+	NODE_ENV=production LOCAL_ASSETS=true $(NODE_BIN)/supervisor --harmony -n exit -w build.js -w $(JS_DIR) -- build.js
 
 devassets:
-	$(NODE_BIN)/webpack-dev-server --config etc/webpack.config.js
+	node assetserver.js
 
 devapi:
 	goapp serve

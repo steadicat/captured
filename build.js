@@ -1,6 +1,6 @@
 /* eslint-env node */
 /* eslint no-console: 0, no-var: 0 */
-require('babel-core/register')(require('./etc/babel'));
+require('babel-core/register')();
 var fs = require('fs');
 var path = require('path');
 var mkdirp = require('mkdirp');

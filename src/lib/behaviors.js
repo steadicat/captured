@@ -4,7 +4,7 @@ import {connect} from 'ducts';
 
 export function hover(Component) {
   return class Hover extends React.Component {
-    static displayName = 'Hover';
+    static pure = true;
 
     constructor() {
       super();
@@ -34,7 +34,7 @@ export function hover(Component) {
 
 export function track(Component) {
   class Track extends React.Component {
-    static displayName = 'Track';
+    static pure = true;
 
     componentDidMount() {
       this.componentDidUpdate();
