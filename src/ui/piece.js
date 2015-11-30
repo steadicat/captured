@@ -23,10 +23,15 @@ function getImageSize(get) {
   return Math.ceil(Math.min(get('browser.width') * 0.8, get('browser.height')));
 }
 
+function choose(seed, list, preferred) {
+  if (list.indexOf('preferred') >= 0) return preferred;
+  return list[seed.length % list.length];
+}
+
 export const Piece = track(component('Piece', ({get, piece, ...props}) =>
   <Block maxWidth={get('browser.height')} {...props}>
     <Image
-      src={`${piece.id}.jpg`}
+      src={`${choose(piece.artistCharges, ['corbat', 'dougan', 'mcmillon', 'koch', 'read'], piece.id) || piece.id}.jpg`}
       pxWidth={getImageSize(get)}
       pxHeight={getImageSize(get)}
       width={get('browser.known') ? getImageSize(get) : '100%'}
