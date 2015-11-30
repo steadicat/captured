@@ -82,10 +82,20 @@ export const Footer = track(component('Footer', ({get, actions, ...props}) =>
   </Block>
 ));
 
+import Infinite from 'react-infinite';
+
 export const Home = component('Home', ({get, actions, ...props}) =>
   <DefaultFont>
     <Block textAlign="center" onClick={actions.toggleClick}>
       <Header trackKey="" />
+      <Infinite
+        containerHeight={get('browser.height')}
+        elementHeight={data.map(piece => {
+          const pos = get(`positions.${piece.id}`) || {top: 0, bottom: 0};
+          return pos.bottom - pos.top;
+        })}
+        useWindowAsScrollContainer
+        timeScrollStateLastsForAfterUserScrolls={0}>
       {data.map((piece, i) =>
         <Piece
           key={piece.id}
@@ -94,9 +104,10 @@ export const Home = component('Home', ({get, actions, ...props}) =>
           marginLeft="auto"
           marginRight="auto"
           width="80%"
-          marginBottom={96}
+          paddingBottom={96}
         />
       )}
+      </Infinite>
       <Footer trackKey="act" />
       {get('sold') < 1000 && <Toolbar />}
     </Block>
