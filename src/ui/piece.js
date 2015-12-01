@@ -32,8 +32,8 @@ function choose(seed, list, preferred) {
   return list[seed.length % list.length];
 }
 
-export const Piece = track(component('Piece', ({get, piece, style, ...props}) =>
-  <Block maxWidth={get('browser.height')} top={style.top} position={style.position} {...props}>
+export const Piece = track(component('Piece', ({get, piece, ...props}) =>
+  <Block maxWidth={get('browser.height')} {...props}>
     <Image
       src={`${choose(piece.artistCharges, ['corbat', 'dougan', 'mcmillon', 'koch', 'read'], piece.id) || piece.id}.jpg`}
       pxWidth={getImageSize(get)[0]}

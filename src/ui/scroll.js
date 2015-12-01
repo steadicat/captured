@@ -11,125 +11,66 @@ export class Scroll extends React.Component {
   constructor() {
     super();
     this.state = {
-      screenTop: 0,
       screenBottom: 1000,
-      heights: [],
+      rendered: 0,
     };
   }
 
   componentDidMount() {
     /* global window */
-    window.addEventListener('scroll', this.update);
-    window.addEventListener('resize', this.onResize);
-    this.update();
-    this.componentDidUpdate();
+    window.addEventListener('scroll', this.onScroll);
+    this.batchRenderChildren();
   }
 
+  /*
   shouldComponentUpdate(nextProps, nextState) {
     const firstOnScreen = this.getFirstOnScreen(nextProps, nextState);
     const should = this.lastFirstOnScreen !== firstOnScreen;
     this.lastFirstOnScreen = firstOnScreen;
     return should;
   }
+  */
 
   componentDidUpdate() {
-    const heights = this.heightsValid ? [...this.state.heights] : [];
-    let changed = false;
-    for (let i = 0, l = this.props.data.length; i < l; i++) {
-      const el = ReactDOM.findDOMNode(this.refs[i])
-      if (!el) continue;
-      if (heights[i]) continue;
-      const h = el.offsetHeight;
-      if (h !== heights[i]) {
-        heights[i] = h;
-        changed = true;
-      }
-    }
-    this.heightsValid = changed;
-    changed && this.setState({heights});
+    this.batchRenderChildren();
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.update);
-    window.removeEventListener('resize', this.onResize);
-  }
-  onResize = () => {
-    this.heightsValid = false;
-    this.update();
+    window.removeEventListener('scroll', this.onScroll);
   }
 
-  update = throttle(() => {
-    raf(this.updateFrame);
-  }, 1000 / 15)
-
-  updateFrame = () => {
-    const elTop = ReactDOM.findDOMNode(this).offsetTop;
-    this.setState({
-      screenTop: window.scrollY - elTop,
-      screenBottom: window.scrollY + window.innerHeight - elTop,
-    });
+  onScroll = () => {
+    this.batchRenderChildren();
   }
 
-  onScreen = (i, top) => {
-    if (top < 0) return false;
-    const {margin} = this.props;
-    const {heights, screenTop, screenBottom} = this.state;
-    let height = heights[i];
-    if (!height) {
-      return top < screenBottom + margin;
+  batchRenderChildren = () => {
+    if (this.state.rendered >= this.props.data.length) return;
+    clearTimeout(this.batchRenderTimeout);
+    const rect = ReactDOM.findDOMNode(this).getBoundingClientRect();
+    let delay = 1000;
+    if (rect.bottom < window.scrollY + window.innerHeight) {
+      delay = 0;
     }
-    const bottom = top + height;
-    return (top < screenBottom + margin) & (bottom > screenTop - margin);
+    this.batchRenderTimeout = setTimeout(this.renderChildren, delay);
   }
 
-  getFirstOnScreen(props, state) {
-    let top = 0;
-    return props.data.findIndex((item, i) => {
-      const h = state.heights[i];
-      if (!h) return true;
-      top += h;
-      return top > state.screenTop - props.margin;
-    });
+  renderChildren = () => {
+    this.setState({rendered: this.state.rendered + 1});
   }
 
   render() {
-    const {data, children: childGen, margin} = this.props;
-    const {heights, screenTop, screenBottom} = this.state;
+    const {data, children: childGen} = this.props;
+    const {rendered} = this.state;
 
-    const knownHeights = heights.filter(h => h > 0);
-    const averageHeight = knownHeights.length ? knownHeights.reduce((a, b) => a + b, 0) / knownHeights.length : 0;
-    const totalHeight = averageHeight * data.length;
-    const averageOnScreen = Math.ceil((2 * margin + screenBottom - screenTop) / averageHeight) + 1;
-    const firstOnScreen = this.getFirstOnScreen(this.props, this.state);
-
-    let top = 0;
     return (
-      <div style={{minHeight: totalHeight, position: 'relative'}}>
-        {data.map((item, i) => {
-          if ((i < firstOnScreen) || (i >= firstOnScreen + averageOnScreen)) {
-            top += heights[i];
-            return null;
-          }
-
-          if (top >= 0 && heights[i]) {
-            top += heights[i];
-          } else {
-            top = -1;
-          }
-          return React.cloneElement(childGen(item, i), {
-            ref: i,
-            style: {
-              top: top - (heights[i] || 0),
-              position: top > 0 ? 'absolute' : null,
-            },
-          });
-        }).filter(item => item !== null)}
+      <div>
+        {data.slice(0, rendered).map(childGen)}
       </div>
     );
   }
 }
-
 /*
+
 const items = [
   {color: '#fc0', height: 100},
   {color: '#cff', height: 150},
@@ -213,7 +154,7 @@ export class ScrollTest extends React.Component {
     return (
       <div>
         <Scroll data={items}>
-          {(item, i) => <Box color={item.color} height={item.height} />}
+          {(item, i) => <Box key={i} color={item.color} height={item.height} />}
         </Scroll>
       </div>
     );

@@ -94,8 +94,8 @@ export const Home = component('Home', ({get, actions, ...props}) =>
             trackKey={piece.id}
             piece={piece}
             width="80%"
-            left="50%"
-            translateX="-50%"
+            marginLeft="auto"
+            marginRight="auto"
             paddingBottom={96}
           />
         }
