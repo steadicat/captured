@@ -59,7 +59,7 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
         textAlign="left"
         marginBottom={24}
       />
-      {get('browser.width') < 740 && <Link display="block" paddingBottom={24} fontWeight="bold" textAlign="left">More Info</Link>}
+      {get('browser.width') < 740 && <Link display="block" paddingBottom={24} fontWeight="bold" textAlign="left">References</Link>}
     </ResponsiveColumn>
     <ResponsiveColumn textAlign="left" width="40%">
       <LightCondensedText fontSize={24} textTransform="uppercase">Captured by</LightCondensedText>
@@ -71,12 +71,12 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
       {get('browser.width') < 740 && <Link display="block" paddingTop={24} fontWeight="bold" textAlign="left">Contact Info</Link>}
     </ResponsiveColumn>
     {get('browser.width') > 740 && <Column textAlign="left" width="60%" paddingRight={24}>
-      <Link display="block" fontWeight="bold" textAlign="left">More Info</Link>
+      <Link display="block" fontWeight="bold" textAlign="left">References</Link>
     </Column>}
     {get('browser.width') > 740 && <Column textAlign="left" width="40%">
       <Link display="block" fontWeight="bold" textAlign="left">Contact Info</Link>
+      <Text textAlign="left" marginTop={24}>Materials: {piece.materials}.</Text>
     </Column>}
-    <Text textAlign="left" marginTop={24}>Materials: {piece.materials}.</Text>
 
   </Block>
 ));
