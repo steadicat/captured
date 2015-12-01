@@ -3,7 +3,7 @@ import {Block, InlineBlock, Inline} from 'stylistic-elements';
 import component from '../lib/component';
 import {track} from '../lib/behaviors';
 import {Image} from '../ui/image';
-import {ResponsiveColumn} from '../ui/layout';
+import {Column, ResponsiveColumn} from '../ui/layout';
 import {Link} from '../ui/core';
 import {Text, LightCondensedText, PageHeading} from '../ui/type';
 
@@ -47,10 +47,10 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
     <ResponsiveColumn textAlign="left" width="60%" paddingRight={24}>
       {/*<SocialButtons display="block" textAlign="right" url={`https://thecapturedproject.com/${piece.id}/`} />*/}
       <LightCondensedText fontSize={24} textTransform="uppercase">
-        {piece.company}
+        {piece.title} of {piece.company}
       </LightCondensedText>
       <PageHeading marginTop={6}>
-        {piece.name}, {piece.title}
+        {piece.name}
       </PageHeading>
       <Text marginTop={6}>Oversees a company engaged in:</Text>
       <Charges
@@ -59,29 +59,24 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
         textAlign="left"
         marginBottom={24}
       />
-      <Link display="block" paddingBottom={24} fontWeight="bold" textAlign="left">More Info</Link>
+      {get('browser.width') < 740 && <Link display="block" paddingBottom={24} fontWeight="bold" textAlign="left">More Info</Link>}
     </ResponsiveColumn>
     <ResponsiveColumn textAlign="left" width="40%">
       <LightCondensedText fontSize={24} textTransform="uppercase">Captured by</LightCondensedText>
       <PageHeading marginTop={6}>
         {piece.artist}
       </PageHeading>
-      <Text marginTop={6}>Prison ID# {piece.artistPrisonID}</Text>
-      <Text marginTop={24}>Serving {piece.artistSentence} at {piece.artistPrison} for <Inline fontWeight="bold">{piece.artistCharges}</Inline>.</Text>
-      <Link display="block" paddingTop={24} fontWeight="bold" textAlign="left">Contact Info</Link>
-      <Text marginTop={24}>{piece.materials}</Text>
+      <Text marginTop={6}>Serving {piece.artistSentence} for:</Text>
+      <Text marginTop={24}><Inline fontWeight="bold">{piece.artistCharges}</Inline></Text>
+      {get('browser.width') < 740 && <Link display="block" paddingTop={24} fontWeight="bold" textAlign="left">Contact Info</Link>}
     </ResponsiveColumn>
-    <InlineBlock display="none">
-      {(piece.links || []).map((link, i) =>
-      <Link
-        key={i}
-        href={link}
-        fontWeight="normal"
-        paddingLeft={4}
-        paddingRight={4}>
-        {i + 1}
-      </Link>
-    )}
-    </InlineBlock>
+    {get('browser.width') > 740 && <Column textAlign="left" width="60%" paddingRight={24}>
+      <Link display="block" fontWeight="bold" textAlign="left">More Info</Link>
+    </Column>}
+    {get('browser.width') > 740 && <Column textAlign="left" width="40%">
+      <Link display="block" fontWeight="bold" textAlign="left">Contact Info</Link>
+    </Column>}
+    <Text textAlign="left" marginTop={24}>Materials: {piece.materials}.</Text>
+
   </Block>
 ));
