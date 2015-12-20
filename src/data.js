@@ -68,6 +68,7 @@ module.exports = [
     ],
     "company": "Credit Suisse",
     "id": "dougan",
+    "size": [4893, 8652],
     "links": [
       "http://www.corp-research.org/credit-suisse",
       "http://articles.latimes.com/2014/feb/25/business/la-fi-mo-credit-suisse-tax-evasion-levin-senate-20140225",
@@ -110,6 +111,7 @@ module.exports = [
     ],
     "company": "Citigroup",
     "id": "corbat",
+    "size": [6725, 8552],
     "links": [
       "http://www.corp-research.org/citigroup",
       "http://www.consumeraffairs.com/news04/2008/09/ca_citibank.html",
@@ -155,6 +157,7 @@ module.exports = [
     ],
     "company": "ConocoPhillips",
     "id": "lance",
+    "size": [5431, 7338],
     "links": [
       "http://www.corp-research.org/conocophillips",
       "http://articles.latimes.com/1990-04-20/business/fi-1369_1_safety-violations",
@@ -194,6 +197,7 @@ module.exports = [
     ],
     "company": "Dupont",
     "id": "kullman",
+    "size": [5863, 7632],
     "links": [
       "http://www.corporatewatch.org/company-profiles/dupont-corporate-crimes",
       "http://www.corp-research.org/dupont",
@@ -270,6 +274,7 @@ module.exports = [
     ],
     "company": "Archer Daniels Midland (ADM)",
     "id": "woertz",
+    "size": [5144, 6704],
     "links": [
       "http://www.iatp.org/news/adm-ranked-30th-worst-in-air-pollution",
       "https://en.wikipedia.org/wiki/Archer_Daniels_Midland#Criticism",
@@ -342,6 +347,7 @@ module.exports = [
     ],
     "company": "The Coca-Cola Company",
     "id": "kent",
+    "size": [5823, 7342],
     "links": [
       "http://blog.fooducate.com/2014/01/14/this-simple-chart-explains-the-devastating-influence-in dustry-has-on-scientific-integrity/",
       "http://www.corp-research.org/coca-cola-company",
@@ -383,6 +389,7 @@ module.exports = [
     ],
     "company": "ExxonMobil",
     "id": "tillerson",
+    "size": [5617, 7116],
     "links": [
       "http://www.theguardian.com/environment/2015/jul/08/exxon-climate-change-1981-cli mate-denier-funding",
       "http://www.newyorker.com/news/daily-comment/what-exxon-knew-about-climate-cha nge",
@@ -455,6 +462,7 @@ module.exports = [
     ],
     "company": "Cargil",
     "id": "maclennan",
+    "size": [5588, 5528],
     "links": [
       "http://www.corp-research.org/cargill",
       "http://www.confectionerynews.com/Manufacturers/Cocoa-child-slavery-case-against-Nestle-ADM-and-Cargill-proceeds",
@@ -646,6 +654,7 @@ module.exports = [
     ],
     "company": "BP Oil",
     "id": "hayward",
+    "size": [5953, 7728],
     "links": [
       "http://www.wsj.com/articles/SB10001424052748703339304575240210545113710",
       "http://www.nytimes.com/2010/05/27/us/27rig.html?_r=0",
@@ -771,6 +780,7 @@ module.exports = [
     ],
     "company": "General Motors",
     "id": "barra",
+    "size": [5713, 7734],
     "links": [
       "http://www.nytimes.com/2014/07/16/business/documents-show-general-motors-kept-silent-on-fatal-crashes.html",
       "http://www.washingtonpost.com/business/economy/pressure-from-victims-investigators-mounts-on-gm-ahead-of-congressional-hearing/2014/04/01/7993fe4c-b9ae-11e3-9a05-c739f29ccb08_story.html",
@@ -849,6 +859,7 @@ module.exports = [
     ],
     "company": "Duke Energy",
     "id": "good",
+    "size": [5537, 5940],
     "links": [
       "http://polluterwatch.com/duke-energy",
       "http://www.nytimes.com/2015/05/15/us/duke-energy-agrees-to-pay-102-million-for-breaches.html",
@@ -894,6 +905,7 @@ module.exports = [
     ],
     "company": "Chevron",
     "id": "watson",
+    "size": [6751, 8496],
     "links": [
       "http://www.nytimes.com/2008/09/11/washington/11royalty.html?_r=0",
       "http://www.justice.gov/opa/pr/chevron-pay-us-more-45-million-resolve-allegations-false-claims-royalties-underpayment",
@@ -934,6 +946,7 @@ module.exports = [
     ],
     "company": "Bank of America",
     "id": "moynihan",
+    "size": [5983, 7338],
     "links": [
       " http://www.sfweekly.com/sanfrancisco/the-great-bank-thievery/Content?oid=2134873",
       "http://www.nytimes.com/1998/11/13/business/bank-of-america-settles-suits-from-california.html",
@@ -1092,6 +1105,7 @@ module.exports = [
     ],
     "company": "FIFA",
     "id": "blatter",
+    "size": [8720, 10976],
     "links": [
       "http://www.theguardian.com/world/2014/feb/13/fifa-labour-conditions-qatar-world-cup",
       "http://www.justice.gov/opa/pr/nine-fifa-officials-and-five-corporate-executives-indicted-racketeering-conspiracy-and",
@@ -1104,5 +1118,5 @@ module.exports = [
     "name": "Sepp Blatter",
     "title": "Former President"
   }
-];
+].filter(piece => !!piece.size);
 

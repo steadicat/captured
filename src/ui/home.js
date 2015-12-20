@@ -5,13 +5,14 @@ import {track} from '../lib/behaviors';
 import {linear} from '../lib/math';
 import {Link} from '../ui/core';
 import {Image} from '../ui/image';
-import {DefaultFont, PageTitle, PageSubtitle, Text, CondensedText} from '../ui/type';
+import {DefaultFont, PageTitle, PageSubtitle, Text, CondensedText, LightCondensedText} from '../ui/type';
 import {SocialButtons} from '../ui/social';
 import {Toolbar} from '../ui/toolbar';
 import {Piece} from '../ui/piece';
 import {BuyButton} from '../ui/buy';
 import {Orders} from '../ui/orders';
 import {Scroll} from '../ui/scroll';
+import {Gallery} from '../ui/gallery';
 import data from '../data';
 
 export const Router = component('Router', ({get}) => {
@@ -38,24 +39,25 @@ function getSubtitleSize(get) {
   return linear(320, 14, 2000, 32, Math.min(get('browser.width'), get('browser.height') * 2))
 }
 
-function getImageSize(get) {
-  return Math.ceil(linear(320, 270, 2000, 1300, Math.min(get('browser.height') - 200, get('browser.width'))));
-  //return Math.ceil(Math.min(get('browser.width') - 48, get('browser.height') - 200));
-}
-
 export const Header = track(component('Header', ({get, actions, ...props}) =>
-  <Block paddingTop={0} paddingBottom={96} {...props}>
-    <Image
-      src="pencils.jpg"
-      pxWidth={getImageSize(get)}
-      pxHeight={getImageSize(get)}
-      width={get('browser.known') ? getImageSize(get) : '100%'}
-      height={get('browser.known') ? getImageSize(get) : null}
-      maxWidth="100vh"
-    />
+  <Block paddingTop={0} {...props}>
     <PageTitle marginTop={24} marginBottom={24} fontSize={getTitleSize(get)} lineHeight={getTitleSize(get)}>CAPTURED</PageTitle>
     <PageSubtitle fontSize={getSubtitleSize(get)} lineHeight={getSubtitleSize(get)}>People in prison drawing people who should be</PageSubtitle>
-    <Text marginTop={24} maxWidth={700} marginLeft="auto" marginRight="auto" paddingLeft={24} paddingRight={24}>We asked people in prison to paint or draw people we felt <em>should</em>&nbsp; be in prison – the CEOs of companies doing the most damage to our environment, economy, and society. Here are the results, each presented with the crimes committed by both companies and artists.</Text>
+    <LightCondensedText
+      fontSize={getSubtitleSize(get) * 1.5}
+      lineHeight={getSubtitleSize(get) * 1.5 * 2}
+      paddingTop={get('browser.height') * 0.2}
+      paddingBottom={get('browser.height') * 0.2}
+      maxWidth={660}
+      marginLeft="auto"
+      marginRight="auto"
+      paddingLeft={24}
+      paddingRight={24}>
+        We asked people in prison to paint or draw people we felt <em>should</em>&nbsp; be in prison – the CEOs of companies doing the most damage to our environment, economy, and society.
+        <br/><br/>
+        Here are the results, each presented with the crimes committed by both companies & artists.
+    </LightCondensedText>
+    <Gallery />
   </Block>
 ));
 

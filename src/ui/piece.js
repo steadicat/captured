@@ -1,5 +1,5 @@
 import React from 'react';
-import {Block, InlineBlock, Inline} from 'stylistic-elements';
+import {Block, Inline} from 'stylistic-elements';
 import component from '../lib/component';
 import {track} from '../lib/behaviors';
 import {Image} from '../ui/image';
@@ -27,15 +27,10 @@ function getImageSize(get) {
   return [width, height].map(Math.ceil);
 }
 
-function choose(seed, list, preferred) {
-  if (list.indexOf('preferred') >= 0) return preferred;
-  return list[seed.length % list.length];
-}
-
 export const Piece = track(component('Piece', ({get, piece, ...props}) =>
   <Block maxWidth={get('browser.height')} {...props}>
     <Image
-      src={`${choose(piece.artistCharges, ['corbat', 'dougan', 'mcmillon', 'koch', 'read'], piece.id) || piece.id}.jpg`}
+      src={`${piece.id}.jpg`}
       pxWidth={getImageSize(get)[0]}
       pxHeight={getImageSize(get)[1]}
       width={get('browser.known') ? getImageSize(get)[0] : '100%'}
