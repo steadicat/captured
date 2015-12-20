@@ -49,14 +49,14 @@ func ImageListHandler(w http.ResponseWriter, r *http.Request) {
 	for _, object := range objects.Results {
 		blobKey, err := blobstore.BlobKeyForFile(c, fmt.Sprintf("/gs/thecapturedproject/%s", object.Name))
 		if err != nil {
-			web.LogError(c, err, "Image not found in blobstore")
+			web.LogError(c, err, fmt.Sprintf("Image %s ot found in blobstore", object.Name))
 		}
 
 		url, err := image.ServingURL(c, blobKey, &image.ServingURLOptions{
 			Secure: true,
 		})
 		if err != nil {
-			web.LogError(c, err, "Could not serve image")
+			web.LogError(c, err, fmt.Sprintf("Could not serve image %s", object.Name))
 		}
 		response.Images[object.Name] = url.String()
 	}
