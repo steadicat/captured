@@ -3,6 +3,7 @@ import component from '../lib/component';
 import {Block} from 'stylistic-elements';
 import {Image} from '../ui/image';
 import {Column} from '../ui/layout';
+import {Text} from '../ui/type';
 import {linear} from '../lib/math';
 import data from '../data';
 
@@ -16,6 +17,10 @@ function gutter(width) {
 
 function margins(width) {
   return width < 760 ? 24 : 48;
+}
+
+function chinHeight(width) {
+  return 72;
 }
 
 function columnWidth(width) {
@@ -47,7 +52,7 @@ function toColumns(pieces, width) {
   const g = gutter(width);
   for (let piece of pieces) {
     const shortest = minIndex(heights);
-    heights[shortest] += w * piece.size[1] / piece.size[0] + g;
+    heights[shortest] += w * piece.size[1] / piece.size[0] + chinHeight(width) + g;
     result[shortest].push(piece);
   }
   return result;
@@ -72,14 +77,19 @@ export const Gallery = component('Gallery', ({get}) =>
 
 
 export const Thumbnail = component('Thumbnail', ({piece, get, ...props}) =>
-  <Image
-    src={`${piece.id}.jpg`}
-    display="block"
-    pxWidth={columnWidth(get('browser.width'))}
-    pxHeight={Math.round(columnWidth(get('browser.width')) * piece.size[1] / piece.size[0])}
-    width="100%"
-    height={Math.round(columnWidth(get('browser.width')) * piece.size[1] / piece.size[0])}
-    marginBottom={gutter(get('browser.width'))}
-    {...props}
-  />
+  <Block marginBottom={gutter(get('browser.width'))}>
+    <Image
+      src={`${piece.id}.jpg`}
+      display="block"
+      pxWidth={columnWidth(get('browser.width'))}
+      pxHeight={Math.round(columnWidth(get('browser.width')) * piece.size[1] / piece.size[0])}
+      width="100%"
+      {...props}
+    />
+    <Block height={chinHeight(get('browser.height'))} fontSize={12} lineHeight={20} marginTop={12}>
+      <Text fontWeight="bold">{piece.artist}, Prison ID# {piece.artistPrisonID}</Text>
+      <Text fontStyle="italic">{piece.title} of {piece.company}</Text>
+      <Text>{piece.materials}</Text>
+    </Block>
+  </Block>
 );

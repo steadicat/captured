@@ -66,7 +66,7 @@ function getImage(path) {
   if (piece) {
     return `${config.IMAGES[piece.image + '.jpg']}=w900-h900-c`;
   } else {
-    return `${config.IMAGES[data[0].image + '.jpg']}=w900-h900-c`;
+    return `${config.IMAGES['book-photo.jpg']}=w900-h550-c`;
   }
 }
 
@@ -80,8 +80,8 @@ export const Page = component('Page', ({$, store, children}) =>
     <head>
       <title>{getTitle($('path'))}</title>
       <link rel="prefetch" href={`${config.ASSETS_URL}${$('main')}`} />
-      <link rel="prefetch" href="https://fonts.googleapis.com/css?family=Roboto:300,700|Roboto+Condensed:300,700" />
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,700|Roboto+Condensed:300,700" type="text/css" />
+      <link rel="prefetch" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700|Roboto+Condensed:300,300italic,700" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700|Roboto+Condensed:300,300italic,700" type="text/css" />
       <meta name="description" content={getDescription($('path'))} />
       <link rel="canonical" href={trailingSlash(`https://thecapturedproject.com${$('path')}`)} />
       <meta property="og:site_name" content="The Captured Project" />

@@ -46,6 +46,13 @@ export const Header = track(component('Header', ({get, actions, ...props}) =>
     <PageTitle display="none">CAPTURED</PageTitle>
     <PageSubtitle display="none">People in prison drawing people who should be</PageSubtitle>
     <HeaderText width="80vw" height="calc(100vh - 46px)" />
+    <Block>
+      <Image
+        src="book-photo.jpg"
+        width={get('browser.width')}
+        height={get('browser.height') - 46}
+      />
+    </Block>
     <LightCondensedText
       tag="div"
       fontSize={getSubtitleSize(get) * 1.5}
@@ -73,14 +80,7 @@ export const Header = track(component('Header', ({get, actions, ...props}) =>
 ));
 
 export const Footer = track(component('Footer', ({get, actions, ...props}) =>
-  <Block {...props}>
-    <Block marginBottom={24}>
-      <Image
-        src="book-photo.jpg"
-        width={get('browser.width')}
-        height={Math.round(get('browser.width') * 2890 / 4738)}
-      />
-    </Block>
+  <Block paddingTop={48} {...props}>
     {get('sold') >= 1000 ? <CondensedText fontWeight="bold" fontSize={24}>SOLD OUT</CondensedText> : <BuyButton />}
     <Text marginTop={12}>
       {get('sold') > 0
