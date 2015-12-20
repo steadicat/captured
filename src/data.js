@@ -31,6 +31,7 @@ module.exports = [
     ],
     "company": "Walmart",
     "id": "mcmillon",
+    "size": [5781, 7619],
     "links": [
       "http://www.corp-research.org/wal-mart",
       "http://www.nytimes.com/2013/05/29/business/wal-mart-is-fined-82-million-over-mishandling-of-hazardous-wastes.html",
@@ -238,6 +239,7 @@ module.exports = [
     ],
     "company": "Royal Dutch Shell",
     "id": "van-beurden",
+    "size": [7265, 10000],
     "links": [
       "http://www.corp-research.org/royal-dutch-shell",
       "http://priceofoil.org/2009/05/19/shell-the-worlds-most-carbon-intensive-company/",
@@ -311,6 +313,7 @@ module.exports = [
     ],
     "company": "The Nestle Group",
     "id": "brabeck-letmathe",
+    "size": [8210, 10000],
     "links": [
       "http://www.babymilkaction.org/nestlefree",
       "http://www.corp-research.org/nestle",
@@ -426,6 +429,7 @@ module.exports = [
     ],
     "company": "McDonalds",
     "id": "thompson",
+    "size": [7394, 10000],
     "links": [
       " http://www.corp-research.org/mcdonalds",
       "unnamed record",
@@ -502,6 +506,7 @@ module.exports = [
     ],
     "company": "Pepsico",
     "id": "nooyi",
+    "size": [6801, 10000],
     "links": [
       "http://www.globalexchange.org/corporateHRviolators#PepsiCo",
       "http://blogs.wsj.com/law/2009/10/28/an-unfortunate-series-of-events-after-clerical-error-pepsi-gets-slammed/",
@@ -535,6 +540,7 @@ module.exports = [
     ],
     "company": "Tyson Foods",
     "id": "smith",
+    "size": [7265, 10000],
     "links": [
       "http://www.sourcewatch.org/index.php/Tyson_Foods",
       "http://www.triplepundit.com/2014/08/epa-launches-criminal-investigation-tyson-foods/",
@@ -582,6 +588,7 @@ module.exports = [
     ],
     "company": "JP Morgan",
     "id": "dimon",
+    "size": [8344, 10000],
     "links": [
       "http://www.corp-research.org/jpmorganchase",
       "http://dealbook.nytimes.com/2013/02/06/e-mails-imply-jpmorgan-knew-some-mortga ge-deals-were-bad/",
@@ -618,6 +625,7 @@ module.exports = [
     ],
     "company": "Wells Fargo",
     "id": "stumpf",
+    "size": [8171, 10000],
     "links": [
       " http://oag.ca.gov/news/press-releases/brown-recovers-14-billion-wells-fargo-investors-landmark-settlement",
       " http://www.nytimes.com/2011/07/08/business/wells-fargo-to-settle-loans-suit.html?_r=0",
@@ -706,6 +714,7 @@ module.exports = [
     ],
     "company": "Pfizer",
     "id": "read",
+    "size": [5857, 7596],
     "links": [
       "http://thedailyshow.cc.com/videos/qrq3eo/the-pharmaceutical-drug-epidemic",
       "http://consumerist.com/2012/12/12/pfizer-hit-with-43-million-settlement-for-misleading-marke ting-of-drugs/",
@@ -738,6 +747,7 @@ module.exports = [
     ],
     "company": "Monsanto",
     "id": "grant",
+    "size": [6738, 8502],
     "links": [
       "https://corporatewatch.org/company-profiles/monsanto-corporate-crimes",
       "http://www.startribune.com/calif-vote-on-genetically-modified-foods-a-win-for-food-industry/178024361/ http://www.corp-research.org/monsanto",
@@ -824,6 +834,7 @@ module.exports = [
     ],
     "company": "Koch Industries",
     "id": "koch",
+    "size": [10000, 6364],
     "links": [
       "http://www.rollingstone.com/politics/news/inside-the-koch-brothers-toxic-empire-20140924",
       "http://www.corp-research.org/koch_industries",
@@ -992,6 +1003,7 @@ module.exports = [
     ],
     "company": "Goldman Sachs",
     "id": "blankfein",
+    "size": [7452, 10000],
     "links": [
       "http://www.rollingstone.com/politics/news/the-people-vs-goldman-sachs-20110511",
       "http://www.rollingstone.com/politics/news/the-great-american-bubble-machine-20100405",
@@ -1028,6 +1040,7 @@ module.exports = [
     ],
     "company": "JPay",
     "id": "shapiro",
+    "size": [6953, 8760],
     "links": [
       "https://www.eff.org/deeplinks/2015/05/hidden-cost-jpays-prison-email-system",
       "unnamed record",
@@ -1065,6 +1078,7 @@ module.exports = [
     ],
     "company": "HSBC",
     "id": "gulliver",
+    "size": [5737, 7476],
     "links": [
       "http://www.justice.gov/opa/pr/hsbc-holdings-plc-and-hsbc-bank-usa-na-admit-anti-money-laundering-and-sanctions-violations",
       "http://www.sec.gov/news/press/2007/2007-187.htm",
@@ -1105,7 +1119,7 @@ module.exports = [
     ],
     "company": "FIFA",
     "id": "blatter",
-    "size": [8720, 10976],
+    "size": [7945, 10000],
     "links": [
       "http://www.theguardian.com/world/2014/feb/13/fifa-labour-conditions-qatar-world-cup",
       "http://www.justice.gov/opa/pr/nine-fifa-officials-and-five-corporate-executives-indicted-racketeering-conspiracy-and",
@@ -1118,5 +1132,5 @@ module.exports = [
     "name": "Sepp Blatter",
     "title": "Former President"
   }
-].filter(piece => !!piece.size);
+];
 
