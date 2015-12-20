@@ -43,24 +43,29 @@ function getSubtitleSize(get) {
 
 export const Header = track(component('Header', ({get, actions, ...props}) =>
   <Block paddingTop={0} {...props}>
+    <PageTitle display="none">CAPTURED</PageTitle>
+    <PageSubtitle display="none">People in prison drawing people who should be</PageSubtitle>
     <HeaderText width="80vw" height="calc(100vh - 46px)" />
-    {/*
-    <PageTitle marginTop={24} marginBottom={24} fontSize={getTitleSize(get)} lineHeight={getTitleSize(get)}>CAPTURED</PageTitle>
-    <PageSubtitle fontSize={getSubtitleSize(get)} lineHeight={getSubtitleSize(get)}>People in prison drawing people who should be</PageSubtitle>
-  */}
     <LightCondensedText
+      tag="div"
       fontSize={getSubtitleSize(get) * 1.5}
       lineHeight="2"
       height="calc(100vh - 46px)"
-      maxWidth={700}
+      maxWidth={760}
       marginLeft="auto"
       marginRight="auto"
       paddingLeft={24}
       paddingRight={24}>
       <Block tag="span" position="relative" top="50%" translateY="-50%">
-        We asked people in prison to paint or draw people we felt <em>should</em>&nbsp; be in prison – the CEOs of companies doing the most damage to our environment, economy, and society.
-        <br/><br/>
-        Here are the results, each presented with the crimes committed by both companies & artists.
+        <Text>
+          For over a year, we asked people in prison to paint or draw people we felt <em>should</em> be in prison–the CEOs of companies doing the most damage to our environment, economy, and society.
+        </Text>
+        <Text marginTop="1em">
+          Here are the results, each shown with the crimes committed by the companies as well as the imprisoned artists.
+        </Text>
+        <Text marginTop="1em">
+          We present this project as a way to better to see the crimes that are masquerading as commerce.
+        </Text>
       </Block>
     </LightCondensedText>
     <Gallery />
@@ -79,15 +84,17 @@ export const Footer = track(component('Footer', ({get, actions, ...props}) =>
     {get('sold') >= 1000 ? <CondensedText fontWeight="bold" fontSize={24}>SOLD OUT</CondensedText> : <BuyButton />}
     <Text marginTop={12}>
       {get('sold') > 0
-      ? `Limited edition. ${get('sold')} of ${get('total')} copies sold.`
-      : `Limited edition of 1000 copies.`}
+      ? (get('sold') >= 1000 ?
+        `Limited edition. ${get('sold')} of ${get('total')} copies sold.`
+        : 'Limited edition. All 1000 copies sold out.')
+      : 'Limited edition of 1000 copies.'}
     </Text>
     <Text marginTop={24} marginBottom={48}>
-      All proceeds will go towards supporting
+      All profits go towards effors to elect
       {' '}
       <Link href="https://berniesanders.com/">Bernie Sanders</Link>’s
       {' '}
-      presidential run.
+      as president.
     </Text>
     <SocialButtons url="https://thecapturedproject.com/" marginBottom={96} />
   </Block>

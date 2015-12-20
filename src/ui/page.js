@@ -42,22 +42,22 @@ function getPieceFromPath(path) {
 function getTitle(path) {
   const piece = getPieceFromPath(path);
   if (piece) {
-    return `${piece.name}, ${piece.title}: Captured by ${piece.artist}`;
+    return `People in Prison Draw People who Should Be`;
   } else if (path === '/act/') {
-    return 'Captured: buy the book or share the project';
+    return 'People in Prison Draw People who Should Be';
   } else {
-    return 'Captured: people in prison drawing people who should be';
+    return 'People in Prison Draw People who Should Be';
   }
 }
 
 function getDescription(path) {
   const piece = getPieceFromPath(path);
   if (piece) {
-    return `${piece.materials}, by ${piece.artist}. ${piece.artistBio} ${piece.artistCharges}.`;
+    return `${piece.title} of ${piece.company} – Painted by ${piece.artist} – serving ${piece.artistSentence} for ${piece.artistCharges}.`;
   } else if (path === '/act/') {
-    return 'Limited edition of 1000 copies. All proceeds will be donated to the Bernie 2016 campaign.';
+    return 'Limited edition book of 1000 copies. All profits go to help elect Bernie Sanders.';
   } else {
-    return 'See the pictures or buy the book. All proceeds will be donated to the Bernie 2016 campaign.';
+    return 'Limited edition book of 1000 copies. All profits go to help elect Bernie Sanders.';
   }
 }
 
