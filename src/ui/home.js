@@ -58,13 +58,13 @@ export const Header = track(component('Header', ({get, actions, ...props}) =>
       paddingRight={24}>
       <Block tag="span" position="relative" top="50%" translateY="-50%">
         <Text>
-          For over a year, we asked people in prison to paint or draw people we felt <em>should</em> be in prison–the CEOs of companies doing the most damage to our environment, economy, and society.
+          For over a year, we asked people in prison to paint or draw people we felt <em>should</em> be in prison–the CEOs of companies doing the most damage to our environment, economy,&nbsp;and&nbsp;society.
         </Text>
         <Text marginTop="1em">
-          Here are the results, each shown with the crimes committed by the companies as well as the imprisoned artists.
+          Here are the results, each shown with the crimes committed by the companies as well as the imprisoned&nbsp;artists.
         </Text>
         <Text marginTop="1em">
-          We present this project as a way to better to see the crimes that are masquerading as commerce.
+          We present this project as a way to better to see the crimes that are masquerading as&nbsp;commerce.
         </Text>
       </Block>
     </LightCondensedText>
