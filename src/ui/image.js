@@ -7,7 +7,7 @@ import config from '../../etc/config';
 function getImageOptions(get, w, h) {
   const ratio = get('browser.pixelRatio');
   const webp = get('browser.webp');
-  return `w${w * ratio}-h${h * ratio}-c${webp ? '-rw' : ''}`;
+  return `w${w * ratio}-h${h * ratio}-p${webp ? '-rw' : ''}`;
 }
 
 @connect

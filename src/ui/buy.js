@@ -9,9 +9,9 @@ export const BuyButton = hover(component('BuyButton', ({hovered, get, ...props})
   <Animate scaleX={hovered ? 1.1 : 1} scaleY={hovered ? 1.1 : 1}>
     <Pay
       lineHeight={12}
-      backgroundColor={hovered ? '#e52' : null}
+      backgroundColor={hovered ? [230, 60, 34] : null}
       color={hovered ? '#fff' : null}
-      borderColor={hovered ? '#e52' : '#444'}
+      borderColor={hovered ? [230, 60, 34] : '#444'}
       borderStyle="solid"
       borderWidth={1}
       translateZ={0}

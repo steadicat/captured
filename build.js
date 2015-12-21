@@ -14,6 +14,7 @@ var config = require('./etc/config');
 var paths = {
   '/': 'assets/index.html',
   '/act': 'assets/act/index.html',
+  '/about': 'assets/about/index.html',
   '/orders': 'assets/orders/index.html',
 };
 

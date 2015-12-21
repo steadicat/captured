@@ -5,7 +5,7 @@ import component from '../lib/component';
 import {hover} from '../lib/behaviors';
 
 export const Link = hover(component('Link', ({hovered, ...props}) =>
-  <Animate color={hovered ? [198, 60, 38] : [0, 0, 0]}>
+  <Animate color={hovered ? [230, 60, 34] : [0, 0, 0]}>
     <ResetElement
       tag="a"
       cursor="pointer"
@@ -31,7 +31,7 @@ export const MainButton = hover(component('MainButton', ({hovered, get, ...props
   <Animate scaleX={hovered ? 1.1 : 1} scaleY={hovered ? 1.1 : 1}>
     <Button
       lineHeight={12}
-      backgroundColor={hovered ? [198, 60, 38] : '#fff'}
+      backgroundColor={hovered ? [230, 60, 34] : '#fff'}
       color={hovered ? '#fff' : null}
       borderColor={hovered ? '#e52' : '#444'}
       borderStyle="solid"

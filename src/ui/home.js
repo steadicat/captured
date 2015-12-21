@@ -5,7 +5,7 @@ import {track} from '../lib/behaviors';
 import {linear} from '../lib/math';
 import {Link} from '../ui/core';
 import {Image} from '../ui/image';
-import {DefaultFont, PageTitle, PageSubtitle, Text, CondensedText, LightCondensedText} from '../ui/type';
+import {DefaultFont, PageSubtitle, Text, CondensedText, LightCondensedText} from '../ui/type';
 import {SocialButtons} from '../ui/social';
 import {Toolbar} from '../ui/toolbar';
 import {Piece} from '../ui/piece';
@@ -14,6 +14,7 @@ import {Orders} from '../ui/orders';
 import {Scroll} from '../ui/scroll';
 import {Gallery} from '../ui/gallery';
 import {HeaderText} from '../ui/header';
+import {About} from '../ui/about';
 import data from '../data';
 
 export const Router = component('Router', ({get}) => {
@@ -43,12 +44,12 @@ function getSubtitleSize(get) {
 
 export const Header = track(component('Header', ({get, actions, ...props}) =>
   <Block paddingTop={0} {...props}>
-    <PageTitle display="none">CAPTURED</PageTitle>
-    <PageSubtitle display="none">People in prison drawing people who should be</PageSubtitle>
+    <Block tag="h1" display="none">CAPTURED</Block>
+    <Block tag="h2" display="none">People in prison drawing people who should be</Block>
     <HeaderText width="80vw" height="calc(100vh - 46px)" />
     <Block>
       <Image
-        src="book-photo.jpg"
+        src="book-orange.jpg"
         width={get('browser.width')}
         height={get('browser.height') - 46}
       />
@@ -57,13 +58,16 @@ export const Header = track(component('Header', ({get, actions, ...props}) =>
       tag="div"
       fontSize={getSubtitleSize(get) * 1.5}
       lineHeight="2"
-      height="calc(100vh - 46px)"
-      maxWidth={760}
+      minHeight="calc(100vh - 46px)"
+      maxWidth="80%"
       marginLeft="auto"
       marginRight="auto"
+      paddingTop={48}
+      paddingBottom={48}
       paddingLeft={24}
-      paddingRight={24}>
-      <Block tag="span" position="relative" top="50%" translateY="-50%">
+      paddingRight={24}
+      boxSizing="border-box">
+      <Block tag="span" position="relative" top="calc(50vh - 23px - 48px)" translateY="-50%">
         <Text>
           For over a year, we asked people in prison to paint or draw people we felt <em>should</em> be in prison–the CEOs of companies doing the most damage to our environment, economy,&nbsp;and&nbsp;society.
         </Text>
@@ -79,8 +83,16 @@ export const Header = track(component('Header', ({get, actions, ...props}) =>
   </Block>
 ));
 
+
 export const Footer = track(component('Footer', ({get, actions, ...props}) =>
   <Block paddingTop={48} {...props}>
+    <Block marginBottom={48}>
+      <Image
+        src="book-white.jpg"
+        width={Math.round(get('browser.width') / 2)}
+        height={Math.round(get('browser.width') / 2 * 2148 / 5098)}
+      />
+    </Block>
     {get('sold') >= 1000 ? <CondensedText fontWeight="bold" fontSize={24}>SOLD OUT</CondensedText> : <BuyButton />}
     <Text marginTop={12}>
       {get('sold') > 0
@@ -119,6 +131,7 @@ export const Home = component('Home', ({get, actions, ...props}) =>
         }
       </Scroll>*/}
       <Footer trackKey="act" />
+      <About trackKey="about" />
       {get('sold') < 1000 && <Toolbar />}
     </Block>
   </DefaultFont>

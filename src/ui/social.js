@@ -32,7 +32,7 @@ export const FacebookButton = hover(component('FacebookButton', ({url, hovered, 
     href={`https://www.facebook.com/sharer/sharer.php?url=${encodeURIComponent(url)}`}
     {...props}>
     <Animate scaleX={hovered ? 1.1 : 1} scaleY={hovered ? 1.1 : 1}>
-      <FacebookIcon width={24} height={24} color={hovered ? 'rgb(238, 85, 34)' : '#888'} />
+      <FacebookIcon width={24} height={24} color={hovered ? 'rgb(230, 60, 34)' : '#888'} />
     </Animate>
   </InlineBlock>
 ));
@@ -45,7 +45,7 @@ export const TwitterButton = hover(component('TwitterButton', ({url, hovered, ..
     href={`https://twitter.com/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(tweetText)}`}
     {...props}>
     <Animate scaleX={hovered ? 1.1 : 1} scaleY={hovered ? 1.1 : 1}>
-      <TwitterIcon width={24} height={24} color={hovered ? 'rgb(238, 85, 34)' : '#888'} />
+      <TwitterIcon width={24} height={24} color={hovered ? 'rgb(230, 60, 34)' : '#888'} />
     </Animate>
   </InlineBlock>
 ));
