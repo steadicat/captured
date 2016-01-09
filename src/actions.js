@@ -75,18 +75,22 @@ export function browserResize(get, actions) {
     .set('browser.height', window.innerHeight);
 }
 
+/*
 function getDistance({top, bottom}, point) {
   return Math.abs((top + bottom) / 2 - point);
 }
+*/
 
 export function browserScroll(get, actions) {
+  return;
+  /*
   if (get('scrolling')) return get().set('needsScroll', false);
 
   // Find closest element on screen and navigate to it if necessary
   let path = get('path');
   const positions = get('positions');
   const scrollCenter = scroll.getScroll() + get('browser.height') / 2;
-  const [closestKey, _] = Object.keys(positions).reduce(([closest, dist], key) => {
+  const [closestKey] = Object.keys(positions).reduce(([closest, dist], key) => {
     const newDist = getDistance(positions[key], scrollCenter);
     return newDist < dist ? [key, newDist] : [closest, dist];
   }, [null, Infinity]);
@@ -101,6 +105,7 @@ export function browserScroll(get, actions) {
   return get()
     .set('path', path)
     .set('needsScroll', false);
+  */
 }
 
 export function detectWebP(get, actions, supported) {
@@ -109,14 +114,6 @@ export function detectWebP(get, actions, supported) {
 
 export function show(get, actions) {
   return get().set('shown', true);
-}
-
-export function navigate(get, actions, path) {
-  const bits = path.split('/');
-  if (bits.length === 3 && bits[0] === '' && bits[1] === 'unlock' && sha1(bits[2]) === config.UNLOCK_KEY) {
-    actions.show();
-  }
-  return get().set('path', path);
 }
 
 export function requestSoldUpdate(get, actions) {
@@ -145,10 +142,27 @@ export function scrollingDone(get, actions) {
   return get().set('scrolling', false);
 }
 
+/*
 export function navigate(get, actions, path) {
-  const id = path.substring(1, path.length - 1);
-  const position = get('positions')[id === '/' ? '' : id];
-  position && scroll.scrollTo(position.top, actions.scrollingDone);
+  console.log('navigate', path);
+  const bits = path.split('/');
+  if (bits.length === 3 && bits[0] === '' && bits[1] === 'unlock' && sha1(bits[2]) === config.UNLOCK_KEY) {
+    actions.show();
+  }
+  return get().set('path', path);
+}*/
+
+import {getThumbnailSize, getFullScreenSize} from './ui/gallery';
+import data from './data';
+
+export function navigate(get, actions, path) {
+  const id = path.substring(1, path.length);
+  const position = get('positions')[id];
+  if (position && (id !== '')) {
+    const browser = get('browser');
+    const piece = data.find(p => p.id === id);
+    scroll.scrollTo(position.top + getThumbnailSize(piece, browser)[1] / 2 - getFullScreenSize(piece, browser)[1] / 2, actions.scrollingDone);
+  }
   return get().set('scrolling', true).set('path', path);
 }
 

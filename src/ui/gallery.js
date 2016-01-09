@@ -1,6 +1,9 @@
 import React from 'react';
-import component from '../lib/component';
+import {Animate} from 'react-rebound';
 import {Block} from 'stylistic-elements';
+import component from '../lib/component';
+import {hover, track} from '../lib/behaviors';
+import {Link} from '../ui/core';
 import {Image} from '../ui/image';
 import {Column} from '../ui/layout';
 import {Text} from '../ui/type';
@@ -12,15 +15,15 @@ function columns(width) {
 }
 
 function gutter(width) {
-  return 24;
+  return width < 760 ? 12 : 24;
 }
 
 function margins(width) {
-  return width < 760 ? 24 : 48;
+  return width < 760 ? 12 : 48;
 }
 
 function chinHeight(width) {
-  return 72;
+  return width < 760 ? 112 : 72;
 }
 
 function columnWidth(width) {
@@ -69,27 +72,79 @@ export const Gallery = component('Gallery', ({get}) =>
         {column.map(piece =>
           <Thumbnail
             key={piece.id}
+            trackKey={piece.id}
             piece={piece}
+            current={'/' + piece.id === get('path')}
+            x={(columnWidth(get('browser.width')) * (i + 0.5) + gutter(get('browser.width')) * i) + margins(get('browser.width'))}
+            y={get(`positions.${piece.id}.top`)}
           />)}
       </Column>)}
+    <Animate opacity={get('path') === '/' ? 0 : 1}>
+      <Block
+        position="fixed"
+        top={0}
+        left={0}
+        right={0}
+        bottom={0}
+        backgroundColor="#fff"
+        opacity={0}
+        pointerEvents={get('path') === '/' ? 'none' : null}
+        zIndex={1}
+      />
+    </Animate>
   </Block>
 );
 
+export function getThumbnailSize(piece, {width, height}) {
+  const imageRatio = piece.size[0] / piece.size[1];
+  return [columnWidth(width), Math.round(columnWidth(width) / imageRatio)];
+}
 
-export const Thumbnail = component('Thumbnail', ({piece, get, ...props}) =>
-  <Block marginBottom={gutter(get('browser.width'))}>
-    <Image
-      src={`${piece.id}.jpg`}
-      display="block"
-      pxWidth={columnWidth(get('browser.width'))}
-      pxHeight={Math.round(columnWidth(get('browser.width')) * piece.size[1] / piece.size[0])}
-      width="100%"
-      {...props}
-    />
+export function getFullScreenSize(piece, {width, height}) {
+  const screenRatio = width / height;
+  const imageRatio = piece.size[0] / piece.size[1];
+  const fullScreenWidth = imageRatio > screenRatio ? width : (height * imageRatio);
+  return [Math.round(fullScreenWidth), Math.round(fullScreenWidth / imageRatio)];
+}
+
+function getSize(piece, current, {width, height}) {
+  return (current ? getFullScreenSize : getThumbnailSize)(piece, {width, height});
+}
+
+function getScale(piece, current, hovered, {width, height}) {
+  if (current) {
+    const [fullScreenWidth] = getFullScreenSize(piece, {width, height});
+    return fullScreenWidth / columnWidth(width);
+  }
+  return hovered ? 1.05 : 1;
+}
+
+export const Thumbnail = track(hover(component('Thumbnail', ({piece, x, y, get, current, hovered, ...props}) =>
+  <Link
+    href={current ? '/' : `/${piece.id}`}
+    marginBottom={gutter(get('browser.width'))}
+    fontWeight="normal"
+    display="block">
+    <Animate
+      scaleX={getScale(piece, current, hovered, get('browser'))}
+      scaleY={getScale(piece, current, hovered, get('browser'))}
+      translateX={current ? (get('browser.width') / 2 - x) : 0}>
+      {animating => <Image
+        src={`${piece.id}.jpg`}
+        display="block"
+        pxWidth={getSize(piece, current, get('browser'))[0]}
+        pxHeight={getSize(piece, current, get('browser'))[1]}
+        width={getThumbnailSize(piece, get('browser'))[0]}
+        height={getThumbnailSize(piece, get('browser'))[1]}
+        position="relative"
+        zIndex={current || animating ? 2 : 0}
+        {...props}
+      />}
+    </Animate>
     <Block height={chinHeight(get('browser.height'))} fontSize={12} lineHeight={20} marginTop={12}>
-      <Text fontWeight="bold">{piece.artist}, Prison ID# {piece.artistPrisonID}</Text>
-      <Text fontStyle="italic">{piece.title} of {piece.company}</Text>
-      <Text>{piece.materials}</Text>
+      <Text fontWeight="bold">{piece.title} of {piece.company}</Text>
+      <Text>by {piece.artist}, Prison ID# {piece.artistPrisonID}</Text>
+      <Text fontStyle="italic">{piece.materials}</Text>
     </Block>
-  </Block>
-);
+  </Link>
+)));

@@ -4,7 +4,7 @@ import component from '../lib/component';
 import {track} from '../lib/behaviors';
 import {Image} from '../ui/image';
 import {Column, ResponsiveColumn} from '../ui/layout';
-import {Link} from '../ui/core';
+import {TextLink} from '../ui/core';
 import {Text, LightCondensedText, PageHeading} from '../ui/type';
 
 export const Charges = component('Charges', ({get, charges, ...props}) =>
@@ -54,7 +54,7 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
         textAlign="left"
         marginBottom={24}
       />
-      {get('browser.width') < 740 && <Link display="block" paddingBottom={24} fontWeight="bold" textAlign="left">References</Link>}
+      {get('browser.width') < 740 && <TextLink display="block" paddingBottom={24} fontWeight="bold" textAlign="left">References</TextLink>}
     </ResponsiveColumn>
     <ResponsiveColumn textAlign="left" width="40%">
       <LightCondensedText fontSize={24} textTransform="uppercase">Captured by</LightCondensedText>
@@ -63,13 +63,13 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
       </PageHeading>
       <Text marginTop={6}>Serving {piece.artistSentence} for:</Text>
       <Text marginTop={24}><Inline fontWeight="bold">{piece.artistCharges}</Inline></Text>
-      {get('browser.width') < 740 && <Link display="block" paddingTop={24} fontWeight="bold" textAlign="left">Contact Info</Link>}
+      {get('browser.width') < 740 && <TextLink display="block" paddingTop={24} fontWeight="bold" textAlign="left">Contact Info</TextLink>}
     </ResponsiveColumn>
     {get('browser.width') > 740 && <Column textAlign="left" width="60%" paddingRight={24}>
-      <Link display="block" fontWeight="bold" textAlign="left">References</Link>
+      <TextLink display="block" fontWeight="bold" textAlign="left">References</TextLink>
     </Column>}
     {get('browser.width') > 740 && <Column textAlign="left" width="40%">
-      <Link display="block" fontWeight="bold" textAlign="left">Contact Info</Link>
+      <TextLink display="block" fontWeight="bold" textAlign="left">Contact Info</TextLink>
       <Text textAlign="left" marginTop={24}>Materials: {piece.materials}.</Text>
     </Column>}
 

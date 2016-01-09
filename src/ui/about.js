@@ -2,7 +2,7 @@ import React from 'react';
 import component from '../lib/component';
 import {track} from '../lib/behaviors';
 import {Block, InlineBlock} from 'stylistic-elements';
-import {Link} from '../ui/core';
+import {TextLink} from '../ui/core';
 import {Column} from '../ui/layout';
 import {Text, BoldText, PageHeading} from '../ui/type';
 
@@ -19,13 +19,13 @@ export const About = track(component('About', ({...props}) =>
   <InlineBlock textAlign="left" maxWidth={700} paddingLeft={24} paddingRight={24} paddingBottom={192} {...props}>
     <AboutSection title="Artists’ Statement" subtitle="Jeff Greenspan & Andrew Tider (2015)">
       <Text>
-        Corporations frequently commit crimes any average person would be imprisoned for. These corporate crimes devastate our environment, economy and society, yet the companies committing them often <Link href="http://prospect.org/article/get-out-jail-free-0/">get away with only paying a settlement</Link>. These payouts do little damage to a corporation's bottom line and are practically baked into their budgets. The cost of doing business.
+        Corporations frequently commit crimes any average person would be imprisoned for. These corporate crimes devastate our environment, economy and society, yet the companies committing them often <TextLink href="http://prospect.org/article/get-out-jail-free-0/">get away with only paying a settlement</TextLink>. These payouts do little damage to a corporation's bottom line and are practically baked into their budgets. The cost of doing business.
       </Text>
       <Text>
         CAPTURED shines a light on these crimes masquerading as commerce. Through the use of art made by people in prison, this project imagines the highest levels of corporate leadership being personally responsible for their companies’ illegal actions.
       </Text>
       <Text>
-        Money, power, and political influence allow these companies, and their leaders, to not just break the rules, but make the rules. They are “untouchable.” On the opposite end of society’s spectrum lies another “untouchable”–the incarcerated– who even after paying their debts to society are often <Link href="http://www.urban.org/sites/default/files/alfresco/publication-pdfs/411778-Employment-after-Prison-A-Longitudinal-Study-of-Releasees-in-Three-States.PDF">treated as unworthy</Link>.
+        Money, power, and political influence allow these companies, and their leaders, to not just break the rules, but make the rules. They are “untouchable.” On the opposite end of society’s spectrum lies another “untouchable”–the incarcerated– who even after paying their debts to society are often <TextLink href="http://www.urban.org/sites/default/files/alfresco/publication-pdfs/411778-Employment-after-Prison-A-Longitudinal-Study-of-Releasees-in-Three-States.PDF">treated as unworthy</TextLink>.
       </Text>
       <Text>
         The artistry displayed within this project may help viewers see the incarcerated as more than one-dimensional criminals and remind them a prisoner is also a person. They may also remind us a corporation is not a person. A corporation has no conscience. It cannot repent or truly pay for its crimes.
@@ -47,10 +47,10 @@ export const About = track(component('About', ({...props}) =>
     </AboutSection>
     <AboutSection title="Why Bernie?" marginBottom={96}>
       <Text>
-        A limited run of 1,000 CAPTURED fine printed art books (great for coffee tables) are being sold through this website, with all profits going towards efforts to elect <Link href="https://berniesanders.com/">Bernie Sanders</Link> as president in 2016.
+        A limited run of 1,000 CAPTURED fine printed art books (great for coffee tables) are being sold through this website, with all profits going towards efforts to elect <TextLink href="https://berniesanders.com/">Bernie Sanders</TextLink> as president in 2016.
       </Text>
       <Text>
-        One of the main pillars of Bernie’s campaign is to <Link href="https://berniesanders.com/issues/money-in-politics/">eliminate corporate control</Link> over government, politics, and political campaigns. Since the crimes documented within this project reflect corporate America’s pattern of putting profits before people, this goal has our full support.
+        One of the main pillars of Bernie’s campaign is to <TextLink href="https://berniesanders.com/issues/money-in-politics/">eliminate corporate control</TextLink> over government, politics, and political campaigns. Since the crimes documented within this project reflect corporate America’s pattern of putting profits before people, this goal has our full support.
       </Text>
     </AboutSection>
     <Column fontSize={12} width="50%">

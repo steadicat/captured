@@ -1,17 +1,39 @@
 import React from 'react';
 import {Animate} from 'react-rebound';
+import {connect} from 'ducts';
 import {ResetElement} from 'stylistic-elements';
 import component from '../lib/component';
+import * as history from '../lib/history';
 import {hover} from '../lib/behaviors';
 
-export const Link = hover(component('Link', ({hovered, ...props}) =>
+@connect
+export class Link extends React.Component {
+  onLinkClick = (event) => {
+    const {href} = this.props;
+    if (!/^http(s?):\/\//.test(href)) {
+      event.preventDefault();
+      history.pushState(href);
+      this.props.actions.navigate(href);
+    }
+  }
+
+  render() {
+    return (
+      <ResetElement
+        tag="a"
+        cursor="pointer"
+        fontWeight="bold"
+        onClick={this.onLinkClick}
+        {...this.props}
+      />
+    );
+  }
+}
+
+
+export const TextLink = hover(component('TextLink', ({hovered, ...props}) =>
   <Animate color={hovered ? [230, 60, 34] : [0, 0, 0]}>
-    <ResetElement
-      tag="a"
-      cursor="pointer"
-      fontWeight="bold"
-      {...props}
-    />
+    <Link fontWeight="bold" {...props} />
   </Animate>
 ));
 

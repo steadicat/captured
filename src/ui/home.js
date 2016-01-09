@@ -3,7 +3,7 @@ import {Block} from 'stylistic-elements';
 import component from '../lib/component';
 import {track} from '../lib/behaviors';
 import {linear} from '../lib/math';
-import {Link} from '../ui/core';
+import {TextLink} from '../ui/core';
 import {Image} from '../ui/image';
 import {DefaultFont, PageSubtitle, Text, CondensedText, LightCondensedText} from '../ui/type';
 import {SocialButtons} from '../ui/social';
@@ -38,8 +38,8 @@ function getTitleSize(get) {
   return linear(320, 68, 2000, 96 + 96, Math.min(get('browser.width'), get('browser.height') * 2));
 }
 */
-function getSubtitleSize(get) {
-  return linear(320, 14, 2000, 32, Math.min(get('browser.width'), get('browser.height') * 2))
+function getPrefaceSize(get) {
+  return linear(320, 18, 2000, 56, Math.min(get('browser.width'), get('browser.height') * 2));
 }
 
 export const Header = track(component('Header', ({get, actions, ...props}) =>
@@ -49,17 +49,17 @@ export const Header = track(component('Header', ({get, actions, ...props}) =>
     <HeaderText width="80vw" height="calc(100vh - 46px)" />
     <Block>
       <Image
-        src="book-orange.jpg"
+        src="book-photo.jpg"
         width={get('browser.width')}
         height={get('browser.height') - 46}
       />
     </Block>
     <LightCondensedText
       tag="div"
-      fontSize={getSubtitleSize(get) * 1.5}
+      fontSize={getPrefaceSize(get)}
       lineHeight="2"
       minHeight="calc(100vh - 46px)"
-      maxWidth="80%"
+      maxWidth={getPrefaceSize(get) * 26}
       marginLeft="auto"
       marginRight="auto"
       paddingTop={48}
@@ -71,10 +71,10 @@ export const Header = track(component('Header', ({get, actions, ...props}) =>
         <Text>
           For over a year, we asked people in prison to paint or draw people we felt <em>should</em> be in prison–the CEOs of companies doing the most damage to our environment, economy,&nbsp;and&nbsp;society.
         </Text>
-        <Text marginTop="1em">
+        <Text marginTop={16}>
           Here are the results, each shown with the crimes committed by the companies as well as the imprisoned&nbsp;artists.
         </Text>
-        <Text marginTop="1em">
+        <Text marginTop={16}>
           We present this project as a way to better to see the crimes that are masquerading as&nbsp;commerce.
         </Text>
       </Block>
@@ -83,20 +83,23 @@ export const Header = track(component('Header', ({get, actions, ...props}) =>
   </Block>
 ));
 
+function bookWidth(get) {
+  return linear(320, 300, 1800, 800, get('browser.width'));
+}
 
 export const Footer = track(component('Footer', ({get, actions, ...props}) =>
   <Block paddingTop={48} {...props}>
     <Block marginBottom={48}>
       <Image
         src="book-white.jpg"
-        width={Math.round(get('browser.width') / 2)}
-        height={Math.round(get('browser.width') / 2 * 2148 / 5098)}
+        width={Math.round(bookWidth(get))}
+        height={Math.round(bookWidth(get) * 2148 / 5098)}
       />
     </Block>
     {get('sold') >= 1000 ? <CondensedText fontWeight="bold" fontSize={24}>SOLD OUT</CondensedText> : <BuyButton />}
     <Text marginTop={12}>
       {get('sold') > 0
-      ? (get('sold') >= 1000 ?
+      ? (get('sold') < 1000 ?
         `Limited edition. ${get('sold')} of ${get('total')} copies sold.`
         : 'Limited edition. All 1000 copies sold out.')
       : 'Limited edition of 1000 copies.'}
@@ -104,9 +107,9 @@ export const Footer = track(component('Footer', ({get, actions, ...props}) =>
     <Text marginTop={24} marginBottom={48}>
       All profits go towards effors to elect
       {' '}
-      <Link href="https://berniesanders.com/">Bernie Sanders</Link>’s
+      <TextLink href="https://berniesanders.com/">Bernie Sanders</TextLink>
       {' '}
-      as president.
+      as&nbsp;president.
     </Text>
     <SocialButtons url="https://thecapturedproject.com/" marginBottom={96} />
   </Block>

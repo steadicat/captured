@@ -1,4 +1,7 @@
+import React from 'react';
 import {connect} from 'ducts';
+
+const DEBUG = false; //process.env.NODE_ENV !== 'production';
 
 export default function component(displayName, func) {
   if (!func) {
@@ -6,9 +9,26 @@ export default function component(displayName, func) {
     displayName = func.name;
   }
 
-  const f = function(props) {
+  if (DEBUG) {
+    @connect
+    class C extends React.Component {
+      static displayName = displayName;
+
+      shouldComponentUpdate() {
+        return true;
+      }
+
+      render() {
+        return func({...this.props, $: this.props.get});
+      }
+    }
+    return C;
+  }
+
+  let f = function(props) {
     return func({...props, $: props.get});
   }
+
   f.displayName = displayName;
   f.pure = true;
   return connect(f);
