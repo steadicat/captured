@@ -39,7 +39,7 @@ function getTitleSize(get) {
 }
 */
 function getPrefaceSize(get) {
-  return linear(320, 18, 2000, 56, Math.min(get('browser.width'), get('browser.height') * 2));
+  return linear(320, 18, 2000, 56, Math.min(get('browser.width'), get('browser.height') * 1.4));
 }
 
 export const Header = track(component('Header', ({get, actions, ...props}) =>
@@ -49,7 +49,7 @@ export const Header = track(component('Header', ({get, actions, ...props}) =>
     <HeaderText width="80vw" height="calc(100vh - 46px)" />
     <Block>
       <Image
-        src="book-photo.jpg"
+        src="book-orange.jpg"
         width={get('browser.width')}
         height={get('browser.height') - 46}
       />

@@ -137,7 +137,7 @@ export const Thumbnail = track(hover(component('Thumbnail', ({piece, x, y, get, 
         width={getThumbnailSize(piece, get('browser'))[0]}
         height={getThumbnailSize(piece, get('browser'))[1]}
         position="relative"
-        zIndex={current || animating ? 2 : 0}
+        zIndex={current ? 3 : (animating ? 2 : 0)}
         {...props}
       />}
     </Animate>
