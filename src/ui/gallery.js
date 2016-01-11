@@ -7,6 +7,7 @@ import {Link} from '../ui/core';
 import {Image} from '../ui/image';
 import {Column} from '../ui/layout';
 import {Text} from '../ui/type';
+import {Piece} from '../ui/piece';
 import {linear} from '../lib/math';
 import data from '../data';
 
@@ -92,6 +93,17 @@ export const Gallery = component('Gallery', ({get}) =>
         zIndex={1}
       />
     </Animate>
+    {data.filter(piece => '/' + piece.id === get('path')).map(piece =>
+      <Animate key={piece.id} opacity={1}>
+        <Piece
+          piece={piece}
+          position="absolute"
+          zIndex={4}
+          opacity={0}
+          top={get(`positions.${piece.id}.top`) + getThumbnailSize(piece, get('browser'))[1] / 2 + getFullScreenSize(piece, get('browser'))[1] / 2}
+          left={0}
+        />
+      </Animate>)}
   </Block>
 );
 

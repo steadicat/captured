@@ -29,6 +29,7 @@ function getImageSize(get) {
 
 export const Piece = track(component('Piece', ({get, piece, ...props}) =>
   <Block maxWidth={get('browser.height')} {...props}>
+    {/*
     <Image
       src={`${piece.id}.jpg`}
       pxWidth={getImageSize(get)[0]}
@@ -37,7 +38,7 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
       height={get('browser.known') ? getImageSize(get)[1] : null}
       maxWidth="100vh"
       marginBottom={24}
-    />
+    />*/}
 
     <ResponsiveColumn textAlign="left" width="60%" paddingRight={24}>
       {/*<SocialButtons display="block" textAlign="right" url={`https://thecapturedproject.com/${piece.id}/`} />*/}
