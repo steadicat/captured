@@ -101,7 +101,8 @@ export const Gallery = component('Gallery', ({get}) =>
           zIndex={4}
           opacity={0}
           top={get(`positions.${piece.id}.top`) + getThumbnailSize(piece, get('browser'))[1] / 2 + getFullScreenSize(piece, get('browser'))[1] / 2}
-          left={0}
+          left={40}
+          right={40}
         />
       </Animate>)}
   </Block>

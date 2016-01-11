@@ -22,7 +22,7 @@ export class Image extends React.Component {
 
   onLoad = () => {
     this.setState({loaded: true});
-  }
+  };
 
   render() {
     const {src, width, height, pxWidth, pxHeight, get, actions, ...props} = this.props;

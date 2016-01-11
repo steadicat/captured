@@ -37,7 +37,7 @@ class Tracking extends React.Component {
   onSubmit = (event) => {
     event.preventDefault();
     this.props.onShipped(ReactDOM.findDOMNode(this.input).value);
-  }
+  };
 
   render() {
     const {onShipped, ...props} = this.props;

@@ -15,7 +15,7 @@ export class Link extends React.Component {
       history.pushState(href);
       this.props.actions.navigate(href);
     }
-  }
+  };
 
   render() {
     return (

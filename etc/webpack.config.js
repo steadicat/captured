@@ -9,7 +9,7 @@ var profile = process.env.PROFILE == 'true';
 
 module.exports = {
   entry: debug ? [
-    //'webpack-hot-middleware/client?path=' + config.ASSETS_URL + '/__webpack_hmr',
+    'webpack-hot-middleware/client?path=' + config.ASSETS_URL + '/__webpack_hmr',
     './src/captured',
   ] : [
     './src/captured',
@@ -39,6 +39,6 @@ module.exports = {
       compress: {warnings: false},
     }),
     !debug && new AssetsPlugin({path: './assets', filename: 'manifest.json'}),
-    //debug && new webpack.HotModuleReplacementPlugin(),
+    debug && new webpack.HotModuleReplacementPlugin(),
   ].filter(function(x) { return !!x }),
 };

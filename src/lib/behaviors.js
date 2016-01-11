@@ -13,11 +13,11 @@ export function hover(Component) {
 
     onMouseEnter = () => {
       this.setState({hovered: true});
-    }
+    };
 
     onMouseLeave = () => {
       this.setState({hovered: false});
-    }
+    };
 
     render() {
       return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Block, Inline} from 'stylistic-elements';
+import {Block, Inline, ResetElement} from 'stylistic-elements';
 import component from '../lib/component';
 import {track} from '../lib/behaviors';
 import {Image} from '../ui/image';
@@ -8,14 +8,14 @@ import {TextLink} from '../ui/core';
 import {Text, LightCondensedText, PageHeading} from '../ui/type';
 
 export const Charges = component('Charges', ({get, charges, ...props}) =>
-  <Block {...props}>
+  <ResetElement tag="ul" {...props}>
     {charges.map((c, i) =>
-      <Block key={i} marginTop={get('browser.width') > 740 ? 24 : 6}>
-        <Text fontWeight="bold">{c.title}</Text>
-        {get('browser.width') > 740 && <Text>{c.description}.</Text>}
-      </Block>
+      <ResetElement tag="li" key={i} marginTop={get('browser.width') > 740 ? 24 : 6}>
+        <Text fontWeight="bold">{c.title || c}</Text>
+        {c.description && get('browser.width') > 740 && <Text>{c.description}.</Text>}
+      </ResetElement>
     )}
-  </Block>
+  </ResetElement>
 );
 
 function getImageSize(get) {
@@ -28,7 +28,7 @@ function getImageSize(get) {
 }
 
 export const Piece = track(component('Piece', ({get, piece, ...props}) =>
-  <Block maxWidth={get('browser.height')} {...props}>
+  <Block {...props}>
     {/*
     <Image
       src={`${piece.id}.jpg`}
@@ -40,7 +40,9 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
       marginBottom={24}
     />*/}
 
-    <ResponsiveColumn textAlign="left" width="60%" paddingRight={24}>
+    <Text textAlign="center" marginTop={12} marginBottom={48} fontStyle="italic">Materials: {piece.materials}.</Text>
+
+    <ResponsiveColumn textAlign="left" width="60%" paddingRight={48}>
       {/*<SocialButtons display="block" textAlign="right" url={`https://thecapturedproject.com/${piece.id}/`} />*/}
       <LightCondensedText fontSize={24} textTransform="uppercase">
         {piece.title} of {piece.company}
@@ -63,15 +65,29 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
         {piece.artist}
       </PageHeading>
       <Text marginTop={6}>Serving {piece.artistSentence} for:</Text>
-      <Text marginTop={24}><Inline fontWeight="bold">{piece.artistCharges}</Inline></Text>
+      <Charges
+        charge={piece}
+        charges={piece.artistCharges}
+        textAlign="left"
+        marginBottom={24}
+      />
       {get('browser.width') < 740 && <TextLink display="block" paddingTop={24} fontWeight="bold" textAlign="left">Contact Info</TextLink>}
     </ResponsiveColumn>
     {get('browser.width') > 740 && <Column textAlign="left" width="60%" paddingRight={24}>
-      <TextLink display="block" fontWeight="bold" textAlign="left">References</TextLink>
+      <TextLink
+        href={`/${piece.id}/references`}
+        fontWeight="bold"
+        textAlign="left">
+        References
+      </TextLink>
     </Column>}
     {get('browser.width') > 740 && <Column textAlign="left" width="40%">
-      <TextLink display="block" fontWeight="bold" textAlign="left">Contact Info</TextLink>
-      <Text textAlign="left" marginTop={24}>Materials: {piece.materials}.</Text>
+      <TextLink
+        href={`/${piece.id}/contact`}
+        fontWeight="bold"
+        textAlign="left">
+        Contact Info
+      </TextLink>
     </Column>}
 
   </Block>

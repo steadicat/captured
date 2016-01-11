@@ -8,14 +8,14 @@ import {Image} from '../ui/image';
 import {DefaultFont, PageSubtitle, Text, CondensedText, LightCondensedText} from '../ui/type';
 import {SocialButtons} from '../ui/social';
 import {Toolbar} from '../ui/toolbar';
-import {Piece} from '../ui/piece';
+//import {Piece} from '../ui/piece';
 import {BuyButton} from '../ui/buy';
 import {Orders} from '../ui/orders';
-import {Scroll} from '../ui/scroll';
+//import {Scroll} from '../ui/scroll';
 import {Gallery} from '../ui/gallery';
 import {HeaderText} from '../ui/header';
 import {About} from '../ui/about';
-import data from '../data';
+//import data from '../data';
 
 export const Router = component('Router', ({get}) => {
   if (!get('shown')) return <Placeholder />;

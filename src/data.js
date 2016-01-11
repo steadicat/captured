@@ -2,7 +2,7 @@
 module.exports = [
   {
     "artist": "Charles Lytle",
-    "artistCharges": "1st degree robbery, 2nd degree assault",
+    "artistCharges": ["Robbery (1st degree)", "Assault (2nd degree)"],
     "artistContact": "http://www.writeaprisoner.com/Template.aspx?i=z-16684648",
     "artistPrison": "Eastern Oregon Correctional Institution, OR",
     "artistPrisonID": "16684648",
@@ -48,7 +48,7 @@ module.exports = [
   },
   {
     "artist": "Jerry Lee Jenkins",
-    "artistCharges": "Bank robbery",
+    "artistCharges": ["Bank robbery"],
     "artistContact": "https://www.facebook.com/profile.php?id=100009143405700\u00a0",
     "artistPrison": "U.S. Penitentiary Coleman-2, FL",
     "artistPrisonID": "03339-087",
@@ -83,7 +83,7 @@ module.exports = [
   },
   {
     "artist": "Garrett Rushing",
-    "artistCharges": "Drug trafficking w/a firearm and possession with intent to distribute (over 500 grams of meth)",
+    "artistCharges": ["Drug trafficking with a firearm", "Possession with intent to distribute (over 500 grams of meth)"],
     "artistContact": "Garrett Rushing #10706-091\nFederal Correctional Complex USP-2\nP.O. Box 1034\nColeman, FL 33521",
     "artistPrison": "U.S. Penitentiary Coleman-2, FL",
     "artistPrisonID": "10706-091",
@@ -129,18 +129,18 @@ module.exports = [
   },
   {
     "artist": "Michael Coen",
-    "artistCharges": "Assault with a firearm, Robbery (1st degree),  Assault (2nd degree) w/priors",
+    "artistCharges": ["Assault with a firearm", "Robbery (1st degree)", "Assault (2nd degree, with priors)"],
     "artistContact": "Michael Coen #T-16505\nK.V.S.P. C5-213\nP.O. Box 5103\nDelano, CA 93216",
     "artistPrison": "Kern Valley State Prison, CA",
     "artistPrisonID": "T-16505",
     "artistSentence": "21 years",
     "charges": [
       {
-        "description": "makes public commitments to sustainability while spending heavily to block climate change reform",
+        "description": "Makes public commitments to sustainability while spending heavily to block climate change reform",
         "title": "Deception"
       },
       {
-        "description": "continuous negligence created decades of oil spills and chemical leaks, making them the worst polluter of any U.S. energy company",
+        "description": "Continuous negligence created decades of oil spills and chemical leaks, making them the worst polluter of any U.S. energy company",
         "title": "Destruction of environment"
       },
       {
@@ -148,11 +148,11 @@ module.exports = [
         "title": "Negligent homicide"
       },
       {
-        "description": "from 2008-2012, spent over $71 million to successfully weaken bills that protect the environment and public health",
+        "description": "From 2008-2012, spent over $71 million to successfully weaken bills that protect the environment and public health",
         "title": "Public endangerment"
       },
       {
-        "description": "illegal dumping of hazardous waste poisoned hundreds of America\u2019s water systems",
+        "description": "Illegal dumping of hazardous waste poisoned hundreds of America\u2019s water systems",
         "title": "Public water contamination"
       }
     ],
@@ -173,26 +173,26 @@ module.exports = [
   },
   {
     "artist": "Jaime Vidales",
-    "artistCharges": "Murder (2 counts)",
+    "artistCharges": ["Murder (2 counts)"],
     "artistContact": "Jaime Vidales #K96986\nCSP D-4 149\nP.O. Box 941\nImperial, CA 92251",
     "artistPrison": "Centinela State Prison, CA",
     "artistPrisonID": "K96986 ",
-    "artistSentence": "Life without parole + 25 to life",
+    "artistSentence": "life without parole + 25 to life",
     "charges": [
       {
-        "description": "knew their pesticide Benlate caused health issues (e.g. babies born without eyes), yet kept silent during trials brought by victims",
+        "description": "Knew their pesticide Benlate caused health issues (e.g. babies born without eyes), yet kept silent during trials brought by victims",
         "title": "Concealing evidence"
       },
       {
-        "description": "responsible for more toxic releases than any other manufacturing company in the late \u201880s - in the decades since, their poisonous chemicals have killed employees and endangered the public",
+        "description": "Responsible for more toxic releases than any other manufacturing company in the late \u201880s - in the decades since, their poisonous chemicals have killed employees and endangered the public",
         "title": "Poisoning"
       },
       {
-        "description": "illegally released harmful amounts of airborne chemicals (e.g. sulfuric acid) across the U.S.",
+        "description": "Illegally released harmful amounts of airborne chemicals (e.g. sulfuric acid) across the U.S.",
         "title": "Public endangerment"
       },
       {
-        "description": "contaminating groundwater on a massive scale, causing cancer and birth defects in multiple countries",
+        "description": "Contaminating groundwater on a massive scale, causing cancer and birth defects in multiple countries",
         "title": "Reckless Endangerment"
       }
     ],
@@ -214,26 +214,26 @@ module.exports = [
   },
   {
     "artist": "Mitchell Hand",
-    "artistCharges": "Selling stolen goods and burglary (w/priors)",
+    "artistCharges": ["Selling stolen goods", "Burglary (with priors)"],
     "artistContact": "Mitchell Hand #054005\nA.S.P.C. Tucson Cimarron Unit\nP.O. Box 24408\nTucson, AZ 85734",
     "artistPrison": "Arizona State Prison, Tucson",
     "artistPrisonID": "054005",
     "artistSentence": "33 years",
     "charges": [
       {
-        "description": "complicit in human rights abuses including the torture and killing of environmentalists in Nigeria",
+        "description": "Complicit in human rights abuses including the torture and killing of environmentalists in Nigeria",
         "title": "Accomplice to murder"
       },
       {
-        "description": "since 2002, there have been over 1,000 spills across their Nigerian pipelines - two alone devastated a 27,000 square mile area of Nigeria. Fraud: misled public by promoting highly pollutant projects as \"sustainable energy initiatives,\u201d as exposed in one of the most significant \"greenwash\" rulings to date",
+        "description": "Since 2002, there have been over 1,000 spills across their Nigerian pipelines - two alone devastated a 27,000 square mile area of Nigeria. Fraud: misled public by promoting highly pollutant projects as \"sustainable energy initiatives,\u201d as exposed in one of the most significant \"greenwash\" rulings to date",
         "title": "Environmental destruction"
       },
       {
-        "description": "even while admitting CO2 emissions contribute to climate change, Shell remained the world\u2019s most carbon intensive oil company",
+        "description": "Even while admitting CO2 emissions contribute to climate change, Shell remained the world\u2019s most carbon intensive oil company",
         "title": "Reckless endangerment"
       },
       {
-        "description": "stole millions from citizens\u2019 pensions and investments by lying about oil reserve levels",
+        "description": "Stole millions from citizens\u2019 pensions and investments by lying about oil reserve levels",
         "title": "Theft"
       }
     ],
@@ -255,7 +255,7 @@ module.exports = [
   },
   {
     "artist": "Billy Bush",
-    "artistCharges": "Armed robbery",
+    "artistCharges": ["Armed robbery"],
     "artistContact": "Billy Bush CDC# H-85182\nCalifornia Correctional Institution\nFacility B  Building 1  Bed C208\nP.O. Box 1906\nTehachapi, CA 93581",
     "artistPrison": "California State Prison, Tehachapi",
     "artistPrisonID": "H-85182",
@@ -266,7 +266,7 @@ module.exports = [
         "title": "Child exploitation"
       },
       {
-        "description": "more than merely harming the environment and ozone layer; ADM released such large amounts of poisonous and cancer-causing chemicals they\u2019ve been ranked as tenth worst corporate air polluter",
+        "description": "More than merely harming the environment and ozone layer; ADM released such large amounts of poisonous and cancer-causing chemicals they\u2019ve been ranked as tenth worst corporate air polluter",
         "title": "Poisoning the air"
       },
       {
@@ -292,7 +292,7 @@ module.exports = [
   },
   {
     "artist": "Charles Listo Vera",
-    "artistCharges": "Attempted manslaughter",
+    "artistCharges": ["Attempted manslaughter"],
     "artistContact": "http://www.facebook.com/charles.vera.35",
     "artistPrison": "Centinela State Prison, CA",
     "artistPrisonID": "Ai-6401",
@@ -329,22 +329,22 @@ module.exports = [
   },
   {
     "artist": "Anthony Miera",
-    "artistCharges": "Possession of explosive device, poss of controlled substance for sales, possession of a firearm",
+    "artistCharges": ["Possession of explosive device", "Possession of controlled substance for sales", "Possession of a firearm"],
     "artistContact": "Anthony Miera / #J-21779\nK.V.S.P.\nFacility C, Bldg 5, Cell 211\nP.O. Box 5103\nDelano, CA 93216",
     "artistPrison": "Kern Valley State Prison, CA",
     "artistPrisonID": "J-21779",
     "artistSentence": "14 years",
     "charges": [
       {
-        "description": "contributed significantly to our national rise in Type-2 Diabetes (roughly 10% of Americans have the disease and it kills hundreds of thousands of Americans year year)",
+        "description": "Contributed significantly to our national rise in Type-2 Diabetes (roughly 10% of Americans have the disease and it kills hundreds of thousands of Americans year year)",
         "title": "Gross negligence manslaughter"
       },
       {
-        "description": "paid scientists to draw attention away from poor diets high in sugar and towards lack of exercise. Health experts say this is misleading and distracts attention from how sugary drinks spread obesity and Type-2 Diabetes.",
+        "description": "Paid scientists to draw attention away from poor diets high in sugar and towards lack of exercise. Health experts say this is misleading and distracts attention from how sugary drinks spread obesity and Type-2 Diabetes.",
         "title": "Mass deception"
       },
       {
-        "description": "used their lobbying clout to coerce the World Health Organization to suppress official findings that no more than 10% of daily caloric intake should come from sugar (for an adult male = less than two cans of Coke)",
+        "description": "Used their lobbying clout to coerce the World Health Organization to suppress official findings that no more than 10% of daily caloric intake should come from sugar (for an adult male = less than two cans of Coke)",
         "title": "Public endangerment"
       }
     ],
@@ -367,26 +367,26 @@ module.exports = [
   },
   {
     "artist": "Brandon Meyer",
-    "artistCharges": "Possession of a firearm in furtherance of a drug trafficking crime",
+    "artistCharges": ["Possession of a firearm in furtherance of a drug trafficking crime"],
     "artistContact": "https://www.facebook.com/brandon.meyer.1610?fref=ts",
     "artistPrison": "Federal Correctional Institution, Forrest City, AZ",
     "artistPrisonID": "11032-030",
     "artistSentence": "10 years",
     "charges": [
       {
-        "description": "knew there was a link between fossil fuels and global warming, yet led the fight against any action on climate change and funded groups to undermine confidence in climate science",
+        "description": "Knew there was a link between fossil fuels and global warming, yet led the fight against any action on climate change and funded groups to undermine confidence in climate science",
         "title": "Concealing evidence"
       },
       {
-        "description": "for decades, Exxon Mobil has spilled PCBs, gasoline additives, petroleum, crude oil and other toxic substances into the world\u2019s air, rivers and coasts",
+        "description": "For decades, Exxon Mobil has spilled PCBs, gasoline additives, petroleum, crude oil and other toxic substances into the world\u2019s air, rivers and coasts",
         "title": "Poisoning"
       },
       {
-        "description": "long history of fighting against stricter controls on additives which have been linked to reproductive hazards, autism, and breast cancer",
+        "description": "Long history of fighting against stricter controls on additives which have been linked to reproductive hazards, autism, and breast cancer",
         "title": "Public Endangerment"
       },
       {
-        "description": "for over 12 years, overcharged service station owners across the country for gasoline. Forced to pay back $500 million plus interest after losing a Supreme Court case",
+        "description": "For over 12 years, overcharged service station owners across the country for gasoline. Forced to pay back $500 million plus interest after losing a Supreme Court case",
         "title": "Theft"
       }
     ],
@@ -408,22 +408,22 @@ module.exports = [
   },
   {
     "artist": "Alex Carrillo",
-    "artistCharges": "Murder",
+    "artistCharges": ["Murder"],
     "artistContact": "https://www.facebook.com/profile.php?id=100008456865016",
     "artistPrison": "Centinela State Prison, CA",
     "artistPrisonID": "J-69100",
     "artistSentence": "30 years to life",
     "charges": [
       {
-        "description": "pushes employees onto taxpayer funded health coverage, costing the public over $1.2 Billion per year",
+        "description": "Pushes employees onto taxpayer funded health coverage, costing the public over $1.2 Billion per year",
         "title": "Looting the public"
       },
       {
-        "description": "lures kids in with playgrounds and clowns, then rewards them with toys for consuming high amounts of fat and sodium, contributing to rising rates of juvenile diabetes and obesity",
+        "description": "Lures kids in with playgrounds and clowns, then rewards them with toys for consuming high amounts of fat and sodium, contributing to rising rates of juvenile diabetes and obesity",
         "title": "Preying on children"
       },
       {
-        "description": "forces employees to be paid on pre-paid cards, which carry heavy fees for withdrawals, balance inquiries, and even inactivity",
+        "description": "Forces employees to be paid on pre-paid cards, which carry heavy fees for withdrawals, balance inquiries, and even inactivity",
         "title": "Wage theft"
       }
     ],
@@ -445,22 +445,22 @@ module.exports = [
   },
   {
     "artist": "Danny Gutierrez",
-    "artistCharges": "Murder",
+    "artistCharges": ["Murder"],
     "artistContact": "Danny Gutierrez / #H99604\nK.V.S.P.\nFacility 5, Bldg 5, Cell 228\nP.O. Box 5103\nDelano, CA 93216",
     "artistPrison": "Kern Valley State Prison, CA",
     "artistPrisonID": "H99604",
-    "artistSentence": "Life without parole",
+    "artistSentence": "life without parole",
     "charges": [
       {
-        "description": "purposely supported child slavery in their overseas cocoa processing operations.",
+        "description": "Purposely supported child slavery in their overseas cocoa processing operations.",
         "title": "Child slave labor"
       },
       {
-        "description": "holds one of the worst environmental records in the agribusiness industry, for decades they\u2019ve illegally dumped millions of gallons of toxic chemicals, hog manure, poisonous brine, and wastewater into public waterways",
+        "description": "Holds one of the worst environmental records in the agribusiness industry, for decades they\u2019ve illegally dumped millions of gallons of toxic chemicals, hog manure, poisonous brine, and wastewater into public waterways",
         "title": "Contaminating public water"
       },
       {
-        "description": "continually tainted meat products from their beef, pork, and poultry operations have been linked to serious illnesses, deaths, and miscarriages",
+        "description": "Continually tainted meat products from their beef, pork, and poultry operations have been linked to serious illnesses, deaths, and miscarriages",
         "title": "Criminally negligent manslaughter"
       }
     ],
@@ -481,26 +481,26 @@ module.exports = [
   },
   {
     "artist": "John Vercusky",
-    "artistCharges": "Armed robbery",
+    "artistCharges": ["Armed robbery"],
     "artistContact": "jbercusky@gmail.com",
     "artistPrison": "Federal Correctional Institution, Pollack, LA",
     "artistPrisonID": "55341-066",
     "artistSentence": "22 years",
     "charges": [
       {
-        "description": "hired private armies to force indigenous communities off of land in Indonesia, resulting in violence and deaths",
+        "description": "Hired private armies to force indigenous communities off of land in Indonesia, resulting in violence and deaths",
         "title": "Accessory to murder"
       },
       {
-        "description": "spends millions lobbying the government to conceal information about sugar content and GMOs on their products",
+        "description": "Spends millions lobbying the government to conceal information about sugar content and GMOs on their products",
         "title": "Conspiracy to deceive"
       },
       {
-        "description": "degrades land and pollutes environment of indigenous communities, leading to species extinction, in order to harvest palm oil",
+        "description": "Degrades land and pollutes environment of indigenous communities, leading to species extinction, in order to harvest palm oil",
         "title": "Environmental crimes"
       },
       {
-        "description": "despite community protest, drains India\u2019s groundwater to make bottled water, depleting a scarce a natural resource crucial for irrigation of locals\u2019 rice paddies, putting the population who cannot afford to buy bottled water at risk",
+        "description": "Despite community protest, drains India\u2019s groundwater to make bottled water, depleting a scarce a natural resource crucial for irrigation of locals\u2019 rice paddies, putting the population who cannot afford to buy bottled water at risk",
         "title": "Public endangerment"
       }
     ],
@@ -519,22 +519,22 @@ module.exports = [
   },
   {
     "artist": "Benny Joe Palomo",
-    "artistCharges": "Indecency with a minor, multiple indecency counts, shooting + priors",
+    "artistCharges": ["Indecency with a minor", "Multiple indecency counts", "Shooting (with priors)"],
     "artistContact": "facebook.com/profile.php?id=100007366698171",
     "artistPrison": "Clements Unit, Amarillo, TX",
     "artistPrisonID": "1491804",
     "artistSentence": "42 years",
     "charges": [
       {
-        "description": "when top executives discovered their Mexican chicken plants were bribing inspectors to overlook food safety issues, they not only allowed the practice to continue, they formed a committee to find a more acceptable way to make the illicit payments",
+        "description": "When top executives discovered their Mexican chicken plants were bribing inspectors to overlook food safety issues, they not only allowed the practice to continue, they formed a committee to find a more acceptable way to make the illicit payments",
         "title": "Bribery and conspiracy"
       },
       {
-        "description": "routinely breed birds to grow so fast they\u2019re crippled under their own weight, ripping heads off live birds, urinating on the slaughter line, and denying veterinary care, food, and water to thousands of severely sick and injured animals",
+        "description": "Routinely breed birds to grow so fast they\u2019re crippled under their own weight, ripping heads off live birds, urinating on the slaughter line, and denying veterinary care, food, and water to thousands of severely sick and injured animals",
         "title": "Cruelty to animals"
       },
       {
-        "description": "large amounts of the company\u2019s polluted wastewater killed more than 100,000 fish in a four-mile stretch of Missouri river",
+        "description": "Large amounts of the company\u2019s polluted wastewater killed more than 100,000 fish in a four-mile stretch of Missouri river",
         "title": "Killing wildlife with pollutants"
       }
     ],
@@ -555,34 +555,34 @@ module.exports = [
   },
   {
     "artist": "Jose Fregoso",
-    "artistCharges": "2nd degree robbery",
+    "artistCharges": ["Robbery (2nd degree)"],
     "artistContact": "http://www.write2convicts.com/#!jose-frogos-ab2966/c1qy6",
     "artistPrison": "Kern Valley State Prison, CA",
     "artistPrisonID": "AB-2966",
     "artistSentence": "9 years",
     "charges": [
       {
-        "description": "offloaded bad mortgages (altering paperwork to cover up their toxicity) onto other parties, including U.S. taxpayers - losses on these mortgage securities eroded confidence in the U.S. banking and financial system, spawning the massive 2008 financial crisis",
+        "description": "Offloaded bad mortgages (altering paperwork to cover up their toxicity) onto other parties, including U.S. taxpayers - losses on these mortgage securities eroded confidence in the U.S. banking and financial system, spawning the massive 2008 financial crisis",
         "title": "Conspiracy"
       },
       {
-        "description": "bribed county commissioners in Alabama over $8MM in a scheme to secure contracts involving municipal bond offerings",
+        "description": "Bribed county commissioners in Alabama over $8MM in a scheme to secure contracts involving municipal bond offerings",
         "title": "Corruption and bribery"
       },
       {
-        "description": "charged customers monthly fees for services which were never actually performed, some customers exceeded account limits due to these fees and thus were fined double",
+        "description": "Charged customers monthly fees for services which were never actually performed, some customers exceeded account limits due to these fees and thus were fined double",
         "title": "Illegal credit card practices"
       },
       {
-        "description": "pleaded guilty to a criminal charge of currency market manipulation, but were allowed to continue business as usual",
+        "description": "Pleaded guilty to a criminal charge of currency market manipulation, but were allowed to continue business as usual",
         "title": "Price fixing"
       },
       {
-        "description": "rigged the initial public offerings of hundreds of companies during the 1990s Internet stock boom, costing investors millions",
+        "description": "Rigged the initial public offerings of hundreds of companies during the 1990s Internet stock boom, costing investors millions",
         "title": "Scamming investors"
       },
       {
-        "description": "overvalued their portfolios, then tried to hide losses in excess of $6 billion by keeping false records",
+        "description": "Overvalued their portfolios, then tried to hide losses in excess of $6 billion by keeping false records",
         "title": "Securities fraud"
       }
     ],
@@ -604,22 +604,22 @@ module.exports = [
   },
   {
     "artist": "Jose Velasquez",
-    "artistCharges": "Armed bank robbery",
+    "artistCharges": ["Armed bank robbery"],
     "artistContact": "https://www.facebook.com/profile.php?id=100008282955922",
     "artistPrison": "Fed. Correctional Institution, Butner, NC",
     "artistPrisonID": "83465-180",
     "artistSentence": "10 years",
     "charges": [
       {
-        "description": "intentionally misled pension fund managers about important details regarding the quality of the investments sold to them",
+        "description": "Intentionally misled pension fund managers about important details regarding the quality of the investments sold to them",
         "title": "Conspiracy"
       },
       {
-        "description": "deceived thousands of individuals and small businesses, telling them risky securities were safe and liquid, costing them billions",
+        "description": "Deceived thousands of individuals and small businesses, telling them risky securities were safe and liquid, costing them billions",
         "title": "Securities fraud"
       },
       {
-        "description": "steered potential prime borrowers into more costly subprime loans, effectively stealing tens of millions of dollars from them and covered it up by falsifying income information in mortgage applications",
+        "description": "Steered potential prime borrowers into more costly subprime loans, effectively stealing tens of millions of dollars from them and covered it up by falsifying income information in mortgage applications",
         "title": "Theft"
       }
     ],
@@ -637,26 +637,26 @@ module.exports = [
   },
   {
     "artist": "Benjamin Gonzalez Sr.",
-    "artistCharges": "1st and 2nd degree robbery",
+    "artistCharges": ["Robbery (1st and 2nd degree)"],
     "artistContact": "facebook.com/profile.php?id=100004821551531",
     "artistPrison": "Snake River Correctional, OR",
     "artistPrisonID": "17554404",
     "artistSentence": "9 years",
     "charges": [
       {
-        "description": "spewed millions of barrels of oil into the sea, sickening animals, and causing economic damages in the billions of dollars",
+        "description": "Spewed millions of barrels of oil into the sea, sickening animals, and causing economic damages in the billions of dollars",
         "title": "Environmental crimes"
       },
       {
-        "description": "to save money, ignored clear warnings to do more safety tests on the Deepwater Horizon Oil Rig, causing the deaths of 11 workers",
+        "description": "To save money, ignored clear warnings to do more safety tests on the Deepwater Horizon Oil Rig, causing the deaths of 11 workers",
         "title": "Manslaughter"
       },
       {
-        "description": "destroyed crucial evidence by deleting text messages that discussed the amount of oil that was leaking from the damaged Deepwater Horizon well",
+        "description": "Destroyed crucial evidence by deleting text messages that discussed the amount of oil that was leaking from the damaged Deepwater Horizon well",
         "title": "Obstruction of Congress"
       },
       {
-        "description": "knowingly issued misleading statements to investors about the magnitude of the Deepwater Horizon oil spill, leading to massive financial losses for these investors when a the correct information was revealed later",
+        "description": "Knowingly issued misleading statements to investors about the magnitude of the Deepwater Horizon oil spill, leading to massive financial losses for these investors when a the correct information was revealed later",
         "title": "Securities fraud"
       }
     ],
@@ -677,38 +677,38 @@ module.exports = [
   },
   {
     "artist": "Joseph Sharrow",
-    "artistCharges": "Receiving stolen goods (auto)",
+    "artistCharges": ["Receiving stolen goods (auto)"],
     "artistContact": "https://www.etsy.com/shop/CellBlockSketchin",
     "artistPrison": "North Kern State Prison, CA",
     "artistPrisonID": "D-3-102",
     "artistSentence": "4 years",
     "charges": [
       {
-        "description": "poor people with AIDS suffer and die globally because they can\u2019t afford Fluconazole, a drug made by Pfizer who blocks affordable, generic Fluconazole, causing countless number of people with AIDS to die preventable deaths.",
+        "description": "Poor people with AIDS suffer and die globally because they can\u2019t afford Fluconazole, a drug made by Pfizer who blocks affordable, generic Fluconazole, causing countless number of people with AIDS to die preventable deaths.",
         "title": "AIDS profiteering:"
       },
       {
-        "description": "bribed doctors, hospital administrators, and regulators in several countries across Europe and Asia to prescribe medicines",
+        "description": "Bribed doctors, hospital administrators, and regulators in several countries across Europe and Asia to prescribe medicines",
         "title": "Bribery"
       },
       {
-        "description": "tested a dangerous antibiotic on Nigerian children without receiving proper consent from their parents\u2013then after settling some of the suits, \nhired investigators to dig up dirt on Nigeria\u2019s former attorney general to get leverage in one of the remaining cases",
+        "description": "Tested a dangerous antibiotic on Nigerian children without receiving proper consent from their parents\u2013then after settling some of the suits, \nhired investigators to dig up dirt on Nigeria\u2019s former attorney general to get leverage in one of the remaining cases",
         "title": "Experimenting on children"
       },
       {
-        "description": "using fraudulent information, they encouraged doctors to prescribe drugs for ailments (and at doses) the FDA specifically declined approval",
+        "description": "Using fraudulent information, they encouraged doctors to prescribe drugs for ailments (and at doses) the FDA specifically declined approval",
         "title": "Fraud:"
       },
       {
-        "description": "illegally dumped PCBs and other toxic chemicals into the nation\u2019s air and water for decades, also broke federal laws by not properly reporting an explosion which released hazardous substances and caused serious injuries",
+        "description": "Illegally dumped PCBs and other toxic chemicals into the nation\u2019s air and water for decades, also broke federal laws by not properly reporting an explosion which released hazardous substances and caused serious injuries",
         "title": "Poisoning:"
       },
       {
-        "description": "conspired to prevent generic versions of its cholesterol drug Lipitor from \nentering the market to protect billions in profits while making sure patients did not have access to more affordable options",
+        "description": "Conspired to prevent generic versions of its cholesterol drug Lipitor from \nentering the market to protect billions in profits while making sure patients did not have access to more affordable options",
         "title": "Price fixing"
       },
       {
-        "description": "marketed drugs as effective multiple times, for multiple diseases when they were, in many cases, even less effective than sugar pills",
+        "description": "Marketed drugs as effective multiple times, for multiple diseases when they were, in many cases, even less effective than sugar pills",
         "title": "Racketeering"
       }
     ],
@@ -734,14 +734,14 @@ module.exports = [
   },
   {
     "artist": "Walter Lego",
-    "artistCharges": "Vehicular manslaughter",
+    "artistCharges": ["Vehicular manslaughter"],
     "artistContact": "freebirdartdesigns@yahoo.com",
     "artistPrison": "Desert View Modified Community Correctional, CA",
     "artistPrisonID": "T00705",
     "artistSentence": "17 years",
     "charges": [
       {
-        "description": "the FDA is responsible for protecting the public health by assuring foods are safe, sanitary and properly labeled - over the past decades, at least seven high-ranking employees in the FDA were employed with Monsanto",
+        "description": "The FDA is responsible for protecting the public health by assuring foods are safe, sanitary and properly labeled - over the past decades, at least seven high-ranking employees in the FDA were employed with Monsanto",
         "title": "Collusion"
       }
     ],
@@ -761,30 +761,30 @@ module.exports = [
   },
   {
     "artist": "Leslie Robinson",
-    "artistCharges": "Retail theft (multiple counts)",
+    "artistCharges": ["Retail theft (multiple counts)"],
     "artistContact": "kyahsgrandmom@gmail.com",
     "artistPrison": "Montgomery County Correctional Facility, PA",
     "artistPrisonID": "143219",
     "artistSentence": "'1-3 years (paroled mid-project)",
     "charges": [
       {
-        "description": "after complaints and deaths related to ignition switches, they secretly approved a new switch design in 2006 without assigning a new part number or initiating a recall, eventually leading to over 100 more deaths",
+        "description": "After complaints and deaths related to ignition switches, they secretly approved a new switch design in 2006 without assigning a new part number or initiating a recall, eventually leading to over 100 more deaths",
         "title": "Conspiracy"
       },
       {
-        "description": "knew their pickup trucks with side-mounted gas tanks were dangerous (fires resulting from them killed over 300 people in the 5 year period before the company changed the tanks) but when they finally altered the mounts they claimed it was for design rather than safety reasons",
+        "description": "Knew their pickup trucks with side-mounted gas tanks were dangerous (fires resulting from them killed over 300 people in the 5 year period before the company changed the tanks) but when they finally altered the mounts they claimed it was for design rather than safety reasons",
         "title": "Criminal negligence"
       },
       {
-        "description": "deliberately evaded regulations by having vehicle emissions testing occur under special conditions, allowing cars that produce an illegal amount of carbon monoxide into the air to pass the test",
+        "description": "Deliberately evaded regulations by having vehicle emissions testing occur under special conditions, allowing cars that produce an illegal amount of carbon monoxide into the air to pass the test",
         "title": "Fraud"
       },
       {
-        "description": "knowingly delayed (over 10 years) addressing a defect in car ignition-switches that was directly responsible for over 124 deaths",
+        "description": "Knowingly delayed (over 10 years) addressing a defect in car ignition-switches that was directly responsible for over 124 deaths",
         "title": "Manslaughter"
       },
       {
-        "description": "failed to obey health and safety standards or keep records of practices at multiple plants - abnormally high rates of cancer has been found in workers at these plants",
+        "description": "Failed to obey health and safety standards or keep records of practices at multiple plants - abnormally high rates of cancer has been found in workers at these plants",
         "title": "Reckless endangerment"
       }
     ],
@@ -805,30 +805,30 @@ module.exports = [
   },
   {
     "artist": "Joseph Acker",
-    "artistCharges": "'1st degree theft by receiving, 2 counts of ID theft (altered passports), 1 count of felon in possession of body armor",
+    "artistCharges": ["Receiving stolen goods (1st degree)", "ID theft (altered passports, 2 counts)", "Felon in possession of body armor (1 count)"],
     "artistContact": "https://www.facebook.com/pages/Inside-Out-Artwork/970761372982756",
     "artistPrison": "Snake River Correctional, OR",
     "artistPrisonID": "15967538",
     "artistSentence": "10 years",
     "charges": [
       {
-        "description": "helped \u201ctutor\u201d hundreds of judges with all-expenses-paid trips to resorts where they learn about the \u201cfree market\u201d impact of their rulings - for $25,000 a year, Koch Industries sits as an \u201cequal\u201d board member with state legislators, influencing bills impacting their interests",
+        "description": "Helped \u201ctutor\u201d hundreds of judges with all-expenses-paid trips to resorts where they learn about the \u201cfree market\u201d impact of their rulings - for $25,000 a year, Koch Industries sits as an \u201cequal\u201d board member with state legislators, influencing bills impacting their interests",
         "title": "Bribing judges and legislators"
       },
       {
-        "description": "bribed their way into securing contracts in Africa, India, and the Middle East",
+        "description": "Bribed their way into securing contracts in Africa, India, and the Middle East",
         "title": "Illicit payments"
       },
       {
-        "description": "the leading funders of climate science denial groups and clean energy opposition - through a secretive funding route they\u2019ve channeled nearly $120 million to over 100 groups casting doubt on the climate change science",
+        "description": "The leading funders of climate science denial groups and clean energy opposition - through a secretive funding route they\u2019ve channeled nearly $120 million to over 100 groups casting doubt on the climate change science",
         "title": "Mass deception"
       },
       {
-        "description": "responsible for a staggering amount of toxic output, making them one of only three companies that ranks in the top 30 polluters of America\u2019s air, water and climate",
+        "description": "Responsible for a staggering amount of toxic output, making them one of only three companies that ranks in the top 30 polluters of America\u2019s air, water and climate",
         "title": "Public endangerment"
       },
       {
-        "description": "sold millions of dollars of petrochemical equipment to Iran, a country the U.S. identifies as a sponsor of global terrorism",
+        "description": "Sold millions of dollars of petrochemical equipment to Iran, a country the U.S. identifies as a sponsor of global terrorism",
         "title": "Supporting terrorism"
       }
     ],
@@ -849,22 +849,22 @@ module.exports = [
   },
   {
     "artist": "John Vercusky",
-    "artistCharges": "Armed robbery",
+    "artistCharges": ["Armed robbery"],
     "artistContact": "jbercusky@gmail.com",
     "artistPrison": "Federal Correctional Institution, Pollack, LA",
     "artistPrisonID": "55341-066",
     "artistSentence": "22 years",
     "charges": [
       {
-        "description": "their spill of 39,000 tons of coal ash and millions of gallons of coal-ash wastewater at North Carolina\u2019s Dan River revealed criminal activity throughout the state, including failures to maintain and inspect aging pipes",
+        "description": "Their spill of 39,000 tons of coal ash and millions of gallons of coal-ash wastewater at North Carolina\u2019s Dan River revealed criminal activity throughout the state, including failures to maintain and inspect aging pipes",
         "title": "Criminal misconduct"
       },
       {
-        "description": "hid key information from regulators regarding problems with construction on a new plant in Indiana - fraud and gross mismanagement raised costs from the estimated $1.9 billion to $3.5 billion, with consumers eating a share of the overages",
+        "description": "Hid key information from regulators regarding problems with construction on a new plant in Indiana - fraud and gross mismanagement raised costs from the estimated $1.9 billion to $3.5 billion, with consumers eating a share of the overages",
         "title": "Fraud and deceit"
       },
       {
-        "description": "as 3rd largest carbon dioxide emitter in the U.S. (112 million tons per year and the number 11 emitter worldwide), they\u2019ve violated the Federal Clean Air Act numerous times - their coal fleet collectively causes more than $10 billion dollars worth of health impacts annually",
+        "description": "As 3rd largest carbon dioxide emitter in the U.S. (112 million tons per year and the number 11 emitter worldwide), they\u2019ve violated the Federal Clean Air Act numerous times - their coal fleet collectively causes more than $10 billion dollars worth of health impacts annually",
         "title": "Poisoning"
       }
     ],
@@ -883,34 +883,34 @@ module.exports = [
   },
   {
     "artist": "Daniel Raines",
-    "artistCharges": "Possession of stolen vehicle (2 times)",
+    "artistCharges": ["Possession of stolen vehicle (2 times)"],
     "artistContact": "www.writeaprisoner.com/Template.aspx?i=z-10662419",
     "artistPrison": "Snake River Correctional, OR",
     "artistPrisonID": "10662419",
     "artistSentence": "3 years",
     "charges": [
       {
-        "description": "knew the military groups they were paying in Burma had a record of human rights abuses, yet continued to work with them as as they committed forced labor, forced relocation, and numerous acts of violence for the benefit of the Chevron projects",
+        "description": "Knew the military groups they were paying in Burma had a record of human rights abuses, yet continued to work with them as as they committed forced labor, forced relocation, and numerous acts of violence for the benefit of the Chevron projects",
         "title": "Accessory to rape and murder"
       },
       {
-        "description": "gave prohibited gifts and worked with other oil companies to help corrupt employees of the Interior Department agency responsible for overseeing the federal royalty program",
+        "description": "Gave prohibited gifts and worked with other oil companies to help corrupt employees of the Interior Department agency responsible for overseeing the federal royalty program",
         "title": "Bribery"
       },
       {
-        "description": "evaded $3.25 billion in federal and state taxes from 1970 to 2000 through a complex petroleum pricing scheme involving a project in Indonesia",
+        "description": "Evaded $3.25 billion in federal and state taxes from 1970 to 2000 through a complex petroleum pricing scheme involving a project in Indonesia",
         "title": "Massive tax fraud"
       },
       {
-        "description": "routed hydrocarbon gases around monitoring equipment and allowed them to be burned off without officials knowing about it, releasing dangerous gasses into the air that can cause cancer and respiratory problems for their employees and the public",
+        "description": "Routed hydrocarbon gases around monitoring equipment and allowed them to be burned off without officials knowing about it, releasing dangerous gasses into the air that can cause cancer and respiratory problems for their employees and the public",
         "title": "Public endangerment"
       },
       {
-        "description": "stole over $150 million from the government and Native Americans by knowingly underpaying royalties owed on natural gas produced from federal and Indian leases",
+        "description": "Stole over $150 million from the government and Native Americans by knowingly underpaying royalties owed on natural gas produced from federal and Indian leases",
         "title": "Theft"
       },
       {
-        "description": "made secret, illegal payments to Saddam Hussein\u2019s former government of Iraq in order to obtain oil, after being specifically forbade from doing so by the U.S. government",
+        "description": "Made secret, illegal payments to Saddam Hussein\u2019s former government of Iraq in order to obtain oil, after being specifically forbade from doing so by the U.S. government",
         "title": "Wire fraud"
       }
     ],
@@ -932,26 +932,26 @@ module.exports = [
   },
   {
     "artist": "Kim VanPelt",
-    "artistCharges": "Capital murder",
+    "artistCharges": ["Capital murder"],
     "artistContact": "kc93494@gmail.com (Kevin Carpenter)",
     "artistPrison": "Holman Prison, AL",
     "artistPrisonID": "Z-737/I-26",
-    "artistSentence": "Death Row",
+    "artistSentence": "death Row",
     "charges": [
       {
-        "description": "stole hundreds of millions of dollars in public funds from the State of California by systematically pocketing unclaimed bondholder payments that should have been returned to the authorities to use to build schools, hospitals and roads",
+        "description": "Stole hundreds of millions of dollars in public funds from the State of California by systematically pocketing unclaimed bondholder payments that should have been returned to the authorities to use to build schools, hospitals and roads",
         "title": "Conspiracy"
       },
       {
-        "description": "systematically duped shareholders and the federal government multiple times by not disclosing the \u201cextraordinary losses\u201d of the acquisition of Merrill Lynch, the $5 billion in bonuses paid to employees during the financial crisis, and other many charges",
+        "description": "Systematically duped shareholders and the federal government multiple times by not disclosing the \u201cextraordinary losses\u201d of the acquisition of Merrill Lynch, the $5 billion in bonuses paid to employees during the financial crisis, and other many charges",
         "title": "Fraud"
       },
       {
-        "description": "conspired to rig bids in the municipal bond derivatives market",
+        "description": "Conspired to rig bids in the municipal bond derivatives market",
         "title": "Securities fraud"
       },
       {
-        "description": "secretly used excessive fees to gouge thousands of trust account holders - the beneficiaries of which include many children and charities. When discovered, the company then shortchanged them on their refunds, in total concealing amounts in the tens of millions",
+        "description": "Secretly used excessive fees to gouge thousands of trust account holders - the beneficiaries of which include many children and charities. When discovered, the company then shortchanged them on their refunds, in total concealing amounts in the tens of millions",
         "title": "Theft"
       }
     ],
@@ -974,30 +974,30 @@ module.exports = [
   },
   {
     "artist": "Ryan Gragg",
-    "artistCharges": "Murder",
+    "artistCharges": ["Murder"],
     "artistContact": "Ryan Gragg / #1651297\nFerguson Unit\n12120 Savage\nMidway, TX 75852",
     "artistPrison": "Ferguson Unit, TX",
     "artistPrisonID": "1651297",
     "artistSentence": "15 years",
     "charges": [
       {
-        "description": "gave executives of companies they took public shares at extra-low prices in exchange for future underwriting business.",
+        "description": "Gave executives of companies they took public shares at extra-low prices in exchange for future underwriting business.",
         "title": "Bribery"
       },
       {
-        "description": "packaged toxic mortgages as legitimate and sold them to unsuspecting victims, costing municipalities and pension funds millions - simultaneously took short positions in the same market, betting against the same toxic packages they sold",
+        "description": "Packaged toxic mortgages as legitimate and sold them to unsuspecting victims, costing municipalities and pension funds millions - simultaneously took short positions in the same market, betting against the same toxic packages they sold",
         "title": "Mass deception and theft"
       },
       {
-        "description": "the U.S. Senate panel investigating their role in the financial crisis found Goldman executives to have misled Congress - they did so brazenly, with no apparent fear of consequence",
+        "description": "The U.S. Senate panel investigating their role in the financial crisis found Goldman executives to have misled Congress - they did so brazenly, with no apparent fear of consequence",
         "title": "Obstruction of Congress"
       },
       {
-        "description": "artificially inflated tech stock prices, allowing insiders to buy at lower prices while guaranteeing they can sell higher- this illegal stock manipulation fueled the tech bubble, and its bust",
+        "description": "Artificially inflated tech stock prices, allowing insiders to buy at lower prices while guaranteeing they can sell higher- this illegal stock manipulation fueled the tech bubble, and its bust",
         "title": "Securities fraud"
       },
       {
-        "description": "after being bailed out with tens of billions in taxpayer money, moved their earnings to countries with low tax rates, deferring taxes on them indefinitely while claiming deductions on the same untaxed income",
+        "description": "After being bailed out with tens of billions in taxpayer money, moved their earnings to countries with low tax rates, deferring taxes on them indefinitely while claiming deductions on the same untaxed income",
         "title": "Stealing taxpayer money"
       }
     ],
@@ -1015,26 +1015,26 @@ module.exports = [
   },
   {
     "artist": "Thong Vanh Louangrath",
-    "artistCharges": "Robbery (12 counts), Unlawful use of a stolen vehicle, Assault",
+    "artistCharges": ["Robbery (12 counts)", "Unlawful use of a stolen vehicle", "Assault"],
     "artistContact": "https://www.outofsightoutofmindprisoners.com/archives/2174",
     "artistPrison": "Snake River Correctional, OR",
     "artistPrisonID": "15643291",
     "artistSentence": "15 years",
     "charges": [
       {
-        "description": "pays a \u201ccommission\u201d to prisons in exchange for allowing them to offer their services - after they begin operation, competitors like Western Union (which charge lower fees and doesn\u2019t give a kickback to the prison) are often phased out",
+        "description": "Pays a \u201ccommission\u201d to prisons in exchange for allowing them to offer their services - after they begin operation, competitors like Western Union (which charge lower fees and doesn\u2019t give a kickback to the prison) are often phased out",
         "title": "Bribery"
       },
       {
-        "description": "responsible for creating services and pricing incentives that encourage facilities to create rules such as video-only visitation, denying inmates the right to see their loved ones in person",
+        "description": "Responsible for creating services and pricing incentives that encourage facilities to create rules such as video-only visitation, denying inmates the right to see their loved ones in person",
         "title": "Human rights violations"
       },
       {
-        "description": "charges inmates (who have no alternative) up to 45% in transfer fees to get the money their families send to them",
+        "description": "Charges inmates (who have no alternative) up to 45% in transfer fees to get the money their families send to them",
         "title": "Profiteering"
       },
       {
-        "description": "claimed to own the contents of inmates\u2019 correspondence, treating everything from casual conversations and artistic output, to interactions with the press as its intellectual property",
+        "description": "Claimed to own the contents of inmates\u2019 correspondence, treating everything from casual conversations and artistic output, to interactions with the press as its intellectual property",
         "title": "Theft"
       }
     ],
@@ -1053,26 +1053,26 @@ module.exports = [
   },
   {
     "artist": "Mario \u201cA.B.\u201d Beltran",
-    "artistCharges": "Receiving stolen goods",
+    "artistCharges": ["Receiving stolen goods"],
     "artistContact": "www.facebook.com/groups/A.B.art.and.tattoos",
     "artistPrison": "Prairie du Chien Correctional Institution, WI",
     "artistPrisonID": "437846",
     "artistSentence": "3.5 years",
     "charges": [
       {
-        "description": "violated federal laws related to mortgage-backed securities, contributing significantly to the 2008 U.S. housing crisis, leading to over 112,000 HSBC customers alone having their homes foreclosed upon",
+        "description": "Violated federal laws related to mortgage-backed securities, contributing significantly to the 2008 U.S. housing crisis, leading to over 112,000 HSBC customers alone having their homes foreclosed upon",
         "title": "Conspiracy"
       },
       {
-        "description": "colluded with a company selling fraudulent person funds to Central and South American investors - the fund took in over $127 million, never disclosing they were taking up to 95% of what was invested as their own commissions and fees",
+        "description": "Colluded with a company selling fraudulent person funds to Central and South American investors - the fund took in over $127 million, never disclosing they were taking up to 95% of what was invested as their own commissions and fees",
         "title": "Fraud"
       },
       {
-        "description": "repeatedly and continuously helps foreign businesses and wealthy customers evade their taxes; holding back evidence from investigations and refusing repeated demands by regulators to apply effective anti-money laundering measures",
+        "description": "Repeatedly and continuously helps foreign businesses and wealthy customers evade their taxes; holding back evidence from investigations and refusing repeated demands by regulators to apply effective anti-money laundering measures",
         "title": "Money laundering"
       },
       {
-        "description": "ignored obvious money laundering, cleared suspicious bulk quantities of travelers cheques, and provided U.S. correspondent accounts to foreign banks despite evidence of links to terrorist financing",
+        "description": "Ignored obvious money laundering, cleared suspicious bulk quantities of travelers cheques, and provided U.S. correspondent accounts to foreign banks despite evidence of links to terrorist financing",
         "title": "Supporting terrorism"
       }
     ],
@@ -1094,7 +1094,7 @@ module.exports = [
   },
   {
     "artist": "Lewis Walters",
-    "artistCharges": "Assault with intent to commit murder",
+    "artistCharges": ["Assault with intent to commit murder"],
     "artistContact": "www.facebook.com/profile.php?id=100008488121741",
     "artistPrison": "US Penitentiary Coleman-2, FL",
     "artistPrisonID": "38699-007",
@@ -1105,15 +1105,15 @@ module.exports = [
         "title": "Conspiracy"
       },
       {
-        "description": "admitted to knowing Qatar was a slave state for migrant workers, and scores of workers had died in appalling conditions, yet still refused to reverse the decision to hold the World Cup there, knowing slave labor would continue for FIFA-related projects",
+        "description": "Admitted to knowing Qatar was a slave state for migrant workers, and scores of workers had died in appalling conditions, yet still refused to reverse the decision to hold the World Cup there, knowing slave labor would continue for FIFA-related projects",
         "title": "Supporting slave labor"
       },
       {
-        "description": "via bribes, diverted hundreds of millions of dollars that should have gone towards benefiting youth leagues, developing nations, and the sport itself",
+        "description": "Via bribes, diverted hundreds of millions of dollars that should have gone towards benefiting youth leagues, developing nations, and the sport itself",
         "title": "Theft"
       },
       {
-        "description": "executives took hundreds of millions of dollars in illegal gifts and kickbacks in exchange for everything from vote buying and construction contracts, to marketing rights for soccer tournaments",
+        "description": "Executives took hundreds of millions of dollars in illegal gifts and kickbacks in exchange for everything from vote buying and construction contracts, to marketing rights for soccer tournaments",
         "title": "Wire fraud"
       }
     ],

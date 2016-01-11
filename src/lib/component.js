@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'ducts';
 
-const DEBUG = false; //process.env.NODE_ENV !== 'production';
+const DEBUG = process.env.NODE_ENV !== 'production';
 
 export default function component(displayName, func) {
   if (!func) {

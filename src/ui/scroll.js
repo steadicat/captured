@@ -6,7 +6,7 @@ import raf from 'raf';
 export class Scroll extends React.Component {
   static defaultProps = {
     margin: 200,
-  }
+  };
 
   constructor() {
     super();
@@ -41,7 +41,7 @@ export class Scroll extends React.Component {
 
   onScroll = () => {
     this.batchRenderChildren();
-  }
+  };
 
   batchRenderChildren = () => {
     if (this.state.rendered >= this.props.data.length) return;
@@ -52,11 +52,11 @@ export class Scroll extends React.Component {
       delay = 0;
     }
     this.batchRenderTimeout = setTimeout(this.renderChildren, delay);
-  }
+  };
 
   renderChildren = () => {
     this.setState({rendered: this.state.rendered + 1});
-  }
+  };
 
   render() {
     const {data, children: childGen} = this.props;
