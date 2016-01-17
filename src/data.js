@@ -745,6 +745,22 @@ module.exports = [
     "artistSentence": "17 years",
     "charges": [
       {
+        "description": "After decades of polluting the Earth with PCBs, dioxins, and harmful pesticides, they are now spending billions acquiring seed companies around the world, consolidating the entire food chain",
+        "title": "Monopolistic practices"
+      },
+      {
+        "description": "“Roundup Ready” crops are genetically modified to resist Monsanto’s herbicide Roundup - their herbicide intolerance spreads to neighboring crops and wild plants, locking farmers into a more chemical dependent farming system",
+        "title": "Forced chemical dependency"
+      },
+      {
+        "description": "Contaminates the global food chain with genetically modified crops - though the long term health effects of eating GM crops are still unknown, they have denied consumers the right avoid them by spending over $46 million to squash efforts to require labeling of such foods",
+        "title": "Food contamination"
+      },
+      {
+        "description": "Marketed a genetically engineered hormone (BST) to make cows produce more milk - BST milk has been banned in Europe because it may cause breast, colon, and prostate cancers in humans",
+        "title": "Reckless endangerment"
+      },
+      {
         "description": "The FDA is responsible for protecting the public health by assuring foods are safe, sanitary and properly labeled - over the past decades, at least seven high-ranking employees in the FDA were employed with Monsanto",
         "title": "Collusion"
       }
@@ -1135,6 +1151,45 @@ module.exports = [
     "materials": "oil on board",
     "name": "Sepp Blatter",
     "title": "Former President",
+    "former": true
+  },
+  {
+    "artist": "Mark Crawford",
+    "artistCharges": ["Murder", "Kidnapping", "Racketeering", "Fraud related charges"],
+    "artistContact": "http://markcrawford079.com/",
+    "artistPrison": "FCI Pollock Medium, TX",
+    "artistPrisonID": "76603-079",
+    "artistSentence": "life in prison",
+    "charges": [
+      {
+        "description": "Kept wages so low their employees were forced to seek taxpayer-funded public assistance–while simultaneously loophole to also have taxpayers foot the bill for a multi-million dollar increase to their CEO's salary",
+        "title": "Corporate welfare abuse"
+      },
+      {
+        "description": "Conned consumers by selling gift cards that failed to sufficiently disclose “dormancy fees” that would be subtracted from the value of the cards after a period of non-use",
+        "title": "Deception"
+      },
+      {
+        "description": "After the company aggressively lobbied to kill “living wage” initiatives and keep the minimum hourly wage for tipped workers at $2.13 (where it’s been since 1991), Otis personally lobbied against a bill penalizing large companies whose workers can only afford Medicaid– taxpayers bear the burden of the public assistance their workers need (food stamps, insurance, etc.) while they grow profits",
+        "title": "Stealing from taxpayers"
+      },
+      {
+        "description": "As owners of Olive Garden, LongHorn Steakhouse, Capital Grille, and (the recently sold) Red Lobster, they have systematically stolen wages from employees by: forcing off-the-clock work, requiring servers to make up for cash shortages, underpaying for shifts, and paying workers with debit cards saddled with severe fees",
+        "title": "Wage theft"
+      }
+    ],
+    "company": "Darden Restaurants",
+    "id": "otis",
+    "size": [7302, 9878],
+    "links": [
+      "http://www.sourcewatch.org/index.php/Darden_Restaurants",
+      "http://www.corp-research.org/darden",
+      "http://www.foxbusiness.com/industries/2013/12/10/darden-political-spending-raises-eyebrows/",
+      "http://www.progressillinois.com/posts/content/2014/05/02/report-sheds-light-taxpayer-subsidies-restaurant-ceo-pay"
+    ],
+    "materials": "oil on board",
+    "name": "Clarence Otis, Jr.",
+    "title": "Former CEO",
     "former": true
   }
 ];

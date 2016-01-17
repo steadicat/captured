@@ -8,7 +8,7 @@ import {Text, LightCondensedText, PageHeading} from '../ui/type';
 
 export const Charges = component('Charges', ({get, charges, ...props}) =>
   <ResetElement tag="ul" {...props}>
-    {charges.map((c, i) =>
+    {charges.reverse().map((c, i) =>
       <ResetElement tag="li" key={i} marginTop={get('browser.width') > 740 ? 24 : 6}>
         <Text fontWeight="bold">{c.title || c}</Text>
         {c.description && get('browser.width') > 740 && <Text>{c.description}.</Text>}
@@ -21,7 +21,7 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
   <Block {...props}>
     <Text textAlign="center" marginTop={12} marginBottom={48} fontStyle="italic">Materials: {piece.materials}.</Text>
 
-    <ResponsiveColumn textAlign="left" width="60%" paddingRight={96}>
+    <ResponsiveColumn textAlign="left" width="50%" paddingRight={96}>
       {/*<SocialButtons display="block" textAlign="right" url={`https://thecapturedproject.com/${piece.id}/`} />*/}
       <LightCondensedText fontSize={24} textTransform="uppercase">
         {piece.title} of {piece.company}
@@ -38,7 +38,7 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
       />
       {get('browser.width') < 740 && <TextLink display="block" paddingBottom={24} fontWeight="bold" textAlign="left">References</TextLink>}
     </ResponsiveColumn>
-    <ResponsiveColumn textAlign="left" width="40%">
+    <ResponsiveColumn textAlign="left" width="50%">
       <LightCondensedText fontSize={24} textTransform="uppercase">Captured by</LightCondensedText>
       <PageHeading marginTop={6}>
         {piece.artist} {get('browser.width') > 740 && `(Prison ID #${piece.artistPrisonID})`}
@@ -52,7 +52,7 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
       />
       {get('browser.width') < 740 && <TextLink display="block" paddingTop={24} fontWeight="bold" textAlign="left">Contact Info</TextLink>}
     </ResponsiveColumn>
-    {get('browser.width') > 740 && <Column textAlign="left" width="60%" paddingRight={24}>
+    {get('browser.width') > 740 && <Column textAlign="left" width="50%" paddingRight={24}>
       <TextLink
         href={`/${piece.id}/references`}
         fontWeight="bold"
@@ -60,7 +60,7 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
         References
       </TextLink>
     </Column>}
-    {get('browser.width') > 740 && <Column textAlign="left" width="40%">
+    {get('browser.width') > 740 && <Column textAlign="left" width="50%">
       <TextLink
         href={`/${piece.id}/contact`}
         fontWeight="bold"
