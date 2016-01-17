@@ -1,8 +1,7 @@
 import React from 'react';
-import {Block, Inline, ResetElement} from 'stylistic-elements';
+import {Block, ResetElement} from 'stylistic-elements';
 import component from '../lib/component';
 import {track} from '../lib/behaviors';
-import {Image} from '../ui/image';
 import {Column, ResponsiveColumn} from '../ui/layout';
 import {TextLink} from '../ui/core';
 import {Text, LightCondensedText, PageHeading} from '../ui/type';
@@ -18,31 +17,11 @@ export const Charges = component('Charges', ({get, charges, ...props}) =>
   </ResetElement>
 );
 
-function getImageSize(get) {
-  const browser = get('browser');
-  const maxWidth = browser.width * 0.8;
-  const maxAspectRatio = 0.7;
-  const width = Math.min(maxWidth, browser.height);
-  const height = Math.min(browser.height, width / maxAspectRatio);
-  return [width, height].map(Math.ceil);
-}
-
 export const Piece = track(component('Piece', ({get, piece, ...props}) =>
   <Block {...props}>
-    {/*
-    <Image
-      src={`${piece.id}.jpg`}
-      pxWidth={getImageSize(get)[0]}
-      pxHeight={getImageSize(get)[1]}
-      width={get('browser.known') ? getImageSize(get)[0] : '100%'}
-      height={get('browser.known') ? getImageSize(get)[1] : null}
-      maxWidth="100vh"
-      marginBottom={24}
-    />*/}
-
     <Text textAlign="center" marginTop={12} marginBottom={48} fontStyle="italic">Materials: {piece.materials}.</Text>
 
-    <ResponsiveColumn textAlign="left" width="60%" paddingRight={48}>
+    <ResponsiveColumn textAlign="left" width="60%" paddingRight={96}>
       {/*<SocialButtons display="block" textAlign="right" url={`https://thecapturedproject.com/${piece.id}/`} />*/}
       <LightCondensedText fontSize={24} textTransform="uppercase">
         {piece.title} of {piece.company}
@@ -50,7 +29,7 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
       <PageHeading marginTop={6}>
         {piece.name}
       </PageHeading>
-      <Text marginTop={6}>Oversees a company engaged in:</Text>
+      <Text marginTop={6}>{piece.former ? 'Oversaw' : 'Oversees'} a company engaged in:</Text>
       <Charges
         charge={piece}
         charges={piece.charges}
@@ -62,7 +41,7 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
     <ResponsiveColumn textAlign="left" width="40%">
       <LightCondensedText fontSize={24} textTransform="uppercase">Captured by</LightCondensedText>
       <PageHeading marginTop={6}>
-        {piece.artist}
+        {piece.artist} {get('browser.width') > 740 && `(Prison ID #${piece.artistPrisonID})`}
       </PageHeading>
       <Text marginTop={6}>Serving {piece.artistSentence} for:</Text>
       <Charges

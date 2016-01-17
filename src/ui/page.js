@@ -3,7 +3,7 @@ import {connect, Root} from 'ducts';
 import {ResetElement} from 'stylistic-elements';
 import config from '../../etc/config';
 import component from '../lib/component';
-import {Router} from '../ui/home';
+import {Router} from '../ui/router';
 import data from '../data';
 
 export function createPage(get, boundActions) {

@@ -79,7 +79,8 @@ module.exports = [
     ],
     "materials": "oil on canvas",
     "name": "Brady Dougan",
-    "title": "Former CEO"
+    "title": "Former CEO",
+    "former": true
   },
   {
     "artist": "Garrett Rushing",
@@ -210,7 +211,8 @@ module.exports = [
     ],
     "materials": "#2 pencil on Strathmore Bristol 300 series paper",
     "name": "Ellen J. Kullman",
-    "title": "Former CEO"
+    "title": "Former CEO",
+    "former": true
   },
   {
     "artist": "Mitchell Hand",
@@ -441,7 +443,8 @@ module.exports = [
     ],
     "materials": "pencil on paper",
     "name": "Don Thompson",
-    "title": "Former CEO"
+    "title": "Former CEO",
+    "former": true
   },
   {
     "artist": "Danny Gutierrez",
@@ -673,7 +676,8 @@ module.exports = [
     ],
     "materials": "black bic pen on 100lb vellum paper",
     "name": "Tony Hayward",
-    "title": "Former CEO"
+    "title": "Former CEO",
+    "former": true
   },
   {
     "artist": "Joseph Sharrow",
@@ -1130,7 +1134,8 @@ module.exports = [
     ],
     "materials": "oil on board",
     "name": "Sepp Blatter",
-    "title": "Former President"
+    "title": "Former President",
+    "former": true
   }
 ];
 

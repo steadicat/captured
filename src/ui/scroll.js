@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import throttle from '../lib/throttle';
-import raf from 'raf';
+/* global setTimout, clearTimeout */
 
 export class Scroll extends React.Component {
   static defaultProps = {

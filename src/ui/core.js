@@ -77,3 +77,11 @@ export const Input = component('Input', ({label, ...props}) =>
     {...props}
   />
 );
+
+export const List = component('List', ({...props}) =>
+  <ResetElement tag="ul" {...props} />
+);
+
+export const ListItem = component('ListItem', ({...props}) =>
+  <ResetElement tag="li" {...props} />
+);

@@ -11,6 +11,8 @@ import {Piece} from '../ui/piece';
 import {linear} from '../lib/math';
 import data from '../data';
 
+const IDS = new Set(data.map(piece => piece.id));
+
 function columns(width) {
   return Math.round(linear(320, 2, 1800, 6, width));
 }
@@ -20,7 +22,7 @@ function gutter(width) {
 }
 
 function margins(width) {
-  return width < 760 ? 12 : 48;
+  return width < 760 ? 24 : 48;
 }
 
 function chinHeight(width) {
@@ -62,6 +64,18 @@ function toColumns(pieces, width) {
   return result;
 }
 
+function getPieceMargin(width) {
+  return Math.round((width - Math.min(960, width - 2 * margins(width))) / 2);
+}
+
+function isCurrent(path, piece) {
+  return '/' + piece.id === path;
+}
+
+function isExpanded(path) {
+  return IDS.has(path.substring(1));
+}
+
 export const Gallery = component('Gallery', ({get}) =>
   <Block paddingLeft={margins(get('browser.width')) - gutter(get('browser.width')) / 2} textAlign="left">
     {toColumns(data, get('browser.width')).map((column, i) =>
@@ -75,12 +89,12 @@ export const Gallery = component('Gallery', ({get}) =>
             key={piece.id}
             trackKey={piece.id}
             piece={piece}
-            current={'/' + piece.id === get('path')}
+            current={isCurrent(get('path'), piece)}
             x={(columnWidth(get('browser.width')) * (i + 0.5) + gutter(get('browser.width')) * i) + margins(get('browser.width'))}
             y={get(`positions.${piece.id}.top`)}
           />)}
       </Column>)}
-    <Animate opacity={get('path') === '/' ? 0 : 1}>
+    <Animate opacity={isExpanded(get('path')) ? 1 : 0}>
       <Block
         position="fixed"
         top={0}
@@ -89,11 +103,11 @@ export const Gallery = component('Gallery', ({get}) =>
         bottom={0}
         backgroundColor="#fff"
         opacity={0}
-        pointerEvents={get('path') === '/' ? 'none' : null}
+        pointerEvents={isExpanded(get('path')) ? null : 'none'}
         zIndex={1}
       />
     </Animate>
-    {data.filter(piece => '/' + piece.id === get('path')).map(piece =>
+    {data.filter(piece => isCurrent(get('path'), piece)).map(piece =>
       <Animate key={piece.id} opacity={1}>
         <Piece
           piece={piece}
@@ -101,8 +115,8 @@ export const Gallery = component('Gallery', ({get}) =>
           zIndex={4}
           opacity={0}
           top={get(`positions.${piece.id}.top`) + getThumbnailSize(piece, get('browser'))[1] / 2 + getFullScreenSize(piece, get('browser'))[1] / 2}
-          left={40}
-          right={40}
+          left={getPieceMargin(get('browser.width'))}
+          right={getPieceMargin(get('browser.width'))}
         />
       </Animate>)}
   </Block>
@@ -145,6 +159,8 @@ export const Thumbnail = track(hover(component('Thumbnail', ({piece, x, y, get, 
       {animating => <Image
         src={`${piece.id}.jpg`}
         display="block"
+        scaleX={1}
+        scaleY={1}
         pxWidth={getSize(piece, current, get('browser'))[0]}
         pxHeight={getSize(piece, current, get('browser'))[1]}
         width={getThumbnailSize(piece, get('browser'))[0]}

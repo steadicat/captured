@@ -158,12 +158,17 @@ import data from './data';
 export function navigate(get, actions, path) {
   const id = path.substring(1, path.length);
   const position = get('positions')[id];
+  let scrolling = false;
   if (position && (id !== '')) {
     const browser = get('browser');
     const piece = data.find(p => p.id === id);
     scroll.scrollTo(position.top + getThumbnailSize(piece, browser)[1] / 2 - getFullScreenSize(piece, browser)[1] / 2, actions.scrollingDone);
+    scrolling = true;
+  } else if (id === 'about' || get('path') === '/about') {
+    scroll.scrollTo(0, actions.scrollingDone);
+    scrolling = true;
   }
-  return get().set('scrolling', true).set('path', path);
+  return get().set('scrolling', scrolling).set('path', path);
 }
 
 export function stripeDialogRequested(get, actions) {

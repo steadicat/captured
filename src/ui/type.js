@@ -20,7 +20,7 @@ export const PageTitle = component('PageTitle', (props) =>
   <ResetElement
     tag="h1"
     fontFamily={CONDENSED}
-    fontSize={96}
+    fontSize={48}
     fontWeight={700}
     lineHeight={96}
     {...props}

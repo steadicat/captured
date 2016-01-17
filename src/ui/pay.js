@@ -2,6 +2,7 @@ import React from 'react';
 import superagent from 'superagent';
 import component from '../lib/component';
 import * as script from '../lib/script';
+import {Block} from 'stylistic-elements';
 import {Button} from '../ui/core';
 import config from '../../etc/config';
 
@@ -38,7 +39,19 @@ function onClick(get, actions, event) {
 
 export const Pay = component('Pay', ({get, actions, children, ...props}) => (
   <Button onClick={onClick.bind(this, get, actions)} {...props}>
-    {get('stripeDialogRequested') && !get('stripeDialogShown') ? '...' : children}
+    <Block visibility={get('stripeDialogRequested') && !get('stripeDialogShown') ? 'hidden' : null}>
+      {children}
+    </Block>
+    {get('stripeDialogRequested') && !get('stripeDialogShown') && <Block
+      position="absolute"
+      top={0}
+      left={0}
+      right={0}
+      bottom={0}
+      fontSize={28}
+      lineHeight={32}>
+      ...
+    </Block>}
   </Button>
 ));
 

@@ -7,6 +7,7 @@ ga.q = [];
 ga.l = 1 * new Date();
 
 export function init() {
+  /* global window */
   window.ga = ga;
   window.GoogleAnalyticsObject = 'ga';
 
