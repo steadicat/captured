@@ -7,11 +7,11 @@ import {TextLink} from '../ui/core';
 import {Text, LightCondensedText, PageHeading} from '../ui/type';
 
 export const Charges = component('Charges', ({get, charges, ...props}) =>
-  <ResetElement tag="ul" {...props}>
+  <ResetElement tag="ul" listStyleType="none" {...props}>
     {charges.reverse().map((c, i) =>
-      <ResetElement tag="li" key={i} marginTop={get('browser.width') > 740 ? 24 : 6}>
+      <ResetElement tag="li" key={i} marginTop={24}>
         <Text fontWeight="bold">{c.title || c}</Text>
-        {c.description && get('browser.width') > 740 && <Text>{c.description}.</Text>}
+        {c.description && <Text>{c.description}.</Text>}
       </ResetElement>
     )}
   </ResetElement>
@@ -20,8 +20,7 @@ export const Charges = component('Charges', ({get, charges, ...props}) =>
 export const Piece = track(component('Piece', ({get, piece, ...props}) =>
   <Block {...props}>
     <Text textAlign="center" marginTop={12} marginBottom={48} fontStyle="italic">Materials: {piece.materials}.</Text>
-
-    <ResponsiveColumn textAlign="left" width="50%" paddingRight={96}>
+    <ResponsiveColumn textAlign="left" width="50%" paddingRight={get('browser.width') < 740 ? 12 : 48}>
       {/*<SocialButtons display="block" textAlign="right" url={`https://thecapturedproject.com/${piece.id}/`} />*/}
       <LightCondensedText fontSize={24} textTransform="uppercase">
         {piece.title} of {piece.company}
@@ -29,7 +28,7 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
       <PageHeading marginTop={6}>
         {piece.name}
       </PageHeading>
-      <Text marginTop={6}>{piece.former ? 'Oversaw' : 'Oversees'} a company engaged in:</Text>
+      <Text marginTop={6}>{piece.former ? 'Oversaw' : (piece.id === 'koch' ? 'Oversee' : 'Oversees')} a company engaged in:</Text>
       <Charges
         charge={piece}
         charges={piece.charges}
@@ -38,7 +37,7 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
       />
       {get('browser.width') < 740 && <TextLink display="block" paddingBottom={24} fontWeight="bold" textAlign="left">References</TextLink>}
     </ResponsiveColumn>
-    <ResponsiveColumn textAlign="left" width="50%">
+    <ResponsiveColumn textAlign="left" width="50%" paddingLeft={get('browser.width') < 740 ? 12 : 48}>
       <LightCondensedText fontSize={24} textTransform="uppercase">Captured by</LightCondensedText>
       <PageHeading marginTop={6}>
         {piece.artist} {get('browser.width') > 740 && `(Prison\xa0ID\xa0#${piece.artistPrisonID})`}

@@ -376,21 +376,29 @@ module.exports = [
     "artistSentence": "10 years",
     "charges": [
       {
-        "description": "Knew there was a link between fossil fuels and global warming, yet led the fight against any action on climate change and funded groups to undermine confidence in climate science",
-        "title": "Concealing evidence"
+        "description": "Over the past decade, accepted millions of dollars in tax exemptions for its Baton Rouge plants while creating only 95 permanent jobs, racking up record profits on the backs of taxpayers",
+        "title": "Corporate welfare abuse"
+      },
+      {
+        "description": "Extracted vast quantities of oil and natural gas from states, either without permission or without paying royalties, defrauding state and federal governments out of millions",
+        "title": "Fraud"
+      },
+      {
+        "description": "For over 12 years, overcharged service station owners across the country for gasoline. Forced to pay back $500 million plus interest after losing a Supreme Court case",
+        "title": "Theft"
       },
       {
         "description": "For decades, Exxon Mobil has spilled PCBs, gasoline additives, petroleum, crude oil and other toxic substances into the world\u2019s air, rivers and coasts",
         "title": "Poisoning"
       },
       {
+        "description": "Knew there was a link between fossil fuels and global warming, yet led the fight against any action on climate change and funded groups to undermine confidence in climate science",
+        "title": "Concealing evidence"
+      },
+      {
         "description": "Long history of fighting against stricter controls on additives which have been linked to reproductive hazards, autism, and breast cancer",
         "title": "Public Endangerment"
       },
-      {
-        "description": "For over 12 years, overcharged service station owners across the country for gasoline. Forced to pay back $500 million plus interest after losing a Supreme Court case",
-        "title": "Theft"
-      }
     ],
     "company": "ExxonMobil",
     "id": "tillerson",
@@ -832,12 +840,16 @@ module.exports = [
     "artistSentence": "10 years",
     "charges": [
       {
-        "description": "Helped \u201ctutor\u201d hundreds of judges with all-expenses-paid trips to resorts where they learn about the \u201cfree market\u201d impact of their rulings — for $25,000 a year, Koch Industries sits as an \u201cequal\u201d board member with state legislators, influencing bills impacting their interests",
-        "title": "Bribing judges and legislators"
-      },
-      {
         "description": "Bribed their way into securing contracts in Africa, India, and the Middle East",
         "title": "Illicit payments"
+      },
+      {
+        "description": "Sold millions of dollars of petrochemical equipment to Iran, a country the U.S. identifies as a sponsor of global terrorism",
+        "title": "Supporting terrorism"
+      },
+      {
+        "description": "Helped \u201ctutor\u201d hundreds of judges with all-expenses-paid trips to resorts where they learn about the \u201cfree market\u201d impact of their rulings — for $25,000 a year, Koch Industries sits as an \u201cequal\u201d board member with state legislators, influencing bills impacting their interests",
+        "title": "Bribing judges and legislators"
       },
       {
         "description": "The leading funders of climate science denial groups and clean energy opposition — through a secretive funding route they\u2019ve channeled nearly $120 million to over 100 groups casting doubt on the climate change science",
@@ -848,8 +860,8 @@ module.exports = [
         "title": "Public endangerment"
       },
       {
-        "description": "Sold millions of dollars of petrochemical equipment to Iran, a country the U.S. identifies as a sponsor of global terrorism",
-        "title": "Supporting terrorism"
+        "description": "Pumps hundreds of millions of dollars into Congress via campaign funding, then uses this leverage to craft and fuel an anti-regulatory­ agenda, allowing their company’s actions, like injecting chemicals beneath the nation's aquifers, to be entirely exempt from protections",
+        "title": "Rigging the system"
       }
     ],
     "company": "Koch Industries",

@@ -53,7 +53,7 @@ export class Toolbar extends React.Component {
               fontSize={back ? 28 : 18}
               paddingLeft={16}
               paddingRight={16}
-              paddingTop={back ? 15 : 16}
+              paddingTop={back ? 15 : 17}
               paddingBottom={16}>
               {back ? '‹' : 'About'}
             </CondensedText>
@@ -78,12 +78,12 @@ export class Toolbar extends React.Component {
             right={0}
             display={hovered ? 'none' : 'inline-block'}
             fontSize={12}>
-            SHARE:
+            {get('browser.width') > 760 && 'SHARE:'}
             <SocialButtons
               url="https://thecapturedproject.com/"
               paddingRight={16}
               paddingLeft={16}
-              paddingTop={12}
+              paddingTop={9}
               paddingBottom={12}
             />
           </Block>
