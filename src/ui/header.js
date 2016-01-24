@@ -3,7 +3,7 @@ import {InlineBlock} from 'stylistic-elements';
 import component from '../lib/component';
 
 export const HeaderTitle = component('HeaderTitle', ({...props}) =>
-  <InlineBlock tag="svg" viewBox="0 0 800 180" {...props}>
+  <InlineBlock tag="svg" viewBox="0 0 800 182" {...props}>
     <path fill="#444" d="M0,90.1c0-49.83,0.78-57.06,3.1-64.29C8.52,9.29,20.91,0,40.79,0C63.76,0,77.7,12.39,80.02,39.25
       c0.26,1.81-0.52,2.84-2.06,3.1l-14.71,2.84c-1.55,0.26-2.84-0.52-2.84-2.07c-1.29-15.75-7.23-23.5-19.36-23.5
       c-9.29,0-14.97,3.87-17.55,12.13c-1.55,4.91-2.32,9.81-2.32,58.35s0.78,53.44,2.32,58.35c2.58,8.26,8.26,12.14,17.55,12.14

@@ -61,7 +61,7 @@ export const SocialButtons = component('SocialButtons', ({url, ...props}) =>
 
 export const SocialLink = hover(component('SocialLink', ({href, text, icon: Ico, hovered, ...props}) =>
   <Link href={href} {...props}>
-    <Ico width={16} height={16} color={hovered ? [230, 60, 34] : [0, 0, 0]} verticalAlign="middle" />
+    <Ico width={16} height={16} color={hovered ? 'rgb(230, 60, 34)' : '#000'} verticalAlign="middle" />
     {' '}
     <Animate color={hovered ? [230, 60, 34] : [0, 0, 0]}>
       <span>{text}</span>

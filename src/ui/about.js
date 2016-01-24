@@ -29,7 +29,7 @@ export const About = track(component('About', ({get, ...props}) =>
   <DefaultFont>
     <Block textAlign="center" paddingBottom={192}>
       <Link href="/" display="block" marginTop={48} marginBottom={24}>
-        <HeaderTitle width={300} />
+        <HeaderTitle width={500} maxWidth="80vw" />
       </Link>
       <InlineBlock
         textAlign="left"

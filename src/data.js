@@ -3,7 +3,7 @@ module.exports = [
   {
     "artist": "Charles Lytle",
     "artistCharges": ["Robbery (1st degree)", "Assault (2nd degree)"],
-    "artistContact": "http://www.writeaprisoner.com/Template.aspx?i=z-16684648",
+    "artistContactLink": "http://www.writeaprisoner.com/Template.aspx?i=z-16684648",
     "artistPrison": "Eastern Oregon Correctional Institution, OR",
     "artistPrisonID": "16684648",
     "artistSentence": "9 years",
@@ -49,7 +49,7 @@ module.exports = [
   {
     "artist": "Jerry Lee Jenkins",
     "artistCharges": ["Bank robbery"],
-    "artistContact": "https://www.facebook.com/profile.php?id=100009143405700\u00a0",
+    "artistContactLink": "https://www.facebook.com/profile.php?id=100009143405700",
     "artistPrison": "U.S. Penitentiary Coleman-2, FL",
     "artistPrisonID": "03339-087",
     "artistSentence": "18 years",
@@ -295,7 +295,7 @@ module.exports = [
   {
     "artist": "Charles Listo Vera",
     "artistCharges": ["Attempted manslaughter"],
-    "artistContact": "http://www.facebook.com/charles.vera.35",
+    "artistContactLink": "https://www.facebook.com/charles.vera.35",
     "artistPrison": "Centinela State Prison, CA",
     "artistPrisonID": "Ai-6401",
     "artistSentence": "19 years",
@@ -370,7 +370,7 @@ module.exports = [
   {
     "artist": "Brandon Meyer",
     "artistCharges": ["Possession of a firearm in furtherance of a drug trafficking crime"],
-    "artistContact": "https://www.facebook.com/brandon.meyer.1610?fref=ts",
+    "artistContactLink": "https://www.facebook.com/brandon.meyer.1610",
     "artistPrison": "Federal Correctional Institution, Forrest City, AZ",
     "artistPrisonID": "11032-030",
     "artistSentence": "10 years",
@@ -419,7 +419,7 @@ module.exports = [
   {
     "artist": "Alex Carrillo",
     "artistCharges": ["Murder"],
-    "artistContact": "https://www.facebook.com/profile.php?id=100008456865016",
+    "artistContactLink": "https://www.facebook.com/profile.php?id=100008456865016",
     "artistPrison": "Centinela State Prison, CA",
     "artistPrisonID": "J-69100",
     "artistSentence": "30 years to life",
@@ -441,8 +441,7 @@ module.exports = [
     "id": "thompson",
     "size": [7394, 10000],
     "links": [
-      " http://www.corp-research.org/mcdonalds",
-      "unnamed record",
+      "http://www.corp-research.org/mcdonalds",
       "http://www.nytimes.com/2013/07/01/business/as-pay-cards-replace-paychecks-bank-fees-hurt-workers.html?pagewanted=all",
       "http://thinkprogress.org/economy/2015/06/03/3665647/mcdonalds-payroll-cards-lawsuit-chase-refunds/",
       "https://www.change.org/p/mcdonald-s-stop-paying-employees-with-debit-cards-loaded-with-fees",
@@ -493,7 +492,7 @@ module.exports = [
   {
     "artist": "John Vercusky",
     "artistCharges": ["Armed robbery"],
-    "artistContact": "jbercusky@gmail.com",
+    "artistContactLink": "mailto:jbercusky@gmail.com",
     "artistPrison": "Federal Correctional Institution, Pollack, LA",
     "artistPrisonID": "55341-066",
     "artistSentence": "22 years",
@@ -531,7 +530,7 @@ module.exports = [
   {
     "artist": "Benny Joe Palomo",
     "artistCharges": ["Indecency with a minor", "Multiple indecency counts", "Shooting (with priors)"],
-    "artistContact": "facebook.com/profile.php?id=100007366698171",
+    "artistContactLink": "https://www.facebook.com/profile.php?id=100007366698171",
     "artistPrison": "Clements Unit, Amarillo, TX",
     "artistPrisonID": "1491804",
     "artistSentence": "42 years",
@@ -556,7 +555,7 @@ module.exports = [
       "http://www.sourcewatch.org/index.php/Tyson_Foods",
       "http://www.triplepundit.com/2014/08/epa-launches-criminal-investigation-tyson-foods/",
       "http://www.tysontorturesanimals.com/",
-      "http://www.nytimes.com/2011/02/11/business/11tyson.html?_r=0",
+      "http://www.nytimes.com/2011/02/11/business/11tyson.html",
       "https://en.wikipedia.org/wiki/Tyson_Foods",
       "http://www.foxbusiness.com/markets/2015/01/20/tyson-foods-agrees-to-pay-53000-for-spill-that-killed-more-than-100000-fish-in/"
     ],
@@ -617,7 +616,7 @@ module.exports = [
   {
     "artist": "Jose Velasquez",
     "artistCharges": ["Armed bank robbery"],
-    "artistContact": "https://www.facebook.com/profile.php?id=100008282955922",
+    "artistContactLink": "https://www.facebook.com/profile.php?id=100008282955922",
     "artistPrison": "Fed. Correctional Institution, Butner, NC",
     "artistPrisonID": "83465-180",
     "artistSentence": "10 years",
@@ -640,7 +639,7 @@ module.exports = [
     "size": [8171, 10000],
     "links": [
       " http://oag.ca.gov/news/press-releases/brown-recovers-14-billion-wells-fargo-investors-landmark-settlement",
-      " http://www.nytimes.com/2011/07/08/business/wells-fargo-to-settle-loans-suit.html?_r=0",
+      " http://www.nytimes.com/2011/07/08/business/wells-fargo-to-settle-loans-suit.html",
       "http://www.federalreserve.gov/newsevents/press/enforcement/20110720a.htm"
     ],
     "materials": "pencil on paper",
@@ -650,7 +649,7 @@ module.exports = [
   {
     "artist": "Benjamin Gonzalez Sr.",
     "artistCharges": ["Robbery (1st and 2nd degree)"],
-    "artistContact": "facebook.com/profile.php?id=100004821551531",
+    "artistContactLink": "https://www.facebook.com/profile.php?id=100004821551531",
     "artistPrison": "Snake River Correctional, OR",
     "artistPrisonID": "17554404",
     "artistSentence": "9 years",
@@ -677,7 +676,7 @@ module.exports = [
     "size": [5953, 7728],
     "links": [
       "http://www.wsj.com/articles/SB10001424052748703339304575240210545113710",
-      "http://www.nytimes.com/2010/05/27/us/27rig.html?_r=0",
+      "http://www.nytimes.com/2010/05/27/us/27rig.html",
       "http://www.nytimes.com/2012/04/25/business/energy-environment/engineer-charged-in-bp-spill-case.html",
       "http://www.justice.gov/opa/pr/bp-exploration-and-production-inc-agrees-plead-guilty-felony-manslaughter-environmental",
       "http://www.sec.gov/News/PressRelease/Detail/PressRelease/1365171485962",
@@ -691,7 +690,7 @@ module.exports = [
   {
     "artist": "Joseph Sharrow",
     "artistCharges": ["Receiving stolen goods (auto)"],
-    "artistContact": "https://www.etsy.com/shop/CellBlockSketchin",
+    "artistContactLink": "https://www.etsy.com/shop/CellBlockSketchin",
     "artistPrison": "North Kern State Prison, CA",
     "artistPrisonID": "D-3-102",
     "artistSentence": "4 years",
@@ -733,9 +732,7 @@ module.exports = [
       "http://consumerist.com/2012/12/12/pfizer-hit-with-43-million-settlement-for-misleading-marke ting-of-drugs/",
       "https://kleantreatmentcenters.com/pfizer-profits-illegal-tactics/",
       "http://www.cnn.com/2009/BUSINESS/09/02/Pfizer.fine/index.html",
-      "unnamed record",
       "http://www.nytimes.com/2012/08/08/business/pfizer-settles-us-charges-of-overseas-bribery.html",
-      "unnamed record",
       "http://www.naturalnews.com/036417_Glaxo_Merck_fraud.html",
       "http://www.wsj.com/articles/SB10000872396390444246904577575110723150588",
       "http://www.commondreams.org/newswire/2009/09/02/23-billion-pfizer-settlement-not-enough -deter-organized-crime-pharmaceutical",
@@ -748,7 +745,7 @@ module.exports = [
   {
     "artist": "Walter Lego",
     "artistCharges": ["Vehicular manslaughter"],
-    "artistContact": "freebirdartdesigns@yahoo.com",
+    "artistContactLink": "mailto:freebirdartdesigns@yahoo.com",
     "artistPrison": "Desert View Modified Community Correctional, CA",
     "artistPrisonID": "T00705",
     "artistSentence": "17 years",
@@ -791,7 +788,7 @@ module.exports = [
   {
     "artist": "Leslie Robinson",
     "artistCharges": ["Retail theft (multiple counts)"],
-    "artistContact": "kyahsgrandmom@gmail.com",
+    "artistContactLink": "mailto:kyahsgrandmom@gmail.com",
     "artistPrison": "Montgomery County Correctional Facility, PA",
     "artistPrisonID": "143219",
     "artistSentence": "'1-3 years (paroled mid-project)",
@@ -835,7 +832,7 @@ module.exports = [
   {
     "artist": "Joseph Acker",
     "artistCharges": ["Receiving stolen goods (1st degree)", "ID theft (altered passports, 2 counts)", "Felon in possession of body armor (1 count)"],
-    "artistContact": "https://www.facebook.com/pages/Inside-Out-Artwork/970761372982756",
+    "artistContactLink": "https://www.facebook.com/pages/Inside-Out-Artwork/970761372982756",
     "artistPrison": "Snake River Correctional, OR",
     "artistPrisonID": "15967538",
     "artistSentence": "10 years",
@@ -883,7 +880,7 @@ module.exports = [
   {
     "artist": "John Vercusky",
     "artistCharges": ["Armed robbery"],
-    "artistContact": "jbercusky@gmail.com",
+    "artistContactLink": "mailto:jbercusky@gmail.com",
     "artistPrison": "Federal Correctional Institution, Pollack, LA",
     "artistPrisonID": "55341-066",
     "artistSentence": "22 years",
@@ -917,7 +914,7 @@ module.exports = [
   {
     "artist": "Daniel Raines",
     "artistCharges": ["Possession of stolen vehicle (2 times)"],
-    "artistContact": "www.writeaprisoner.com/Template.aspx?i=z-10662419",
+    "artistContactLink": "http://www.writeaprisoner.com/Template.aspx?i=z-10662419",
     "artistPrison": "Snake River Correctional, OR",
     "artistPrisonID": "10662419",
     "artistSentence": "3 years",
@@ -951,7 +948,7 @@ module.exports = [
     "id": "watson",
     "size": [6751, 8496],
     "links": [
-      "http://www.nytimes.com/2008/09/11/washington/11royalty.html?_r=0",
+      "http://www.nytimes.com/2008/09/11/washington/11royalty.html",
       "http://www.justice.gov/opa/pr/chevron-pay-us-more-45-million-resolve-allegations-false-claims-royalties-underpayment",
       "http://www.nytimes.com/2002/09/13/business/study-says-chevrontexaco-evaded-taxes-in-price-scheme.html",
       "http://ca-contracostacounty.civicplus.com/DocumentCenter/View/27350",
@@ -966,7 +963,7 @@ module.exports = [
   {
     "artist": "Kim VanPelt",
     "artistCharges": ["Capital murder"],
-    "artistContact": "kc93494@gmail.com (Kevin Carpenter)",
+    "artistContactLink": "mailto:kc93494@gmail.com",
     "artistPrison": "Holman Prison, AL",
     "artistPrisonID": "Z-737/I-26",
     "artistSentence": "death Row",
@@ -1049,7 +1046,7 @@ module.exports = [
   {
     "artist": "Thong Vanh Louangrath",
     "artistCharges": ["Robbery (12 counts)", "Unlawful use of a stolen vehicle", "Assault"],
-    "artistContact": "https://www.outofsightoutofmindprisoners.com/archives/2174",
+    "artistContactLink": "https://www.outofsightoutofmindprisoners.com/archives/2174",
     "artistPrison": "Snake River Correctional, OR",
     "artistPrisonID": "15643291",
     "artistSentence": "15 years",
@@ -1076,7 +1073,6 @@ module.exports = [
     "size": [6953, 8760],
     "links": [
       "https://www.eff.org/deeplinks/2015/05/hidden-cost-jpays-prison-email-system",
-      "unnamed record",
       "http://motherboard.vice.com/read/meet-jpay-the-company-that-controls-prisoners-access-to-technology",
       "http://www.publicintegrity.org/2014/09/30/15761/prison-bankers-cash-captive-customers"
     ],
@@ -1087,7 +1083,7 @@ module.exports = [
   {
     "artist": "Mario \u201cA.B.\u201d Beltran",
     "artistCharges": ["Receiving stolen goods"],
-    "artistContact": "www.facebook.com/groups/A.B.art.and.tattoos",
+    "artistContactLink": "https://www.facebook.com/groups/A.B.art.and.tattoos",
     "artistPrison": "Prairie du Chien Correctional Institution, WI",
     "artistPrisonID": "437846",
     "artistSentence": "3.5 years",
@@ -1118,7 +1114,6 @@ module.exports = [
       "http://www.occ.gov/news-issuances/news-releases/2013/nr-ia-2013-13.html",
       "http://www.icij.org/project/swiss-leaks",
       "http://www.wsj.com/articles/SB10001424127887323415304578368244050745684",
-      "unnamed record",
       "http://www.federalreserve.gov/newsevents/press/enforcement/20101007a.htm"
     ],
     "materials": "Prismacolor Premiere color pencils and Prismacolor Art Sticks on Canson XL 140lb paper",
@@ -1128,7 +1123,7 @@ module.exports = [
   {
     "artist": "Lewis Walters",
     "artistCharges": ["Assault with intent to commit murder"],
-    "artistContact": "www.facebook.com/profile.php?id=100008488121741",
+    "artistContactLink": "https://www.facebook.com/profile.php?id=100008488121741",
     "artistPrison": "US Penitentiary Coleman-2, FL",
     "artistPrisonID": "38699-007",
     "artistSentence": "72 years",
@@ -1169,7 +1164,7 @@ module.exports = [
   {
     "artist": "Mark Crawford",
     "artistCharges": ["Murder", "Kidnapping", "Racketeering", "Fraud related charges"],
-    "artistContact": "http://markcrawford079.com/",
+    "artistContactLink": "http://markcrawford079.com/",
     "artistPrison": "FCI Pollock Medium, TX",
     "artistPrisonID": "76603-079",
     "artistSentence": "life in prison",

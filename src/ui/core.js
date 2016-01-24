@@ -1,7 +1,7 @@
 import React from 'react';
 import {Animate} from 'react-rebound';
 import {connect} from 'ducts';
-import {ResetElement} from 'stylistic-elements';
+import {ResetElement, InlineBlock} from 'stylistic-elements';
 import component from '../lib/component';
 import * as history from '../lib/history';
 import {hover} from '../lib/behaviors';
@@ -9,8 +9,10 @@ import {hover} from '../lib/behaviors';
 @connect
 export class Link extends React.Component {
   onLinkClick = (event) => {
+    if (event.shiftKey || event.metaKey || event.superKey || event.controlKey) return;
     const {href} = this.props;
-    if (!/^http(s?):\/\//.test(href)) {
+    if (!/^http(s?):\/\//.test(href) && !/^mailto:/.test(href)) {
+      event.stopPropagation();
       event.preventDefault();
       history.pushState(href);
       this.props.actions.navigate(href);
@@ -84,4 +86,11 @@ export const List = component('List', ({...props}) =>
 
 export const ListItem = component('ListItem', ({...props}) =>
   <ResetElement tag="li" {...props} />
+);
+
+export const Close = component('Close', ({color = '#444', width = 46, height = 46, ...props}) =>
+  <InlineBlock tag="svg" viewBox="0 0 46 46" stroke={color} width={width} height={height} {...props}>
+    <path d="M11.75,34.25 L34.25,11.75" />
+    <path d="M11.75,11.75 L34.25,34.25" />
+  </InlineBlock>
 );

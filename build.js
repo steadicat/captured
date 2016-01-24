@@ -22,6 +22,10 @@ paths['/unlock/' + config.UNLOCK_CODE] = 'assets/unlock/' + config.UNLOCK_CODE +
 
 for (var i = 0, l = data.length; i < l; i++) {
   paths['/' + data[i].id] = 'assets/' + data[i].id + '/index.html';
+  paths['/' + data[i].id + '/references'] = 'assets/' + data[i].id + '/references/index.html';
+  if (data[i].artistContact) {
+    paths['/' + data[i].id + '/contact'] = 'assets/' + data[i].id + '/contact/index.html';
+  }
 }
 
 for (var p in paths) {

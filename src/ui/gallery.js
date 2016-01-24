@@ -3,7 +3,7 @@ import {Animate} from 'react-rebound';
 import {Block, InlineBlock} from 'stylistic-elements';
 import component from '../lib/component';
 import {hover, track} from '../lib/behaviors';
-import {Link} from '../ui/core';
+import {Link, Close} from '../ui/core';
 import {Image} from '../ui/image';
 import {Column} from '../ui/layout';
 import {Text} from '../ui/type';
@@ -69,19 +69,12 @@ function getPieceMargin(width) {
 }
 
 function isCurrent(path, piece) {
-  return '/' + piece.id === path;
+  return path.split('/')[1] === piece.id;
 }
 
 function isExpanded(path) {
-  return IDS.has(path.substring(1));
+  return IDS.has(path.split('/')[1]);
 }
-
-export const Close = component('Close', ({color = '#444', width = 46, height = 46, ...props}) =>
-  <InlineBlock tag="svg" viewBox="0 0 46 46" stroke={color} width={width} height={height} {...props}>
-    <path d="M11.75,34.25 L34.25,11.75" />
-    <path d="M11.75,11.75 L34.25,34.25" />
-  </InlineBlock>
-);
 
 export const Gallery = component('Gallery', ({get}) =>
   <Block paddingLeft={margins(get('browser.width')) - gutter(get('browser.width')) / 2} textAlign="left">
@@ -128,7 +121,7 @@ export const Gallery = component('Gallery', ({get}) =>
       </Animate>)}
     {data.filter(piece => isCurrent(get('path'), piece)).map(piece =>
       <Link
-        href="/"
+        href={get('path').split('/').slice(0, get('path').split('/').length - 1).join('/')}
         key="close"
         position="fixed"
         zIndex={5}
@@ -145,6 +138,7 @@ export function getThumbnailSize(piece, {width, height}) {
 }
 
 export function getFullScreenSize(piece, {width, height}) {
+  height -= 46; // Height of toolbar
   const screenRatio = width / height;
   const imageRatio = piece.size[0] / piece.size[1];
   const fullScreenWidth = imageRatio > screenRatio ? width : (height * imageRatio);

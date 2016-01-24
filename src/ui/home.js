@@ -32,7 +32,7 @@ export const Header = track(component('Header', ({get, actions, ...props}) =>
     <Block height="calc(100vh - 46px)" position="relative">
       <Block position="absolute" top="50%" left={0} right={0} translateY="-50%">
         <HeaderTitle width="80vw" />
-        <HeaderSubtitle width="70vw" marginTop={48} />
+        <HeaderSubtitle width="calc(100% - 48px)" maxWidth={600} marginTop={48} />
       </Block>
     </Block>
     <Block>
