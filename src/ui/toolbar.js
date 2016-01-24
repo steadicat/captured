@@ -1,10 +1,11 @@
 import React from 'react';
 import {connect} from 'ducts';
-import {Block} from 'stylistic-elements';
+import {Block, InlineBlock} from 'stylistic-elements';
 import {BuyButton} from '../ui/buy';
-import {TextLink} from '../ui/core';
+import {TextLink, Link} from '../ui/core';
 import {CondensedText} from '../ui/type';
 import {SocialButtons} from '../ui/social';
+import {Bernie} from '../ui/bernie';
 import {Animate} from 'react-rebound';
 
 @connect
@@ -46,13 +47,14 @@ export class Toolbar extends React.Component {
             href={back ? '/' : '/about'}
             position="absolute"
             left={0}
+            lineHeight={12}
             display={hovered ? 'none' : null}>
             <CondensedText
               fontSize={back ? 28 : 18}
               paddingLeft={16}
               paddingRight={16}
-              paddingTop={back ? 10 : 12}
-              paddingBottom={12}>
+              paddingTop={back ? 15 : 16}
+              paddingBottom={16}>
               {back ? '‹' : 'About'}
             </CondensedText>
           </TextLink>
@@ -61,17 +63,30 @@ export class Toolbar extends React.Component {
             onMouseEnter={this.onMouseEnter}
             onMouseLeave={this.onMouseLeave}
             hovered={this.state.hovered}
+            marginLeft={get('browser.width') > 760 ? 145 : 0}
+            paddingLeft={16}
+            paddingRight={16}
           />}
-          <SocialButtons
-            url="https://thecapturedproject.com/"
+          {get('browser.width') > 760 && <InlineBlock visibility={hovered ? 'hidden' : null}>
+            All profits go to {' '}
+            <Link href="https://berniesanders.com/">
+              <Bernie height={16} />
+            </Link>
+          </InlineBlock>}
+          <Block
             position="absolute"
             right={0}
-            paddingRight={16}
-            paddingLeft={16}
-            paddingTop={12}
-            paddingBottom={12}
             display={hovered ? 'none' : 'inline-block'}
-          />
+            fontSize={12}>
+            SHARE:
+            <SocialButtons
+              url="https://thecapturedproject.com/"
+              paddingRight={16}
+              paddingLeft={16}
+              paddingTop={12}
+              paddingBottom={12}
+            />
+          </Block>
         </Block>
       </Animate>
     );

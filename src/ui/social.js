@@ -3,15 +3,17 @@ import {Animate} from 'react-rebound';
 import {InlineBlock} from 'stylistic-elements';
 import component from '../lib/component';
 import {hover} from '../lib/behaviors';
+import {TextLink} from '../ui/core';
 
-export const Icon = component('Icon', ({width, height, color, children}) =>
-  <svg
+export const Icon = component('Icon', ({width, height, color, ...props}) =>
+  <InlineBlock
+    tag="svg"
     width={`${width}px`}
     height={`${height}px`}
     viewBox="0 0 24 24"
-    fill={color}>
-    {children}
-  </svg>
+    fill={color}
+    {...props}
+  />
 );
 
 export const FacebookIcon = component('FacebookIcon', props =>
@@ -56,3 +58,15 @@ export const SocialButtons = component('SocialButtons', ({url, ...props}) =>
     <TwitterButton url={url} marginLeft={12} />
   </InlineBlock>
 );
+
+export const SocialLinks = component('SocialLinks', ({url, hovered, ...props}) =>
+  <InlineBlock {...props}>
+    <TextLink href="https://www.facebook.com/capturedproject" marginRight={24}>
+      <FacebookIcon width={16} height={16} color="#333" verticalAlign="middle" /> capturedproject
+    </TextLink>
+    <TextLink href="https://www.twitter.com/projectcaptured">
+      <TwitterIcon width={16} height={16} color="#333" verticalAlign="middle" /> @projectcaptured
+    </TextLink>
+  </InlineBlock>
+);
+

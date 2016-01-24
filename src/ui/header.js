@@ -2,8 +2,8 @@ import React from 'react';
 import {InlineBlock} from 'stylistic-elements';
 import component from '../lib/component';
 
-export const HeaderText = component('HeaderText', ({...props}) =>
-  <InlineBlock tag="svg" viewBox="0 0 800 291" {...props}>
+export const HeaderTitle = component('HeaderTitle', ({...props}) =>
+  <InlineBlock tag="svg" viewBox="0 0 800 180" {...props}>
     <path fill="#444" d="M0,90.1c0-49.83,0.78-57.06,3.1-64.29C8.52,9.29,20.91,0,40.79,0C63.76,0,77.7,12.39,80.02,39.25
       c0.26,1.81-0.52,2.84-2.06,3.1l-14.71,2.84c-1.55,0.26-2.84-0.52-2.84-2.07c-1.29-15.75-7.23-23.5-19.36-23.5
       c-9.29,0-14.97,3.87-17.55,12.13c-1.55,4.91-2.32,9.81-2.32,58.35s0.78,53.44,2.32,58.35c2.58,8.26,8.26,12.14,17.55,12.14
@@ -45,6 +45,11 @@ export const HeaderText = component('HeaderText', ({...props}) =>
       c0-36.66-1.03-46.21-3.35-53.44c-3.61-10.33-10.33-14.97-22.2-14.97h-14.45c-1.03,0-1.55,0.51-1.55,1.55v133.74
       C737.27,158.01,737.79,158.52,738.82,158.52z"
     />
+  </InlineBlock>
+);
+
+export const HeaderSubtitle = component('HeaderSubtitle', ({...props}) =>
+  <InlineBlock tag="svg" viewBox="96 268 624 24" {...props}>
     <path d="M97.53,290.43c-0.2,0-0.34-0.13-0.34-0.32V268.8c0-0.19,0.13-0.32,0.34-0.32h3.29c4,0,5.85,1.78,5.85,6.36
       c0,4.55-1.88,6.39-5.85,6.39h-1.68c-0.13,0-0.2,0.06-0.2,0.19v8.68c0,0.19-0.13,0.32-0.33,0.32H97.53z M104.92,274.83
       c0-3.48-1.11-4.78-4.1-4.78h-1.68c-0.13,0-0.2,0.06-0.2,0.19v9.2c0,0.13,0.07,0.19,0.2,0.19h1.68

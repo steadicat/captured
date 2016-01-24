@@ -41,7 +41,7 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
     <ResponsiveColumn textAlign="left" width="50%">
       <LightCondensedText fontSize={24} textTransform="uppercase">Captured by</LightCondensedText>
       <PageHeading marginTop={6}>
-        {piece.artist} {get('browser.width') > 740 && `(Prison ID #${piece.artistPrisonID})`}
+        {piece.artist} {get('browser.width') > 740 && `(Prison\xa0ID\xa0#${piece.artistPrisonID})`}
       </PageHeading>
       <Text marginTop={6}>Serving {piece.artistSentence} for:</Text>
       <Charges

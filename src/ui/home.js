@@ -6,11 +6,12 @@ import {linear} from '../lib/math';
 import {TextLink} from '../ui/core';
 import {Image} from '../ui/image';
 import {DefaultFont, Text, CondensedText, LightCondensedText} from '../ui/type';
-import {SocialButtons} from '../ui/social';
+import {SocialLinks} from '../ui/social';
 import {Toolbar} from '../ui/toolbar';
 import {HoverBuyButton} from '../ui/buy';
 import {Gallery} from '../ui/gallery';
-import {HeaderText} from '../ui/header';
+import {HeaderTitle, HeaderSubtitle} from '../ui/header';
+import {Bernie} from '../ui/bernie';
 
 function getPrefaceSize(get) {
   return linear(320, 18, 2000, 56, Math.min(get('browser.width'), get('browser.height') * 1.4));
@@ -20,7 +21,20 @@ export const Header = track(component('Header', ({get, actions, ...props}) =>
   <Block paddingTop={0} {...props}>
     <Block tag="h1" display="none">CAPTURED</Block>
     <Block tag="h2" display="none">People in prison drawing people who should be</Block>
-    <HeaderText width="80vw" height="calc(100vh - 46px)" />
+    {get('browser.width') <= 760 && <Block
+      position="absolute"
+      top="70vh"
+      left={0}
+      right={0}
+      textAlign="center">
+      All profits go to <Bernie height={16} />
+    </Block>}
+    <Block height="calc(100vh - 46px)" position="relative">
+      <Block position="absolute" top="50%" left={0} right={0} translateY="-50%">
+        <HeaderTitle width="80vw" />
+        <HeaderSubtitle width="70vw" marginTop={48} />
+      </Block>
+    </Block>
     <Block>
       <Image
         src="book-orange.jpg"
@@ -43,13 +57,13 @@ export const Header = track(component('Header', ({get, actions, ...props}) =>
       boxSizing="border-box">
       <Block tag="span" position="relative" top="calc(50vh - 23px - 48px)" translateY="-50%">
         <Text>
-          For over a year, we asked people in prison to paint or draw people we felt <em>should</em> be in prison–the CEOs of companies doing the most damage to our environment, economy,&nbsp;and&nbsp;society.
+          For over a year, we asked people in prison to paint or draw people we felt <em>should</em> be in prison–the CEOs of companies destroying our environment, economy,&nbsp;and&nbsp;society.
         </Text>
         <Text marginTop={16}>
-          Here are the results, each shown with the crimes committed by the companies as well as the imprisoned&nbsp;artists.
+          Here are the results, shown with the crimes committed by both the companies and the&nbsp;artists.
         </Text>
         <Text marginTop={16}>
-          We present this project as a way to better to see the crimes that are masquerading as&nbsp;commerce.
+          We present this project to help expose crimes masquerading&nbsp;as&nbsp;commerce.
         </Text>
       </Block>
     </LightCondensedText>
@@ -78,14 +92,25 @@ export const Footer = track(component('Footer', ({get, actions, ...props}) =>
         : 'Limited edition. All 1000 copies sold out.')
       : 'Limited edition of 1000 copies.'}
     </Text>
-    <Text marginTop={24} marginBottom={48}>
+    <Text marginTop={24} marginBottom={48} marginLeft="auto" marginRight="auto" maxWidth={600}>
       All profits go towards effors to elect
       {' '}
       <TextLink href="https://berniesanders.com/">Bernie Sanders</TextLink>
       {' '}
-      as&nbsp;president.
+      as&nbsp;president. One of the main pillars of his presidential campaign is to eliminate corporate control over government.
     </Text>
-    <SocialButtons url="https://thecapturedproject.com/" marginBottom={96} />
+    <TextLink href="/about">
+      <CondensedText
+        fontSize={18}
+        paddingTop={16}
+        paddingLeft={16}
+        paddingRight={16}
+        paddingBottom={16}
+        marginBottom={24}>
+        ABOUT THE PROJECT
+      </CondensedText>
+    </TextLink>
+    <SocialLinks marginBottom={96} />
   </Block>
 ));
 

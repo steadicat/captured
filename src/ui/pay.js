@@ -6,6 +6,8 @@ import {Block} from 'stylistic-elements';
 import {Button} from '../ui/core';
 import config from '../../etc/config';
 
+script.load('https://checkout.stripe.com/checkout.js');
+
 let handler;
 
 function onClick(get, actions, event) {
@@ -27,7 +29,7 @@ function onClick(get, actions, event) {
     }));
     handler.open({
       name: 'Captured',
-      description: `Buy copy ${get('sold') + 1} of ${get('total')}. Free shipping.`,
+      description: `Buy copy ${get('sold') + 1} of ${get('total')}. Free shipping. All profits go to Bernie 2016.`,
       amount: get('price') * 100,
       allowRememberMe: false,
       shippingAddress: true,
