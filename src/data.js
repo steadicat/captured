@@ -227,7 +227,7 @@ module.exports = [
         "title": "Accomplice to murder"
       },
       {
-        "description": "Since 2002, there have been over 1,000 spills across their Nigerian pipelines — two alone devastated a 27,000 square mile area of Nigeria. Fraud: misled public by promoting highly pollutant projects as \"sustainable energy initiatives,\u201d as exposed in one of the most significant \"greenwash\" rulings to date",
+        "description": "Since 2002, there have been over 1,000 spills across their Nigerian pipelines\u2009—\u2009two alone devastated a 27,000 square mile area of Nigeria. Fraud: misled public by promoting highly pollutant projects as \"sustainable energy initiatives,\u201d as exposed in one of the most significant \"greenwash\" rulings to date",
         "title": "Environmental destruction"
       },
       {
@@ -573,7 +573,7 @@ module.exports = [
     "artistSentence": "9 years",
     "charges": [
       {
-        "description": "Offloaded bad mortgages (altering paperwork to cover up their toxicity) onto other parties, including U.S. taxpayers — losses on these mortgage securities eroded confidence in the U.S. banking and financial system, spawning the massive 2008 financial crisis",
+        "description": "Offloaded bad mortgages (altering paperwork to cover up their toxicity) onto other parties, including U.S. taxpayers\u2009—\u2009losses on these mortgage securities eroded confidence in the U.S. banking and financial system, spawning the massive 2008 financial crisis",
         "title": "Conspiracy"
       },
       {
@@ -599,6 +599,7 @@ module.exports = [
     ],
     "company": "JP Morgan",
     "id": "dimon",
+    "image": "dimon2",
     "size": [8344, 10000],
     "links": [
       "http://www.corp-research.org/jpmorganchase",
@@ -757,19 +758,19 @@ module.exports = [
         "title": "Monopolistic practices"
       },
       {
-        "description": "“Roundup Ready” crops are genetically modified to resist Monsanto’s herbicide Roundup — their herbicide intolerance spreads to neighboring crops and wild plants, locking farmers into a more chemical dependent farming system",
+        "description": "“Roundup Ready” crops are genetically modified to resist Monsanto’s herbicide Roundup\u2009—\u2009their herbicide intolerance spreads to neighboring crops and wild plants, locking farmers into a more chemical dependent farming system",
         "title": "Forced chemical dependency"
       },
       {
-        "description": "Contaminates the global food chain with genetically modified crops — though the long term health effects of eating GM crops are still unknown, they have denied consumers the right avoid them by spending over $46 million to squash efforts to require labeling of such foods",
+        "description": "Contaminates the global food chain with genetically modified crops\u2009—\u2009though the long term health effects of eating GM crops are still unknown, they have denied consumers the right avoid them by spending over $46 million to squash efforts to require labeling of such foods",
         "title": "Food contamination"
       },
       {
-        "description": "Marketed a genetically engineered hormone (BST) to make cows produce more milk — BST milk has been banned in Europe because it may cause breast, colon, and prostate cancers in humans",
+        "description": "Marketed a genetically engineered hormone (BST) to make cows produce more milk\u2009—\u2009BST milk has been banned in Europe because it may cause breast, colon, and prostate cancers in humans",
         "title": "Reckless endangerment"
       },
       {
-        "description": "The FDA is responsible for protecting the public health by assuring foods are safe, sanitary and properly labeled — over the past decades, at least seven high-ranking employees in the FDA were employed with Monsanto",
+        "description": "The FDA is responsible for protecting the public health by assuring foods are safe, sanitary and properly labeled\u2009—\u2009over the past decades, at least seven high-ranking employees in the FDA were employed with Monsanto",
         "title": "Collusion"
       }
     ],
@@ -812,7 +813,7 @@ module.exports = [
         "title": "Manslaughter"
       },
       {
-        "description": "Failed to obey health and safety standards or keep records of practices at multiple plants — abnormally high rates of cancer has been found in workers at these plants",
+        "description": "Failed to obey health and safety standards or keep records of practices at multiple plants\u2009—\u2009abnormally high rates of cancer has been found in workers at these plants",
         "title": "Reckless endangerment"
       }
     ],
@@ -848,11 +849,11 @@ module.exports = [
         "title": "Supporting terrorism"
       },
       {
-        "description": "Helped \u201ctutor\u201d hundreds of judges with all-expenses-paid trips to resorts where they learn about the \u201cfree market\u201d impact of their rulings — for $25,000 a year, Koch Industries sits as an \u201cequal\u201d board member with state legislators, influencing bills impacting their interests",
+        "description": "Helped \u201ctutor\u201d hundreds of judges with all-expenses-paid trips to resorts where they learn about the \u201cfree market\u201d impact of their rulings\u2009—\u2009for $25,000 a year, Koch Industries sits as an \u201cequal\u201d board member with state legislators, influencing bills impacting their interests",
         "title": "Bribing judges and legislators"
       },
       {
-        "description": "The leading funders of climate science denial groups and clean energy opposition — through a secretive funding route they\u2019ve channeled nearly $120 million to over 100 groups casting doubt on the climate change science",
+        "description": "The leading funders of climate science denial groups and clean energy opposition\u2009—\u2009through a secretive funding route they\u2019ve channeled nearly $120 million to over 100 groups casting doubt on the climate change science",
         "title": "Mass deception"
       },
       {
@@ -892,11 +893,11 @@ module.exports = [
         "title": "Criminal misconduct"
       },
       {
-        "description": "Hid key information from regulators regarding problems with construction on a new plant in Indiana — fraud and gross mismanagement raised costs from the estimated $1.9 billion to $3.5 billion, with consumers eating a share of the overages",
+        "description": "Hid key information from regulators regarding problems with construction on a new plant in Indiana\u2009—\u2009fraud and gross mismanagement raised costs from the estimated $1.9 billion to $3.5 billion, with consumers eating a share of the overages",
         "title": "Fraud and deceit"
       },
       {
-        "description": "As 3rd largest carbon dioxide emitter in the U.S. (112 million tons per year and the number 11 emitter worldwide), they\u2019ve violated the Federal Clean Air Act numerous times — their coal fleet collectively causes more than $10 billion dollars worth of health impacts annually",
+        "description": "As 3rd largest carbon dioxide emitter in the U.S. (112 million tons per year and the number 11 emitter worldwide), they\u2019ve violated the Federal Clean Air Act numerous times\u2009—\u2009their coal fleet collectively causes more than $10 billion dollars worth of health impacts annually",
         "title": "Poisoning"
       }
     ],
@@ -983,7 +984,7 @@ module.exports = [
         "title": "Securities fraud"
       },
       {
-        "description": "Secretly used excessive fees to gouge thousands of trust account holders — the beneficiaries of which include many children and charities. When discovered, the company then shortchanged them on their refunds, in total concealing amounts in the tens of millions",
+        "description": "Secretly used excessive fees to gouge thousands of trust account holders\u2009—\u2009the beneficiaries of which include many children and charities. When discovered, the company then shortchanged them on their refunds, in total concealing amounts in the tens of millions",
         "title": "Theft"
       }
     ],
@@ -1017,11 +1018,11 @@ module.exports = [
         "title": "Bribery"
       },
       {
-        "description": "Packaged toxic mortgages as legitimate and sold them to unsuspecting victims, costing municipalities and pension funds millions — simultaneously took short positions in the same market, betting against the same toxic packages they sold",
+        "description": "Packaged toxic mortgages as legitimate and sold them to unsuspecting victims, costing municipalities and pension funds millions\u2009—\u2009simultaneously took short positions in the same market, betting against the same toxic packages they sold",
         "title": "Mass deception and theft"
       },
       {
-        "description": "The U.S. Senate panel investigating their role in the financial crisis found Goldman executives to have misled Congress — they did so brazenly, with no apparent fear of consequence",
+        "description": "The U.S. Senate panel investigating their role in the financial crisis found Goldman executives to have misled Congress\u2009—\u2009they did so brazenly, with no apparent fear of consequence",
         "title": "Obstruction of Congress"
       },
       {
@@ -1054,7 +1055,7 @@ module.exports = [
     "artistSentence": "15 years",
     "charges": [
       {
-        "description": "Pays a \u201ccommission\u201d to prisons in exchange for allowing them to offer their services — after they begin operation, competitors like Western Union (which charge lower fees and doesn\u2019t give a kickback to the prison) are often phased out",
+        "description": "Pays a \u201ccommission\u201d to prisons in exchange for allowing them to offer their services\u2009—\u2009after they begin operation, competitors like Western Union (which charge lower fees and doesn\u2019t give a kickback to the prison) are often phased out",
         "title": "Bribery"
       },
       {
@@ -1096,7 +1097,7 @@ module.exports = [
         "title": "Conspiracy"
       },
       {
-        "description": "Colluded with a company selling fraudulent person funds to Central and South American investors — the fund took in over $127 million, never disclosing they were taking up to 95% of what was invested as their own commissions and fees",
+        "description": "Colluded with a company selling fraudulent person funds to Central and South American investors\u2009—\u2009the fund took in over $127 million, never disclosing they were taking up to 95% of what was invested as their own commissions and fees",
         "title": "Fraud"
       },
       {

@@ -21,7 +21,7 @@ export const Header = track(component('Header', ({get, actions, ...props}) =>
   <Block paddingTop={0} {...props}>
     <Block tag="h1" display="none">CAPTURED</Block>
     <Block tag="h2" display="none">People in prison drawing people who should be</Block>
-    {get('browser.width') <= 760 && <Block
+    {get('browser.mobile') && <Block
       position="absolute"
       top="70vh"
       left={0}
@@ -99,18 +99,20 @@ export const Footer = track(component('Footer', ({get, actions, ...props}) =>
       {' '}
       as&nbsp;president. One of the main pillars of his presidential campaign is to eliminate corporate control over government.
     </Text>
-    <TextLink href="/about">
-      <CondensedText
-        fontSize={18}
-        paddingTop={16}
-        paddingLeft={16}
-        paddingRight={16}
-        paddingBottom={16}
-        marginBottom={24}>
-        ABOUT THE PROJECT
-      </CondensedText>
-    </TextLink>
-    <SocialLinks marginBottom={96} />
+    <Block paddingBottom={96}>
+      <TextLink href="/about" display="inline-block" verticalAlign="top">
+        <CondensedText
+          tag="span"
+          fontSize={18}
+          paddingTop={16}
+          paddingLeft={16}
+          paddingRight={16}
+          paddingBottom={16}>
+          ABOUT THE PROJECT
+        </CondensedText>
+      </TextLink>
+      <SocialLinks marginLeft={24} verticalAlign="top" />
+    </Block>
   </Block>
 ));
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Animate} from 'react-rebound';
-import {Block} from 'stylistic-elements';
+import {Block, Inline} from 'stylistic-elements';
 import component from '../lib/component';
 import {hover, track} from '../lib/behaviors';
 import {Link} from '../ui/core';
@@ -157,7 +157,7 @@ export const Thumbnail = track(hover(component('Thumbnail', ({piece, x, y, get, 
       scaleY={getScale(piece, current, hovered, get('browser'))}
       translateX={current ? (get('browser.width') / 2 - x) : 0}>
       {animating => <Image
-        src={`${piece.id}.jpg`}
+        src={`${piece.image || piece.id}.jpg`}
         display="block"
         scaleX={1}
         scaleY={1}
@@ -172,7 +172,7 @@ export const Thumbnail = track(hover(component('Thumbnail', ({piece, x, y, get, 
     </Animate>
     <Block height={chinHeight(get('browser.height'))} fontSize={12} lineHeight={20} marginTop={12}>
       <Text fontWeight="bold">{piece.title} of {piece.company}</Text>
-      <Text>by {piece.artist}, Prison ID# {piece.artistPrisonID}</Text>
+      <Text>by {piece.artist}, <Inline whiteSpace="nowrap">prison ID #{piece.artistPrisonID}</Inline></Text>
       <Text fontStyle="italic">{piece.materials}</Text>
     </Block>
   </Link>

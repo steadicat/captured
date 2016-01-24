@@ -81,6 +81,7 @@ export const Page = component('Page', ({$, store, children}) =>
       <title>{getTitle($('path'))}</title>
       <link rel="prefetch" href={`${config.ASSETS_URL}${$('main')}`} />
       <link rel="prefetch" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700|Roboto+Condensed:300,300italic,700" />
+      <link rel="prefetch" href="https://checkout.stripe.com/checkout.js" />
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700|Roboto+Condensed:300,300italic,700" type="text/css" />
       <meta name="description" content={getDescription($('path'))} />
       <link rel="canonical" href={trailingSlash(`https://thecapturedproject.com${$('path')}`)} />

@@ -3,7 +3,7 @@ import {Animate} from 'react-rebound';
 import {InlineBlock} from 'stylistic-elements';
 import component from '../lib/component';
 import {hover} from '../lib/behaviors';
-import {TextLink} from '../ui/core';
+import {Link} from '../ui/core';
 
 export const Icon = component('Icon', ({width, height, color, ...props}) =>
   <InlineBlock
@@ -59,14 +59,20 @@ export const SocialButtons = component('SocialButtons', ({url, ...props}) =>
   </InlineBlock>
 );
 
+export const SocialLink = hover(component('SocialLink', ({href, text, icon: Ico, hovered, ...props}) =>
+  <Link href={href} {...props}>
+    <Ico width={16} height={16} color={hovered ? [230, 60, 34] : [0, 0, 0]} verticalAlign="middle" />
+    {' '}
+    <Animate color={hovered ? [230, 60, 34] : [0, 0, 0]}>
+      <span>{text}</span>
+    </Animate>
+  </Link>
+));
+
 export const SocialLinks = component('SocialLinks', ({url, hovered, ...props}) =>
   <InlineBlock {...props}>
-    <TextLink href="https://www.facebook.com/capturedproject" marginRight={24}>
-      <FacebookIcon width={16} height={16} color="#333" verticalAlign="middle" /> capturedproject
-    </TextLink>
-    <TextLink href="https://www.twitter.com/projectcaptured">
-      <TwitterIcon width={16} height={16} color="#333" verticalAlign="middle" /> @projectcaptured
-    </TextLink>
+    <SocialLink text="capturedproject" href="https://www.facebook.com/capturedproject" icon={FacebookIcon} marginRight={24} />
+    <SocialLink text="@projectcaptured" href="https://www.twitter.com/projectcaptured" icon={TwitterIcon} />
   </InlineBlock>
 );
 

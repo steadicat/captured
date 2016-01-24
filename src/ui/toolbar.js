@@ -63,11 +63,11 @@ export class Toolbar extends React.Component {
             onMouseEnter={this.onMouseEnter}
             onMouseLeave={this.onMouseLeave}
             hovered={this.state.hovered}
-            marginLeft={get('browser.width') > 760 ? 145 : 0}
+            marginLeft={get('browser.mobile') ? 0 : 145}
             paddingLeft={16}
             paddingRight={16}
           />}
-          {get('browser.width') > 760 && <InlineBlock visibility={hovered ? 'hidden' : null}>
+          {!get('browser.mobile') && <InlineBlock visibility={hovered ? 'hidden' : null}>
             All profits go to {' '}
             <Link href="https://berniesanders.com/">
               <Bernie height={16} />
@@ -78,7 +78,7 @@ export class Toolbar extends React.Component {
             right={0}
             display={hovered ? 'none' : 'inline-block'}
             fontSize={12}>
-            {get('browser.width') > 760 && 'SHARE:'}
+            {!get('browser.mobile') && 'SHARE:'}
             <SocialButtons
               url="https://thecapturedproject.com/"
               paddingRight={16}

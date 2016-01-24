@@ -33,7 +33,7 @@ export const About = track(component('About', ({get, ...props}) =>
       </Link>
       <InlineBlock
         textAlign="left"
-        width={get('browser.width') > 800 ? '80%' : null}
+        width={get('browser.mobile') ? null : '80%'}
         maxWidth={1400}
         {...props}>
         <AboutSection title="Artists’ Statement">
@@ -70,8 +70,8 @@ export const About = track(component('About', ({get, ...props}) =>
             </AboutText>
           </AboutColumn>
         </AboutSection>
-        <Block textAlign={get('browser.width') > 800 ? 'right' : 'left'} marginTop={24}>
-          <AboutText fontSize={12} textAlign="left" display="inline-block" marginLeft={get('browser.width') > 800 ? '50%' : null} textIndent={-6} paddingLeft={24} paddingRight={24}>
+        <Block textAlign={get('browser.mobile') ? 'left' : 'right'} marginTop={24}>
+          <AboutText fontSize={12} textAlign="left" display="inline-block" marginLeft={get('browser.mobile') ? null : '50%'} textIndent={-6} paddingLeft={24} paddingRight={24}>
             <InlineBlock tag="sup" fontWeight="bold" width={6}>1</InlineBlock>With the exception of BP Oil. Tony Hayward stepped down prior to this project’s start, but BP’s crimes were so destructive during his tenure that it was decided to include him. He is now the Chairman of Glencore, an equally dubious company.
           </AboutText>
         </Block>

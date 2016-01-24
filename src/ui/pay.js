@@ -6,7 +6,9 @@ import {Block} from 'stylistic-elements';
 import {Button} from '../ui/core';
 import config from '../../etc/config';
 
-script.load('https://checkout.stripe.com/checkout.js');
+if (typeof document !== 'undefined') {
+  script.load('https://checkout.stripe.com/checkout.js');
+}
 
 let handler;
 
