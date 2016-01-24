@@ -1,5 +1,5 @@
 import React from 'react';
-import {Block, ResetElement, Inline} from 'stylistic-elements';
+import {Block, ResetElement, InlineBlock} from 'stylistic-elements';
 import component from '../lib/component';
 import {track} from '../lib/behaviors';
 import {Column, ResponsiveColumn} from '../ui/layout';
@@ -40,7 +40,7 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
     <ResponsiveColumn textAlign="left" width="50%" paddingLeft={get('browser.mobile') ? 12 : 48}>
       <LightCondensedText fontSize={24} textTransform="uppercase">Captured by</LightCondensedText>
       <PageHeading marginTop={6}>
-        {piece.artist} {!get('browser.mobile') && <Inline whiteSpace="nowrap">(Prison ID #{piece.artistPrisonID})</Inline>}
+        {piece.artist} {!get('browser.mobile') && <InlineBlock tag="span" whiteSpace="nowrap">(Prison ID #{piece.artistPrisonID})</InlineBlock>}
       </PageHeading>
       <Text marginTop={6}>Serving {piece.artistSentence} for:</Text>
       <Charges

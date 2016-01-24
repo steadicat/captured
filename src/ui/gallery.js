@@ -1,6 +1,6 @@
 import React from 'react';
 import {Animate} from 'react-rebound';
-import {Block, Inline} from 'stylistic-elements';
+import {Block, InlineBlock} from 'stylistic-elements';
 import component from '../lib/component';
 import {hover, track} from '../lib/behaviors';
 import {Link} from '../ui/core';
@@ -76,6 +76,13 @@ function isExpanded(path) {
   return IDS.has(path.substring(1));
 }
 
+export const Close = component('Close', ({color = '#444', width = 46, height = 46, ...props}) =>
+  <InlineBlock tag="svg" viewBox="0 0 46 46" stroke={color} width={width} height={height} {...props}>
+    <path d="M11.75,34.25 L34.25,11.75" />
+    <path d="M11.75,11.75 L34.25,34.25" />
+  </InlineBlock>
+);
+
 export const Gallery = component('Gallery', ({get}) =>
   <Block paddingLeft={margins(get('browser.width')) - gutter(get('browser.width')) / 2} textAlign="left">
     {toColumns(data, get('browser.width')).map((column, i) =>
@@ -108,7 +115,7 @@ export const Gallery = component('Gallery', ({get}) =>
       />
     </Animate>
     {data.filter(piece => isCurrent(get('path'), piece)).map(piece =>
-      <Animate key={piece.id} opacity={1}>
+      <Animate key="current" opacity={1}>
         <Piece
           piece={piece}
           position="absolute"
@@ -119,6 +126,16 @@ export const Gallery = component('Gallery', ({get}) =>
           right={getPieceMargin(get('browser.width'))}
         />
       </Animate>)}
+    {data.filter(piece => isCurrent(get('path'), piece)).map(piece =>
+      <Link
+        href="/"
+        key="close"
+        position="fixed"
+        zIndex={5}
+        top={6}
+        left={6}>
+        <Close />
+      </Link>)}
   </Block>
 );
 
@@ -172,7 +189,7 @@ export const Thumbnail = track(hover(component('Thumbnail', ({piece, x, y, get, 
     </Animate>
     <Block height={chinHeight(get('browser.height'))} fontSize={12} lineHeight={20} marginTop={12}>
       <Text fontWeight="bold">{piece.title} of {piece.company}</Text>
-      <Text>by {piece.artist}, <Inline whiteSpace="nowrap">prison ID #{piece.artistPrisonID}</Inline></Text>
+      <Text>by {piece.artist}, <InlineBlock tag="span" whiteSpace="nowrap">prison ID #{piece.artistPrisonID}</InlineBlock></Text>
       <Text fontStyle="italic">{piece.materials}</Text>
     </Block>
   </Link>
