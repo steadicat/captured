@@ -76,6 +76,11 @@ function isExpanded(path) {
   return IDS.has(path.split('/')[1]);
 }
 
+function trimPathEnd(path) {
+  const bits = path.split('/')
+  return bits.slice(0, bits.length - 1).join('/');
+}
+
 export const Gallery = component('Gallery', ({get}) =>
   <Block paddingLeft={margins(get('browser.width')) - gutter(get('browser.width')) / 2} textAlign="left">
     {toColumns(data, get('browser.width')).map((column, i) =>
@@ -121,7 +126,7 @@ export const Gallery = component('Gallery', ({get}) =>
       </Animate>)}
     {data.filter(piece => isCurrent(get('path'), piece)).map(piece =>
       <Link
-        href={get('path').split('/').slice(0, get('path').split('/').length - 1).join('/')}
+        href={trimPathEnd(get('path'))}
         key="close"
         position="fixed"
         zIndex={5}

@@ -566,7 +566,7 @@ module.exports = [
   {
     "artist": "Jose Fregoso",
     "artistCharges": ["Robbery (2nd degree)"],
-    "artistContact": "http://www.write2convicts.com/#!jose-frogos-ab2966/c1qy6",
+    "artistContactLink": "http://www.write2convicts.com/#!jose-frogos-ab2966/c1qy6",
     "artistPrison": "Kern Valley State Prison, CA",
     "artistPrisonID": "AB-2966",
     "artistSentence": "9 years",

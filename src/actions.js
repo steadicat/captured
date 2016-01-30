@@ -60,6 +60,7 @@ export function clientInit(get, actions) {
   window.addEventListener('resize', throttle(actions.browserResize));
   //window.addEventListener('scroll', throttle(actions.browserScroll));
   history.onChange(actions.navigate);
+  window.addEventListener('keydown', actions.keyDown);
   tracking.init();
 
   return get()
@@ -166,11 +167,25 @@ export function navigate(get, actions, path) {
     const piece = data.find(p => p.id === id);
     scroll.scrollTo(position.top + getThumbnailSize(piece, browser)[1] / 2 - getFullScreenSize(piece, browser)[1] / 2, actions.scrollingDone);
     scrolling = true;
-  } else if (id === 'about') {
-    //scroll.scrollTo(0, actions.scrollingDone);
-    //scrolling = true;
+  } else if (id === 'about' || get('path') === '/about') {
+    scroll.scrollTo(0, actions.scrollingDone);
+    scrolling = true;
   }
   return get().set('scrolling', scrolling).set('path', path);
+}
+
+function trimPathEnd(path) {
+  const bits = path.split('/');
+  if (bits.length === 2) return '/';
+  return bits.slice(0, bits.length - 1).join('/');
+}
+
+export function keyDown(get, actions, event) {
+  if (event.keyCode === 27 && get('path') !== '/') {
+    const href = trimPathEnd(get('path'));
+    history.pushState(href);
+    actions.navigate(href);
+  }
 }
 
 export function stripeDialogRequested(get, actions) {
