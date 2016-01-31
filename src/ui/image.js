@@ -36,6 +36,7 @@ export class Image extends React.Component {
           translateZ={0}
           width={width}
           height={height}
+          opacity={this.props.opacity || 0}
           {...props}
         />
       </Animate>

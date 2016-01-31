@@ -24,6 +24,8 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
     <Link href="/">
       <Image
         src={`${piece.image || piece.id}.jpg`}
+        pxWidth={getSize(piece, !get('expanding'), get('browser'))[0]}
+        pxHeight={getSize(piece, !get('expanding'), get('browser'))[1]}
         width={getSize(piece, true, get('browser'))[0]}
         height={getSize(piece, true, get('browser'))[1]}
         translateX="-50%"
