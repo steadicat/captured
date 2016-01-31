@@ -3,7 +3,7 @@ import {Block, ResetElement, InlineBlock} from 'stylistic-elements';
 import component from '../lib/component';
 import {track} from '../lib/behaviors';
 import {Column, ResponsiveColumn} from '../ui/layout';
-import {TextLink, Close, Link} from '../ui/core';
+import {TextLink} from '../ui/core';
 import {Text, LightCondensedText, PageHeading} from '../ui/type';
 
 function humanizeLink(link) {
@@ -21,7 +21,7 @@ export const Modal = component('Modal', ({children, ...props}) =>
     zIndex={10}
     {...props}>
     <Block
-      maxWidth="100%"
+      maxWidth="80%"
       paddingLeft={24}
       paddingRight={24}
       boxSizing="border-box"
@@ -128,7 +128,8 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
           textOverflow="ellipsis"
           whiteSpace="nowrap"
           paddingTop={12}
-          paddingBottom={12}>
+          paddingBottom={12}
+          target="_blank">
           {humanizeLink(link)}
         </TextLink>)}
     </Modal>}

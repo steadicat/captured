@@ -120,7 +120,6 @@ export const Gallery = component('Gallery', ({get}) =>
           position="absolute"
           zIndex={4}
           opacity={0}
-          translateZ={0}
           top={get(`positions.${piece.id}.top`) + getThumbnailSize(piece, get('browser'))[1] / 2 + getFullScreenSize(piece, get('browser'))[1] / 2}
           left={getPieceMargin(get('browser.width'))}
           right={getPieceMargin(get('browser.width'))}

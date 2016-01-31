@@ -1,6 +1,6 @@
 import React from 'react';
 import {Animate} from 'react-rebound';
-import {InlineBlock} from 'stylistic-elements';
+import {InlineBlock, Inline} from 'stylistic-elements';
 import component from '../lib/component';
 import {hover} from '../lib/behaviors';
 import {Link} from '../ui/core';
@@ -63,9 +63,7 @@ export const SocialLink = hover(component('SocialLink', ({href, text, icon: Ico,
   <Link href={href} {...props}>
     <Ico width={16} height={16} color={hovered ? 'rgb(230, 60, 34)' : '#000'} verticalAlign="middle" />
     {' '}
-    <Animate color={hovered ? [230, 60, 34] : [0, 0, 0]}>
-      <span>{text}</span>
-    </Animate>
+    <Inline color={hovered ? [230, 60, 34] : [0, 0, 0]}>{text}</Inline>
   </Link>
 ));
 

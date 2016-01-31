@@ -3,10 +3,9 @@ import component from '../lib/component';
 import {track} from '../lib/behaviors';
 import {Block, InlineBlock, Inline} from 'stylistic-elements';
 import {TextLink, Link} from '../ui/core';
-import {HeaderTitle} from '../ui/header';
 import {Toolbar} from '../ui/toolbar';
 import {ResponsiveColumn} from '../ui/layout';
-import {DefaultFont, Text, PageHeading} from '../ui/type';
+import {DefaultFont, Text} from '../ui/type';
 import {SocialLinks} from '../ui/social';
 
 const AboutSection = component('AboutSection', ({title, titleElement: TitleElement, subtitle, children, get, ...props}) =>
@@ -78,10 +77,8 @@ export const About = track(component('About', ({get, ...props}) =>
         <AboutSection title="Credits & Gratitude" titleElement={CreditsTitle}>
           <AboutColumn>
             <AboutText>
-              Project created by <Link href="http://http://jeffgreenspan.com/">Jeff Greenspan</Link> and <Link href="http://www.andrewtider.com/">Andrew Tider</Link>. Site design and development by <Link href="https://attardi.org/">Stefano J. Attardi</Link>. Book Printing by <Link href="http://www.oddi.com/">Oddi</Link>.
+              Project created by <TextLink href="http://jeffgreenspan.com/">Jeff Greenspan</TextLink> and <TextLink href="http://www.andrewtider.com/">Andrew Tider</TextLink>. Site design and development by <TextLink href="https://attardi.org/">Stefano J. Attardi</TextLink>. Book Printing by <TextLink href="http://www.oddi.com/">Oddi</TextLink>.
             </AboutText>
-          </AboutColumn>
-          <AboutColumn>
             <AboutText>Special thanks to Gonzalo Torres, Jes Pepe, Meg Worden, Nick McKinney, Arturo Aranda, Jeff Kling, and the friends and families of the imprisoned artists who facilitated communication and helped get the artwork to us.</AboutText>
           </AboutColumn>
         </AboutSection>
