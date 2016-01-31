@@ -8,3 +8,13 @@ export function trimPathEnd(path) {
 export function humanizeLink(link) {
   return link.replace(/^https?:\/\/(www\.)?/, '');
 }
+
+export function lowercaseFirst(s) {
+  if (s.length <= 1) return s.toLowerCase();
+  return s.substring(0, 1).toLowerCase() + s.substring(1);
+}
+
+export function uppercaseFirst(s) {
+  if (s.length <= 1) return s.toUpperCase();
+  return s.substring(0, 1).toUpperCase() + s.substring(1);
+}

@@ -4,7 +4,8 @@ import {Body} from '../ui/constrain';
 import config from '../../etc/config';
 import component from '../lib/component';
 import {Router} from '../ui/router';
-import data from '../data';
+import {getCurrentPiece} from '../ui/gallerylayout';
+import {uppercaseFirst, lowercaseFirst} from '../lib/strings';
 
 export function createPage(get, boundActions) {
   return (
@@ -31,42 +32,25 @@ class InitScript extends React.Component {
   }
 }
 
-function getPieceFromPath(path) {
-  for (let i = 0, l = data.length; i < l; i++) {
-    if (`/${data[i].id}/` === path) {
-      return data[i];
-    }
-  }
-}
-
 function getTitle(path) {
-  const piece = getPieceFromPath(path);
-  if (piece) {
-    return `People in Prison Draw People who Should Be`;
-  } else if (path === '/act/') {
-    return 'People in Prison Draw People who Should Be';
-  } else {
-    return 'People in Prison Draw People who Should Be';
-  }
+  return 'People in Prison Drawing People who Should Be';
 }
 
 function getDescription(path) {
-  const piece = getPieceFromPath(path);
+  const piece = getCurrentPiece(path);
   if (piece) {
-    return `${piece.title} of ${piece.company} – Painted by ${piece.artist} – serving ${piece.artistSentence} for ${piece.artistCharges}.`;
-  } else if (path === '/act/') {
-    return 'Limited edition book of 1000 copies. All profits go to help elect Bernie Sanders.';
+    return `${piece.title} of ${piece.company}. ${uppercaseFirst(piece.materials)} by ${piece.artist}, serving ${piece.artistSentence} for ${piece.artistCharges.map(lowercaseFirst).join(', ')}.`;
   } else {
-    return 'Limited edition book of 1000 copies. All profits go to help elect Bernie Sanders.';
+    return 'All book profits go to elect Bernie Sanders.';
   }
 }
 
 function getImage(path) {
-  const piece = getPieceFromPath(path);
+  const piece = getCurrentPiece(path);
   if (piece) {
     return `${config.IMAGES[piece.image + '.jpg']}=w900-h900-c`;
   } else {
-    return `${config.IMAGES['book-photo.jpg']}=w900-h550-c`;
+    return `${config.IMAGES['book-orange.jpg']}=w900-h550-c`;
   }
 }
 

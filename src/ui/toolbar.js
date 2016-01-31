@@ -67,7 +67,9 @@ export class Toolbar extends React.Component {
             paddingLeft={16}
             paddingRight={16}
           />}
-          {!get('browser.mobile') && <InlineBlock visibility={hovered ? 'hidden' : null}>
+          {!get('browser.mobile') && <InlineBlock
+            visibility={hovered ? 'hidden' : null}
+            verticalAlign="baseline">
             All profits go to {' '}
             <Link href="https://berniesanders.com/">
               <Bernie height={16} />
@@ -80,11 +82,12 @@ export class Toolbar extends React.Component {
             fontSize={12}>
             {!get('browser.mobile') && 'SHARE:'}
             <SocialButtons
-              url="https://thecapturedproject.com/"
+              url={`https://thecapturedproject.com${get('path')}`}
               paddingRight={16}
               paddingLeft={16}
               paddingTop={9}
               paddingBottom={12}
+              verticalAlign={2}
             />
           </Block>
         </Block>

@@ -30,7 +30,8 @@ module.exports = [
       }
     ],
     "company": "Walmart",
-    "id": "mcmillon",
+    "id": "walmart",
+    "image": "mcmillon",
     "size": [5781, 7619],
     "links": [
       "http://www.corp-research.org/wal-mart",
@@ -68,7 +69,8 @@ module.exports = [
       }
     ],
     "company": "Credit Suisse",
-    "id": "dougan",
+    "id": "credit-suisse",
+    "image": "dougan",
     "size": [4893, 8652],
     "links": [
       "http://www.corp-research.org/credit-suisse",
@@ -112,7 +114,8 @@ module.exports = [
       }
     ],
     "company": "Citigroup",
-    "id": "corbat",
+    "id": "citigroup",
+    "image": "corbat",
     "size": [6725, 8552],
     "links": [
       "http://www.corp-research.org/citigroup",
@@ -158,7 +161,8 @@ module.exports = [
       }
     ],
     "company": "ConocoPhillips",
-    "id": "lance",
+    "id": "conocophillips",
+    "image": "lance",
     "size": [5431, 7338],
     "links": [
       "http://www.corp-research.org/conocophillips",
@@ -198,7 +202,8 @@ module.exports = [
       }
     ],
     "company": "Dupont",
-    "id": "kullman",
+    "id": "dupont",
+    "image": "kullman",
     "size": [5863, 7632],
     "links": [
       "http://www.corporatewatch.org/company-profiles/dupont-corporate-crimes",
@@ -240,7 +245,8 @@ module.exports = [
       }
     ],
     "company": "Royal Dutch Shell",
-    "id": "van-beurden",
+    "id": "royal-dutch-shell",
+    "image": "van-beurden",
     "size": [7265, 10000],
     "links": [
       "http://www.corp-research.org/royal-dutch-shell",
@@ -277,7 +283,8 @@ module.exports = [
       }
     ],
     "company": "Archer Daniels Midland (ADM)",
-    "id": "woertz",
+    "id": "adm",
+    "image": "woertz",
     "size": [5144, 6704],
     "links": [
       "http://www.iatp.org/news/adm-ranked-30th-worst-in-air-pollution",
@@ -314,7 +321,8 @@ module.exports = [
       }
     ],
     "company": "The Nestle Group",
-    "id": "brabeck-letmathe",
+    "id": "nestle",
+    "image": "brabeck-letmathe",
     "size": [8210, 10000],
     "links": [
       "http://www.babymilkaction.org/nestlefree",
@@ -351,7 +359,8 @@ module.exports = [
       }
     ],
     "company": "The Coca-Cola Company",
-    "id": "kent",
+    "id": "coca-cola",
+    "image": "kent",
     "size": [5823, 7342],
     "links": [
       "http://blog.fooducate.com/2014/01/14/this-simple-chart-explains-the-devastating-influence-in dustry-has-on-scientific-integrity/",
@@ -401,7 +410,8 @@ module.exports = [
       },
     ],
     "company": "ExxonMobil",
-    "id": "tillerson",
+    "id": "exxonmobil",
+    "image": "tillerson",
     "size": [5617, 7116],
     "links": [
       "http://www.theguardian.com/environment/2015/jul/08/exxon-climate-change-1981-cli mate-denier-funding",
@@ -438,7 +448,8 @@ module.exports = [
       }
     ],
     "company": "McDonalds",
-    "id": "thompson",
+    "id": "mcdonalds",
+    "image": "thompson",
     "size": [7394, 10000],
     "links": [
       "http://www.corp-research.org/mcdonalds",
@@ -475,7 +486,8 @@ module.exports = [
       }
     ],
     "company": "Cargil",
-    "id": "maclennan",
+    "id": "cargil",
+    "image": "maclennan",
     "size": [5588, 5528],
     "links": [
       "http://www.corp-research.org/cargill",
@@ -515,7 +527,8 @@ module.exports = [
       }
     ],
     "company": "Pepsico",
-    "id": "nooyi",
+    "id": "pepsi",
+    "image": "nooyi",
     "size": [6801, 10000],
     "links": [
       "http://www.globalexchange.org/corporateHRviolators#PepsiCo",
@@ -549,7 +562,8 @@ module.exports = [
       }
     ],
     "company": "Tyson Foods",
-    "id": "smith",
+    "id": "tyson",
+    "image": "smith",
     "size": [7265, 10000],
     "links": [
       "http://www.sourcewatch.org/index.php/Tyson_Foods",
@@ -597,7 +611,8 @@ module.exports = [
       }
     ],
     "company": "JP Morgan",
-    "id": "dimon",
+    "id": "jp-morgan",
+    "image": "dimon",
     "image": "dimon2",
     "size": [8344, 10000],
     "links": [
@@ -635,7 +650,8 @@ module.exports = [
       }
     ],
     "company": "Wells Fargo",
-    "id": "stumpf",
+    "id": "wells-fargo",
+    "image": "stumpf",
     "size": [8171, 10000],
     "links": [
       " http://oag.ca.gov/news/press-releases/brown-recovers-14-billion-wells-fargo-investors-landmark-settlement",
@@ -672,7 +688,8 @@ module.exports = [
       }
     ],
     "company": "BP Oil",
-    "id": "hayward",
+    "id": "bp-oil",
+    "image": "hayward",
     "size": [5953, 7728],
     "links": [
       "http://www.wsj.com/articles/SB10001424052748703339304575240210545113710",
@@ -725,7 +742,8 @@ module.exports = [
       }
     ],
     "company": "Pfizer",
-    "id": "read",
+    "id": "pfizer",
+    "image": "read",
     "size": [5857, 7596],
     "links": [
       "http://thedailyshow.cc.com/videos/qrq3eo/the-pharmaceutical-drug-epidemic",
@@ -772,7 +790,8 @@ module.exports = [
       }
     ],
     "company": "Monsanto",
-    "id": "grant",
+    "id": "monsanto",
+    "image": "grant",
     "size": [6738, 8502],
     "links": [
       "https://corporatewatch.org/company-profiles/monsanto-corporate-crimes",
@@ -815,7 +834,8 @@ module.exports = [
       }
     ],
     "company": "General Motors",
-    "id": "barra",
+    "id": "gm",
+    "image": "barra",
     "size": [5713, 7734],
     "links": [
       "http://www.nytimes.com/2014/07/16/business/documents-show-general-motors-kept-silent-on-fatal-crashes.html",
@@ -864,6 +884,7 @@ module.exports = [
     ],
     "company": "Koch Industries",
     "id": "koch",
+    "image": "koch",
     "size": [10000, 6364],
     "links": [
       "http://www.rollingstone.com/politics/news/inside-the-koch-brothers-toxic-empire-20140924",
@@ -899,7 +920,8 @@ module.exports = [
       }
     ],
     "company": "Duke Energy",
-    "id": "good",
+    "id": "duke-energy",
+    "image": "good",
     "size": [5537, 5940],
     "links": [
       "http://polluterwatch.com/duke-energy",
@@ -945,7 +967,8 @@ module.exports = [
       }
     ],
     "company": "Chevron",
-    "id": "watson",
+    "id": "chevron",
+    "image": "watson",
     "size": [6751, 8496],
     "links": [
       "http://www.nytimes.com/2008/09/11/washington/11royalty.html",
@@ -986,7 +1009,8 @@ module.exports = [
       }
     ],
     "company": "Bank of America",
-    "id": "moynihan",
+    "id": "bank-of-america",
+    "image": "moynihan",
     "size": [5983, 7338],
     "links": [
       " http://www.sfweekly.com/sanfrancisco/the-great-bank-thievery/Content?oid=2134873",
@@ -1032,7 +1056,8 @@ module.exports = [
       }
     ],
     "company": "Goldman Sachs",
-    "id": "blankfein",
+    "id": "goldman-sachs",
+    "image": "blankfein",
     "size": [7452, 10000],
     "links": [
       "http://www.rollingstone.com/politics/news/the-people-vs-goldman-sachs-20110511",
@@ -1069,7 +1094,8 @@ module.exports = [
       }
     ],
     "company": "JPay",
-    "id": "shapiro",
+    "id": "jpay",
+    "image": "shapiro",
     "size": [6953, 8760],
     "links": [
       "https://www.eff.org/deeplinks/2015/05/hidden-cost-jpays-prison-email-system",
@@ -1106,7 +1132,8 @@ module.exports = [
       }
     ],
     "company": "HSBC",
-    "id": "gulliver",
+    "id": "hsbc",
+    "image": "gulliver",
     "size": [5737, 7476],
     "links": [
       "http://www.justice.gov/opa/pr/hsbc-holdings-plc-and-hsbc-bank-usa-na-admit-anti-money-laundering-and-sanctions-violations",
@@ -1146,7 +1173,8 @@ module.exports = [
       }
     ],
     "company": "FIFA",
-    "id": "blatter",
+    "id": "fifa",
+    "image": "blatter",
     "size": [7945, 10000],
     "links": [
       "http://www.theguardian.com/world/2014/feb/13/fifa-labour-conditions-qatar-world-cup",
@@ -1187,7 +1215,8 @@ module.exports = [
       }
     ],
     "company": "Darden Restaurants",
-    "id": "otis",
+    "id": "darden",
+    "image": "otis",
     "size": [7302, 9878],
     "links": [
       "http://www.sourcewatch.org/index.php/Darden_Restaurants",
