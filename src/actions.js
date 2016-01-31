@@ -7,6 +7,8 @@ import throttle from './lib/throttle';
 import * as scroll from './lib/scroll';
 import * as history from './lib/history';
 import * as tracking from './lib/tracking';
+import {getThumbnailSize, getFullScreenSize, idFromPath, pieceById} from './ui/gallerylayout';
+import {trimPathEnd} from './lib/strings';
 
 export function init(path) {
   return mutatis({
@@ -155,36 +157,24 @@ export function navigate(get, actions, path) {
   return get().set('path', path);
 }*/
 
-import {getThumbnailSize, getFullScreenSize} from './ui/gallery';
-import data from './data';
-
 export function navigate(get, actions, path) {
-  const id = path.substring(1, path.length);
+  const id = idFromPath(path);
   const position = get('positions')[id];
   let scrolling = false;
-  let constraint = null;
   if (position && (id !== '')) {
     const browser = get('browser');
-    const piece = data.find(p => p.id === id);
+    const piece = pieceById(id);
     let fullScreenHeight = getFullScreenSize(piece, browser)[1];
     let top = position.top + getThumbnailSize(piece, browser)[1] / 2 - fullScreenHeight / 2;
     scroll.scrollTo(top, actions.scrollingDone);
     scrolling = true;
-    constraint = [top, top + fullScreenHeight * 2];
   } else if (id === 'about' || get('path') === '/about') {
     scroll.scrollTo(0, actions.scrollingDone);
     scrolling = true;
   }
   return get()
     .set('scrolling', scrolling)
-    .set('path', path)
-    .set('constraint', constraint);
-}
-
-function trimPathEnd(path) {
-  const bits = path.split('/');
-  if (bits.length === 2) return '/';
-  return bits.slice(0, bits.length - 1).join('/');
+    .set('path', path);
 }
 
 export function keyDown(get, actions, event) {

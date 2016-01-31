@@ -3,41 +3,14 @@ import {Block, ResetElement, InlineBlock} from 'stylistic-elements';
 import component from '../lib/component';
 import {track} from '../lib/behaviors';
 import {Column, ResponsiveColumn} from '../ui/layout';
-import {TextLink} from '../ui/core';
+import {TextLink, Link} from '../ui/core';
+import {Image} from '../ui/image';
 import {Text, LightCondensedText, PageHeading} from '../ui/type';
-
-function humanizeLink(link) {
-  return link.replace(/^https?:\/\/(www\.)?/, '');
-}
-
-export const Modal = component('Modal', ({children, ...props}) =>
-  <Block
-    position="fixed"
-    top={0}
-    left={0}
-    right={0}
-    bottom={0}
-    background="rgba(255, 255, 255, 0.95)"
-    zIndex={10}
-    {...props}>
-    <Block
-      maxWidth="80%"
-      paddingLeft={24}
-      paddingRight={24}
-      boxSizing="border-box"
-      position="absolute"
-      top="50%"
-      left="50%"
-      translateX="-50%"
-      translateY="-50%">
-      {children}
-    </Block>
-  </Block>
-);
+import {getSize} from '../ui/gallerylayout';
 
 export const Charges = component('Charges', ({get, charges, ...props}) =>
   <ResetElement tag="ul" listStyleType="none" {...props}>
-    {charges.reverse().map((c, i) =>
+    {charges.map((c, i) =>
       <ResetElement tag="li" key={i} marginTop={24}>
         <Text fontWeight="bold">{c.title || c}</Text>
         {c.description && <Text>{c.description}</Text>}
@@ -48,6 +21,17 @@ export const Charges = component('Charges', ({get, charges, ...props}) =>
 
 export const Piece = track(component('Piece', ({get, piece, ...props}) =>
   <Block {...props}>
+    <Link href="/">
+      <Image
+        src={`${piece.image || piece.id}.jpg`}
+        display="block"
+        width={getSize(piece, true, get('browser'))[0]}
+        height={getSize(piece, true, get('browser'))[1]}
+        translateX="-50%"
+        position="relative"
+        left="50%"
+      />
+    </Link>
     <Text textAlign="center" marginTop={12} marginBottom={48} fontStyle="italic">Materials: {piece.materials}.</Text>
     <ResponsiveColumn
       width="50%"
@@ -117,24 +101,5 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
         {piece.artistContact ? 'Contact Info' : 'Contact Link'}
       </TextLink>
     </Column>}
-    {get('path').split('/')[2] === 'references' && <Modal>
-      {piece.links.map((link, i) =>
-        <TextLink
-          key={i}
-          href={link}
-          display="block"
-          overflow="hidden"
-          position="relative"
-          textOverflow="ellipsis"
-          whiteSpace="nowrap"
-          paddingTop={12}
-          paddingBottom={12}
-          target="_blank">
-          {humanizeLink(link)}
-        </TextLink>)}
-    </Modal>}
-    {piece.artistContact && get('path').split('/')[2] === 'contact' && <Modal whiteSpace="pre">
-      {piece.artistContact}
-    </Modal>}
   </Block>
 ));

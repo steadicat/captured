@@ -1,7 +1,7 @@
 import React from 'react';
 import {Animate} from 'react-rebound';
 import {connect} from 'ducts';
-import {ResetElement, InlineBlock} from 'stylistic-elements';
+import {ResetElement, InlineBlock, Block} from 'stylistic-elements';
 import component from '../lib/component';
 import * as history from '../lib/history';
 import {hover} from '../lib/behaviors';
@@ -93,4 +93,30 @@ export const Close = component('Close', ({color = '#444', width = 46, height = 4
     <path d="M11.75,34.25 L34.25,11.75" />
     <path d="M11.75,11.75 L34.25,34.25" />
   </InlineBlock>
+);
+
+export const Modal = component('Modal', ({get, children, ...props}) =>
+  <Block
+    position="fixed"
+    top={0}
+    left={0}
+    right={0}
+    bottom={0}
+    background="rgba(255, 255, 255, 0.95)"
+    zIndex={10}
+    {...props}>
+    <Block
+      width={get('browser.mobile') ? '100%' : '80%'}
+      maxWidth={800}
+      paddingLeft={24}
+      paddingRight={24}
+      boxSizing="border-box"
+      position="absolute"
+      top="50%"
+      left="50%"
+      translateX="-50%"
+      translateY="-50%">
+      {children}
+    </Block>
+  </Block>
 );

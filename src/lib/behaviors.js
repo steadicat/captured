@@ -19,6 +19,11 @@ export function hover(Component) {
       this.setState({hovered: false});
     };
 
+    shouldComponentUpdate() {
+      if (this.props.animating === true) return false;
+      return true;
+    }
+
     render() {
       return (
         <Component
