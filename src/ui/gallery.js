@@ -77,7 +77,8 @@ function isExpanded(path) {
 }
 
 function trimPathEnd(path) {
-  const bits = path.split('/')
+  const bits = path.split('/');
+  if (bits.length === 2) return '/';
   return bits.slice(0, bits.length - 1).join('/');
 }
 
@@ -101,7 +102,7 @@ export const Gallery = component('Gallery', ({get}) =>
       </Column>)}
     <Animate opacity={isExpanded(get('path')) ? 1 : 0}>
       <Block
-        position="fixed"
+        position="absolute"
         top={0}
         left={0}
         right={0}

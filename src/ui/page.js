@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect, Root} from 'ducts';
-import {ResetElement} from 'stylistic-elements';
+import {Body} from '../ui/constrain';
 import config from '../../etc/config';
 import component from '../lib/component';
 import {Router} from '../ui/router';
@@ -104,11 +104,11 @@ export const Page = component('Page', ({$, store, children}) =>
       {/*<link rel="shortcut icon" href="" type="image/png" />*/}
       <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     </head>
-    <ResetElement tag="body">
+    <Body>
       {children}
       <script src={`${config.ASSETS_URL}${$('main')}`} />
       <InitScript />
-    </ResetElement>
+    </Body>
   </html>
 );
 

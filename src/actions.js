@@ -162,16 +162,23 @@ export function navigate(get, actions, path) {
   const id = path.substring(1, path.length);
   const position = get('positions')[id];
   let scrolling = false;
+  let constraint = null;
   if (position && (id !== '')) {
     const browser = get('browser');
     const piece = data.find(p => p.id === id);
-    scroll.scrollTo(position.top + getThumbnailSize(piece, browser)[1] / 2 - getFullScreenSize(piece, browser)[1] / 2, actions.scrollingDone);
+    let fullScreenHeight = getFullScreenSize(piece, browser)[1];
+    let top = position.top + getThumbnailSize(piece, browser)[1] / 2 - fullScreenHeight / 2;
+    scroll.scrollTo(top, actions.scrollingDone);
     scrolling = true;
+    constraint = [top, top + fullScreenHeight * 2];
   } else if (id === 'about' || get('path') === '/about') {
     scroll.scrollTo(0, actions.scrollingDone);
     scrolling = true;
   }
-  return get().set('scrolling', scrolling).set('path', path);
+  return get()
+    .set('scrolling', scrolling)
+    .set('path', path)
+    .set('constraint', constraint);
 }
 
 function trimPathEnd(path) {
