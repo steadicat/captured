@@ -2,20 +2,26 @@ import React from 'react';
 import component from '../lib/component';
 import {track} from '../lib/behaviors';
 import {Block, InlineBlock, Inline} from 'stylistic-elements';
-import {TextLink, Link} from '../ui/core';
+import {TextLink, Link, Close} from '../ui/core';
 import {Toolbar} from '../ui/toolbar';
 import {ResponsiveColumn} from '../ui/layout';
 import {DefaultFont, Text} from '../ui/type';
 import {SocialLinks} from '../ui/social';
+import {trimPathEnd} from '../lib/strings';
 
-const AboutSection = component('AboutSection', ({title, titleElement: TitleElement, subtitle, children, get, ...props}) =>
-  <Block marginTop={96 * 2} {...props}>
+const AboutSection = component('AboutSection', ({title, titleElement: TitleElement, subtitle, footnote, children, get, ...props}) =>
+  <Block minHeight="80vh" display="flex" flexDirection="column" justifyContent="center" alignItems="flex-start" paddingTop={48} paddingBottom={48} {...props}>
     {TitleElement && <TitleElement marginLeft={24} marginRight={24} height={60} marginBottom={48} />}
-    {/*<PageHeading fontSize={48} lineHeight={48} marginBottom={48} marginLeft={24} marginRight={24}>{title}</PageHeading>*/}
+    <Block tag="h2" display="none">{title}</Block>
     <Block>
       {children}
     </Block>
-    <Toolbar back />
+    {footnote &&
+      <Block textAlign={get('browser.mobile') ? 'left' : 'right'} marginTop={24}>
+        <AboutText fontSize={12} textAlign="left" display="inline-block" marginLeft={get('browser.mobile') ? null : '50%'} textIndent={-6} paddingLeft={24} paddingRight={24}>
+          <InlineBlock tag="sup" fontWeight="bold" width={6}>1</InlineBlock>{footnote}
+        </AboutText>
+      </Block>}
   </Block>
 );
 
@@ -28,8 +34,6 @@ export const AboutText = component('AboutText', props =>
 export const About = track(component('About', ({get, ...props}) =>
   <DefaultFont>
     <Block textAlign="center" paddingBottom={192}>
-      <Link href="/" display="block" marginTop={48} marginBottom={24}>
-      </Link>
       <InlineBlock
         textAlign="left"
         width={get('browser.mobile') ? null : '80%'}
@@ -57,7 +61,7 @@ export const About = track(component('About', ({get, ...props}) =>
             <AboutText fontStyle="italic" marginBottom={16}>– Jeff Greenspan & Andrew Tider (2016)</AboutText>
           </AboutColumn>
         </AboutSection>
-        <AboutSection title="Methodology" titleElement={MethodologyTitle}>
+        <AboutSection title="Methodology" titleElement={MethodologyTitle} footnote={`With the exception of BP Oil. Tony Hayward stepped down prior to this project’s start, but BP’s crimes were so destructive during his tenure that it was decided to include him. He is now the Chairman of Glencore, an equally dubious company.`}>
           <AboutColumn>
             <AboutText>
               Subjects were chosen based upon the leadership of companies with the longest and/or most egregious histories of crimes against the environment, economy, and society. The featured CEOs held their titles at the time the portraits were commissioned, though some have since stepped down.<Inline tag="sup" position="absolute" fontWeight="bold">1</Inline> &nbsp;{' '}In certain cases, a CEO was not in power when the highlighted crimes were committed, but were included because they either held other senior positions during the time in question, or did little to change corrupt business practices once assuming executive control.
@@ -69,11 +73,6 @@ export const About = track(component('About', ({get, ...props}) =>
             </AboutText>
           </AboutColumn>
         </AboutSection>
-        <Block textAlign={get('browser.mobile') ? 'left' : 'right'} marginTop={24}>
-          <AboutText fontSize={12} textAlign="left" display="inline-block" marginLeft={get('browser.mobile') ? null : '50%'} textIndent={-6} paddingLeft={24} paddingRight={24}>
-            <InlineBlock tag="sup" fontWeight="bold" width={6}>1</InlineBlock>With the exception of BP Oil. Tony Hayward stepped down prior to this project’s start, but BP’s crimes were so destructive during his tenure that it was decided to include him. He is now the Chairman of Glencore, an equally dubious company.
-          </AboutText>
-        </Block>
         <AboutSection title="Credits & Gratitude" titleElement={CreditsTitle}>
           <AboutColumn>
             <AboutText>
@@ -84,6 +83,16 @@ export const About = track(component('About', ({get, ...props}) =>
         </AboutSection>
       </InlineBlock>
       <SocialLinks marginTop={96} />
+      <Toolbar back />
+      <Link
+        href={trimPathEnd(get('path'))}
+        key="close"
+        position="fixed"
+        zIndex={11}
+        top={6}
+        left={6}>
+        <Close />
+      </Link>
     </Block>
   </DefaultFont>
 ));
