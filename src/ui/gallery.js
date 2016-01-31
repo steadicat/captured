@@ -118,7 +118,7 @@ export const Thumbnail = track(hover(component('Thumbnail', ({piece, x, y, get, 
     </Animate>
     <Block height={chinHeight(get('browser.height'))} fontSize={12} lineHeight={20} marginTop={12}>
       <Text fontWeight="bold">{piece.title} of {piece.company}</Text>
-      <Text>by {piece.artist}, <InlineBlock tag="span" whiteSpace="nowrap">prison ID #{piece.artistPrisonID}</InlineBlock></Text>
+      <Text>by {piece.artist}, <InlineBlock tag="span" whiteSpace="nowrap" verticalAlign="baseline">prison ID #{piece.artistPrisonID}</InlineBlock></Text>
       <Text fontStyle="italic">{piece.materials}</Text>
     </Block>
   </Link>

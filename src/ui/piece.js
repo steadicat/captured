@@ -66,7 +66,7 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
     <ResponsiveColumn textAlign="left" width="50%" paddingLeft={get('browser.mobile') ? 0 : 36}>
       <LightCondensedText fontSize={24} textTransform="uppercase">Captured by</LightCondensedText>
       <PageHeading marginTop={6}>
-        {piece.artist} {!get('browser.mobile') && <InlineBlock tag="span" whiteSpace="nowrap">(Prison ID #{piece.artistPrisonID})</InlineBlock>}
+        {piece.artist} {!get('browser.mobile') && <InlineBlock tag="span" whiteSpace="nowrap" verticalAlign="baseline">(Prison ID #{piece.artistPrisonID})</InlineBlock>}
       </PageHeading>
       <Text marginTop={6}>Serving {piece.artistSentence} for:</Text>
       <Charges
