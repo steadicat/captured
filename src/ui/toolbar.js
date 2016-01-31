@@ -50,12 +50,12 @@ export class Toolbar extends React.Component {
             lineHeight={12}
             display={hovered ? 'none' : null}>
             <CondensedText
-              fontSize={back ? 28 : 18}
+              fontSize={18}
               paddingLeft={16}
               paddingRight={16}
-              paddingTop={back ? 15 : 17}
+              paddingTop={17}
               paddingBottom={16}>
-              {back ? '‹' : 'About'}
+              {back ? 'Back' : 'About'}
             </CondensedText>
           </TextLink>
           {get('sold') < 1000 && <BuyButton

@@ -92,7 +92,7 @@ export const Footer = track(component('Footer', ({get, actions, ...props}) =>
         : 'Limited edition. All 1000 copies sold out.')
       : 'Limited edition of 1000 copies.'}
     </Text>
-    <Text marginTop={24} marginBottom={48} marginLeft="auto" marginRight="auto" maxWidth={600}>
+    <Text marginTop={24} marginBottom={48} marginLeft="auto" marginRight="auto" maxWidth={648} paddingLeft={24} paddingRight={24}>
       All profits go towards effors to elect
       {' '}
       <TextLink href="https://berniesanders.com/">Bernie Sanders</TextLink>
@@ -100,7 +100,12 @@ export const Footer = track(component('Footer', ({get, actions, ...props}) =>
       as&nbsp;president. One of the main pillars of his presidential campaign is to eliminate corporate control over government.
     </Text>
     <Block paddingBottom={96}>
-      <TextLink href="/about" display="inline-block" verticalAlign="top">
+      <TextLink
+        href="/about"
+        display="inline-block"
+        verticalAlign="top"
+        marginTop={12}
+        marginBottom={12}>
         <CondensedText
           tag="span"
           fontSize={18}
@@ -111,7 +116,7 @@ export const Footer = track(component('Footer', ({get, actions, ...props}) =>
           ABOUT THE PROJECT
         </CondensedText>
       </TextLink>
-      <SocialLinks marginLeft={24} verticalAlign="top" />
+      <SocialLinks marginTop={11} marginBottom={12} marginLeft={24} marginRight={24} verticalAlign="top" />
     </Block>
   </Block>
 ));
