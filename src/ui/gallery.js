@@ -120,6 +120,7 @@ export const Gallery = component('Gallery', ({get}) =>
           position="absolute"
           zIndex={4}
           opacity={0}
+          translateZ={0}
           top={get(`positions.${piece.id}.top`) + getThumbnailSize(piece, get('browser'))[1] / 2 + getFullScreenSize(piece, get('browser'))[1] / 2}
           left={getPieceMargin(get('browser.width'))}
           right={getPieceMargin(get('browser.width'))}
@@ -172,7 +173,8 @@ export const Thumbnail = track(hover(component('Thumbnail', ({piece, x, y, get, 
     <Animate
       scaleX={getScale(piece, current, hovered, get('browser'))}
       scaleY={getScale(piece, current, hovered, get('browser'))}
-      translateX={current ? (get('browser.width') / 2 - x) : 0}>
+      translateX={current ? (get('browser.width') / 2 - x) : 0}
+      translateZ={0}>
       {animating => <Image
         src={`${piece.image || piece.id}.jpg`}
         display="block"
@@ -187,7 +189,7 @@ export const Thumbnail = track(hover(component('Thumbnail', ({piece, x, y, get, 
         {...props}
       />}
     </Animate>
-    <Block height={chinHeight(get('browser.height'))} fontSize={12} lineHeight={20} marginTop={12}>
+    <Block translateZ={0} height={chinHeight(get('browser.height'))} fontSize={12} lineHeight={20} marginTop={12}>
       <Text fontWeight="bold">{piece.title} of {piece.company}</Text>
       <Text>by {piece.artist}, <InlineBlock tag="span" whiteSpace="nowrap">prison ID #{piece.artistPrisonID}</InlineBlock></Text>
       <Text fontStyle="italic">{piece.materials}</Text>
