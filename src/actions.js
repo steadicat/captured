@@ -124,12 +124,12 @@ export function navigate(get, actions, path) {
     let top = position.top + getThumbnailSize(piece, browser)[1] / 2 - fullScreenHeight / 2;
     scroll.scrollTo(top, actions.scrollingDone);
     scrolling = true;
-    actions.expandStarted();
+    actions.expandStarted(id);
   } else if (path === '/about' || get('path') === '/about') {
     scroll.scrollTo(0, actions.scrollingDone);
     scrolling = true;
   } else if (isExpanded(get('path')) && !isExpanded(path)) {
-    actions.expandStarted();
+    actions.expandStarted(idFromPath(get('path')));
   }
   return get()
     .set('scrolling', scrolling)
@@ -146,15 +146,15 @@ export function keyDown(get, actions, event) {
 
 let expandEndTimeout;
 
-export function expandStarted(get, actions) {
+export function expandStarted(get, actions, id) {
   clearTimeout(expandEndTimeout);
-  expandEndTimeout = setTimeout(actions.expandEnded, 800);
-  return get().set('expanding', true);
+  expandEndTimeout = setTimeout(actions.expandEnded, 600);
+  return get().set('expanding', id);
 }
 
 export function expandEnded(get, actions) {
   if (!get('expanding')) return;
-  return get().set('expanding', false);
+  return get().set('expanding', null);
 }
 
 export function stripeDialogRequested(get, actions) {

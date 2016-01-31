@@ -113,7 +113,7 @@ export const Thumbnail = track(hover(component('Thumbnail', ({piece, x, y, get, 
         width={getThumbnailSize(piece, get('browser'))[0]}
         height={getThumbnailSize(piece, get('browser'))[1]}
         position="relative"
-        zIndex={animating && get('expanding') ? 2 : 0}
+        zIndex={animating && (get('expanding') === piece.id) ? 2 : 0}
       />}
     </Animate>
     <Block height={chinHeight(get('browser.height'))} fontSize={12} lineHeight={20} marginTop={12}>
