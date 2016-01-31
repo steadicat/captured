@@ -24,7 +24,6 @@ export class Link extends React.Component {
       <ResetElement
         tag="a"
         cursor="pointer"
-        fontWeight="bold"
         onClick={this.onLinkClick}
         {...this.props}
       />

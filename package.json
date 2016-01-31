@@ -23,7 +23,7 @@
     "raf": "3.1.0",
     "react": "0.14.7",
     "react-dom": "0.14.7",
-    "react-rebound": "0.3.2",
+    "react-rebound": "0.4.1",
     "rebound": "0.0.13",
     "sha1": "1.1.1",
     "stylistic-elements": "0.2.4",

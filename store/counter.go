@@ -21,6 +21,7 @@ func getSoldCounter(c context.Context) int {
 	}
 
 	if err != memcache.ErrCacheMiss {
+		log.Infof(c, "[counter] Unexpected error")
 		web.LogError(c, err, "Error accessing counter in memcache")
 	} else {
 		log.Infof(c, "[counter] Cache miss")

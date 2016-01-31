@@ -91,7 +91,7 @@ export const Gallery = component('Gallery', ({get}) =>
   </Block>
 );
 
-export const Thumbnail = track(hover(component('Thumbnail', ({piece, x, y, get, current, hovered, ...props}) =>
+export const Thumbnail = track(hover(component('Thumbnail', ({piece, x, y, get, actions, current, hovered, ...props}) =>
   <Link
     href={current ? '/' : `/${piece.id}`}
     marginBottom={gutter(get('browser.width'))}
@@ -113,7 +113,7 @@ export const Thumbnail = track(hover(component('Thumbnail', ({piece, x, y, get, 
         width={getThumbnailSize(piece, get('browser'))[0]}
         height={getThumbnailSize(piece, get('browser'))[1]}
         position="relative"
-        zIndex={animating ? 2 : 0}
+        zIndex={animating && get('expanding') ? 2 : 0}
       />}
     </Animate>
     <Block height={chinHeight(get('browser.height'))} fontSize={12} lineHeight={20} marginTop={12}>

@@ -7,7 +7,7 @@ import throttle from './lib/throttle';
 import * as scroll from './lib/scroll';
 import * as history from './lib/history';
 import * as tracking from './lib/tracking';
-import {getThumbnailSize, getFullScreenSize, idFromPath, pieceById} from './ui/gallerylayout';
+import {getThumbnailSize, getFullScreenSize, idFromPath, pieceById, isExpanded} from './ui/gallerylayout';
 import {trimPathEnd} from './lib/strings';
 
 export function init(path) {
@@ -124,9 +124,12 @@ export function navigate(get, actions, path) {
     let top = position.top + getThumbnailSize(piece, browser)[1] / 2 - fullScreenHeight / 2;
     scroll.scrollTo(top, actions.scrollingDone);
     scrolling = true;
+    actions.expandStarted();
   } else if (path === '/about' || get('path') === '/about') {
     scroll.scrollTo(0, actions.scrollingDone);
     scrolling = true;
+  } else if (isExpanded(get('path')) && !isExpanded(path)) {
+    actions.expandStarted();
   }
   return get()
     .set('scrolling', scrolling)
@@ -139,6 +142,19 @@ export function keyDown(get, actions, event) {
     history.pushState(href);
     actions.navigate(href);
   }
+}
+
+let expandEndTimeout;
+
+export function expandStarted(get, actions) {
+  clearTimeout(expandEndTimeout);
+  expandEndTimeout = setTimeout(actions.expandEnded, 800);
+  return get().set('expanding', true);
+}
+
+export function expandEnded(get, actions) {
+  if (!get('expanding')) return;
+  return get().set('expanding', false);
 }
 
 export function stripeDialogRequested(get, actions) {

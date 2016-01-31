@@ -29,9 +29,8 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
         translateX="-50%"
         position="relative"
         left="50%"
-        opacity={1}
         display="block"
-        visibility={get('needsScroll') || get('scrolling') ? 'hidden' : 'visible'}
+        visibility={get('expanding') ? 'hidden' : 'visible'}
       />
     </Link>
     <Text textAlign="center" marginTop={12} marginBottom={48} fontStyle="italic">Materials: {piece.materials}.</Text>
@@ -60,8 +59,9 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
         display="block"
         marginBottom={48}
         marginTop={24}
-        fontWeight="bold"
-        textAlign="left">References</TextLink>}
+        textAlign="left">
+        References
+      </TextLink>}
     </ResponsiveColumn>
     <ResponsiveColumn textAlign="left" width="50%" paddingLeft={get('browser.mobile') ? 0 : 36}>
       <LightCondensedText fontSize={24} textTransform="uppercase">Captured by</LightCondensedText>
@@ -77,8 +77,8 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
       />
       {get('browser.mobile') && <TextLink
         href={piece.artistContact ? `/${piece.id}/contact` : piece.artistContactLink}
+        target={piece.artistContact ? null : '_blank'}
         display="block"
-        fontWeight="bold"
         marginTop={24}
         textAlign="left">
         {piece.artistContact ? 'Contact Info' : 'Contact Link'}
@@ -89,16 +89,13 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
       paddingRight={36}
       marginTop={24}
       textAlign={get('browser.mobile') ? 'left' : 'right'}>
-      <TextLink
-        href={`/${piece.id}/references`}
-        fontWeight="bold">
+      <TextLink href={`/${piece.id}/references`}>
         References
       </TextLink>
     </Column>}
     {!get('browser.mobile') && <Column textAlign="left" width="50%" marginTop={24} paddingLeft={36}>
       <TextLink
         href={piece.artistContact ? `/${piece.id}/contact` : piece.artistContactLink}
-        fontWeight="bold"
         textAlign="left">
         {piece.artistContact ? 'Contact Info' : 'Contact Link'}
       </TextLink>

@@ -38,7 +38,7 @@ buildassets:
 buildhtml:
 	NODE_ENV=production $(NODE) build.js
 
-deploy: clean images buildassets buildhtml
+deploy: clean buildassets buildhtml
 	goapp deploy
 
 .PHONY: deps clean devhtml devassets devapi dev lint images buildassets buildhtml deploy
