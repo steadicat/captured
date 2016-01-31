@@ -6,11 +6,16 @@ import {hover, track} from '../lib/behaviors';
 import {Link, TextLink, Close, Modal} from '../ui/core';
 import {Image} from '../ui/image';
 import {Column} from '../ui/layout';
-import {Text} from '../ui/type';
+import {Text, LightCondensedText} from '../ui/type';
 import {Piece} from '../ui/piece';
 import {margins, gutter, chinHeight, toColumns, columnWidth, isCurrent, isExpanded, getThumbnailSize, getPieceMargin, getScale, getCurrentPiece, isReferences, isContact} from '../ui/gallerylayout';
 import {trimPathEnd, humanizeLink} from '../lib/strings';
+import {linear} from '../lib/math';
 import data from '../data';
+
+function getPrefaceSize(get) {
+  return linear(320, 18, 2000, 56, Math.min(get('browser.width'), get('browser.height') * 1.4));
+}
 
 export const Gallery = component('Gallery', ({get}) =>
   <Block paddingLeft={margins(get('browser.width')) - gutter(get('browser.width')) / 2} textAlign="left">
@@ -69,7 +74,9 @@ export const Gallery = component('Gallery', ({get}) =>
         </TextLink>)}
     </Modal>}
     {isContact(get('path')) && <Modal whiteSpace="pre">
-      {getCurrentPiece(get('path')).artistContact}
+      <LightCondensedText lineHeight="2" fontSize={getPrefaceSize(get)}>
+        {getCurrentPiece(get('path')).artistContact}
+      </LightCondensedText>
     </Modal>}
     {data.filter(piece => isCurrent(get('path'), piece)).map(piece =>
       <Link

@@ -60,7 +60,6 @@ export function clientInit(get, actions) {
 
   actions.browserResize();
   window.addEventListener('resize', throttle(actions.browserResize));
-  //window.addEventListener('scroll', throttle(actions.browserScroll));
   history.onChange(actions.navigate);
   window.addEventListener('keydown', actions.keyDown);
   tracking.init();
@@ -78,39 +77,6 @@ export function browserResize(get, actions) {
     .set('browser.mobile', w < 740)
     .set('browser.width', w)
     .set('browser.height', window.innerHeight);
-}
-
-/*
-function getDistance({top, bottom}, point) {
-  return Math.abs((top + bottom) / 2 - point);
-}
-*/
-
-export function browserScroll(get, actions) {
-  return;
-  /*
-  if (get('scrolling')) return get().set('needsScroll', false);
-
-  // Find closest element on screen and navigate to it if necessary
-  let path = get('path');
-  const positions = get('positions');
-  const scrollCenter = scroll.getScroll() + get('browser.height') / 2;
-  const [closestKey] = Object.keys(positions).reduce(([closest, dist], key) => {
-    const newDist = getDistance(positions[key], scrollCenter);
-    return newDist < dist ? [key, newDist] : [closest, dist];
-  }, [null, Infinity]);
-  if (closestKey !== null) {
-    const p = closestKey.length ? `/${closestKey}` : '/';
-    if (p !== get('path')) {
-      history.replaceState(p);
-      path = p;
-    }
-  }
-
-  return get()
-    .set('path', path)
-    .set('needsScroll', false);
-  */
 }
 
 export function detectWebP(get, actions, supported) {
@@ -134,7 +100,7 @@ export function updateSold(get, actions, sold) {
 
 export function positionElement(get, actions, id, {top, bottom}) {
   let store = get();
-  if (get('needsScroll') && (get('path') === `/${id}/`)) {
+  if (get('needsScroll') && (idFromPath(get('path')) === id)) {
     scroll.scrollTo(top, actions.scrollingDone);
     store = store
       .set('scrolling', true)
@@ -147,16 +113,6 @@ export function scrollingDone(get, actions) {
   return get().set('scrolling', false);
 }
 
-/*
-export function navigate(get, actions, path) {
-  console.log('navigate', path);
-  const bits = path.split('/');
-  if (bits.length === 3 && bits[0] === '' && bits[1] === 'unlock' && sha1(bits[2]) === config.UNLOCK_KEY) {
-    actions.show();
-  }
-  return get().set('path', path);
-}*/
-
 export function navigate(get, actions, path) {
   const id = idFromPath(path);
   const position = get('positions')[id];
@@ -168,7 +124,7 @@ export function navigate(get, actions, path) {
     let top = position.top + getThumbnailSize(piece, browser)[1] / 2 - fullScreenHeight / 2;
     scroll.scrollTo(top, actions.scrollingDone);
     scrolling = true;
-  } else if (id === 'about' || get('path') === '/about') {
+  } else if (path === '/about' || get('path') === '/about') {
     scroll.scrollTo(0, actions.scrollingDone);
     scrolling = true;
   }

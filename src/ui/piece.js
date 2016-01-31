@@ -24,12 +24,14 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
     <Link href="/">
       <Image
         src={`${piece.image || piece.id}.jpg`}
-        display="block"
         width={getSize(piece, true, get('browser'))[0]}
         height={getSize(piece, true, get('browser'))[1]}
         translateX="-50%"
         position="relative"
         left="50%"
+        opacity={1}
+        display="block"
+        visibility={get('needsScroll') || get('scrolling') ? 'hidden' : 'visible'}
       />
     </Link>
     <Text textAlign="center" marginTop={12} marginBottom={48} fontStyle="italic">Materials: {piece.materials}.</Text>

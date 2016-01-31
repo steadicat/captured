@@ -28,11 +28,10 @@ export class Image extends React.Component {
     const {src, width, height, pxWidth, pxHeight, get, actions, ...props} = this.props;
     const url = `${config.IMAGES[src]}=${getImageOptions(get, pxWidth || width, pxHeight || height)}`;
     return (
-      <Animate opacity={this.state.loaded ? 1 : 0}>
+      <Animate opacity={this.props.opacity !== undefined ? this.props.opacity : (this.state.loaded ? 1 : 0)}>
         <InlineBlock
           tag="img"
           src={url}
-          opacity={0}
           onLoad={this.onLoad}
           translateZ={0}
           width={width}

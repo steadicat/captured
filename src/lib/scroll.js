@@ -2,7 +2,11 @@ import rebound from 'rebound';
 /* global window */
 
 const springSystem = new rebound.SpringSystem();
-const scrollSpring = springSystem.createSpring(60, 20);
+const scrollSpring = springSystem.createSpring(500, 50);
+scrollSpring
+  .setRestSpeedThreshold(2)
+  .setRestDisplacementThreshold(2);
+
 let lastSet = null;
 let scrollEventsFiredElsewhere = 0;
 
@@ -10,7 +14,7 @@ scrollSpring.addListener({
   onSpringUpdate: () => {
     const current = Math.round(scrollSpring.getCurrentValue());
     lastSet = current;
-    window.scrollTo(0, current);
+    window.scrollTo(0, Math.round(current));
   },
   onSpringAtRest: () => {
     callback && callback();
