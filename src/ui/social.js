@@ -74,8 +74,8 @@ export const SocialLink = hover(component('SocialLink', ({href, text, icon: Ico,
     whiteSpace="nowrap"
     paddingLeft={12}
     paddingRight={12}
-    paddingBottom={6}
-    paddingTop={6}
+    paddingBottom={12}
+    paddingTop={12}
     display="inline-block"
     {...props}>
     <Ico width={16} height={16} color={hovered ? 'rgb(230, 60, 34)' : '#000'} verticalAlign="middle" marginRight={8} />

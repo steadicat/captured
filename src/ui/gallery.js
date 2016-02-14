@@ -37,6 +37,7 @@ export const Gallery = component('Gallery', ({get}) =>
       </Column>)}
     <Animate opacity={isExpanded(get('path')) ? 1 : 0}>
       <Block
+        id="scroll"
         position="fixed"
         overflow="auto"
         top={0}

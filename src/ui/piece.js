@@ -1,13 +1,36 @@
 import React from 'react';
 import {Block, ResetElement, InlineBlock} from 'stylistic-elements';
+import {Animate} from 'react-rebound';
 import component from '../lib/component';
 import {track} from '../lib/behaviors';
 import {Column, ResponsiveColumn} from '../ui/layout';
-import {TextLink, Link} from '../ui/core';
+import {TextLink, Link, Arrow} from '../ui/core';
 import {Image} from '../ui/image';
-import {Text, LightCondensedText, PageHeading, CONDENSED} from '../ui/type';
+import {Text, CondensedText, LightCondensedText, PageHeading, SmallCaps, BoldSmallCaps} from '../ui/type';
 import {SocialButtons} from '../ui/social';
 import {getSize} from '../ui/gallerylayout';
+
+export const ReferencesLink = component('ReferencesLink', ({piece, ...props}) =>
+  <BoldSmallCaps>
+    <TextLink
+      href={`/${piece.id}/references`}
+      display="block"
+      {...props}>
+      References
+    </TextLink>
+  </BoldSmallCaps>
+);
+
+export const ContactLink = component('ReferencesLink', ({piece, ...props}) =>
+  <BoldSmallCaps>
+    <TextLink
+      href={piece.artistContact ? `/${piece.id}/contact` : piece.artistContactLink}
+      display="block"
+      {...props}>
+      {piece.artistContact ? 'Contact Info' : 'Contact Link'}
+    </TextLink>
+  </BoldSmallCaps>
+);
 
 export const Charges = component('Charges', ({get, charges, ...props}) =>
   <ResetElement tag="ul" listStyleType="none" {...props}>
@@ -20,7 +43,7 @@ export const Charges = component('Charges', ({get, charges, ...props}) =>
   </ResetElement>
 );
 
-export const Piece = track(component('Piece', ({get, piece, ...props}) =>
+export const Piece = track(component('Piece', ({get, actions, piece, ...props}) =>
   <Block {...props}>
     <Link href="/">
       <Image
@@ -36,7 +59,29 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
         visibility={get('expanding') ? 'hidden' : 'visible'}
       />
     </Link>
-    <Text textAlign="center" marginTop={12} marginBottom={48} fontStyle="italic">Materials: {piece.materials}.</Text>
+    <Animate opacity={get('seeCrimesShown') ? 1 : 0}>
+      <CondensedText
+        position="absolute"
+        cursor="pointer"
+        top={getSize(piece, true, get('browser'))[1] - 80}
+        left={0}
+        right={0}
+        color="#fff"
+        textAlign="center"
+        fontSize={18}
+        opacity={0}
+        onClick={actions.scrollToCrimes}>
+        See the Crimes
+        <Arrow display="block" marginTop={0} marginLeft="auto" marginRight="auto" />
+      </CondensedText>
+    </Animate>
+    <Text
+      textAlign="center"
+      marginTop={12}
+      marginBottom={48}
+      fontStyle="italic">
+      Materials: {piece.materials}.
+    </Text>
     <ResponsiveColumn
       width="50%"
       textAlign={get('browser.mobile') ? 'left' : 'right'}
@@ -44,7 +89,6 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
       borderRightStyle="solid"
       borderRightColor="#444"
       borderRightWidth={get('browser.mobile') ? 0 : 1}>
-      <SocialButtons display="block" textAlign="right" url={`https://thecapturedproject.com/${piece.id}`} />
       <LightCondensedText fontSize={24} textTransform="uppercase">
         {piece.title} of {piece.company}
       </LightCondensedText>
@@ -57,14 +101,7 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
         charges={piece.charges}
         marginTop={24}
       />
-      {get('browser.mobile') && <TextLink
-        href={`/${piece.id}/references`}
-        display="block"
-        marginBottom={48}
-        marginTop={24}
-        textAlign="left">
-        References
-      </TextLink>}
+      {get('browser.mobile') && <ReferencesLink piece={piece} marginTop={24} marginBottom={48} />}
     </ResponsiveColumn>
     <ResponsiveColumn textAlign="left" width="50%" paddingLeft={get('browser.mobile') ? 0 : 36}>
       <LightCondensedText fontSize={24} textTransform="uppercase">Captured by</LightCondensedText>
@@ -78,14 +115,7 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
         textAlign="left"
         marginTop={24}
       />
-      {get('browser.mobile') && <TextLink
-        href={piece.artistContact ? `/${piece.id}/contact` : piece.artistContactLink}
-        target={piece.artistContact ? null : '_blank'}
-        display="block"
-        marginTop={24}
-        textAlign="left">
-        {piece.artistContact ? 'Contact Info' : 'Contact Link'}
-      </TextLink>}
+      {get('browser.mobile') && <ContactLink piece={piece} marginTop={24} />}
     </ResponsiveColumn>
     {!get('browser.mobile') && <Column
       width="50%"
@@ -95,27 +125,10 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
       borderRightStyle="solid"
       borderRightColor="#444"
       borderRightWidth={1}>
-      <TextLink
-        href={`/${piece.id}/references`}
-        fontFamily={CONDENSED}
-        fontWeight={700}
-        textTransform="uppercase"
-        letterSpacing={1}
-        fontSize={12}>
-        References
-      </TextLink>
+      <ReferencesLink piece={piece} />
     </Column>}
     {!get('browser.mobile') && <Column textAlign="left" width="50%" paddingTop={36} paddingLeft={36}>
-      <TextLink
-        href={piece.artistContact ? `/${piece.id}/contact` : piece.artistContactLink}
-        textAlign="left"
-        fontFamily={CONDENSED}
-        fontWeight={700}
-        textTransform="uppercase"
-        letterSpacing={1}
-        fontSize={12}>
-        {piece.artistContact ? 'Contact Info' : 'Contact Link'}
-      </TextLink>
+      <ContactLink piece={piece} />
     </Column>}
   </Block>
 ));

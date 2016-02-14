@@ -3,8 +3,7 @@
   "plugins": ["transform-decorators-legacy"],
   "env": {
     "development": {
-      //"presets": ["react-hmre"],
-      "plugins": ["transform-react-inline-elements", "transform-react-constant-elements"]
+      "presets": ["react-hmre"]
     },
     "production": {
       "plugins": ["transform-react-inline-elements", "transform-react-constant-elements"]

@@ -3,7 +3,7 @@ import {connect} from 'ducts';
 import {Block, InlineBlock} from 'stylistic-elements';
 import {BuyButton} from '../ui/buy';
 import {TextLink, Link} from '../ui/core';
-import {CondensedText} from '../ui/type';
+import {CondensedText, SmallCaps} from '../ui/type';
 import {SocialButtons} from '../ui/social';
 import {Bernie} from '../ui/bernie';
 import {Animate} from 'react-rebound';
@@ -75,21 +75,22 @@ export class Toolbar extends React.Component {
               <Bernie height={16} />
             </Link>
           </InlineBlock>}
-          <Block
-            position="absolute"
-            right={0}
-            display={hovered ? 'none' : 'inline-block'}
-            fontSize={12}>
-            {!get('browser.mobile') && 'SHARE:'}
-            <SocialButtons
-              url="https://thecapturedproject.com/"
-              paddingRight={16}
-              paddingLeft={16}
-              paddingTop={9}
-              paddingBottom={12}
-              verticalAlign={2}
-            />
-          </Block>
+          <SmallCaps>
+            <Block
+              position="absolute"
+              right={0}
+              display={hovered ? 'none' : 'inline-block'}>
+              {!get('browser.mobile') && 'SHARE:'}
+              <SocialButtons
+                url="https://thecapturedproject.com/"
+                paddingRight={16}
+                paddingLeft={16}
+                paddingTop={9}
+                paddingBottom={12}
+                verticalAlign={2}
+              />
+            </Block>
+          </SmallCaps>
         </Block>
       </Animate>
     );

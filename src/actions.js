@@ -31,7 +31,7 @@ export function init(path) {
   });
 }
 
-/* global window, document, setInterval, setTimeout */
+/* global window, document, setInterval, setTimeout, clearTimeout */
 
 export function clientInit(get, actions) {
   webp.detectSupport(window.navigator.userAgent, actions.detectWebP);
@@ -63,6 +63,10 @@ export function clientInit(get, actions) {
   history.onChange(actions.navigate);
   window.addEventListener('keydown', actions.keyDown);
   tracking.init();
+
+  if (isExpanded(get('path')) && !get('seeCrimesClicked')) {
+    setTimeout(actions.showScrollToCrimes, 2000);
+  }
 
   return get()
     .set('shown', shown)
@@ -130,6 +134,7 @@ export function navigate(get, actions, path) {
     scrolling = true;
   } else if (isExpanded(get('path')) && !isExpanded(path)) {
     actions.expandStarted(idFromPath(get('path')));
+    actions.collapseStarted();
   }
   return get()
     .set('scrolling', scrolling)
@@ -145,16 +150,38 @@ export function keyDown(get, actions, event) {
 }
 
 let expandEndTimeout;
+let showCrimesTimeout;
 
 export function expandStarted(get, actions, id) {
   clearTimeout(expandEndTimeout);
+  clearTimeout(showCrimesTimeout);
   expandEndTimeout = setTimeout(actions.expandEnded, 600);
   return get().set('expanding', id);
 }
 
 export function expandEnded(get, actions) {
   if (!get('expanding')) return;
+  if (!get('seeCrimesClicked')) {
+    showCrimesTimeout = setTimeout(actions.showScrollToCrimes, 1500);
+  }
   return get().set('expanding', null);
+}
+
+export function collapseStarted(get, actions) {
+  return get().set('seeCrimesShown', false);
+}
+
+export function showScrollToCrimes(get, actions) {
+  return get().set('seeCrimesShown', true);
+}
+
+export function scrollToCrimes(get, actions) {
+  const piece = pieceById(idFromPath(get('path')));
+  let fullScreenHeight = getFullScreenSize(piece, get('browser'))[1];
+  scroll.scrollElementTo('scroll', fullScreenHeight + 48, actions.scrollingDone);
+  return get()
+    .set('seeCrimesShown', false)
+    .set('seeCrimesClicked', true);
 }
 
 export function stripeDialogRequested(get, actions) {

@@ -16,6 +16,26 @@ export const DefaultFont = component('DefaultFont', ({children, ...props}) =>
   })
 );
 
+export const SmallCaps = component('SmallCaps', ({children, ...props}) =>
+  React.cloneElement(React.Children.only(children), {
+    fontFamily: CONDENSED,
+    fontWeight: 300,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+    fontSize: '86%',
+  })
+);
+
+export const BoldSmallCaps = component('SmallCaps', ({children, ...props}) =>
+  React.cloneElement(React.Children.only(children), {
+    fontFamily: CONDENSED,
+    fontWeight: 700,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+    fontSize: '86%',
+  })
+);
+
 export const PageTitle = component('PageTitle', (props) =>
   <ResetElement
     tag="h1"

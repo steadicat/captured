@@ -94,7 +94,7 @@ export const Footer = track(component('Footer', ({get, actions, ...props}) =>
       : 'Limited edition of 1000 copies.'}
     </Text>
     <Text marginTop={24} marginBottom={48} marginLeft="auto" marginRight="auto" maxWidth={648} paddingLeft={24} paddingRight={24}>
-      All profits go towards effors to elect
+      All profits go towards efforts to elect
       {' '}
       <TextLink target="_blank" href="https://berniesanders.com/">Bernie Sanders</TextLink>
       {' '}
@@ -117,7 +117,7 @@ export const Footer = track(component('Footer', ({get, actions, ...props}) =>
           ABOUT THE PROJECT
         </CondensedText>
       </TextLink>
-      <SocialLinks marginTop={11} marginBottom={12} marginLeft={24} marginRight={24} verticalAlign="top" />
+      <SocialLinks marginTop={0} marginBottom={12} marginLeft={24} marginRight={24} verticalAlign="top" />
     </Block>
   </Block>
 ));
