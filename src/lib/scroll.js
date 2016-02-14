@@ -1,12 +1,16 @@
 import rebound from 'rebound';
-/* global document */
+/* global window, document */
 
 function getScroll(el) {
-  return el.scrollTop;
+  return el === window ? window.scrollY : el.scrollTop;
 }
 
 function setScroll(el, y) {
-  el.scrollTop = Math.round(y);
+  if (el === window) {
+    window.scrollTo(0, Math.round(y));
+  } else {
+    el.scrollTop = Math.round(y);
+  }
 }
 
 const springSystem = new rebound.SpringSystem();
@@ -51,8 +55,8 @@ function createSpring(element) {
 
 let documentScrollSpring;
 
-if (typeof document !== 'undefined') {
-  documentScrollSpring = createSpring(document.body);
+if (typeof window !== 'undefined') {
+  documentScrollSpring = createSpring(window);
 }
 
 export function scrollTo(y, cb, animated = true) {
@@ -61,7 +65,7 @@ export function scrollTo(y, cb, animated = true) {
     return;
   }
   documentScrollSpring.callback = cb;
-  documentScrollSpring.setCurrentValue(document.body.scrollTop);
+  documentScrollSpring.setCurrentValue(window.scrollY);
   documentScrollSpring.setEndValue(y);
 }
 
