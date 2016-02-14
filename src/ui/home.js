@@ -31,7 +31,12 @@ export const Header = track(component('Header', ({get, actions, ...props}) =>
       All profits go to <Link target="_blank" href="https://berniesanders.com/"><Bernie height={16} /></Link>
     </Block>}
     <Block height="calc(100vh - 46px)" position="relative">
-      <Block position="absolute" top="50%" left={0} right={0} translateY="-50%">
+      <Block
+        position="absolute"
+        top="50%"
+        left={0}
+        right={0}
+        translateY="-50%">
         <HeaderTitle width="80vw" />
         <HeaderSubtitle width="calc(100% - 48px)" maxWidth={600} marginTop={48} />
       </Block>
@@ -93,7 +98,14 @@ export const Footer = track(component('Footer', ({get, actions, ...props}) =>
         : 'Limited edition. All 1000 copies sold out.')
       : 'Limited edition of 1000 copies.'}
     </Text>
-    <Text marginTop={24} marginBottom={48} marginLeft="auto" marginRight="auto" maxWidth={648} paddingLeft={24} paddingRight={24}>
+    <Text
+      marginTop={24}
+      marginBottom={48}
+      marginLeft="auto"
+      marginRight="auto"
+      maxWidth={648}
+      paddingLeft={24}
+      paddingRight={24}>
       All profits go towards efforts to elect
       {' '}
       <TextLink target="_blank" href="https://berniesanders.com/">Bernie Sanders</TextLink>
@@ -117,7 +129,13 @@ export const Footer = track(component('Footer', ({get, actions, ...props}) =>
           ABOUT THE PROJECT
         </CondensedText>
       </TextLink>
-      <SocialLinks marginTop={0} marginBottom={12} marginLeft={24} marginRight={24} verticalAlign="top" />
+      <SocialLinks
+        marginTop={0}
+        marginBottom={12}
+        marginLeft={24}
+        marginRight={24}
+        verticalAlign="top"
+      />
     </Block>
   </Block>
 ));

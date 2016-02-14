@@ -78,7 +78,13 @@ export const SocialLink = hover(component('SocialLink', ({href, text, icon: Ico,
     paddingTop={12}
     display="inline-block"
     {...props}>
-    <Ico width={16} height={16} color={hovered ? 'rgb(230, 60, 34)' : '#000'} verticalAlign="middle" marginRight={8} />
+    <Ico
+      width={16}
+      height={16}
+      color={hovered ? 'rgb(230, 60, 34)' : '#000'}
+      verticalAlign="middle"
+      marginRight={8}
+    />
     <Inline color={hovered ? [230, 60, 34] : [0, 0, 0]}>{text}</Inline>
   </Link>
 ));

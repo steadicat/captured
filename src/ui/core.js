@@ -88,14 +88,26 @@ export const ListItem = component('ListItem', ({...props}) =>
 );
 
 export const Close = component('Close', ({color = '#444', width = 46, height = 46, ...props}) =>
-  <InlineBlock tag="svg" viewBox="0 0 46 46" stroke={color} width={width} height={height} {...props}>
+  <InlineBlock
+    tag="svg"
+    viewBox="0 0 46 46"
+    stroke={color}
+    width={width}
+    height={height}
+    {...props}>
     <path d="M11.75,34.25 L34.25,11.75" />
     <path d="M11.75,11.75 L34.25,34.25" />
   </InlineBlock>
 );
 
 export const Arrow = component('Arrow', ({color = '#fff', width = 46, height = 46, ...props}) =>
-  <InlineBlock tag="svg" viewBox="0 0 46 46" stroke={color} width={width} height={height} {...props}>
+  <InlineBlock
+    tag="svg"
+    viewBox="0 0 46 46"
+    stroke={color}
+    width={width}
+    height={height}
+    {...props}>
     <path d="M23,28 L34.25,16.75" />
     <path d="M11.75,16.75 L23,28" />
   </InlineBlock>

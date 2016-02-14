@@ -10,7 +10,15 @@ import {SocialLinks} from '../ui/social';
 import {trimPathEnd} from '../lib/strings';
 
 const AboutSection = component('AboutSection', ({title, titleElement: TitleElement, subtitle, footnote, children, get, ...props}) =>
-  <Block minHeight="80vh" display="flex" flexDirection="column" justifyContent="center" alignItems="flex-start" paddingTop={48} paddingBottom={48} {...props}>
+  <Block
+    minHeight="80vh"
+    display="flex"
+    flexDirection="column"
+    justifyContent="center"
+    alignItems="flex-start"
+    paddingTop={48}
+    paddingBottom={48}
+    {...props}>
     {TitleElement && <TitleElement marginLeft={24} marginRight={24} maxWidth="90%" marginBottom={48} />}
     <Block tag="h2" display="none">{title}</Block>
     <Block>
@@ -18,7 +26,14 @@ const AboutSection = component('AboutSection', ({title, titleElement: TitleEleme
     </Block>
     {footnote &&
       <Block textAlign={get('browser.mobile') ? 'left' : 'right'} marginTop={24}>
-        <AboutText fontSize={12} textAlign="left" display="inline-block" marginLeft={get('browser.mobile') ? null : '50%'} textIndent={-6} paddingLeft={24} paddingRight={24}>
+        <AboutText
+          fontSize={12}
+          textAlign="left"
+          display="inline-block"
+          marginLeft={get('browser.mobile') ? null : '50%'}
+          textIndent={-6}
+          paddingLeft={24}
+          paddingRight={24}>
           <InlineBlock tag="sup" fontWeight="bold" width={6}>1</InlineBlock>{footnote}
         </AboutText>
       </Block>}

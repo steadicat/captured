@@ -21,7 +21,7 @@
     "no-func-assign": 2,
     "no-lonely-if": 1,
     "no-loop-func": 1,
-    "no-nested-ternary": 1,
+    "no-nested-ternary": 0,
     "no-shadow": 1,
     "no-throw-literal": 2,
     "no-underscore-dangle": 1,
@@ -43,7 +43,7 @@
     "react/jsx-boolean-value": 2,
     "react/jsx-closing-bracket-location": [2, {
       "nonEmpty": "after-props",
-      "selfClosing": "tag-aligned",
+      "selfClosing": "line-aligned",
     }],
     "react/jsx-curly-spacing": 2,
     "react/jsx-indent-props": [2, 2],
