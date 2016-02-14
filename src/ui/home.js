@@ -3,7 +3,7 @@ import {Block} from 'stylistic-elements';
 import component from '../lib/component';
 import {track} from '../lib/behaviors';
 import {linear} from '../lib/math';
-import {TextLink} from '../ui/core';
+import {TextLink, Link} from '../ui/core';
 import {Image} from '../ui/image';
 import {DefaultFont, Text, CondensedText, LightCondensedText} from '../ui/type';
 import {SocialLinks} from '../ui/social';
@@ -23,11 +23,12 @@ export const Header = track(component('Header', ({get, actions, ...props}) =>
     <Block tag="h2" display="none">People in prison drawing people who should be</Block>
     {get('browser.mobile') && <Block
       position="absolute"
+      zIndex={1}
       top="70vh"
       left={0}
       right={0}
       textAlign="center">
-      All profits go to <Bernie height={16} />
+      All profits go to <Link target="_blank" href="https://berniesanders.com/"><Bernie height={16} /></Link>
     </Block>}
     <Block height="calc(100vh - 46px)" position="relative">
       <Block position="absolute" top="50%" left={0} right={0} translateY="-50%">
@@ -95,7 +96,7 @@ export const Footer = track(component('Footer', ({get, actions, ...props}) =>
     <Text marginTop={24} marginBottom={48} marginLeft="auto" marginRight="auto" maxWidth={648} paddingLeft={24} paddingRight={24}>
       All profits go towards effors to elect
       {' '}
-      <TextLink href="https://berniesanders.com/">Bernie Sanders</TextLink>
+      <TextLink target="_blank" href="https://berniesanders.com/">Bernie Sanders</TextLink>
       {' '}
       as&nbsp;president. One of the main pillars of his presidential campaign is to eliminate corporate control over government.
     </Text>

@@ -73,7 +73,7 @@ export const Gallery = component('Gallery', ({get}) =>
           {humanizeLink(link)}
         </TextLink>)}
     </Modal>}
-    {isContact(get('path')) && <Modal whiteSpace="pre">
+    {isContact(get('path')) && <Modal autoWidth whiteSpace="pre">
       <LightCondensedText lineHeight="2" fontSize={getPrefaceSize(get)}>
         {getCurrentPiece(get('path')).artistContact}
       </LightCondensedText>

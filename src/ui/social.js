@@ -28,9 +28,16 @@ export const TwitterIcon = component('TwitterIcon', props =>
   </Icon>
 );
 
+export const EmailIcon = component('EmailIcon', props =>
+  <Icon {...props}>
+   <path d="M3.73832909e-16,5.40424441 L3.73832909e-16,19.4962901 C3.73832909e-16,19.5741086 0.00574499128,19.6503908 0.0168278983,19.7247556 L6.94131753,11.6963618 C6.10650269,10.9569189 5.08958138,10.0427445 3.9058404,8.96961636 C3.83006433,8.9009133 3.83006433,8.9009133 3.75430776,8.8321974 C2.55505763,7.74428463 1.27961234,6.57897046 0.0102979587,5.4136984 C0.00686336271,5.41054533 0.0034307082,5.407394 1.61329283e-16,5.40424441 Z M0.636398405,3.27285604 C0.880268193,3.10093702 1.1782377,3 1.50130749,3 L22.4986925,3 C22.8221363,3 23.1216906,3.10073378 23.3667748,3.2735764 C23.1381467,3.48473696 22.8971023,3.70715508 22.6455479,3.93902943 C21.3863166,5.09974634 20.1209642,6.26042016 18.9316555,7.34342278 C18.8548857,7.41332251 18.8548857,7.41332251 18.7781017,7.48320282 C15.8712909,10.1283466 13.8420468,11.9181405 13.4678285,12.1533635 C12.6237778,12.6839096 11.4006606,12.71109 10.5859502,12.1679497 C10.148437,11.8762743 8.14514193,10.1132682 5.2491286,7.48786847 C5.17360118,7.41939085 5.17360118,7.41939085 5.09808726,7.35089504 C3.90210177,6.26594384 2.62945821,5.10318947 1.36284044,3.94039299 C1.10945504,3.70777691 0.866665478,3.48466056 0.636398405,3.27285604 Z M24,5.41058017 L24,19.4544111 L17.2144474,11.5871038 C18.0221039,10.8682261 18.9951347,9.98982679 20.1241683,8.96242715 C20.2012119,8.89231066 20.2012119,8.89231066 20.2782347,8.82218049 C21.470538,7.73645099 22.73837,6.57350493 24,5.41058017 Z M15.7102438,12.9052918 L22.6824199,20.9889743 C22.6222474,20.9962534 22.5609358,21 22.4986925,21 L1.55807043,21 L8.44909788,13.010403 C8.94014684,13.4276734 9.28595591,13.7049877 9.4765498,13.8320503 C10.9713152,14.8285606 13.0432706,14.7825171 14.5321715,13.8466365 C14.7323976,13.7207802 15.1285793,13.4030792 15.7102438,12.9052918 Z" />
+  </Icon>
+);
+
 export const FacebookButton = hover(component('FacebookButton', ({url, hovered, ...props}) =>
   <InlineBlock
     tag="a"
+    target="_blank"
     href={`https://www.facebook.com/sharer/sharer.php?url=${encodeURIComponent(url)}`}
     {...props}>
     <Animate scaleX={hovered ? 1.1 : 1} scaleY={hovered ? 1.1 : 1}>
@@ -44,6 +51,7 @@ const tweetText = 'People in prison drawing people who should be. @projectcaptur
 export const TwitterButton = hover(component('TwitterButton', ({url, hovered, ...props}) =>
   <InlineBlock
     tag="a"
+    target="_blank"
     href={`https://twitter.com/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(tweetText)}`}
     {...props}>
     <Animate scaleX={hovered ? 1.1 : 1} scaleY={hovered ? 1.1 : 1}>
@@ -60,17 +68,26 @@ export const SocialButtons = component('SocialButtons', ({url, ...props}) =>
 );
 
 export const SocialLink = hover(component('SocialLink', ({href, text, icon: Ico, hovered, ...props}) =>
-  <Link href={href} {...props}>
-    <Ico width={16} height={16} color={hovered ? 'rgb(230, 60, 34)' : '#000'} verticalAlign="middle" />
-    {' '}
+  <Link
+    href={href}
+    target="_blank"
+    whiteSpace="nowrap"
+    paddingLeft={12}
+    paddingRight={12}
+    paddingBottom={6}
+    paddingTop={6}
+    display="inline-block"
+    {...props}>
+    <Ico width={16} height={16} color={hovered ? 'rgb(230, 60, 34)' : '#000'} verticalAlign="middle" marginRight={8} />
     <Inline color={hovered ? [230, 60, 34] : [0, 0, 0]}>{text}</Inline>
   </Link>
 ));
 
 export const SocialLinks = component('SocialLinks', ({url, hovered, ...props}) =>
   <InlineBlock {...props}>
-    <SocialLink text="capturedproject" href="https://www.facebook.com/capturedproject" icon={FacebookIcon} marginRight={24} />
+    <SocialLink text="capturedproject" href="https://www.facebook.com/capturedproject" icon={FacebookIcon} />
     <SocialLink text="@projectcaptured" href="https://www.twitter.com/projectcaptured" icon={TwitterIcon} />
+    <SocialLink text="info@thecapturedproject.com" href="mailto:info@thecapturedproject.com" icon={EmailIcon} />
   </InlineBlock>
 );
 

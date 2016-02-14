@@ -94,7 +94,7 @@ export const Close = component('Close', ({color = '#444', width = 46, height = 4
   </InlineBlock>
 );
 
-export const Modal = component('Modal', ({get, children, ...props}) =>
+export const Modal = component('Modal', ({get, autoWidth = false, children, ...props}) =>
   <Block
     position="fixed"
     top={0}
@@ -105,7 +105,7 @@ export const Modal = component('Modal', ({get, children, ...props}) =>
     zIndex={10}
     {...props}>
     <Block
-      width={get('browser.mobile') ? '100%' : '80%'}
+      width={autoWidth ? null : (get('browser.mobile') ? '100%' : '80%')}
       maxWidth={800}
       paddingLeft={24}
       paddingRight={24}

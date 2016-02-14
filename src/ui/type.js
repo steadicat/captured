@@ -2,8 +2,8 @@ import React from 'react';
 import {ResetElement} from 'stylistic-elements';
 import component from '../lib/component';
 
-const REGULAR = 'roboto, sans-serif';
-const CONDENSED = '"roboto condensed", sans-serif';
+export const REGULAR = 'roboto, sans-serif';
+export const CONDENSED = '"roboto condensed", sans-serif';
 
 export const DefaultFont = component('DefaultFont', ({children, ...props}) =>
   React.cloneElement(React.Children.only(children), {

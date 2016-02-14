@@ -5,7 +5,8 @@ import {track} from '../lib/behaviors';
 import {Column, ResponsiveColumn} from '../ui/layout';
 import {TextLink, Link} from '../ui/core';
 import {Image} from '../ui/image';
-import {Text, LightCondensedText, PageHeading} from '../ui/type';
+import {Text, LightCondensedText, PageHeading, CONDENSED} from '../ui/type';
+import {SocialButtons} from '../ui/social';
 import {getSize} from '../ui/gallerylayout';
 
 export const Charges = component('Charges', ({get, charges, ...props}) =>
@@ -43,7 +44,7 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
       borderRightStyle="solid"
       borderRightColor="#444"
       borderRightWidth={get('browser.mobile') ? 0 : 1}>
-      {/*<SocialButtons display="block" textAlign="right" url={`https://thecapturedproject.com/${piece.id}/`} />*/}
+      <SocialButtons display="block" textAlign="right" url={`https://thecapturedproject.com/${piece.id}`} />
       <LightCondensedText fontSize={24} textTransform="uppercase">
         {piece.title} of {piece.company}
       </LightCondensedText>
@@ -89,16 +90,30 @@ export const Piece = track(component('Piece', ({get, piece, ...props}) =>
     {!get('browser.mobile') && <Column
       width="50%"
       paddingRight={36}
-      marginTop={24}
-      textAlign={get('browser.mobile') ? 'left' : 'right'}>
-      <TextLink href={`/${piece.id}/references`}>
+      paddingTop={36}
+      textAlign="right"
+      borderRightStyle="solid"
+      borderRightColor="#444"
+      borderRightWidth={1}>
+      <TextLink
+        href={`/${piece.id}/references`}
+        fontFamily={CONDENSED}
+        fontWeight={700}
+        textTransform="uppercase"
+        letterSpacing={1}
+        fontSize={12}>
         References
       </TextLink>
     </Column>}
-    {!get('browser.mobile') && <Column textAlign="left" width="50%" marginTop={24} paddingLeft={36}>
+    {!get('browser.mobile') && <Column textAlign="left" width="50%" paddingTop={36} paddingLeft={36}>
       <TextLink
         href={piece.artistContact ? `/${piece.id}/contact` : piece.artistContactLink}
-        textAlign="left">
+        textAlign="left"
+        fontFamily={CONDENSED}
+        fontWeight={700}
+        textTransform="uppercase"
+        letterSpacing={1}
+        fontSize={12}>
         {piece.artistContact ? 'Contact Info' : 'Contact Link'}
       </TextLink>
     </Column>}
