@@ -40,6 +40,7 @@ export const Gallery = component('Gallery', ({get}) =>
         id="scroll"
         position="fixed"
         overflow="auto"
+        style={{WebkitOverflowScrolling: 'touch'}}
         top={0}
         left={0}
         right={0}

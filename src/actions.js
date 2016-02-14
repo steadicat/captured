@@ -59,7 +59,7 @@ export function clientInit(get, actions) {
   }
 
   actions.browserResize();
-  window.addEventListener('resize', throttle(actions.browserResize));
+  window.addEventListener(typeof window.orientation === 'undefined' ? 'resize' : 'orientationchange', throttle(actions.browserResize));
   history.onChange(actions.navigate);
   window.addEventListener('keydown', actions.keyDown);
   tracking.init();

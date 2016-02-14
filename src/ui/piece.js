@@ -6,8 +6,7 @@ import {track} from '../lib/behaviors';
 import {Column, ResponsiveColumn} from '../ui/layout';
 import {TextLink, Link, Arrow} from '../ui/core';
 import {Image} from '../ui/image';
-import {Text, CondensedText, LightCondensedText, PageHeading, SmallCaps, BoldSmallCaps} from '../ui/type';
-import {SocialButtons} from '../ui/social';
+import {Text, CondensedText, LightCondensedText, PageHeading, BoldSmallCaps} from '../ui/type';
 import {getSize} from '../ui/gallerylayout';
 
 export const ReferencesLink = component('ReferencesLink', ({piece, ...props}) =>
@@ -24,6 +23,7 @@ export const ReferencesLink = component('ReferencesLink', ({piece, ...props}) =>
 export const ContactLink = component('ReferencesLink', ({piece, ...props}) =>
   <BoldSmallCaps>
     <TextLink
+      target="_blank"
       href={piece.artistContact ? `/${piece.id}/contact` : piece.artistContactLink}
       display="block"
       {...props}>
