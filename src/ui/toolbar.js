@@ -62,7 +62,8 @@ export class Toolbar extends React.Component {
           {!get('browser.mobile') && <InlineBlock
             visibility={hovered ? 'hidden' : null}
             paddingTop={7}
-            paddingBottom={8}>
+            paddingBottom={8}
+            whiteSpace="nowrap">
             Support {' '}
             <Link target="_blank" href="https://berniesanders.com/">
               <Bernie height={16} />
@@ -73,7 +74,7 @@ export class Toolbar extends React.Component {
             onMouseEnter={this.onMouseEnter}
             onMouseLeave={this.onMouseLeave}
             hovered={this.state.hovered}
-            marginLeft={get('browser.mobile') ? 0 : 145}
+            marginRight={get('browser.mobile') ? 0 : 145}
             paddingLeft={16}
             paddingRight={16}
           />}

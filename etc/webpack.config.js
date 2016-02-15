@@ -40,5 +40,6 @@ module.exports = {
     }),
     !debug && new AssetsPlugin({path: './assets', filename: 'manifest.json'}),
     debug && new webpack.HotModuleReplacementPlugin(),
+    !debug && new webpack.optimize.DedupePlugin(),
   ].filter(function(x) { return !!x }),
 };

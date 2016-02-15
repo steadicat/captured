@@ -33,7 +33,7 @@ class InitScript extends React.Component {
 }
 
 function getTitle(path) {
-  return 'People in Prison Drawing People who Should Be';
+  return 'CAPTURED: People in Prison Drawing People who Should Be';
 }
 
 function getDescription(path) {
@@ -41,7 +41,7 @@ function getDescription(path) {
   if (piece) {
     return `${piece.title} of ${piece.company}. ${uppercaseFirst(piece.materials)} by ${piece.artist}, serving ${piece.artistSentence} for ${piece.artistCharges.map(lowercaseFirst).join(', ')}.`;
   } else {
-    return 'All book profits go to elect Bernie Sanders.';
+    return 'All book profits go to help elect Bernie Sanders.';
   }
 }
 
@@ -67,6 +67,13 @@ export const Page = component('Page', ({$, store, children}) =>
       <link rel="prefetch" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700|Roboto+Condensed:300,300italic,700" />
       <link rel="prefetch" href="https://checkout.stripe.com/checkout.js" />
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700|Roboto+Condensed:300,300italic,700" type="text/css" />
+      <link rel="prefetch" href="https://fonts.gstatic.com/s/robotocondensed/v13/b9QBgL0iMZfDSpmcXcE8nCqOJfobX9lrC1wFVe9k15E.woff2" />
+      <link rel="prefetch" href="https://fonts.gstatic.com/s/roboto/v15/Hgo13k-tfSpn0qi1SFdUfZBw1xU1rKptJj_0jans920.woff2" />
+      <link rel="prefetch" href="https://fonts.gstatic.com/s/roboto/v15/7m8l7TlFO-S3VkhHuR0at4gp9Q8gbYrhqGlRav_IXfk.woff2" />
+      <link rel="prefetch" href="https://fonts.gstatic.com/s/robotocondensed/v13/mg0cGfGRUERshzBlvqxeAL8HwCiP7DYII36AlQZXXQeglnMp3_3A8V8Ai8YosRtX.woff2" />
+      <link rel="prefetch" href="https://fonts.gstatic.com/s/roboto/v15/d-6IYplOFocCacKzxwXSOJBw1xU1rKptJj_0jans920.woff2" />
+      <link rel="prefetch" href="https://fonts.gstatic.com/s/robotocondensed/v13/b9QBgL0iMZfDSpmcXcE8nPX2or14QGUHgbhSBV1Go0E.woff2" />
+      <link rel="preconnect" href="https://lh3.googleusercontent.com" />
       <meta name="description" content={getDescription($('path'))} />
       <link rel="canonical" href={trailingSlash(`https://thecapturedproject.com${$('path')}`)} />
       <meta property="og:site_name" content="The Captured Project" />
