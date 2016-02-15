@@ -15,8 +15,8 @@ function setScroll(el, y) {
 
 const springSystem = new rebound.SpringSystem();
 
-function createSpring(element) {
-  const spring = springSystem.createSpring(500, 50);
+function createSpring(element, tension = 500, friction = 50) {
+  const spring = springSystem.createSpring(tension, friction);
   spring
     .setRestSpeedThreshold(2)
     .setRestDisplacementThreshold(2);
@@ -78,7 +78,7 @@ export function scrollElementTo(id, y, cb, animated = true) {
     return;
   }
   let spring = springs[id];
-  if (!springs[id]) spring = springs[id] = createSpring(element);
+  if (!springs[id]) spring = springs[id] = createSpring(element, 200);
   spring.callback = cb;
   spring.setCurrentValue(element.scrollTop);
   spring.setEndValue(y);

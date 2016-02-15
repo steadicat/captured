@@ -192,7 +192,12 @@ export function collapseEnded(get, actions) {
 }
 
 export function showScrollToCrimes(get, actions) {
-  return get().set('seeCrimesShown', true);
+  const amount = 200;
+  const delay = 200;
+  scroll.scrollElementTo('scroll', amount);
+  setTimeout(scroll.scrollElementTo.bind(scroll, 'scroll', 0), delay);
+  setTimeout(scroll.scrollElementTo.bind(scroll, 'scroll', amount), delay*2);
+  setTimeout(scroll.scrollElementTo.bind(scroll, 'scroll', 0), delay*3);
 }
 
 export function pieceScroll(get, actions) {
