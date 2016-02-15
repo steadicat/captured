@@ -64,8 +64,8 @@ export function clientInit(get, actions) {
   window.addEventListener('keydown', actions.keyDown);
   tracking.init();
 
-  if (isExpanded(get('path')) && !get('seeCrimesClicked')) {
-    setTimeout(actions.showScrollToCrimes, 2000);
+  if (isExpanded(get('path'))) {
+    actions.expandStarted(idFromPath(get('path')));
   }
 
   return get()
@@ -118,6 +118,7 @@ export function scrollingDone(get, actions) {
 }
 
 export function navigate(get, actions, path) {
+  const previousPath = get('path');
   const id = idFromPath(path);
   const position = get('positions')[id];
   let scrolling = false;
@@ -129,12 +130,11 @@ export function navigate(get, actions, path) {
     scroll.scrollTo(top, actions.scrollingDone);
     scrolling = true;
     actions.expandStarted(id);
-  } else if (path === '/about' || get('path') === '/about') {
+  } else if (path === '/about' || previousPath === '/about') {
     scroll.scrollTo(0, actions.scrollingDone);
     scrolling = true;
-  } else if (isExpanded(get('path')) && !isExpanded(path)) {
-    actions.expandStarted(idFromPath(get('path')));
-    actions.collapseStarted();
+  } else if (isExpanded(previousPath) && !isExpanded(path)) {
+    actions.collapseStarted(idFromPath(previousPath));
   }
   return get()
     .set('scrolling', scrolling)
@@ -163,16 +163,46 @@ export function expandEnded(get, actions) {
   if (!get('expanding')) return;
   if (!get('seeCrimesClicked')) {
     showCrimesTimeout = setTimeout(actions.showScrollToCrimes, 1500);
+    let scroll = document.getElementById('scroll');
+    if (scroll) {
+      scroll.addEventListener('scroll', actions.pieceScroll);
+    }
   }
   return get().set('expanding', null);
 }
 
-export function collapseStarted(get, actions) {
-  return get().set('seeCrimesShown', false);
+export function collapseStarted(get, actions, id) {
+  clearTimeout(expandEndTimeout);
+  clearTimeout(showCrimesTimeout);
+  expandEndTimeout = setTimeout(actions.collapseEnded, 600);
+  if (get('seeCrimesShown')) {
+    let scroll = document.getElementById('scroll');
+    if (scroll) {
+      scroll.removeEventListener('scroll', actions.pieceScroll);
+    }
+  }
+  return get()
+    .set('expanding', id)
+    .set('seeCrimesShown', false);
+}
+
+export function collapseEnded(get, actions) {
+  if (!get('expanding')) return;
+  return get().set('expanding', null);
 }
 
 export function showScrollToCrimes(get, actions) {
   return get().set('seeCrimesShown', true);
+}
+
+export function pieceScroll(get, actions) {
+  if (get('seeCrimesShown')) {
+    let scroll = document.getElementById('scroll');
+    if (scroll) {
+      scroll.removeEventListener('scroll', actions.pieceScroll);
+    }
+    return get().set('seeCrimesClicked', true).set('seeCrimesShown', false);
+  }
 }
 
 export function scrollToCrimes(get, actions) {

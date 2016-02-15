@@ -71,7 +71,7 @@ export const Piece = track(component('Piece', ({get, actions, piece, ...props}) 
         fontSize={18}
         opacity={0}
         onClick={actions.scrollToCrimes}>
-        See the Crimes
+        Scroll to see the crimes
         <Arrow display="block" marginTop={0} marginLeft="auto" marginRight="auto" />
       </CondensedText>
     </Animate>
