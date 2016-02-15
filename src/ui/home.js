@@ -24,7 +24,7 @@ export const Header = track(component('Header', ({get, actions, ...props}) =>
     {get('browser.mobile') && <Block
       position="absolute"
       zIndex={1}
-      top="70vh"
+      top="65vh"
       left={0}
       right={0}
       textAlign="center">
@@ -33,7 +33,7 @@ export const Header = track(component('Header', ({get, actions, ...props}) =>
     <Block height="calc(100vh - 46px)" position="relative">
       <Block
         position="absolute"
-        top="50%"
+        top={get('browser.mobile') ? '40%' : '50%'}
         left={0}
         right={0}
         translateY="-50%">

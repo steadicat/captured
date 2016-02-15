@@ -31,8 +31,8 @@ export const BuyButton = component('BuyButton', ({get, hovered, ...props}) =>
       fontSize={18}
       fontWeight="bold"
       verticalAlign="middle"
-      marginLeft={12}
-      paddingLeft={12}
+      marginLeft={get('browser.mobile') ? 4 : 12}
+      paddingLeft={get('browser.mobile') ? 4 : 12}
       borderLeftStyle="solid"
       borderLeftWidth={1}
       borderColor={hovered ? '#fff' : '#444'}>

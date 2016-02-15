@@ -82,7 +82,7 @@ export function scrollElementTo(id, y, cb, animated = true) {
     return;
   }
   let spring = springs[id];
-  if (!springs[id]) spring = springs[id] = createSpring(element, 200);
+  if (!springs[id]) spring = springs[id] = createSpring(element, 80, 20);
   spring.callback = cb;
   spring.setCurrentValue(element.scrollTop);
   spring.setEndValue(y);

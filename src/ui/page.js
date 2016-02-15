@@ -33,16 +33,11 @@ class InitScript extends React.Component {
 }
 
 function getTitle(path) {
-  return 'CAPTURED: People in Prison Drawing People who Should Be';
+  return 'CAPTURED: People in Prison Drawing People Who Should Be';
 }
 
 function getDescription(path) {
-  const piece = getCurrentPiece(path);
-  if (piece) {
-    return `${piece.title} of ${piece.company}. ${uppercaseFirst(piece.materials)} by ${piece.artist}, serving ${piece.artistSentence} for ${piece.artistCharges.map(lowercaseFirst).join(', ')}.`;
-  } else {
-    return 'All book profits go to help elect Bernie Sanders.';
-  }
+  return 'CEOs of the companies destroying our environment, economy, and society as drawn by incarcerated artists.';
 }
 
 function getImage(path) {
@@ -94,6 +89,9 @@ export const Page = component('Page', ({$, store, children}) =>
       <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
       {/*<link rel="shortcut icon" href="" type="image/png" />*/}
       <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+      <style>
+        {`@keyframes pulse {0% {transform: translate(0px,0px)}50% {transform: translate(0px,10px)}100% {transform: translate(0px,0px)}}`}
+      </style>
     </head>
     <Body>
       {children}

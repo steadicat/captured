@@ -74,7 +74,7 @@ export class Toolbar extends React.Component {
             onMouseEnter={this.onMouseEnter}
             onMouseLeave={this.onMouseLeave}
             hovered={this.state.hovered}
-            marginRight={get('browser.mobile') ? 0 : 145}
+            marginRight={get('browser.mobile') ? 0 : 100}
             paddingLeft={16}
             paddingRight={16}
           />}

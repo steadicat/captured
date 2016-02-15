@@ -1,5 +1,5 @@
 import React from 'react';
-import {Block, ResetElement, InlineBlock} from 'stylistic-elements';
+import {Block, ResetElement, InlineBlock, Inline} from 'stylistic-elements';
 import {Animate} from 'react-rebound';
 import component from '../lib/component';
 import {track} from '../lib/behaviors';
@@ -64,15 +64,27 @@ export const Piece = track(component('Piece', ({get, actions, piece, ...props}) 
         position="absolute"
         cursor="pointer"
         top={getSize(piece, true, get('browser'))[1] - 80}
-        left={0}
-        right={0}
+        left="50%"
+        translateX="-50%"
         color="#fff"
         textAlign="center"
         fontSize={18}
         opacity={0}
         onClick={actions.scrollToCrimes}>
-        Scroll to see the crimes
-        <Arrow display="block" marginTop={0} marginLeft="auto" marginRight="auto" />
+        <Image
+          src="shadow2.png"
+          width={634 / 2}
+          height={254 / 2}
+          position="absolute"
+          top="50%"
+          left="50%"
+          translateX="-50%"
+          translateY="-50%"
+        />
+        <Inline display="block" position="relative" whiteSpace="nowrap">
+          Scroll to see the crimes
+          <Arrow display="block" marginTop={0} marginLeft="auto" marginRight="auto" />
+        </Inline>
       </CondensedText>
     </Animate>
     <Text

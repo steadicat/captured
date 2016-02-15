@@ -162,7 +162,7 @@ export function expandStarted(get, actions, id) {
 export function expandEnded(get, actions) {
   if (!get('expanding')) return;
   if (!get('scrollPromptDismissed')) {
-    showCrimesTimeout = setTimeout(actions.showScrollPrompt, 1500);
+    showCrimesTimeout = setTimeout(actions.showScrollPrompt, 1000);
     enableScrollListener(get, actions);
   }
   return get().set('expanding', null);
@@ -199,13 +199,20 @@ export function collapseEnded(get, actions) {
 
 export function showScrollPrompt(get, actions) {
   if (get('scrollPromptDismissed')) return;
+  disableScrollListener(get, actions);
   const amount = 200;
-  const delay = 200;
+  const delay = 300;
   scroll.scrollElementTo('scroll', amount);
   setTimeout(scroll.scrollElementTo.bind(scroll, 'scroll', 0), delay);
   setTimeout(scroll.scrollElementTo.bind(scroll, 'scroll', amount), delay * 2);
-  setTimeout(scroll.scrollElementTo.bind(scroll, 'scroll', 0), delay * 3);
-  actions.cancelScrollPrompt()
+  setTimeout(scroll.scrollElementTo.bind(scroll, 'scroll', 0, enableScrollListener.bind(null, get, actions)), delay * 3);
+
+  showCrimesTimeout = setTimeout(actions.showScrollButton, delay * 10);
+}
+
+export function showScrollButton(get, actions) {
+  if (get('scrollPromptDismissed')) return;
+  return get().set('seeCrimesShown', true);
 }
 
 export function cancelScrollPrompt(get, actions) {
