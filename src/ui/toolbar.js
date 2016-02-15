@@ -42,6 +42,7 @@ export class Toolbar extends React.Component {
           backgroundColor={hovered ? [230, 60, 34] : [255, 255, 255]}
           borderColor={hovered ? [230, 60, 34] : '#444'}
           transformOrigin="50% 100%"
+          height={45}
           {...props}>
           <TextLink
             href={back ? '/' : '/about'}
@@ -58,6 +59,15 @@ export class Toolbar extends React.Component {
               {back ? 'Back' : 'About'}
             </CondensedText>
           </TextLink>
+          {!get('browser.mobile') && <InlineBlock
+            visibility={hovered ? 'hidden' : null}
+            paddingTop={7}
+            paddingBottom={8}>
+            Support {' '}
+            <Link target="_blank" href="https://berniesanders.com/">
+              <Bernie height={16} />
+            </Link>
+          </InlineBlock>}
           {get('sold') < 1000 && <BuyButton
             borderWidth={0}
             onMouseEnter={this.onMouseEnter}
@@ -67,14 +77,6 @@ export class Toolbar extends React.Component {
             paddingLeft={16}
             paddingRight={16}
           />}
-          {!get('browser.mobile') && <InlineBlock
-            visibility={hovered ? 'hidden' : null}
-            verticalAlign="baseline">
-            All profits go to {' '}
-            <Link target="_blank" href="https://berniesanders.com/">
-              <Bernie height={16} />
-            </Link>
-          </InlineBlock>}
           <SmallCaps>
             <Block
               position="absolute"

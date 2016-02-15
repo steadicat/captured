@@ -612,7 +612,6 @@ module.exports = [
     ],
     "company": "JP Morgan",
     "id": "jp-morgan",
-    "image": "dimon",
     "image": "dimon2",
     "size": [8344, 10000],
     "links": [

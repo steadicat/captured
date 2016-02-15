@@ -163,22 +163,22 @@ export function expandEnded(get, actions) {
   if (!get('expanding')) return;
   if (!get('scrollPromptDismissed')) {
     showCrimesTimeout = setTimeout(actions.showScrollPrompt, 1500);
-    disableScrollListener();
+    enableScrollListener(get, actions);
   }
   return get().set('expanding', null);
 }
 
-function enableScrollListener() {
-  let scroll = document.getElementById('scroll');
-  if (scroll) {
-    scroll.addEventListener('scroll', actions.cancelScrollPrompt);
+function enableScrollListener(get, actions) {
+  let el = document.getElementById('scroll');
+  if (el) {
+    el.addEventListener('scroll', actions.cancelScrollPrompt);
   }
 }
 
-function disableScrollListener() {
-  let scroll = document.getElementById('scroll');
-  if (scroll) {
-    scroll.removeEventListener('scroll', actions.cancelScrollPrompt);
+function disableScrollListener(get, actions) {
+  let el = document.getElementById('scroll');
+  if (el) {
+    el.removeEventListener('scroll', actions.cancelScrollPrompt);
   }
 }
 
@@ -186,7 +186,7 @@ export function collapseStarted(get, actions, id) {
   clearTimeout(expandEndTimeout);
   clearTimeout(showCrimesTimeout);
   expandEndTimeout = setTimeout(actions.collapseEnded, 600);
-  if (get('seeCrimesShown')) disableScrollListener();
+  if (get('seeCrimesShown')) disableScrollListener(get, actions);
   return get()
     .set('expanding', id)
     .set('seeCrimesShown', false);
@@ -203,13 +203,13 @@ export function showScrollPrompt(get, actions) {
   const delay = 200;
   scroll.scrollElementTo('scroll', amount);
   setTimeout(scroll.scrollElementTo.bind(scroll, 'scroll', 0), delay);
-  setTimeout(scroll.scrollElementTo.bind(scroll, 'scroll', amount), delay*2);
-  setTimeout(scroll.scrollElementTo.bind(scroll, 'scroll', 0), delay*3);
+  setTimeout(scroll.scrollElementTo.bind(scroll, 'scroll', amount), delay * 2);
+  setTimeout(scroll.scrollElementTo.bind(scroll, 'scroll', 0), delay * 3);
   actions.cancelScrollPrompt()
 }
 
 export function cancelScrollPrompt(get, actions) {
-  disableScrollListener();
+  disableScrollListener(get, actions);
   clearTimeout(showCrimesTimeout);
   return get()
     .set('scrollPromptDismissed', true)
