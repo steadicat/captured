@@ -1,8 +1,12 @@
 import rebound from 'rebound';
 /* global window, document */
 
+export function getWindowScrollY() {
+  return window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+}
+
 function getScroll(el) {
-  return el === window ? window.scrollY : el.scrollTop;
+  return el === window ? getWindowScrollY() : el.scrollTop;
 }
 
 function setScroll(el, y) {
@@ -65,7 +69,7 @@ export function scrollTo(y, cb, animated = true) {
     return;
   }
   documentScrollSpring.callback = cb;
-  documentScrollSpring.setCurrentValue(window.scrollY);
+  documentScrollSpring.setCurrentValue(getWindowScrollY());
   documentScrollSpring.setEndValue(y);
 }
 
