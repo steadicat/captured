@@ -2,6 +2,7 @@ package email
 
 import (
 	"config"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"github.com/stripe/stripe-go"
@@ -9,7 +10,9 @@ import (
 	"google.golang.org/appengine/log"
 	"google.golang.org/appengine/urlfetch"
 	"io/ioutil"
+	"mime"
 	"net/http"
+	"path/filepath"
 	"strings"
 	"time"
 )
@@ -31,6 +34,14 @@ type PostmarkMessage struct {
 	ReplyTo       string
 	Headers       []PostmarkMessageHeader
 	TrackOpens    bool
+	Attachments   []PostmarkAttachment
+}
+
+type PostmarkAttachment struct {
+	Name        string
+	Content     string
+	ContentType string
+	ContentID   string
 }
 
 func send(c context.Context, message *PostmarkMessage) error {
@@ -61,6 +72,27 @@ func send(c context.Context, message *PostmarkMessage) error {
 	return nil
 }
 
+func getAttachments(c context.Context) []PostmarkAttachment {
+	attachments := []PostmarkAttachment{}
+	path := "captured.png"
+
+	file, err := ioutil.ReadFile(path)
+	if err != nil {
+		log.Infof(c, "[error] Reading attachment file %s (%v)", path, err)
+		return nil
+	}
+
+	attachment := PostmarkAttachment{
+		Name:        path,
+		Content:     base64.StdEncoding.EncodeToString(file),
+		ContentType: mime.TypeByExtension(filepath.Ext(path)),
+		ContentID:   "cid:logo@thecapturedproject.com",
+	}
+
+	attachments = append(attachments, attachment)
+	return attachments
+}
+
 func SendReceipt(c context.Context, name string, email string, shipping stripe.Shipping) error {
 
 	message := PostmarkMessage{
@@ -74,6 +106,7 @@ func SendReceipt(c context.Context, name string, email string, shipping stripe.S
 			"shipping_name": shipping.Name,
 			"address":       shipping.Address,
 		},
+		Attachments: getAttachments(c),
 	}
 	return send(c, &message)
 }
@@ -91,6 +124,7 @@ func SendShippingNotification(c context.Context, name string, email string, ship
 			"address":         shipping.Address,
 			"tracking_number": trackingNumber,
 		},
+		Attachments: getAttachments(c),
 	}
 	return send(c, &message)
 }
