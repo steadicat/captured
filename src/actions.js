@@ -161,26 +161,32 @@ export function expandStarted(get, actions, id) {
 
 export function expandEnded(get, actions) {
   if (!get('expanding')) return;
-  if (!get('seeCrimesClicked')) {
-    showCrimesTimeout = setTimeout(actions.showScrollToCrimes, 1500);
-    let scroll = document.getElementById('scroll');
-    if (scroll) {
-      scroll.addEventListener('scroll', actions.pieceScroll);
-    }
+  if (!get('scrollPromptDismissed')) {
+    showCrimesTimeout = setTimeout(actions.showScrollPrompt, 1500);
+    disableScrollListener();
   }
   return get().set('expanding', null);
+}
+
+function enableScrollListener() {
+  let scroll = document.getElementById('scroll');
+  if (scroll) {
+    scroll.addEventListener('scroll', actions.cancelScrollPrompt);
+  }
+}
+
+function disableScrollListener() {
+  let scroll = document.getElementById('scroll');
+  if (scroll) {
+    scroll.removeEventListener('scroll', actions.cancelScrollPrompt);
+  }
 }
 
 export function collapseStarted(get, actions, id) {
   clearTimeout(expandEndTimeout);
   clearTimeout(showCrimesTimeout);
   expandEndTimeout = setTimeout(actions.collapseEnded, 600);
-  if (get('seeCrimesShown')) {
-    let scroll = document.getElementById('scroll');
-    if (scroll) {
-      scroll.removeEventListener('scroll', actions.pieceScroll);
-    }
-  }
+  if (get('seeCrimesShown')) disableScrollListener();
   return get()
     .set('expanding', id)
     .set('seeCrimesShown', false);
@@ -191,23 +197,23 @@ export function collapseEnded(get, actions) {
   return get().set('expanding', null);
 }
 
-export function showScrollToCrimes(get, actions) {
+export function showScrollPrompt(get, actions) {
+  if (get('scrollPromptDismissed')) return;
   const amount = 200;
   const delay = 200;
   scroll.scrollElementTo('scroll', amount);
   setTimeout(scroll.scrollElementTo.bind(scroll, 'scroll', 0), delay);
   setTimeout(scroll.scrollElementTo.bind(scroll, 'scroll', amount), delay*2);
   setTimeout(scroll.scrollElementTo.bind(scroll, 'scroll', 0), delay*3);
+  actions.cancelScrollPrompt()
 }
 
-export function pieceScroll(get, actions) {
-  if (get('seeCrimesShown')) {
-    let scroll = document.getElementById('scroll');
-    if (scroll) {
-      scroll.removeEventListener('scroll', actions.pieceScroll);
-    }
-    return get().set('seeCrimesClicked', true).set('seeCrimesShown', false);
-  }
+export function cancelScrollPrompt(get, actions) {
+  disableScrollListener();
+  clearTimeout(showCrimesTimeout);
+  return get()
+    .set('scrollPromptDismissed', true)
+    .set('seeCrimesShown', false);
 }
 
 export function scrollToCrimes(get, actions) {
@@ -216,7 +222,7 @@ export function scrollToCrimes(get, actions) {
   scroll.scrollElementTo('scroll', fullScreenHeight + 48, actions.scrollingDone);
   return get()
     .set('seeCrimesShown', false)
-    .set('seeCrimesClicked', true);
+    .set('scrollPromptDismissed', true);
 }
 
 export function stripeDialogRequested(get, actions) {
