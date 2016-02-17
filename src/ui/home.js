@@ -66,7 +66,7 @@ export const Header = track(component('Header', ({get, actions, ...props}) =>
           For over a year, we asked people in prison to paint or draw people we felt <em>should</em> be in prison–the CEOs of companies destroying our environment, economy,&nbsp;and&nbsp;society.
         </Text>
         <Text marginTop={16}>
-          Here are the results, shown with the crimes committed by both the companies and the&nbsp;artists.
+          Here are the results. Click on the images to see the crimes committed by both the companies and the&nbsp;artists.
         </Text>
         <Text marginTop={16}>
           We present this project to help expose crimes masquerading&nbsp;as&nbsp;commerce.
