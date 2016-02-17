@@ -59,25 +59,25 @@ export class Toolbar extends React.Component {
               {back ? 'Back' : 'About'}
             </CondensedText>
           </TextLink>
-          {!get('browser.mobile') && <InlineBlock
-            visibility={hovered ? 'hidden' : null}
-            paddingTop={7}
-            paddingBottom={8}
-            whiteSpace="nowrap">
-            Support {' '}
-            <Link target="_blank" href="https://berniesanders.com/">
-              <Bernie height={16} />
-            </Link>
-          </InlineBlock>}
           {get('sold') < 1000 && <BuyButton
             borderWidth={0}
             onMouseEnter={this.onMouseEnter}
             onMouseLeave={this.onMouseLeave}
             hovered={this.state.hovered}
-            marginRight={get('browser.mobile') ? 0 : 100}
+            marginLeft={get('browser.mobile') ? 0 : 200}
             paddingLeft={16}
             paddingRight={16}
           />}
+          {!get('browser.mobile') && <InlineBlock
+            visibility={hovered ? 'hidden' : null}
+            paddingTop={7}
+            paddingBottom={8}
+            whiteSpace="nowrap">
+            {get('browser.width') > 900 ? 'All profits go to help elect' : 'Help elect'} {' '}
+            <Link target="_blank" href="https://berniesanders.com/">
+              <Bernie height={16} />
+            </Link>
+          </InlineBlock>}
           <SmallCaps>
             <Block
               position="absolute"

@@ -18,7 +18,7 @@ devassets:
 	node assetserver.js
 
 devapi:
-	goapp serve
+	goapp serve --host=0.0.0.0
 
 dev:
 	make devassets & make devhtml & make devapi

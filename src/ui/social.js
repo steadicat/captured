@@ -46,7 +46,7 @@ export const FacebookButton = hover(component('FacebookButton', ({url, hovered, 
   </InlineBlock>
 ));
 
-const tweetText = 'People in prison drawing people who should be. @projectcaptured';
+const tweetText = 'People in prison drawing people who should be.';
 
 export const TwitterButton = hover(component('TwitterButton', ({url, hovered, ...props}) =>
   <InlineBlock

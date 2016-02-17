@@ -34,8 +34,8 @@ export class Pay extends React.Component {
         },
       }));
       handler.open({
-        name: 'Captured',
-        description: `Buy copy ${get('sold') + 1} of ${get('total')}. Free shipping. All profits go to efforts to support Bernie 2016.`,
+        name: 'Buy the Book',
+        description: `Free shipping. All profits go to efforts to support Bernie 2016.`,
         amount: get('price') * 100,
         allowRememberMe: false,
         shippingAddress: true,

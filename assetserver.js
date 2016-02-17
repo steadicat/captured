@@ -14,11 +14,11 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler));
 
-app.listen(config.ASSETS_PORT, 'localhost', function(err) {
+app.listen(config.ASSETS_PORT, '0.0.0.0', function(err) {
   if (err) {
     console.log(err);
     return;
   }
 
-  console.log('Listening at http://localhost:' + config.ASSETS_PORT);
+  console.log('Listening at http://0.0.0.0:' + config.ASSETS_PORT);
 });

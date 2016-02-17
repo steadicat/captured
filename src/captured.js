@@ -28,7 +28,11 @@ export function init(data) {
     }
 
   } catch (e) {
-    tracking.error(e);
+    if (process.env.NODE_ENV !== 'production') {
+      throw e;
+    } else {
+      tracking.error(e);
+    }
   }
 }
 

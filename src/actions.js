@@ -64,7 +64,7 @@ export function clientInit(get, actions) {
   window.addEventListener('keydown', actions.keyDown);
 
   if (isExpanded(get('path'))) {
-    showCrimesTimeout = setTimeout(actions.showScrollPrompt, 3000);
+    scrollPromptTimeout = setTimeout(actions.showScrollPrompt, 3000);
     enableScrollListener(get, actions);
   }
 
@@ -150,11 +150,11 @@ export function keyDown(get, actions, event) {
 }
 
 let expandEndTimeout;
-let showCrimesTimeout;
+let scrollPromptTimeout;
 
 export function expandStarted(get, actions, id) {
   clearTimeout(expandEndTimeout);
-  clearTimeout(showCrimesTimeout);
+  clearTimeout(scrollPromptTimeout);
   expandEndTimeout = setTimeout(actions.expandEnded, 600);
   return get().set('expanding', id);
 }
@@ -162,7 +162,7 @@ export function expandStarted(get, actions, id) {
 export function expandEnded(get, actions) {
   if (!get('expanding')) return;
   if (!get('scrollPromptDismissed')) {
-    showCrimesTimeout = setTimeout(actions.showScrollPrompt, 1000);
+    scrollPromptTimeout = setTimeout(actions.showScrollPrompt, 1000);
     enableScrollListener(get, actions);
   }
   return get().set('expanding', null);
@@ -184,7 +184,7 @@ function disableScrollListener(get, actions) {
 
 export function collapseStarted(get, actions, id) {
   clearTimeout(expandEndTimeout);
-  clearTimeout(showCrimesTimeout);
+  clearTimeout(scrollPromptTimeout);
   expandEndTimeout = setTimeout(actions.collapseEnded, 600);
   if (get('seeCrimesShown')) disableScrollListener(get, actions);
   return get()
@@ -194,29 +194,20 @@ export function collapseStarted(get, actions, id) {
 
 export function collapseEnded(get, actions) {
   if (!get('expanding')) return;
-  return get().set('expanding', null);
+  return get()
+    .set('expanding', null)
+    .set('scrollPromptDismissed', false);
 }
 
 export function showScrollPrompt(get, actions) {
   if (get('scrollPromptDismissed')) return;
-  disableScrollListener(get, actions);
-  const velocity = 2000;
-  const delay = 400;
-  scroll.setElementScrollVelocity('scroll', velocity);
-  setTimeout(scroll.setElementScrollVelocity.bind(scroll, 'scroll', velocity, () => {
-    setTimeout(enableScrollListener.bind(null, get, actions), 100);
-    setTimeout(actions.showScrollButton, 1000);
-  }), delay);
-}
-
-export function showScrollButton(get, actions) {
-  if (get('scrollPromptDismissed')) return;
+  enableScrollListener(get, actions);
   return get().set('seeCrimesShown', true);
 }
 
 export function cancelScrollPrompt(get, actions) {
   disableScrollListener(get, actions);
-  clearTimeout(showCrimesTimeout);
+  clearTimeout(scrollPromptTimeout);
   return get()
     .set('scrollPromptDismissed', true)
     .set('seeCrimesShown', false);

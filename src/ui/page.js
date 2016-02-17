@@ -44,7 +44,7 @@ function getImage(path) {
   if (piece) {
     return `${config.IMAGES[piece.image + '.jpg']}=w900-h900-c`;
   } else {
-    return `${config.IMAGES['book-orange.jpg']}=w900-h550-c`;
+    return `${config.IMAGES['share-image.jpg']}=w1052-h550-c`;
   }
 }
 
@@ -86,7 +86,9 @@ export const Page = component('Page', ({$, store, children}) =>
       <meta property="twitter:description" content={getDescription($('path'))} />
       <meta property="twitter:image:src" content={getImage($('path'))} />
       <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-      {/*<link rel="shortcut icon" href="" type="image/png" />*/}
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <link rel="shortcut icon" type="image/png" href={config.IMAGES['icon.png']} />
+      <link rel="apple-touch-icon" type="image/png" href={config.IMAGES['icon.png']} />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
       <style>
         {`@keyframes pulse {0% {transform: translate(0px,0px)}50% {transform: translate(0px,10px)}100% {transform: translate(0px,0px)}}`}

@@ -28,7 +28,7 @@ export const Header = track(component('Header', ({get, actions, ...props}) =>
       left={0}
       right={0}
       textAlign="center">
-      All profits go to efforts to support <Link target="_blank" href="https://berniesanders.com/"><Bernie height={16} /></Link>
+      All profits go to help elect <Link target="_blank" href="https://berniesanders.com/"><Bernie height={16} /></Link>
     </Block>}
     <Block height="calc(100vh - 46px)" position="relative">
       <Block
@@ -110,7 +110,7 @@ export const Footer = track(component('Footer', ({get, actions, ...props}) =>
       {' '}
       <TextLink target="_blank" href="https://berniesanders.com/">Bernie Sanders</TextLink>
       {' '}
-      as&nbsp;president. One of the main pillars of his presidential campaign is to eliminate corporate control over government.
+      as&nbsp;president. Among the pillars of his campaign are holding corporations responsible for their crimes and reforming the criminal justice system.
     </Text>
     <Block paddingBottom={96}>
       <TextLink
