@@ -36,16 +36,33 @@ function getTitle(path) {
 }
 
 function getDescription(path) {
-  return 'CEOs of the companies destroying our environment, economy, and society as drawn by incarcerated artists.';
+  return 'CEOs of the companies destroying our environment, economy, and society, as drawn by incarcerated artists.';
 }
 
 function getImage(path) {
   const piece = getCurrentPiece(path);
   if (piece) {
-    return `${config.IMAGES[piece.image + '.jpg']}=w900-h900-c`;
+    return `${config.IMAGES[piece.image + '.jpg']}=w1052-h1052-c`;
   } else {
     return `${config.IMAGES['share-image.jpg']}=w1052-h550-c`;
   }
+}
+
+function getOGImages(path) {
+  const piece = getCurrentPiece(path);
+  if (piece) {
+    return <meta property="og:image" content={`${config.IMAGES[piece.image + '.jpg']}=w1052-h1052-c`} />;
+  }
+
+  const images = [];
+
+  ['read.jpg', 'blatter.jpg', 'koch.jpg', 'brabeck-letmathe.jpg'].forEach((image, i) => {
+    images.push(<meta key={i} property="og:image" content={`${config.IMAGES[image]}=w1052-h1052-c`} />);
+  });
+
+  images.push(<meta key={-1} property="og:image" content={`${config.IMAGES['share-image.jpg']}=w2104-h1100-c`} />);
+
+  return images;
 }
 
 function trailingSlash(url) {
@@ -76,8 +93,7 @@ export const Page = component('Page', ({$, store, children}) =>
       <meta property="og:title" content={getTitle($('path'))} />
       <meta property="og:description" content={getDescription($('path'))} />
       <link rel="image_src" content={getImage($('path'))} />
-      <meta property="og:image" content={getImage($('path'))} />
-      <meta property="og:image:secure_url" content={getImage($('path'))} />
+      {getOGImages($('path'))}
       <meta property="og:image:type" content="image/jpg" />
       <meta property="fb:app_id" content="797107167075130" />
       <meta property="twitter:site" content="@ProjectCaptured" />

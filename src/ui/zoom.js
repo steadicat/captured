@@ -31,18 +31,17 @@ function getTouches(event) {
   return touches;
 }
 
-function getOrigin(scale, [w, h], [dx, dy], [x, y]) {
-  return [- dx * scale + x, - dy * scale + y];
-}
-
 @connect
 export class Zoom extends React.Component {
 
   constructor() {
     super();
-    this.delta = [0, 0];
-    this.state = {loaded: false, hover: null, zoom: 1};
+    this.state = {loaded: false, hover: null, zoom: 1, origin: null};
     this.previousTouches = [];
+  }
+
+  componentWillMount() {
+    this.setState({origin: [this.props.width / 2, this.props.height / 2]});
   }
 
   onMouseMove = (event) => {
@@ -52,7 +51,6 @@ export class Zoom extends React.Component {
   onMouseLeave = (event) => {
     this.setState({hover: null});
   };
-
 
   onTouchMove = (event) => {
     const touches = getTouches(event);
@@ -74,24 +72,18 @@ export class Zoom extends React.Component {
         this.props.actions.navigate(href);
         return;
       }
-      this.delta = [
-        this.delta[0] + m1[0] - m0[0],
-        this.delta[1] + m1[1] - m0[1],
-      ];
       this.setState({
         zoom,
-        origin: getOrigin(zoom, [this.props.width, this.props.height], this.delta, midPoint(m0, m1)),
+        origin: [
+          this.state.origin[0] - (m1[0] - m0[0]) * 2 / this.state.zoom,
+          this.state.origin[1] - (m1[1] - m0[1]) * 2 / this.state.zoom,
+        ],
       });
       event.preventDefault();
       this.previousTouches = touches;
     } else if (this.state.zoom > 1.2 && touches.length === 1) {
       const [a] = this.previousTouches;
       const [b] = touches;
-      this.delta = [
-        this.delta[0] + b[0] - a[0],
-        this.delta[1] + b[1] - a[1],
-      ];
-
       this.setState({
         origin: [
           this.state.origin[0] - (b[0] - a[0]) * 2 / this.state.zoom,
