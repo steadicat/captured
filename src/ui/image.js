@@ -22,6 +22,7 @@ export class Image extends React.Component {
 
   onLoad = () => {
     this.setState({loaded: true});
+    this.props.onLoad && this.props.onLoad()
   };
 
   render() {
@@ -32,12 +33,11 @@ export class Image extends React.Component {
         <InlineBlock
           tag="img"
           src={url}
-          onLoad={this.onLoad}
-          translateZ={0}
           width={width}
           height={height}
           opacity={this.props.opacity || 0}
           {...props}
+          onLoad={this.onLoad}
         />
       </Animate>
     );

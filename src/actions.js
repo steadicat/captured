@@ -6,7 +6,6 @@ import * as webp from './lib/webp';
 import throttle from './lib/throttle';
 import * as scroll from './lib/scroll';
 import * as history from './lib/history';
-import * as tracking from './lib/tracking';
 import {getThumbnailSize, getFullScreenSize, idFromPath, pieceById, isExpanded} from './ui/gallerylayout';
 import {trimPathEnd} from './lib/strings';
 
@@ -34,6 +33,7 @@ export function init(path) {
 /* global window, document, setInterval, setTimeout, clearTimeout */
 
 export function clientInit(get, actions) {
+
   webp.detectSupport(window.navigator.userAgent, actions.detectWebP);
 
   actions.requestSoldUpdate();
@@ -62,10 +62,10 @@ export function clientInit(get, actions) {
   window.addEventListener(typeof window.orientation === 'undefined' ? 'resize' : 'orientationchange', throttle(actions.browserResize));
   history.onChange(actions.navigate);
   window.addEventListener('keydown', actions.keyDown);
-  tracking.init();
 
   if (isExpanded(get('path'))) {
-    actions.expandStarted(idFromPath(get('path')));
+    showCrimesTimeout = setTimeout(actions.showScrollPrompt, 3000);
+    enableScrollListener(get, actions);
   }
 
   return get()
@@ -200,14 +200,13 @@ export function collapseEnded(get, actions) {
 export function showScrollPrompt(get, actions) {
   if (get('scrollPromptDismissed')) return;
   disableScrollListener(get, actions);
-  const amount = 200;
-  const delay = 300;
-  scroll.scrollElementTo('scroll', amount);
-  setTimeout(scroll.scrollElementTo.bind(scroll, 'scroll', 0), delay);
-  setTimeout(scroll.scrollElementTo.bind(scroll, 'scroll', amount), delay * 2);
-  setTimeout(scroll.scrollElementTo.bind(scroll, 'scroll', 0, enableScrollListener.bind(null, get, actions)), delay * 3);
-
-  showCrimesTimeout = setTimeout(actions.showScrollButton, delay * 10);
+  const velocity = 2000;
+  const delay = 400;
+  scroll.setElementScrollVelocity('scroll', velocity);
+  setTimeout(scroll.setElementScrollVelocity.bind(scroll, 'scroll', velocity, () => {
+    setTimeout(enableScrollListener.bind(null, get, actions), 100);
+    setTimeout(actions.showScrollButton, 1000);
+  }), delay);
 }
 
 export function showScrollButton(get, actions) {

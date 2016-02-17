@@ -38,7 +38,7 @@ export const FacebookButton = hover(component('FacebookButton', ({url, hovered, 
   <InlineBlock
     tag="a"
     target="_blank"
-    href={`https://www.facebook.com/sharer/sharer.php?url=${encodeURIComponent(url)}`}
+    href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`}
     {...props}>
     <Animate scaleX={hovered ? 1.1 : 1} scaleY={hovered ? 1.1 : 1}>
       <FacebookIcon width={24} height={24} color={hovered ? 'rgb(230, 60, 34)' : '#888'} />

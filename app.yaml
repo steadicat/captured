@@ -15,35 +15,40 @@ handlers:
   static_files: assets/\1
   upload: assets/.*\.js
   mime_type: text/javascript; charset=UTF-8
-  expiration: 1m
   secure: always
+  expiration: "30d"
 - url: /
   static_files: assets/index.html
   upload: assets/index.html
   mime_type: text/html; charset=UTF-8
   secure: always
+  expiration: "1m"
 - url: /orders/
   static_files: assets/orders/index.html
   upload: assets/orders/index\.html
   mime_type: text/html; charset=UTF-8
   secure: always
   login: admin
+  expiration: "1m"
 - url: /orders
   static_files: assets/orders/index.html
   upload: assets/orders/index\.html
   mime_type: text/html; charset=UTF-8
   secure: always
   login: admin
+  expiration: "1m"
 - url: /(.*)/
   static_files: assets/\1/index.html
   upload: assets/.*\.html
   mime_type: text/html; charset=UTF-8
   secure: always
+  expiration: "1m"
 - url: /(.*)
   static_files: assets/\1/index.html
   upload: assets/.*\.html
   mime_type: text/html; charset=UTF-8
   secure: always
+  expiration: "1m"
 
 error_handlers:
   - file: assets/error.html

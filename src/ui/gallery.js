@@ -8,7 +8,7 @@ import {Image} from '../ui/image';
 import {Column} from '../ui/layout';
 import {Text, LightCondensedText} from '../ui/type';
 import {Piece} from '../ui/piece';
-import {margins, gutter, chinHeight, toColumns, columnWidth, isCurrent, isExpanded, getThumbnailSize, getPieceMargin, getScale, getCurrentPiece, isReferences, isContact} from '../ui/gallerylayout';
+import {margins, gutter, chinHeight, toColumns, columnWidth, isCurrent, isExpanded, getThumbnailSize, getScale, getCurrentPiece, isReferences, isContact} from '../ui/gallerylayout';
 import {trimPathEnd, humanizeLink} from '../lib/strings';
 import {linear} from '../lib/math';
 import data from '../data';
@@ -53,8 +53,8 @@ export const Gallery = component('Gallery', ({get}) =>
           piece={getCurrentPiece(get('path'))}
           position="absolute"
           top={0}
-          left={getPieceMargin(get('browser.width'))}
-          right={getPieceMargin(get('browser.width'))}
+          left={0}
+          right={0}
           paddingBottom={96}
         />}
       </Block>

@@ -5,7 +5,6 @@ import config from '../../etc/config';
 import component from '../lib/component';
 import {Router} from '../ui/router';
 import {getCurrentPiece} from '../ui/gallerylayout';
-import {uppercaseFirst, lowercaseFirst} from '../lib/strings';
 
 export function createPage(get, boundActions) {
   return (

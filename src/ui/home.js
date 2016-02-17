@@ -33,7 +33,7 @@ export const Header = track(component('Header', ({get, actions, ...props}) =>
     <Block height="calc(100vh - 46px)" position="relative">
       <Block
         position="absolute"
-        top={get('browser.mobile') ? '40%' : '50%'}
+        top={get('browser.mobile') ? '45%' : '50%'}
         left={0}
         right={0}
         translateY="-50%">

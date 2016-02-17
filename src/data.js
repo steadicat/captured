@@ -809,7 +809,7 @@ module.exports = [
     "artistContactLink": "mailto:kyahsgrandmom@gmail.com",
     "artistPrison": "Montgomery County Correctional Facility, PA",
     "artistPrisonID": "143219",
-    "artistSentence": "'1-3 years (paroled mid-project)",
+    "artistSentence": "1-3 years (paroled mid-project)",
     "charges": [
       {
         "description": "After complaints and deaths related to ignition switches, they secretly approved a new switch design in 2006 without assigning a new part number or initiating a recall, eventually leading to over 100 more deaths",

@@ -109,6 +109,13 @@ export function getSize(piece, current, {width, height}) {
   return (current ? getFullScreenSize : getThumbnailSize)(piece, {width, height});
 }
 
+export function getOriginalSize(piece, {pixelRatio}) {
+  return [
+    Math.round(piece.size[0] / 4),
+    Math.round(piece.size[1] / 4),
+  ];
+}
+
 export function getScale(piece, current, hovered, {width, height}) {
   if (current) {
     const [fullScreenWidth] = getFullScreenSize(piece, {width, height});

@@ -24,6 +24,7 @@ export class Link extends React.Component {
       <ResetElement
         tag="a"
         cursor="pointer"
+        style={{WebkitTapHighlightColor: 'transparent'}}
         onClick={this.onLinkClick}
         {...this.props}
       />

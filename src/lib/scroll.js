@@ -75,15 +75,28 @@ export function scrollTo(y, cb, animated = true) {
 
 const springs = [];
 
-export function scrollElementTo(id, y, cb, animated = true) {
+function getElementSpring(id) {
   const element = document.getElementById(id);
   if (!element) {
     console.warn('Element to scroll not found');
-    return;
+    return null;
   }
   let spring = springs[id];
-  if (!springs[id]) spring = springs[id] = createSpring(element, 80, 20);
-  spring.callback = cb;
+  if (!springs[id]) spring = springs[id] = createSpring(element, 1, 5);
   spring.setCurrentValue(element.scrollTop);
+  return spring;
+}
+
+export function scrollElementTo(id, y, cb, animated = true) {
+  const spring = getElementSpring(id);
+  if (!spring) return;
+  spring.callback = cb;
   spring.setEndValue(y);
+}
+
+export function setElementScrollVelocity(id, dy, cb) {
+  const spring = getElementSpring(id);
+  if (!spring) return;
+  spring.callback = cb;
+  spring.setVelocity(dy);
 }
