@@ -34,7 +34,7 @@ const config = {
   API_URL: prod ? '/api' : 'http://stefano.local:8080/api',
   IMAGES_URL: prod ? '/api/images' : 'http://stefano.local:8080/api/images',
   STRIPE_KEY: 'pk_live_yYzi1T1jphRUyeL1xu9PwdVr',
-  UNLOCK_KEY: 'c75e155a857bac5bf33db59a2962192bd960be77',
+  //UNLOCK_KEY: 'c75e155a857bac5bf33db59a2962192bd960be77',
   IMAGES: getImages(),
 };
 

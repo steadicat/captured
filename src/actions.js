@@ -1,4 +1,4 @@
-import sha1 from 'sha1';
+//import sha1 from 'sha1';
 import mutatis from 'mutatis';
 import superagent from 'superagent';
 import config from '../etc/config';
@@ -41,9 +41,9 @@ export function clientInit(get, actions) {
 
   let shown = false;
 
-  /* TODO: remove unlock code */
+  /* TODO: remove unlock code
   if (window.localStorage) {
-    /* global localStorage */
+    // global localStorage
     const bits = get('path').split('/');
     if (bits.length === 3 && bits[0] === '' && bits[1] === 'unlock') {
       localStorage.setItem('unlock', bits[2]);
@@ -57,6 +57,7 @@ export function clientInit(get, actions) {
       }
     }
   }
+  */
 
   actions.browserResize();
   window.addEventListener(typeof window.orientation === 'undefined' ? 'resize' : 'orientationchange', throttle(actions.browserResize));

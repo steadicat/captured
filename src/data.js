@@ -346,7 +346,7 @@ module.exports = [
     "artistSentence": "14 years",
     "charges": [
       {
-        "description": "Contributed significantly to our national rise in Type-2 Diabetes (roughly 10% of Americans have the disease and it kills hundreds of thousands of Americans year year)",
+        "description": "Contributed significantly to our national rise in Type-2 Diabetes (roughly 10% of Americans have the disease and it kills hundreds of thousands of Americans year)",
         "title": "Gross negligence manslaughter"
       },
       {

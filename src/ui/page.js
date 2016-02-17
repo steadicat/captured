@@ -42,25 +42,25 @@ function getDescription(path) {
 function getImage(path) {
   const piece = getCurrentPiece(path);
   if (piece) {
-    return `${config.IMAGES[piece.image + '.jpg']}=w1052-h1052-c`;
+    return `${config.IMAGES[piece.image + '.jpg']}=w1200-h670-c`;
   } else {
-    return `${config.IMAGES['share-image.jpg']}=w1052-h550-c`;
+    return `${config.IMAGES['koch.jpg']}=w1200-h670-c`;
   }
 }
 
 function getOGImages(path) {
   const piece = getCurrentPiece(path);
   if (piece) {
-    return <meta property="og:image" content={`${config.IMAGES[piece.image + '.jpg']}=w1052-h1052-c`} />;
+    return <meta property="og:image" content={`${config.IMAGES[piece.image + '.jpg']}=w1200-h670-c`} />;
   }
 
   const images = [];
 
-  ['read.jpg', 'blatter.jpg', 'koch.jpg', 'brabeck-letmathe.jpg'].forEach((image, i) => {
-    images.push(<meta key={i} property="og:image" content={`${config.IMAGES[image]}=w1052-h1052-c`} />);
+  ['koch.jpg', 'read.jpg', 'blatter.jpg', 'brabeck-letmathe.jpg'].forEach((image, i) => {
+    images.push(<meta key={i} property="og:image" content={`${config.IMAGES[image]}=w1200-h670-c`} />);
   });
 
-  images.push(<meta key={-1} property="og:image" content={`${config.IMAGES['share-image.jpg']}=w2104-h1100-c`} />);
+  images.push(<meta key={-1} property="og:image" content={`${config.IMAGES['share-image.jpg']}=w1200`} />);
 
   return images;
 }
