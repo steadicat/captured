@@ -39,21 +39,12 @@ export const TextLink = hover(component('TextLink', ({hovered, ...props}) =>
   </Animate>
 ));
 
-export const Button = component('Button', (props) =>
-  <ResetElement
-    display="inline-block"
-    role="button"
-    cursor="pointer"
-    borderColor="#444"
-    borderStyle="solid"
-    borderWidth={1}
-    {...props}
-  />
-);
-
 export const MainButton = hover(component('MainButton', ({hovered, get, ...props}) =>
   <Animate scaleX={hovered ? 1.1 : 1} scaleY={hovered ? 1.1 : 1}>
-    <Button
+    <InlineBlock
+      role="button"
+      cursor="pointer"
+      display="inline-block"
       lineHeight={12}
       backgroundColor={hovered ? [230, 60, 34] : '#fff'}
       color={hovered ? '#fff' : null}

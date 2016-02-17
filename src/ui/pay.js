@@ -2,18 +2,17 @@ import React from 'react';
 import superagent from 'superagent';
 import {connect} from 'ducts';
 import * as script from '../lib/script';
-import {Block} from 'stylistic-elements';
-import {Button} from '../ui/core';
+import {Block, InlineBlock} from 'stylistic-elements';
 import config from '../../etc/config';
-
-if (typeof document !== 'undefined') {
-  script.load('https://checkout.stripe.com/checkout.js');
-}
 
 let handler;
 
 @connect
 export class Pay extends React.Component {
+
+  componentDidMount() {
+    script.load('https://checkout.stripe.com/checkout.js');
+  }
 
   onClick = (event) => {
     const {get, actions} = this.props;
@@ -48,7 +47,14 @@ export class Pay extends React.Component {
   render() {
     const {get, actions, children, ...props} = this.props;
     return (
-      <Button onClick={this.onClick} {...props}>
+      <InlineBlock
+        role="button"
+        cursor="pointer"
+        borderColor="#444"
+        borderStyle="solid"
+        borderWidth={1}
+        onClick={this.onClick}
+        {...props}>
         <Block visibility={get('stripeDialogRequested') && !get('stripeDialogShown') ? 'hidden' : null}>
           {children}
         </Block>
@@ -62,7 +68,7 @@ export class Pay extends React.Component {
           lineHeight={32}>
           ...
         </Block>}
-      </Button>
+      </InlineBlock>
     );
   }
 }

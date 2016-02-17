@@ -1,16 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'ducts';
-import {Block} from 'stylistic-elements';
+import {Block, InlineBlock} from 'stylistic-elements';
 import component from '../lib/component';
 import {DefaultFont, PageHeading, BoldText, Text, LightCondensedText} from '../ui/type';
 import {Column} from '../ui/layout';
-import {MainButton, Input, Button} from '../ui/core';
+import {MainButton, Input} from '../ui/core';
 
 const StatusSelector = component('StatusSelector', ({get, actions, status, ...props}) =>
-  <Button
+  <InlineBlock
+    role="button"
+    cursor="pointer"
     fontWeight="bold"
-    borderWidth={0}
     padding={6}
     color={get('orderStatus') === status ? [238, 85, 34] : '#000'}
     onClick={() => actions.selectOrders(status)}
