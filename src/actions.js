@@ -1,4 +1,3 @@
-//import sha1 from 'sha1';
 import mutatis from 'mutatis';
 import superagent from 'superagent';
 import config from '../etc/config';
@@ -40,24 +39,6 @@ export function clientInit(get, actions) {
   setInterval(actions.requestSoldUpdate, 30000);
 
   let shown = false;
-
-  /* TODO: remove unlock code
-  if (window.localStorage) {
-    // global localStorage
-    const bits = get('path').split('/');
-    if (bits.length === 3 && bits[0] === '' && bits[1] === 'unlock') {
-      localStorage.setItem('unlock', bits[2]);
-      if (bits[2] && sha1(bits[2]) === config.UNLOCK_KEY) {
-        shown = true;
-      }
-    } else {
-      const unlock = localStorage.getItem('unlock');
-      if (unlock && sha1(unlock) === config.UNLOCK_KEY) {
-        shown = true;
-      }
-    }
-  }
-  */
 
   actions.browserResize();
   window.addEventListener(typeof window.orientation === 'undefined' ? 'resize' : 'orientationchange', throttle(actions.browserResize));

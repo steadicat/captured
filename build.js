@@ -9,7 +9,6 @@ var ReactDOMServer = require('react-dom/server');
 var Page = require('./src/ui/page');
 var actions = require('./src/actions');
 var data = require('./src/data');
-var config = require('./etc/config');
 
 var paths = {
   '/': 'assets/index.html',
@@ -17,8 +16,6 @@ var paths = {
   '/about': 'assets/about/index.html',
   '/orders': 'assets/orders/index.html',
 };
-
-paths['/unlock/' + config.UNLOCK_CODE] = 'assets/unlock/' + config.UNLOCK_CODE + '/index.html';
 
 for (var i = 0, l = data.length; i < l; i++) {
   paths['/' + data[i].id] = 'assets/' + data[i].id + '/index.html';
