@@ -78,10 +78,11 @@ export function clientInit(get, actions) {
 
 export function browserResize(get, actions) {
   const w = document.body.clientWidth;
+  const h = Math.min(window.innerHeight, window.screen ? window.screen.height : Infinity);
   return get()
     .set('browser.mobile', w < 740)
     .set('browser.width', w)
-    .set('browser.height', window.innerHeight);
+    .set('browser.height', h);
 }
 
 export function detectWebP(get, actions, supported) {
