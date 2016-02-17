@@ -24,7 +24,7 @@ export const Header = track(component('Header', ({get, actions, ...props}) =>
     {get('browser.mobile') && <Block
       position="absolute"
       zIndex={1}
-      top="65vh"
+      top="72vh"
       left={0}
       right={0}
       textAlign="center">
@@ -33,7 +33,7 @@ export const Header = track(component('Header', ({get, actions, ...props}) =>
     <Block height="calc(100vh - 46px)" position="relative">
       <Block
         position="absolute"
-        top={get('browser.mobile') ? '45%' : '50%'}
+        top="45%"
         left={0}
         right={0}
         translateY="-50%">
@@ -53,15 +53,16 @@ export const Header = track(component('Header', ({get, actions, ...props}) =>
       fontSize={getPrefaceSize(get)}
       lineHeight="2"
       minHeight="calc(100vh - 46px)"
-      maxWidth={getPrefaceSize(get) * 26}
+      maxWidth={getPrefaceSize(get) * 26 + 48}
       marginLeft="auto"
       marginRight="auto"
-      paddingTop={48}
-      paddingBottom={48}
       paddingLeft={24}
       paddingRight={24}
-      boxSizing="border-box">
-      <Block tag="span" position="relative" top="calc(50vh - 23px - 48px)" translateY="-50%">
+      paddingTop={48}
+      paddingBottom={48}
+      boxSizing="border-box"
+      display="table">
+      <Block tag="span" display="table-cell" verticalAlign="middle">
         <Text>
           For over a year, we asked people in prison to paint or draw people we felt <em>should</em> be in prison–the CEOs of companies destroying our environment, economy,&nbsp;and&nbsp;society.
         </Text>
@@ -110,7 +111,7 @@ export const Footer = track(component('Footer', ({get, actions, ...props}) =>
       {' '}
       <TextLink target="_blank" href="https://berniesanders.com/">Bernie Sanders</TextLink>
       {' '}
-      as&nbsp;president. Among the pillars of his campaign are holding corporations responsible for their crimes and reforming the criminal justice system.
+      as&nbsp;president. Holding corporations responsible for their crimes and reforming the criminal justice system are pillars of his campaign.
     </Text>
     <Block paddingBottom={96}>
       <TextLink
