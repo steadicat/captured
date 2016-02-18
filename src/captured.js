@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 import mutatis from 'mutatis';
 import {createStore} from 'ducts';
 import * as actions from './actions';
-import {createPage, createBody} from './ui/page';
+import {createPage} from './ui/page';
 import * as tracking from './lib/tracking';
 
 export function init(data) {
@@ -15,12 +15,6 @@ export function init(data) {
       ReactDOM.render(createPage(get, boundActions), document);
     } catch (e) {
       tracking.error(new Error(`Full-page render failed (${e.message || e})`));
-
-      // Recover from failed full-page render
-      document.body.innerHTML = '';
-      const wrapper = document.createElement('div');
-      document.body.appendChild(wrapper);
-      ReactDOM.render(createBody(get, boundActions), wrapper);
     }
 
     boundActions.clientInit();
