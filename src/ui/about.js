@@ -11,13 +11,8 @@ import {trimPathEnd} from '../lib/strings';
 
 const AboutSection = component('AboutSection', ({title, titleElement: TitleElement, subtitle, footnote, children, get, ...props}) =>
   <Block
-    minHeight="80vh"
-    display="flex"
-    flexDirection="column"
-    justifyContent="center"
-    alignItems="flex-start"
-    paddingTop={48}
-    paddingBottom={48}
+    paddingTop="6vh"
+    paddingBottom="6vh"
     {...props}>
     {TitleElement && <TitleElement marginLeft={24} marginRight={24} maxWidth="90%" marginBottom={48} />}
     <Block tag="h2" display="none">{title}</Block>
