@@ -29,7 +29,7 @@ export const ContactLink = component('ReferencesLink', ({piece, ...props}) =>
       href={piece.artistContact ? `/${piece.id}/contact` : piece.artistContactLink}
       display="block"
       {...props}>
-      {piece.artistContact ? 'Contact Info' : 'Contact Link'}
+      Contact the Artist
     </TextLink>
   </BoldSmallCaps>
 );
