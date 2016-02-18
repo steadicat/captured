@@ -7,6 +7,7 @@ import * as scroll from './lib/scroll';
 import * as history from './lib/history';
 import {getThumbnailSize, getFullScreenSize, idFromPath, pieceById, isExpanded} from './ui/gallerylayout';
 import {trimPathEnd} from './lib/strings';
+import * as tracking from './lib/tracking';
 
 export function init(path) {
   return mutatis({
@@ -119,6 +120,7 @@ export function navigate(get, actions, path) {
   } else if (isExpanded(previousPath) && !isExpanded(path)) {
     actions.collapseStarted(idFromPath(previousPath));
   }
+  tracking.navigation();
   return get()
     .set('scrolling', scrolling)
     .set('path', path);

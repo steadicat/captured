@@ -26,11 +26,16 @@ export function init() {
   load('//www.google-analytics.com/analytics.js');
 }
 
+export function navigation() {
+  init();
+  ga('send', 'pageview');
+}
+
 export function error(e) {
-  if (!initialized) init();
+  init();
   /* global navigator */
-  ga('send', 'event', 'exception', (e.name || '') + ': ' + (e.message || e),  e.stack || (e.filename + ':' + e.lineno), {
-    nonInteraction: 1,
+  ga('send', 'event', 'exception', e.message || e, e.stack || (e.filename + ':' + e.lineno), {
+    nonInteraction: true,
     jsMain: config.JS_MAIN,
     ua: navigator.userAgent,
   });
