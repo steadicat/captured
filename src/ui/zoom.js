@@ -45,7 +45,14 @@ export class Zoom extends React.Component {
   }
 
   onMouseMove = (event) => {
-    this.setState({hover: [event.clientX, event.clientY]})
+    const bw = this.props.get('browser.width');
+    const w = this.props.width;
+    if ((event.clientX < (bw - w) / 2) ||
+        (event.clientX > bw - (bw - w) / 2)) {
+      this.setState({hover: null});
+    } else {
+      this.setState({hover: [event.clientX, event.clientY]})
+    }
   };
 
   onMouseLeave = (event) => {
@@ -129,7 +136,7 @@ export class Zoom extends React.Component {
           pxHeight: (hover && loaded) ? originalHeight : zoomPx(zoom, pxHeight, originalHeight),
           top: 0,
           left: hover ? 0 : '50%',
-          translateX: hover ? linear(0, 0, w, w - originalWidth, hover[0]) : (-width / 2),
+          translateX: hover ? linear((w - width) / 2, 0, w - (w - width) / 2, w - originalWidth, hover[0]) : (-width / 2),
           translateY: hover ? linear(0, 0, height, - originalHeight + height, hover[1]) : 0,
           translateZ: (zoom !== 1) ? null : 0,
           transformOrigin: origin ? origin.map(x => x + 'px').join(' ') : null,
