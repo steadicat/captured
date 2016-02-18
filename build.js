@@ -12,9 +12,10 @@ var data = require('./src/data');
 
 var paths = {
   '/': 'assets/index.html',
-  '/act': 'assets/act/index.html',
   '/about': 'assets/about/index.html',
   '/orders': 'assets/orders/index.html',
+  '/notfound': 'assets/notfound.html',
+  '/error': 'assets/error.html',
 };
 
 for (var i = 0, l = data.length; i < l; i++) {

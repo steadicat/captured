@@ -8,6 +8,9 @@ node_modules: package.json
 deps: node_modules
 	mkdir -p assets
 
+buildconfig:
+	node buildconfig.js
+
 clean:
 	rm -rf assets/*.js assets/**/*.html
 
@@ -17,7 +20,7 @@ devhtml:
 devassets:
 	node assetserver.js
 
-devapi:
+devapi: buildconfig
 	goapp serve --host=0.0.0.0
 
 dev:
@@ -38,7 +41,7 @@ buildassets:
 buildhtml:
 	NODE_ENV=production $(NODE) build.js
 
-deploy: buildassets buildhtml
+deploy: buildconfig buildassets buildhtml
 	goapp deploy
 
 .PHONY: deps clean devhtml devassets devapi dev lint images buildassets buildhtml deploy

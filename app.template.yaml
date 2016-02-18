@@ -1,0 +1,44 @@
+application: thecapturedproject
+version: 1
+runtime: go
+api_version: go1
+default_expiration: "1m"
+
+handlers:
+- url: /api/orders
+  script: _go_app
+  secure: always
+  login: admin
+- url: /api/.*
+  script: _go_app
+  secure: always
+- url: /captured-(.*)\.js
+  mime_type: text/javascript; charset=UTF-8
+  expiration: "30d"
+  static_files: assets/captured-\1.js
+  upload: assets/captured-(\.*)\.js
+  secure: always
+%STATIC%
+- url: /.*
+  static_files: assets/notfound.html
+  upload: assets/notfound\.html
+  mime_type: text/html; charset=UTF-8
+  secure: always
+
+error_handlers:
+- file: assets/error.html
+
+skip_files:
+- ^(.*/)?\..*$
+- ^src/.*$
+- ^etc/.*$
+- ^misc/.*$
+- '^[^/]*\.js$'
+- ^Makefile$
+- ^app.template.yaml$
+- ^node_modules/.*$
+- ^package\.json$
+- ^(.*/)?README\.md$
+- ^.*\.sublime-project$
+- ^.*\.sublime-workspace$
+
