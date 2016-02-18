@@ -16,7 +16,7 @@ handlers:
   mime_type: text/javascript; charset=UTF-8
   expiration: "30d"
   static_files: assets/captured-\1.js
-  upload: assets/captured-(\.*)\.js
+  upload: assets/captured-(.*)\.js
   secure: always
 %STATIC%
 - url: /.*
@@ -30,15 +30,15 @@ error_handlers:
 
 skip_files:
 - ^(.*/)?\..*$
+- ^Makefile$
+- ^package\.json$
+- ^node_modules/.*$
 - ^src/.*$
 - ^etc/.*$
 - ^misc/.*$
 - '^[^/]*\.js$'
-- ^Makefile$
-- ^app.template.yaml$
-- ^node_modules/.*$
-- ^package\.json$
-- ^(.*/)?README\.md$
+- '^[^/]*\.yaml$'
+- '^[^/]*\.md$'
 - ^.*\.sublime-project$
 - ^.*\.sublime-workspace$
 
