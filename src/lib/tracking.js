@@ -23,18 +23,20 @@ export function init() {
   ga('create', 'UA-1809956-7', 'auto');
   ga('send', 'pageview');
 
-  load('//www.google-analytics.com/analytics.js');
+  if (process.env.NODE_ENV === 'production') {
+    load('//www.google-analytics.com/analytics.js');
+  }
 }
 
-export function navigation() {
+export function navigation(path) {
   init();
-  ga('send', 'pageview');
+  window.ga('send', 'pageview', path);
 }
 
 export function error(e) {
   init();
   /* global navigator */
-  ga('send', 'event', 'exception', e.message || e, e.stack || (e.filename + ':' + e.lineno), {
+  window.ga('send', 'event', 'exception', e.message || e, e.stack || (e.filename + ':' + e.lineno), {
     nonInteraction: true,
     jsMain: config.JS_MAIN,
     ua: navigator.userAgent,

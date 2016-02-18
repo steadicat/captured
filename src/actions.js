@@ -120,7 +120,7 @@ export function navigate(get, actions, path) {
   } else if (isExpanded(previousPath) && !isExpanded(path)) {
     actions.collapseStarted(idFromPath(previousPath));
   }
-  tracking.navigation();
+  tracking.navigation(path);
   return get()
     .set('scrolling', scrolling)
     .set('path', path);
