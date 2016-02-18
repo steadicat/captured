@@ -118,8 +118,8 @@ export const Footer = track(component('Footer', ({get, actions, ...props}) =>
         href="/about"
         display="inline-block"
         verticalAlign="top"
-        marginTop={12}
-        marginBottom={12}>
+        marginTop={13}
+        marginBottom={13}>
         <CondensedText
           tag="span"
           fontSize={18}
