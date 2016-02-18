@@ -713,7 +713,7 @@ module.exports = [
     "charges": [
       {
         "description": "Poor people with AIDS suffer and die globally because they can\u2019t afford Fluconazole, a drug made by Pfizer who blocks affordable, generic Fluconazole, causing countless number of people with AIDS to die preventable deaths",
-        "title": "AIDS profiteering:"
+        "title": "AIDS profiteering"
       },
       {
         "description": "Bribed doctors, hospital administrators, and regulators in several countries across Europe and Asia to prescribe medicines",
@@ -725,11 +725,11 @@ module.exports = [
       },
       {
         "description": "Using fraudulent information, they encouraged doctors to prescribe drugs for ailments (and at doses) the FDA specifically declined approval",
-        "title": "Fraud:"
+        "title": "Fraud"
       },
       {
         "description": "Illegally dumped PCBs and other toxic chemicals into the nation\u2019s air and water for decades, also broke federal laws by not properly reporting an explosion which released hazardous substances and caused serious injuries",
-        "title": "Poisoning:"
+        "title": "Poisoning"
       },
       {
         "description": "Conspired to prevent generic versions of its cholesterol drug Lipitor from \nentering the market to protect billions in profits while making sure patients did not have access to more affordable options",
