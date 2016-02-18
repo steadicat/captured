@@ -16,6 +16,14 @@ export function createPage(get, boundActions) {
   );
 }
 
+export function createBody(get, boundActions) {
+  return (
+    <Root get={get} actions={boundActions}>
+      <Router />
+    </Root>
+  );
+}
+
 @connect
 class InitScript extends React.Component {
 
