@@ -32,19 +32,23 @@ export class Link extends React.Component {
   }
 }
 
-
 export const TextLink = hover(component('TextLink', ({hovered, ...props}) =>
   <Animate color={hovered ? [230, 60, 34] : [0, 0, 0]}>
     <Link fontWeight="bold" {...props} />
   </Animate>
 ));
 
+export const Button = component('Button', (props) =>
+  <InlineBlock
+    role="button"
+    cursor="pointer"
+    {...props}
+  />
+);
+
 export const MainButton = hover(component('MainButton', ({hovered, get, ...props}) =>
   <Animate scaleX={hovered ? 1.1 : 1} scaleY={hovered ? 1.1 : 1}>
-    <InlineBlock
-      role="button"
-      cursor="pointer"
-      display="inline-block"
+    <Button
       lineHeight={12}
       backgroundColor={hovered ? [230, 60, 34] : '#fff'}
       color={hovered ? '#fff' : null}
@@ -99,8 +103,7 @@ export const Arrow = component('Arrow', ({color = '#fff', width = 46, height = 4
     stroke={color}
     width={width}
     height={height}
-    animation="pulse ease-in-out 1s"
-    animationIterationCount="infinite"
+    animation="pulse 1s ease-in-out infinite"
     {...props}>
     <path d="M23,28 L34.25,16.75" />
     <path d="M11.75,16.75 L23,28" />

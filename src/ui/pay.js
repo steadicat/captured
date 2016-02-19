@@ -2,7 +2,8 @@ import React from 'react';
 import superagent from 'superagent';
 import {connect} from 'ducts';
 import * as script from '../lib/script';
-import {Block, InlineBlock} from 'stylistic-elements';
+import {Block} from 'stylistic-elements';
+import {Button} from '../ui/core';
 import config from '../../etc/config';
 
 let handler;
@@ -47,9 +48,7 @@ export class Pay extends React.Component {
   render() {
     const {get, actions, children, ...props} = this.props;
     return (
-      <InlineBlock
-        role="button"
-        cursor="pointer"
+      <Button
         borderColor="#444"
         borderStyle="solid"
         borderWidth={1}
@@ -68,7 +67,7 @@ export class Pay extends React.Component {
           lineHeight={32}>
           ...
         </Block>}
-      </InlineBlock>
+      </Button>
     );
   }
 }
