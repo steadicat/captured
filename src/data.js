@@ -522,7 +522,7 @@ module.exports = [
         "title": "Environmental crimes"
       },
       {
-        "description": "Despite community protest, drains India\u2019s groundwater to make bottled water, depleting a scarce a natural resource crucial for irrigation of locals\u2019 rice paddies, putting the population who cannot afford to buy bottled water at risk",
+        "description": "Despite community protest, drains India\u2019s groundwater to make bottled water, depleting a scarce natural resource crucial for irrigation of locals\u2019 rice paddies, putting the population who cannot afford to buy bottled water at risk",
         "title": "Public endangerment"
       }
     ],
