@@ -52,13 +52,6 @@ func ImageListHandler(w http.ResponseWriter, r *http.Request) {
 			web.LogError(c, err, fmt.Sprintf("Image %s ot found in blobstore", object.Name))
 		}
 
-		/*		if object.Name == "koch.jpg" || object.Name == "thompson.jpg" || object.Name == "read.jpg" || object.Name == "dougan.jpg" || object.Name == "corbat.jpg" {
-				err := image.DeleteServingURL(c, blobKey)
-				if err != nil {
-					web.LogError(c, err, fmt.Sprintf("Could not delete serving URL for %s", object.Name))
-				}
-			}*/
-
 		url, err := image.ServingURL(c, blobKey, &image.ServingURLOptions{
 			Secure: true,
 		})

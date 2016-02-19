@@ -51,15 +51,29 @@ class Tracking extends React.Component {
   }
 }
 
+function pad(n, length = 2) {
+  if (('' + n).length >= length) return '' + n;
+  return '0' + pad(n, length - 1);
+}
+
+function formatDate(date) {
+  const d = new Date(date * 1000);
+  return `${d.getMonth() + 1}/${d.getDate()} ${d.getHours()}:${pad(d.getMinutes())}`
+}
+
 const Order = component('Order', ({order: {id, created, status, shipping: {name, address}, customer, metadata}, get, actions}) =>
   <Block marginBottom={12}>
     <Column width="20%">
-      <LightCondensedText fontSize={12}>{new Date(created * 1000).toLocaleString()}</LightCondensedText>
+      <LightCondensedText fontSize={12}>{formatDate(created)}</LightCondensedText>
     </Column>
     <Column width="40%">
       <BoldText>{name}</BoldText>
       <Text>{address.line1}</Text>
       <Text>{address.city}, {address.state} {address.postal_code} </Text>
+      {Object.entries(metadata).map(([key, value]) =>
+        <Block key={key} color="#e52">
+          <strong>{key}</strong>: {value}
+        </Block>)}
     </Column>
     <Column width="40%">
       {status === 'created' && <AdminButton onClick={() => actions.chargeOrder(id, customer.id)}>
@@ -80,6 +94,25 @@ export class Orders extends React.Component {
 
   componentDidMount() {
     this.props.actions.fetchOrders();
+    window.addEventListener('scroll', this.onScroll)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll)
+  }
+
+  onScroll = () => {
+    if (this.timeout) return;
+    this.timeout = setTimeout(this.fetchMore, 1000);
+  };
+
+  fetchMore = () => {
+    this.timeout = null;
+    const el = ReactDOM.findDOMNode(this);
+    console.log(el.offsetTop, el.offsetHeight, window.scrollY, window.innerHeight);
+    if (el.offsetTop + el.offsetHeight <= window.scrollY + window.innerHeight * 1.5) {
+      this.props.actions.fetchOrders(get('orders').last().id);
+    }
   }
 
   static pure = true;
@@ -96,9 +129,9 @@ export class Orders extends React.Component {
             <StatusSelector status="fulfilled">Shipped</StatusSelector>
             <StatusSelector status="all">All</StatusSelector>
           </Block>
-          {get('ordersLoading') && <Message>Loading...</Message>}
           {get('orders').values().map(order => <Order key={order.id} order={order} />)}
           {!get('ordersLoading') && !get('orders').size && <Message>Nothing to show.</Message>}
+          {get('ordersLoading') && <Message>Loading...</Message>}
         </Block>
       </DefaultFont>
     );

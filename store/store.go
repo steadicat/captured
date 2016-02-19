@@ -110,28 +110,66 @@ func PaymentHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 type OrdersResponse struct {
-	Orders []*stripe.Order `json:"orders"`
+	Orders []*ShortOrder `json:"orders"`
+}
+
+type ShortOrder struct {
+	ID       string             `json:"id"`
+	Created  int64              `json:"created"`
+	Status   stripe.OrderStatus `json:"status"`
+	Shipping stripe.Shipping    `json:"shipping"`
+	Customer stripe.Customer    `json:"customer"`
+	Meta     map[string]string  `json:"metadata"`
 }
 
 func OrdersHandler(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
 	sc := client.New(config.Get(c, "STRIPE_KEY"), stripe.NewBackends(urlfetch.Client(c)))
 
-	params := &stripe.OrderListParams{}
+	lastKey := "or_17fQDrKpn8lOrcLslDTTOnWv"
 
 	r.ParseForm()
-	status := r.Form.Get("status")
-	if status != "" && status != "all" {
-		params = &stripe.OrderListParams{Status: stripe.OrderStatus(status)}
+
+	before := r.Form.Get("before")
+	if before != "" {
+		lastKey = before
 	}
 
-	i := sc.Orders.List(params)
+	params := &stripe.OrderListParams{
+		ListParams: stripe.ListParams{
+			Single: true,
+			End:    lastKey,
+		},
+	}
+
+	status := r.Form.Get("status")
+	if status != "" && status != "all" {
+		params = &stripe.OrderListParams{
+			Status: stripe.OrderStatus(status),
+			ListParams: stripe.ListParams{
+				Single: true,
+				End:    lastKey,
+			},
+		}
+	}
+
+	iter := sc.Orders.List(params)
 
 	var response OrdersResponse
-	response.Orders = []*stripe.Order{}
+	response.Orders = []*ShortOrder{}
 
-	for i.Next() {
-		response.Orders = append(response.Orders, i.Order())
+	for iter.Next() {
+		if iter.Order().Status != stripe.StatusCanceled {
+			o := iter.Order()
+			response.Orders = append(response.Orders, &ShortOrder{
+				ID:       o.ID,
+				Created:  o.Created,
+				Status:   o.Status,
+				Shipping: o.Shipping,
+				Customer: o.Customer,
+				Meta:     o.Meta,
+			})
+		}
 	}
 
 	web.SendJSON(c, w, response)

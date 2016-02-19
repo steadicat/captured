@@ -235,9 +235,12 @@ function keyBy(key, list) {
 
 /* global alert */
 
-export function fetchOrders(get, actions) {
-  if (get('ordersLoaded')) return;
-  superagent.get(`${config.API_URL}/orders`, {status: get('orderStatus')}, (err, res) => {
+export function fetchOrders(get, actions, before = null) {
+  if (get('ordersLoading')) return;
+  superagent.get(`${config.API_URL}/orders`, {
+    status: get('orderStatus'),
+    before: before,
+  }, (err, res) => {
     if (err) return alert(err);
     actions.updateOrders(res.body.orders);
   });
@@ -246,9 +249,8 @@ export function fetchOrders(get, actions) {
 
 export function updateOrders(get, actions, orders) {
   return get()
-    .set('orders', keyBy('id', orders))
-    .remove('ordersLoading')
-    .set('ordersLoaded', true);
+    .set('orders', {...get('orders'), ...keyBy('id', orders)})
+    .remove('ordersLoading');
 }
 
 export function chargeOrder(get, actions, orderID, customerID) {
@@ -287,5 +289,6 @@ export function orderShipped(get, actions, orderID, trackingNumber, err, res) {
 
 export function selectOrders(get, actions, status) {
   setTimeout(actions.fetchOrders, 0);
-  return get().set('orders', {}).set('ordersLoaded', false).set('orderStatus', status);
+  return get().set('orders', {})
+    .set('orderStatus', status);
 }
