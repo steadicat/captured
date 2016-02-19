@@ -70,7 +70,8 @@ const Order = component('Order', ({order: {id, created, status, shipping: {name,
       <BoldText>{name}</BoldText>
       <Text>{address.line1}</Text>
       <Text>{address.city}, {address.state} {address.postal_code} </Text>
-      {Object.entries(metadata).map(([key, value]) =>
+      <Text>{address.country}</Text>
+      {Object.entries(metadata).filter(key => key !== 'tracking_number').map(([key, value]) =>
         <Block key={key} color="#e52">
           <strong>{key}</strong>: {value}
         </Block>)}
@@ -89,6 +90,8 @@ const Order = component('Order', ({order: {id, created, status, shipping: {name,
   </Block>
 );
 
+/* global window, setTimeout, clearTimeout */
+
 @connect
 export class Orders extends React.Component {
 
@@ -99,6 +102,7 @@ export class Orders extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.onScroll)
+    clearTimeout(this.timeout);
   }
 
   onScroll = () => {
@@ -109,9 +113,8 @@ export class Orders extends React.Component {
   fetchMore = () => {
     this.timeout = null;
     const el = ReactDOM.findDOMNode(this);
-    console.log(el.offsetTop, el.offsetHeight, window.scrollY, window.innerHeight);
     if (el.offsetTop + el.offsetHeight <= window.scrollY + window.innerHeight * 1.5) {
-      this.props.actions.fetchOrders(get('orders').last().id);
+      this.props.actions.fetchOrders(this.props.get('orders').last().id);
     }
   }
 
