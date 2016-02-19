@@ -30,7 +30,7 @@ export const Header = track(component('Header', ({get, actions, ...props}) =>
       textAlign="center">
       All profits go to help elect <Link target="_blank" href="https://berniesanders.com/"><Bernie height={16} /></Link>
     </Block>}
-    <Block height="calc(100vh - 46px)" position="relative">
+    <Block height="100vh" position="relative">
       <Block
         position="absolute"
         top="45%"

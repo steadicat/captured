@@ -29,7 +29,7 @@ export class Toolbar extends React.Component {
     const {get, back, ...props} = this.props;
     const {hovered} = this.state;
     return (
-      <Animate scaleX={hovered ? 1.05 : 1} scaleY={hovered ? 1.05 : 1}>
+      <Animate scaleX={hovered ? 1.05 : 1} scaleY={hovered ? 1.05 : 1} translateY={get('browser.known') ? 0 : 46}>
         <Block
           position="fixed"
           bottom={0}
@@ -41,6 +41,7 @@ export class Toolbar extends React.Component {
           textAlign="center"
           backgroundColor={hovered ? [230, 60, 34] : [255, 255, 255]}
           borderColor={hovered ? [230, 60, 34] : '#444'}
+          translateY={46}
           transformOrigin="50% 100%"
           height={45}
           {...props}>
