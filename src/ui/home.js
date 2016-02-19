@@ -107,11 +107,11 @@ export const Footer = track(component('Footer', ({get, actions, ...props}) =>
       maxWidth={648}
       paddingLeft={24}
       paddingRight={24}>
-      All profits go towards efforts to elect
+      60-page, high-quality printed hardcover. All profits go towards efforts to elect
       {' '}
       <TextLink target="_blank" href="https://berniesanders.com/">Bernie Sanders</TextLink>
       {' '}
-      as&nbsp;president. Holding corporations responsible for their crimes and reforming the criminal justice system are pillars of his campaign.
+      as&nbsp;president. Holding corporations responsible for their crimes, reforming the criminal justice system, and removing corporate control over government are pillars of his campaign.
     </Text>
     <Block paddingBottom={96}>
       <TextLink
