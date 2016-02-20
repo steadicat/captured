@@ -724,7 +724,7 @@ module.exports = [
         "title": "Experimenting on children"
       },
       {
-        "description": "Using fraudulent information, they encouraged doctors to prescribe drugs for ailments (and at doses) the FDA specifically declined approval",
+        "description": "Using fraudulent information, they encouraged doctors to prescribe drugs for ailments (and at doses) the FDA specifically declined approval for",
         "title": "Fraud"
       },
       {
