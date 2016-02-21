@@ -6,8 +6,6 @@ import {Block} from 'stylistic-elements';
 import {Button} from '../ui/core';
 import config from '../../etc/config';
 
-let handler;
-
 @connect
 export class Pay extends React.Component {
 
@@ -21,7 +19,7 @@ export class Pay extends React.Component {
     actions.stripeDialogRequested();
     script.load('https://checkout.stripe.com/checkout.js', function() {
       /* global require */
-      !handler && (handler = require('StripeCheckout').configure({
+      const handler = require('StripeCheckout').configure({
         key: config.STRIPE_KEY,
         token: function(token, args) {
           superagent
@@ -32,7 +30,7 @@ export class Pay extends React.Component {
               actions.purchaseCompleted();
             });
         },
-      }));
+      });
       handler.open({
         name: 'Buy the Book',
         description: `Copy ${get('sold') + 1} of ${get('total')}. Free shipping.`,
