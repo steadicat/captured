@@ -232,8 +232,12 @@ module.exports = [
         "title": "Accomplice to murder"
       },
       {
-        "description": "Since 2002, there have been over 1,000 spills across their Nigerian pipelines\u2009—\u2009two alone devastated a 27,000 square mile area of Nigeria. Fraud: misled public by promoting highly pollutant projects as \"sustainable energy initiatives,\u201d as exposed in one of the most significant \"greenwash\" rulings to date",
+        "description": "Since 2002, there have been over 1,000 spills across their Nigerian pipelines\u2009—\u2009two alone devastated a 27,000 square mile area of Nigeria",
         "title": "Environmental destruction"
+      },
+      {
+        "description": "Misled public by promoting highly pollutant projects as \u201csustainable energy initiatives,\u201d as exposed in one of the most significant \u201cgreenwash\u201d rulings to date",
+        "title": "Fraud"
       },
       {
         "description": "Even while admitting CO2 emissions contribute to climate change, Shell remained the world\u2019s most carbon intensive oil company",
