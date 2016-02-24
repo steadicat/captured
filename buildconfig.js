@@ -1,3 +1,5 @@
+/* eslint-env node */
+/* eslint no-var: 0 */
 var fs = require('fs');
 var findit = require('findit2');
 

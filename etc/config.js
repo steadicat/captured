@@ -28,11 +28,11 @@ function getImages() {
 
 const config = {
   ASSETS_DIR: './assets',
-  ASSETS_URL: prod ? '' : 'http://stefano.local:3000',
+  ASSETS_URL: prod ? '' : 'http://localhost:3000',
   ASSETS_PORT: 3000,
   JS_MAIN: prod ? getJSMain() : '/captured.js',
-  API_URL: prod ? '/api' : 'http://stefano.local:8080/api',
-  IMAGES_URL: prod ? '/api/images' : 'http://stefano.local:8080/api/images',
+  API_URL: prod ? '/api' : 'http://localhost:8080/api',
+  IMAGES_URL: prod ? '/api/images' : 'http://localhost:8080/api/images',
   STRIPE_KEY: 'pk_live_yYzi1T1jphRUyeL1xu9PwdVr',
   IMAGES: getImages(),
 };

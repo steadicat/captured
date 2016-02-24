@@ -10,6 +10,7 @@
     "babel-plugin-transform-decorators-legacy": "1.3.4",
     "babel-plugin-transform-react-constant-elements": "6.5.0",
     "babel-plugin-transform-react-inline-elements": "6.5.0",
+    "babel-plugin-transform-runtime": "6.5.2",
     "babel-polyfill": "6.5.0",
     "babel-preset-es2015": "6.5.0",
     "babel-preset-react": "6.5.0",
@@ -28,15 +29,11 @@
     "react-dom": "0.14.7",
     "react-rebound": "0.5.0",
     "rebound": "0.0.13",
-    "sha1": "1.1.1",
     "stylistic-elements": "0.3.0",
     "superagent": "1.7.2",
     "supervisor": "0.9.1",
     "webpack": "2.0.7-beta",
     "webpack-dev-middleware": "1.5.1",
     "webpack-hot-middleware": "2.7.1"
-  },
-  "devDependencies": {
-    "babel-plugin-transform-runtime": "6.5.2"
   }
 }

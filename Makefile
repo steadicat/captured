@@ -9,7 +9,7 @@ deps: node_modules
 	mkdir -p assets
 
 buildconfig:
-	node buildconfig.js
+	$(NODE) buildconfig.js
 
 clean:
 	rm -rf assets/*.js assets/**/*.html
@@ -21,7 +21,7 @@ devassets:
 	node assetserver.js
 
 devapi: buildconfig
-	goapp serve --host=0.0.0.0
+	goapp serve
 
 dev:
 	make devassets & make devhtml & make devapi
@@ -44,4 +44,4 @@ buildhtml:
 deploy: buildassets buildhtml buildconfig
 	goapp deploy
 
-.PHONY: deps clean devhtml devassets devapi dev lint images buildassets buildhtml deploy
+.PHONY: deps clean devhtml devassets devapi dev lint images buildassets buildhtml buildconfig deploy
