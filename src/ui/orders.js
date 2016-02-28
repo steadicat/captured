@@ -79,6 +79,8 @@ const Order = component('Order', ({order: {id, created, status, shipping: {name,
         Charge
       </AdminButton>}
       {status === 'charging' && <AdminButton>...</AdminButton>}
+      {status === 'failed' && <Block color="#e52" fontWeight="BOLD">DECLINED</Block>}
+      {status === 'canceled' && <Block color="#e52" fontWeight="BOLD">CANCELED</Block>}
       {status === 'paid' && <Tracking onShipped={(tracking) => actions.shipOrder(id, tracking)} />}
       {status === 'fulfilled' && <Block>
         Shipped: {metadata.tracking_number}

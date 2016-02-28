@@ -262,9 +262,9 @@ export function chargeOrder(get, actions, orderID, customerID) {
 }
 
 export function orderCharged(get, actions, orderID, err, res) {
-  if (err) {
-    alert(err);
-    return get().set(`orders.${orderID}.status`, 'created')
+  if (err || !res.body.success) {
+    err && alert(err);
+    return get().set(`orders.${orderID}.status`, 'failed')
   }
   return get().set(`orders.${orderID}.status`, 'paid');
 }

@@ -5,7 +5,7 @@ api_version: go1
 default_expiration: "5m"
 
 handlers:
-- url: /api/orders
+- url: /api/(orders|charge|ship)
   script: _go_app
   secure: always
   login: admin

@@ -191,8 +191,55 @@ func ChargeHandler(w http.ResponseWriter, r *http.Request) {
 		Customer: customerID,
 	})
 	if err != nil {
-		web.SendError(c, w, err, 500, "Error charging card")
-		return
+		stripeErr := err.(*stripe.Error)
+		web.LogError(c, err, "Error from Stripe")
+
+		switch stripeErr.Code {
+		case stripe.IncorrectNum:
+			fallthrough
+		case stripe.InvalidNum:
+			fallthrough
+		case stripe.InvalidExpM:
+			fallthrough
+		case stripe.InvalidExpY:
+			fallthrough
+		case stripe.InvalidCvc:
+			fallthrough
+		case stripe.ExpiredCard:
+			fallthrough
+		case stripe.IncorrectCvc:
+			fallthrough
+		case stripe.IncorrectZip:
+			fallthrough
+		case stripe.CardDeclined:
+
+			customer, err := sc.Customers.Get(customerID, nil)
+			if err != nil {
+				web.SendError(c, w, err, 500, "Error getting customer")
+				return
+			}
+
+			_, err = sc.Orders.Update(orderID, &stripe.OrderUpdateParams{
+				Status: stripe.StatusCanceled,
+			})
+			if err != nil {
+				web.SendError(c, w, err, 500, "Error marking order as cancelled")
+				return
+			}
+
+			err = email.SendPaymentDeclinedNotification(c, customer.Desc, customer.Email)
+			if err != nil {
+				web.SendError(c, w, err, 500, "Error sending payment declined email")
+			}
+
+			web.SendJSON(c, w, ChargeResponse{Success: false})
+			return
+
+		default:
+			web.SendError(c, w, err, 500, "Error charging card")
+			return
+		}
+
 	}
 
 	web.SendJSON(c, w, ChargeResponse{Success: true})
@@ -229,3 +276,4 @@ func ShipHandler(w http.ResponseWriter, r *http.Request) {
 
 	web.SendJSON(c, w, ChargeResponse{Success: true})
 }
+

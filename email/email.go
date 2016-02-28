@@ -128,3 +128,18 @@ func SendShippingNotification(c context.Context, name string, email string, ship
 	}
 	return send(c, &message)
 }
+
+func SendPaymentDeclinedNotification(c context.Context, name string, email string) error {
+	message := PostmarkMessage{
+		From:       "The Captured Project <info@thecapturedproject.com>",
+		To:         fmt.Sprintf("%s <%s>", name, email),
+		TemplateId: 440161,
+		TemplateModel: map[string]interface{}{
+			"date":         time.Now().Format("1/2/2006"),
+			"total":        "$40",
+			"billing_name": name,
+		},
+		Attachments: getAttachments(c),
+	}
+	return send(c, &message)
+}
