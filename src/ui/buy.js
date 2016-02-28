@@ -24,7 +24,7 @@ export const BuyButton = component('BuyButton', ({get, hovered, ...props}) =>
       fontSize={18}
       fontWeight="bold"
       verticalAlign="middle">
-      Buy the Book
+      {get('sold') >= 1000 ? 'Join the Waitlist' : 'Buy the Book'}
     </CondensedText>
     <CondensedText
       display="inline-block"

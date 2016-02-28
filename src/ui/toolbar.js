@@ -60,7 +60,7 @@ export class Toolbar extends React.Component {
               {back ? 'Back' : 'About'}
             </CondensedText>
           </TextLink>
-          {get('sold') < 1000 && <BuyButton
+          <BuyButton
             borderWidth={0}
             onMouseEnter={this.onMouseEnter}
             onMouseLeave={this.onMouseLeave}
@@ -68,7 +68,7 @@ export class Toolbar extends React.Component {
             marginLeft={get('browser.mobile') ? 0 : (get('browser.width') > 900 ? 200 : 0)}
             paddingLeft={16}
             paddingRight={16}
-          />}
+          />
           {!get('browser.mobile') && <InlineBlock
             visibility={hovered ? 'hidden' : null}
             paddingTop={7}

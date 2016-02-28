@@ -32,8 +32,8 @@ export class Pay extends React.Component {
         },
       });
       handler.open({
-        name: 'Buy the Book',
-        description: `Copy ${get('sold') + 1} of ${get('total')}. Free shipping.`,
+        name: get('sold') >= 1000 ? 'Join the Waitlist' : 'Buy the Book',
+        description: get('sold') >= 1000 ? 'Billed if copies become available.' : `Copy ${get('sold') + 1} of ${get('total')}. Free shipping.`,
         amount: get('price') * 100,
         allowRememberMe: false,
         shippingAddress: true,

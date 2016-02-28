@@ -91,13 +91,19 @@ export const Footer = track(component('Footer', ({get, actions, ...props}) =>
         height={Math.round(bookWidth(get) * 2148 / 5098)}
       />
     </Block>
-    {get('sold') >= 1000 ? <CondensedText fontWeight="bold" fontSize={24}>SOLD OUT</CondensedText> : <HoverBuyButton />}
-    <Text marginTop={12}>
-      {get('sold') > 0
-      ? (get('sold') < 1000 ?
-        `Limited edition. ${get('sold')} of ${get('total')} copies sold.`
-        : 'Limited edition. All 1000 copies sold out.')
-      : 'Limited edition of 1000 copies.'}
+    <HoverBuyButton />
+    <Text
+      marginLeft="auto"
+      marginRight="auto"
+      marginTop={12}
+      maxWidth={548}
+      paddingLeft={24}
+      paddingRight={24}>
+        {get('sold') > 0
+        ? (get('sold') < 1000 ?
+          `Limited edition. ${get('sold')} of ${get('total')} copies sold.`
+          : 'The limited edition book is currently sold out. Orders placed now will be put on standby and only billed if copies become available.')
+        : 'Limited edition of 1000 copies.'}
     </Text>
     <Text
       marginTop={24}
