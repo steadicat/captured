@@ -74,17 +74,17 @@ export const Page = component('Page', ({$, store, children}) =>
   <html>
     <head>
       <title>{getTitle($('path'))}</title>
-      <link rel="prefetch" href={`${config.ASSETS_URL}${$('main')}`} />
-      <link rel="prefetch" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700|Roboto+Condensed:300,300italic,700" />
-      <link rel="prefetch" href="https://checkout.stripe.com/checkout.js" />
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700|Roboto+Condensed:300,300italic,700" type="text/css" />
-      <link rel="prefetch" href="https://fonts.gstatic.com/s/robotocondensed/v13/b9QBgL0iMZfDSpmcXcE8nCqOJfobX9lrC1wFVe9k15E.woff2" />
-      <link rel="prefetch" href="https://fonts.gstatic.com/s/roboto/v15/Hgo13k-tfSpn0qi1SFdUfZBw1xU1rKptJj_0jans920.woff2" />
-      <link rel="prefetch" href="https://fonts.gstatic.com/s/roboto/v15/7m8l7TlFO-S3VkhHuR0at4gp9Q8gbYrhqGlRav_IXfk.woff2" />
-      <link rel="prefetch" href="https://fonts.gstatic.com/s/robotocondensed/v13/mg0cGfGRUERshzBlvqxeAL8HwCiP7DYII36AlQZXXQeglnMp3_3A8V8Ai8YosRtX.woff2" />
-      <link rel="prefetch" href="https://fonts.gstatic.com/s/roboto/v15/d-6IYplOFocCacKzxwXSOJBw1xU1rKptJj_0jans920.woff2" />
-      <link rel="prefetch" href="https://fonts.gstatic.com/s/robotocondensed/v13/b9QBgL0iMZfDSpmcXcE8nPX2or14QGUHgbhSBV1Go0E.woff2" />
+      <link rel="preload" as="script" href={`${config.ASSETS_URL}${$('main')}`} />
       <link rel="preconnect" href="https://lh3.googleusercontent.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700|Roboto+Condensed:300,300italic,700" type="text/css" />
+      <link rel="preload" as="font" type="font/woff2" crossOrigin href="https://fonts.gstatic.com/s/roboto/v15/Hgo13k-tfSpn0qi1SFdUfZBw1xU1rKptJj_0jans920.woff2" />
+      <link rel="preload" as="font" type="font/woff2" crossOrigin href="https://fonts.gstatic.com/s/roboto/v15/d-6IYplOFocCacKzxwXSOJBw1xU1rKptJj_0jans920.woff2" />
+      <link rel="preload" as="font" type="font/woff2" crossOrigin href="https://fonts.gstatic.com/s/roboto/v15/7m8l7TlFO-S3VkhHuR0at4gp9Q8gbYrhqGlRav_IXfk.woff2" />
+      <link rel="preload" as="font" type="font/woff2" crossOrigin href="https://fonts.gstatic.com/s/robotocondensed/v13/b9QBgL0iMZfDSpmcXcE8nCqOJfobX9lrC1wFVe9k15E.woff2" />
+      <link rel="preload" as="font" type="font/woff2" crossOrigin href="https://fonts.gstatic.com/s/robotocondensed/v13/b9QBgL0iMZfDSpmcXcE8nPX2or14QGUHgbhSBV1Go0E.woff2" />
+      <link rel="preload" as="font" type="font/woff2" crossOrigin href="https://fonts.gstatic.com/s/robotocondensed/v13/mg0cGfGRUERshzBlvqxeAL8HwCiP7DYII36AlQZXXQeglnMp3_3A8V8Ai8YosRtX.woff2" />
+      <link rel="preload" as="script" href="https://checkout.stripe.com/checkout.js" />
       <meta name="description" content={getDescription($('path'))} />
       <link rel="canonical" href={trailingSlash(`https://thecapturedproject.com${$('path')}`)} />
       <meta property="og:site_name" content="The Captured Project" />
