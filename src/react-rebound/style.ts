@@ -4,7 +4,8 @@ function cssFunction<Values extends (number | string)[]>(
   name: string,
   ...params: {[Value in keyof Values]: (k: Values[Value]) => string}
 ) {
-  return (...values: Values) => `${name}(${params.map((p, i) => p(values[i]))})`;
+  return (...values: Values) =>
+    `${name}(${params.map((p, i) => p(values[i]))})`;
 }
 
 function px(n: number) {
@@ -28,7 +29,7 @@ const rgb = cssFunction<[number, number, number]>(
   'rgb',
   colorComponent,
   colorComponent,
-  colorComponent,
+  colorComponent
 );
 
 const rgba = cssFunction<[number, number, number, number]>(
@@ -36,7 +37,7 @@ const rgba = cssFunction<[number, number, number, number]>(
   colorComponent,
   colorComponent,
   colorComponent,
-  alpha,
+  alpha
 );
 
 const translate = cssFunction('translate', px, px);
@@ -71,7 +72,7 @@ export const numericalProperties = {
   textDecorationColor: color,
   fontSize: px,
   lineHeight: px,
-  letterSpacing: px,
+  letterSpacing: px
 };
 
 export const transformProperties = {
@@ -84,11 +85,13 @@ export const transformProperties = {
   rotateY: true,
   rotateZ: true,
   skewX: true,
-  skewY: true,
+  skewY: true
 };
 
 type NumericalProperties = {
-  [key in keyof typeof numericalProperties]: Parameters<typeof numericalProperties[key]>[0]
+  [key in keyof typeof numericalProperties]: Parameters<
+    typeof numericalProperties[key]
+  >[0];
 };
 
 type TransformProperties = {[key in keyof typeof transformProperties]: number};
@@ -105,7 +108,7 @@ function toTransformStyle({
   rotateY: ry,
   rotateZ: rz,
   skewX: kx,
-  skewY: ky,
+  skewY: ky
 }: Partial<TransformProperties>) {
   const transforms = [];
   if (tz !== undefined) {
@@ -129,14 +132,18 @@ function toTransformStyle({
   return transforms.join(' ');
 }
 
-export function toStyle(props: Partial<AnimatableProps>): Partial<CSSProperties> {
+export function toStyle(
+  props: Partial<AnimatableProps>
+): Partial<CSSProperties> {
   const transformProps: Partial<TransformProperties> = {};
   const style: Partial<CSSProperties> = {};
 
+  let hasTransform = false;
   for (const p in props) {
     const val = props[p as keyof typeof props];
     if (val === undefined || val === null) continue;
     if (p in transformProperties) {
+      hasTransform = true;
       const prop = p as keyof TransformProperties;
       transformProps[prop] = val as number;
     } else if (p in numericalProperties) {
@@ -149,5 +156,7 @@ export function toStyle(props: Partial<AnimatableProps>): Partial<CSSProperties>
     }
   }
 
-  return {...style, transform: toTransformStyle(transformProps)};
+  return hasTransform
+    ? {...style, transform: toTransformStyle(transformProps)}
+    : style;
 }

@@ -49,7 +49,7 @@ export const BuyButton = component(
 );
 
 export const HoverBuyButton = hover(
-  component('BuyButton', ({hovered, get, ...props}) => (
+  component('BuyButton', ({hovered, get, actions, ...props}) => (
     <Animate scaleX={hovered ? 1.1 : 1} scaleY={hovered ? 1.1 : 1}>
       <BuyButton
         backgroundColor={hovered ? [230, 60, 34] : null}

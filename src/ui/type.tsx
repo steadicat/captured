@@ -28,7 +28,7 @@ export const SmallCaps = component('SmallCaps', ({children, ...props}) =>
 
 export const BoldSmallCaps = component(
   'SmallCaps',
-  ({children, get, ...props}) =>
+  ({children, get, actions, ...props}) =>
     React.cloneElement(React.Children.only(children), {
       fontFamily: CONDENSED,
       fontWeight: 700,

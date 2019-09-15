@@ -74,7 +74,7 @@ export const MainButton = hover(
   ))
 );
 
-export const Input = component('Input', ({label, get, ...props}) => (
+export const Input = component('Input', ({label, get, actions, ...props}) => (
   <ResetElement tag="input" type="text" placeholder={label} {...props} />
 ));
 
@@ -88,7 +88,7 @@ export const ListItem = component('ListItem', ({get, actions, ...props}) => (
 
 export const Close = component(
   'Close',
-  ({color = '#444', width = 46, height = 46, get, ...props}) => (
+  ({color = '#444', width = 46, height = 46, get, actions, ...props}) => (
     <InlineBlock
       tag="svg"
       viewBox="0 0 46 46"
@@ -105,7 +105,7 @@ export const Close = component(
 
 export const Arrow = component(
   'Arrow',
-  ({color = '#fff', width = 46, height = 46, get, ...props}) => (
+  ({color = '#fff', width = 46, height = 46, get, actions, ...props}) => (
     <InlineBlock
       tag="svg"
       viewBox="0 0 46 46"

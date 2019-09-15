@@ -48,7 +48,7 @@ export const Animate = React.forwardRef(
     forwardedRef: React.Ref<AnimateAPI>
   ) => {
     const ref = React.useRef<HTMLElement>();
-    const animating = React.useRef(false);
+    const [animating, setAnimating] = React.useState(false);
     const [, setState] = React.useState({});
     const latestChildren = React.useRef(children);
     latestChildren.current = children;
@@ -62,17 +62,15 @@ export const Animate = React.forwardRef(
       speedThreshold,
       clamp,
       onStart() {
-        animating.current = true;
         if (typeof latestChildren.current === 'function') {
-          setState({}); // Trigger a re-render
+          setAnimating(true);
         }
 
         onStart && onStart();
       },
       onEnd() {
-        animating.current = false;
         if (typeof latestChildren.current === 'function') {
-          setState({}); // Trigger a re-render
+          setAnimating(false);
         }
 
         onEnd && onEnd();
@@ -110,7 +108,7 @@ export const Animate = React.forwardRef(
     );
 
     if (typeof children === 'function') {
-      children = children(animating.current);
+      children = children(animating);
     }
     const child = React.Children.only(children);
     return React.cloneElement(child, {
