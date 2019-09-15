@@ -1,8 +1,8 @@
-import React from 'react';
 import {Animate} from 'react-rebound';
 import {InlineBlock} from 'stylistic-elements';
+import React from 'react';
+import config from '../../config';
 import {connect} from 'ducts';
-import config from '../../etc/config';
 
 function getImageOptions(get, w, h) {
   const ratio = get('browser.pixelRatio');
@@ -12,7 +12,6 @@ function getImageOptions(get, w, h) {
 
 @connect
 export class Image extends React.Component {
-
   constructor() {
     super();
     this.state = {loaded: false};
@@ -22,14 +21,35 @@ export class Image extends React.Component {
 
   onLoad = () => {
     this.setState({loaded: true});
-    this.props.onLoad && this.props.onLoad()
+    this.props.onLoad && this.props.onLoad();
   };
 
   render() {
-    const {src, width, height, pxWidth, pxHeight, get, actions, ...props} = this.props;
-    const url = `${config.IMAGES[src]}=${getImageOptions(get, pxWidth || width, pxHeight || height)}`;
+    const {
+      src,
+      width,
+      height,
+      pxWidth,
+      pxHeight,
+      get,
+      actions,
+      ...props
+    } = this.props;
+    const url = `${config.IMAGES[src]}=${getImageOptions(
+      get,
+      pxWidth || width,
+      pxHeight || height
+    )}`;
     return (
-      <Animate opacity={this.props.opacity !== undefined ? this.props.opacity : (this.state.loaded ? 1 : 0)}>
+      <Animate
+        opacity={
+          this.props.opacity !== undefined
+            ? this.props.opacity
+            : this.state.loaded
+            ? 1
+            : 0
+        }
+      >
         <InlineBlock
           tag="img"
           src={url}
@@ -42,5 +62,4 @@ export class Image extends React.Component {
       </Animate>
     );
   }
-
 }

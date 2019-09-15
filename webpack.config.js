@@ -1,21 +1,14 @@
 /* eslint no-var: 0, node: true */
 var path = require('path');
 var webpack = require('webpack');
-var config = require('./etc/config');
+var config = require('./config');
 var AssetsPlugin = require('assets-webpack-plugin');
 
 var debug = process.env.NODE_ENV != 'production';
 var profile = process.env.PROFILE == 'true';
 
 module.exports = {
-  entry: debug
-    ? [
-        'webpack-hot-middleware/client?path=' +
-          config.ASSETS_URL +
-          '/__webpack_hmr',
-        './src/captured'
-      ]
-    : ['./src/captured'],
+  entry: ['./src/captured'],
   module: {
     rules: [
       {

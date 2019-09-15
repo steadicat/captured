@@ -1,19 +1,19 @@
-import React from 'react';
-import superagent from 'superagent';
-import {connect} from 'ducts';
 import * as script from '../lib/script';
+
 import {Block} from 'stylistic-elements';
 import {Button} from '../ui/core';
-import config from '../../etc/config';
+import React from 'react';
+import config from '../../config';
+import {connect} from 'ducts';
+import superagent from 'superagent';
 
 @connect
 export class Pay extends React.Component {
-
   componentDidMount() {
     script.load('https://checkout.stripe.com/checkout.js');
   }
 
-  onClick = (event) => {
+  onClick = event => {
     const {get, actions} = this.props;
     event.stopPropagation();
     actions.stripeDialogRequested();
@@ -29,16 +29,19 @@ export class Pay extends React.Component {
               if (err) return console.warn(err);
               actions.purchaseCompleted();
             });
-        },
+        }
       });
       handler.open({
         name: get('sold') >= 1000 ? 'Join the Waitlist' : 'Buy the Book',
-        description: get('sold') >= 1000 ? 'Billed if copies become available.' : `Copy ${get('sold') + 1} of ${get('total')}. Free shipping.`,
+        description:
+          get('sold') >= 1000
+            ? 'Billed if copies become available.'
+            : `Copy ${get('sold') + 1} of ${get('total')}. Free shipping.`,
         amount: get('price') * 100,
         allowRememberMe: false,
         shippingAddress: true,
         opened: actions.stripeDialogShown,
-        closed: actions.stripeDialogHidden,
+        closed: actions.stripeDialogHidden
       });
     });
   };
@@ -51,23 +54,31 @@ export class Pay extends React.Component {
         borderStyle="solid"
         borderWidth={1}
         onClick={this.onClick}
-        {...props}>
-        <Block visibility={get('stripeDialogRequested') && !get('stripeDialogShown') ? 'hidden' : null}>
+        {...props}
+      >
+        <Block
+          visibility={
+            get('stripeDialogRequested') && !get('stripeDialogShown')
+              ? 'hidden'
+              : null
+          }
+        >
           {children}
         </Block>
-        {get('stripeDialogRequested') && !get('stripeDialogShown') && <Block
-          position="absolute"
-          top={0}
-          left={0}
-          right={0}
-          bottom={0}
-          fontSize={28}
-          lineHeight={32}>
-          ...
-        </Block>}
+        {get('stripeDialogRequested') && !get('stripeDialogShown') && (
+          <Block
+            position="absolute"
+            top={0}
+            left={0}
+            right={0}
+            bottom={0}
+            fontSize={28}
+            lineHeight={32}
+          >
+            ...
+          </Block>
+        )}
       </Button>
     );
   }
 }
-
-

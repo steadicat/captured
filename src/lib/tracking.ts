@@ -1,5 +1,5 @@
+import config from '../../config';
 import {load} from '../lib/script';
-import config from '../../etc/config';
 
 let initialized = false;
 
@@ -36,9 +36,16 @@ export function navigation(path) {
 export function error(e) {
   init();
   /* global navigator */
-  window.ga('send', 'event', 'exception', e.message || e, e.stack || (e.filename + ':' + e.lineno), {
-    nonInteraction: true,
-    jsMain: config.JS_MAIN,
-    ua: navigator.userAgent,
-  });
+  window.ga(
+    'send',
+    'event',
+    'exception',
+    e.message || e,
+    e.stack || e.filename + ':' + e.lineno,
+    {
+      nonInteraction: true,
+      jsMain: config.JS_MAIN,
+      ua: navigator.userAgent
+    }
+  );
 }

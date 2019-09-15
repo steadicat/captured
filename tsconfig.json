@@ -1,12 +1,14 @@
 {
-  "experimentalDecorators": true,
   "compilerOptions": {
+    "experimentalDecorators": true,
     "baseUrl": "./src/",
     "jsx": "react",
     "allowJs": true,
     "noEmit": true,
     "resolveJsonModule": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src/**/*"]
 }

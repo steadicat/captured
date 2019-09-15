@@ -33,13 +33,13 @@ profileassets:
 	NODE_ENV=production $(NODE_BIN)/webpack --config etc/webpack.config.js --profile --json > stats.json
 
 images:
-	curl https://thecapturedproject.com/api/images -o assets/images.json
+	curl https://thecapturedproject.com/api/images -o app/assets/images.json
 
 buildassets:
 	NODE_ENV=production $(NODE_BIN)/webpack --config etc/webpack.config.js
 
 buildhtml:
-	NODE_ENV=production $(NODE) build.ts
+	NODE_ENV=production $(NODE) -T build.ts
 
 deploy: buildassets buildhtml buildconfig
 	cd app && gcloud app deploy --project thecapturedproject --no-promote

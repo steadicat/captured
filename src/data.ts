@@ -1,5 +1,4 @@
-/* eslint-disable */
-module.exports = [
+export default [
   {
     "artist": "Charles Lytle",
     "artistCharges": ["Robbery (1st degree)", "Assault (2nd degree)"],

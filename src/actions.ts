@@ -1,13 +1,21 @@
+import * as history from './lib/history';
+import * as scroll from './lib/scroll';
+import * as tracking from './lib/tracking';
+import * as webp from './lib/webp';
+
+import {
+  getFullScreenSize,
+  getThumbnailSize,
+  idFromPath,
+  isExpanded,
+  pieceById
+} from './ui/gallerylayout';
+
+import config from '../config';
 import mutatis from 'mutatis';
 import superagent from 'superagent';
-import config from '../etc/config';
-import * as webp from './lib/webp';
 import throttle from './lib/throttle';
-import * as scroll from './lib/scroll';
-import * as history from './lib/history';
-import {getThumbnailSize, getFullScreenSize, idFromPath, pieceById, isExpanded} from './ui/gallerylayout';
 import {trimPathEnd} from './lib/strings';
-import * as tracking from './lib/tracking';
 
 export function init(path) {
   return mutatis({
@@ -22,18 +30,17 @@ export function init(path) {
       height: 600,
       pixelRatio: 1,
       webp: false,
-      known: false,
+      known: false
     },
     positions: {},
     orders: {},
-    orderStatus: 'created',
+    orderStatus: 'created'
   });
 }
 
 /* global window, document, setInterval, setTimeout, clearTimeout */
 
 export function clientInit(get, actions) {
-
   webp.detectSupport(window.navigator.userAgent, actions.detectWebP);
 
   actions.requestSoldUpdate();
@@ -42,7 +49,10 @@ export function clientInit(get, actions) {
   let shown = false;
 
   actions.browserResize();
-  window.addEventListener(typeof window.orientation === 'undefined' ? 'resize' : 'orientationchange', throttle(actions.browserResize));
+  window.addEventListener(
+    typeof window.orientation === 'undefined' ? 'resize' : 'orientationchange',
+    throttle(actions.browserResize)
+  );
   history.onChange(actions.navigate);
   window.addEventListener('keydown', actions.keyDown);
 
@@ -60,7 +70,10 @@ export function clientInit(get, actions) {
 
 export function browserResize(get, actions) {
   const w = document.body.clientWidth;
-  const h = Math.min(window.innerHeight, window.screen ? window.screen.height : Infinity);
+  const h = Math.min(
+    window.innerHeight,
+    window.screen ? window.screen.height : Infinity
+  );
   return get()
     .set('browser.mobile', w < 740)
     .set('browser.width', w)
@@ -88,11 +101,9 @@ export function updateSold(get, actions, sold) {
 
 export function positionElement(get, actions, id, {top, bottom}) {
   let store = get();
-  if (get('needsScroll') && (idFromPath(get('path')) === id)) {
+  if (get('needsScroll') && idFromPath(get('path')) === id) {
     scroll.scrollTo(top, actions.scrollingDone);
-    store = store
-      .set('scrolling', true)
-      .set('needsScroll', false);
+    store = store.set('scrolling', true).set('needsScroll', false);
   }
   return store.set(`positions.${id}`, {top, bottom});
 }
@@ -106,11 +117,14 @@ export function navigate(get, actions, path) {
   const id = idFromPath(path);
   const position = get('positions')[id];
   let scrolling = false;
-  if (position && (id !== '')) {
+  if (position && id !== '') {
     const browser = get('browser');
     const piece = pieceById(id);
     let fullScreenHeight = getFullScreenSize(piece, browser)[1];
-    let top = position.top + getThumbnailSize(piece, browser)[1] / 2 - fullScreenHeight / 2;
+    let top =
+      position.top +
+      getThumbnailSize(piece, browser)[1] / 2 -
+      fullScreenHeight / 2;
     scroll.scrollTo(top, actions.scrollingDone);
     scrolling = true;
     actions.expandStarted(id);
@@ -201,7 +215,11 @@ export function cancelScrollPrompt(get, actions) {
 export function scrollToCrimes(get, actions) {
   const piece = pieceById(idFromPath(get('path')));
   let fullScreenHeight = getFullScreenSize(piece, get('browser'))[1];
-  scroll.scrollElementTo('scroll', fullScreenHeight + 48, actions.scrollingDone);
+  scroll.scrollElementTo(
+    'scroll',
+    fullScreenHeight + 48,
+    actions.scrollingDone
+  );
   return get()
     .set('seeCrimesShown', false)
     .set('scrollPromptDismissed', true);
@@ -237,13 +255,17 @@ function keyBy(key, list) {
 
 export function fetchOrders(get, actions, before = null) {
   if (get('ordersLoading')) return;
-  superagent.get(`${config.API_URL}/orders`, {
-    status: get('orderStatus'),
-    before: before,
-  }, (err, res) => {
-    if (err) return alert(err);
-    actions.updateOrders(res.body.orders);
-  });
+  superagent.get(
+    `${config.API_URL}/orders`,
+    {
+      status: get('orderStatus'),
+      before: before
+    },
+    (err, res) => {
+      if (err) return alert(err);
+      actions.updateOrders(res.body.orders);
+    }
+  );
   return get().set('ordersLoading', true);
 }
 
@@ -264,7 +286,7 @@ export function chargeOrder(get, actions, orderID, customerID) {
 export function orderCharged(get, actions, orderID, err, res) {
   if (err || !res.body.success) {
     err && alert(err);
-    return get().set(`orders.${orderID}.status`, 'failed')
+    return get().set(`orders.${orderID}.status`, 'failed');
   }
   return get().set(`orders.${orderID}.status`, 'paid');
 }
@@ -289,6 +311,7 @@ export function orderShipped(get, actions, orderID, trackingNumber, err, res) {
 
 export function selectOrders(get, actions, status) {
   setTimeout(actions.fetchOrders, 0);
-  return get().set('orders', {})
+  return get()
+    .set('orders', {})
     .set('orderStatus', status);
 }

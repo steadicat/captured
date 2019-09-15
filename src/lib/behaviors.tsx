@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'ducts';
-import {getWindowScrollY} from '../lib/scroll';
+import {getWindowScrollY} from './scroll';
 
 export function hover(Component) {
   return class Hover extends React.Component {
@@ -40,7 +40,6 @@ export function hover(Component) {
 
 export function track(Component) {
   class Track extends React.Component {
-
     componentDidMount() {
       this.componentDidUpdate();
     }
@@ -52,7 +51,7 @@ export function track(Component) {
       const scrollY = getWindowScrollY();
       actions.positionElement(trackKey, {
         top: scrollY + top,
-        bottom: scrollY + bottom,
+        bottom: scrollY + bottom
       });
     }
 
