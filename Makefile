@@ -1,5 +1,5 @@
 NODE_BIN=./node_modules/.bin
-NODE=node --harmony
+NODE=$(NODE_BIN)/ts-node
 JS_DIR=src
 
 node_modules: package.json
@@ -9,19 +9,19 @@ deps: node_modules
 	mkdir -p assets
 
 buildconfig:
-	$(NODE) buildconfig.js
+	$(NODE) buildconfig.ts
 
 clean:
-	rm -rf assets/*.js assets/**/*.html
+	rm -rf app/assets/*.js app/assets/**/*.html
 
 devhtml:
-	NODE_ENV=build $(NODE_BIN)/supervisor --harmony -n exit -w build.js -w $(JS_DIR) -- build.js
+	NODE_ENV=build $(NODE_BIN)/ts-node-dev --respawn --transpileOnly build.ts
 
 devassets:
-	node assetserver.js
+	$(NODE_BIN)/webpack-dev-server --port 3000
 
 devapi: buildconfig
-	goapp serve
+	/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/dev_appserver.py app
 
 dev:
 	make devassets & make devhtml & make devapi
@@ -39,9 +39,9 @@ buildassets:
 	NODE_ENV=production $(NODE_BIN)/webpack --config etc/webpack.config.js
 
 buildhtml:
-	NODE_ENV=production $(NODE) build.js
+	NODE_ENV=production $(NODE) build.ts
 
 deploy: buildassets buildhtml buildconfig
-	goapp deploy
+	cd app && gcloud app deploy --project thecapturedproject --no-promote
 
 .PHONY: deps clean devhtml devassets devapi dev lint images buildassets buildhtml buildconfig deploy
