@@ -26,17 +26,19 @@ export const SmallCaps = component('SmallCaps', ({children, ...props}) =>
   })
 );
 
-export const BoldSmallCaps = component('SmallCaps', ({children, ...props}) =>
-  React.cloneElement(React.Children.only(children), {
-    fontFamily: CONDENSED,
-    fontWeight: 700,
-    textTransform: 'uppercase',
-    letterSpacing: 0.5,
-    fontSize: '86%'
-  })
+export const BoldSmallCaps = component(
+  'SmallCaps',
+  ({children, get, ...props}) =>
+    React.cloneElement(React.Children.only(children), {
+      fontFamily: CONDENSED,
+      fontWeight: 700,
+      textTransform: 'uppercase',
+      letterSpacing: 0.5,
+      fontSize: '86%'
+    })
 );
 
-export const PageTitle = component('PageTitle', props => (
+export const PageTitle = component('PageTitle', ({get, ...props}) => (
   <ResetElement
     tag="h1"
     fontFamily={CONDENSED}
@@ -47,7 +49,7 @@ export const PageTitle = component('PageTitle', props => (
   />
 ));
 
-export const PageSubtitle = component('PageSubtitle', props => (
+export const PageSubtitle = component('PageSubtitle', ({get, ...props}) => (
   <ResetElement
     tag="h2"
     fontFamily={CONDENSED}
@@ -58,7 +60,7 @@ export const PageSubtitle = component('PageSubtitle', props => (
   />
 ));
 
-export const PageHeading = component('PageSubtitle', props => (
+export const PageHeading = component('PageSubtitle', ({get, ...props}) => (
   <ResetElement
     tag="h3"
     fontFamily={CONDENSED}
@@ -69,15 +71,15 @@ export const PageHeading = component('PageSubtitle', props => (
   />
 ));
 
-export const Text = component('Text', ({$, get, ...props}) => (
+export const Text = component('Text', ({get, ...props}) => (
   <ResetElement tag="p" {...props} />
 ));
 
-export const BoldText = component('BoldText', props => (
+export const BoldText = component('BoldText', ({get, ...props}) => (
   <Text fontWeight={700} {...props} />
 ));
 
-export const CondensedText = component('CondensedText', props => (
+export const CondensedText = component('CondensedText', ({get, ...props}) => (
   <Text
     fontFamily={CONDENSED}
     fontWeight={700}
@@ -86,6 +88,9 @@ export const CondensedText = component('CondensedText', props => (
   />
 ));
 
-export const LightCondensedText = component('CondensedText', props => (
-  <Text fontFamily={CONDENSED} fontWeight={300} {...props} />
-));
+export const LightCondensedText = component(
+  'CondensedText',
+  ({get, ...props}) => (
+    <Text fontFamily={CONDENSED} fontWeight={300} {...props} />
+  )
+);

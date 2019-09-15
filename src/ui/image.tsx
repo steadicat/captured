@@ -1,4 +1,4 @@
-import {Animate} from 'react-rebound';
+import {Animate} from '../react-rebound';
 import {InlineBlock} from '../stylistic-elements';
 import React from 'react';
 import config from '../../config';
@@ -10,14 +10,11 @@ function getImageOptions(get, w, h) {
   return `w${w * ratio}-h${h * ratio}-p${webp ? '-rw' : ''}`;
 }
 
-@connect
-export class Image extends React.Component {
-  constructor() {
-    super();
+class ImageClass extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {loaded: false};
   }
-
-  static pure = true;
 
   onLoad = () => {
     this.setState({loaded: true});
@@ -33,6 +30,7 @@ export class Image extends React.Component {
       pxHeight,
       get,
       actions,
+      forwardedRef,
       ...props
     } = this.props;
     const url = `${config.IMAGES[src]}=${getImageOptions(
@@ -51,6 +49,7 @@ export class Image extends React.Component {
         }
       >
         <InlineBlock
+          ref={forwardedRef}
           tag="img"
           src={url}
           width={width}
@@ -63,3 +62,7 @@ export class Image extends React.Component {
     );
   }
 }
+
+export const Image = connect(
+  React.forwardRef((props, ref) => <ImageClass {...props} forwardedRef={ref} />)
+);

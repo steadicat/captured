@@ -1,23 +1,21 @@
 import * as React from 'react';
 
-import {Consumer, context} from './Root';
+import {context} from './Root';
 
-/* global console */
-let DEBUG = true;
-
+let DEBUG = false;
 export function enableRenderLogging(enabled = true) {
   DEBUG = enabled;
 }
 
 export default function connect(Component) {
-  function Connect(props) {
+  function Connect({forwardedRef, ...props}) {
     const {get, actions} = React.useContext(context);
 
     const [, setState] = React.useState({});
     const update = React.useCallback(() => {
       setState({});
     }, []);
-    const getRef = React.useCallback(
+    const getWithSubscriber = React.useCallback(
       (key, defaultValue, subscriber = update) =>
         get(key, defaultValue, subscriber),
       []
@@ -27,7 +25,14 @@ export default function connect(Component) {
       return () => get.unsubscribe(update);
     }, [get, update]);
 
-    return <Component {...props} get={getRef} actions={actions} />;
+    return (
+      <Component
+        {...props}
+        get={getWithSubscriber}
+        actions={actions}
+        ref={forwardedRef}
+      />
+    );
   }
 
   const displayName =
@@ -35,7 +40,7 @@ export default function connect(Component) {
 
   Connect.displayName = `Connect(${displayName})`;
 
-  return React.forwardRef((props, ref) => (
-    <Connect {...props} forwardedRef={ref} />
-  ));
+  return React.forwardRef((props, ref) => {
+    return <Connect {...props} forwardedRef={ref} />;
+  });
 }

@@ -17,8 +17,7 @@ export function createPage(get, boundActions) {
   );
 }
 
-@connect
-class InitScript extends React.Component {
+class InitScriptClass extends React.Component {
   shouldComponentUpdate() {
     return false;
   }
@@ -34,6 +33,8 @@ class InitScript extends React.Component {
     );
   }
 }
+
+const InitScript = connect(InitScriptClass);
 
 function getTitle(path) {
   return 'CAPTURED: People in Prison Drawing People Who Should Be';
@@ -93,14 +94,14 @@ function trailingSlash(url) {
   return url + '/';
 }
 
-export const Page = component('Page', ({$, get, store, children}) => (
+export const Page = component('Page', ({get, store, children}) => (
   <html>
     <head>
-      <title>{getTitle($('path'))}</title>
+      <title>{getTitle(get('path'))}</title>
       <link
         rel="preload"
         as="script"
-        href={`${config.ASSETS_URL}${$('main')}`}
+        href={`${config.ASSETS_URL}${get('main')}`}
       />
       <link rel="preconnect" href="https://lh3.googleusercontent.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -156,31 +157,31 @@ export const Page = component('Page', ({$, get, store, children}) => (
         as="script"
         href="https://checkout.stripe.com/checkout.js"
       />
-      <meta name="description" content={getDescription($('path'))} />
+      <meta name="description" content={getDescription(get('path'))} />
       <link
         rel="canonical"
-        href={trailingSlash(`https://thecapturedproject.com${$('path')}`)}
+        href={trailingSlash(`https://thecapturedproject.com${get('path')}`)}
       />
       <meta property="og:site_name" content="The Captured Project" />
       <meta property="og:type" content="website" />
       <meta
         property="og:url"
-        content={`https://thecapturedproject.com${$('path')}`}
+        content={`https://thecapturedproject.com${get('path')}`}
       />
-      <meta property="og:title" content={getTitle($('path'))} />
-      <meta property="og:description" content={getDescription($('path'))} />
-      <link rel="image_src" content={getImage($('path'))} />
-      {getOGImages($('path'))}
+      <meta property="og:title" content={getTitle(get('path'))} />
+      <meta property="og:description" content={getDescription(get('path'))} />
+      <link rel="image_src" content={getImage(get('path'))} />
+      {getOGImages(get('path'))}
       <meta property="og:image:type" content="image/jpg" />
       <meta property="fb:app_id" content="797107167075130" />
       <meta property="twitter:site" content="@ProjectCaptured" />
       <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:title" content={getTitle($('path'))} />
+      <meta property="twitter:title" content={getTitle(get('path'))} />
       <meta
         property="twitter:description"
-        content={getDescription($('path'))}
+        content={getDescription(get('path'))}
       />
-      <meta property="twitter:image:src" content={getImage($('path'))} />
+      <meta property="twitter:image:src" content={getImage(get('path'))} />
       <meta
         name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
@@ -203,7 +204,7 @@ export const Page = component('Page', ({$, get, store, children}) => (
     </head>
     <Body>
       {children}
-      <script src={`${config.ASSETS_URL}${$('main')}`} />
+      <script src={`${config.ASSETS_URL}${get('main')}`} />
       <InitScript />
     </Body>
   </html>

@@ -1,14 +1,13 @@
+import * as React from 'react';
 import * as script from '../lib/script';
 
 import {Block} from '../stylistic-elements';
 import {Button} from '../ui/core';
-import React from 'react';
 import config from '../../config';
 import {connect} from '../ducts';
 import superagent from 'superagent';
 
-@connect
-export class Pay extends React.Component {
+class PayClass extends React.Component {
   componentDidMount() {
     script.load('https://checkout.stripe.com/checkout.js');
   }
@@ -47,7 +46,7 @@ export class Pay extends React.Component {
   };
 
   render() {
-    const {get, actions, children, ...props} = this.props;
+    const {get, actions, children, forwardedRef, ...props} = this.props;
     return (
       <Button
         borderColor="#444"
@@ -55,6 +54,7 @@ export class Pay extends React.Component {
         borderWidth={1}
         onClick={this.onClick}
         {...props}
+        ref={forwardedRef}
       >
         <Block
           visibility={
@@ -82,3 +82,7 @@ export class Pay extends React.Component {
     );
   }
 }
+
+export const Pay = connect(
+  React.forwardRef((props, ref) => <PayClass {...props} forwardedRef={ref} />)
+);

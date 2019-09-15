@@ -25,7 +25,7 @@ function getPrefaceSize(get) {
 }
 
 export const Header = track(
-  component('Header', ({trackKey, $, get, actions, ...props}) => (
+  component('Header', ({trackKey, get, actions, ...props}) => (
     <Block paddingTop={0} {...props}>
       <Block tag="h1" display="none">
         CAPTURED
@@ -112,7 +112,7 @@ function bookWidth(get) {
 }
 
 export const Footer = track(
-  component('Footer', ({trackKey, $, get, actions, ...props}) => (
+  component('Footer', ({trackKey, get, actions, ...props}) => (
     <Block paddingTop={48} {...props}>
       <Block marginBottom={48}>
         <Image

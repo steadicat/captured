@@ -20,28 +20,14 @@ const log =
 
 export function component(statelessComponent) {
   const displayName = statelessComponent.name;
-  class PureComponent extends React.Component {
+  class Component extends React.Component {
     static displayName = displayName;
-    shouldComponentUpdate(nextProps) {
-      const props = this.props;
-      if (props.children !== nextProps.children)
-        log(true, displayName, 'children changed');
-      for (let k in props) {
-        if (props[k] !== nextProps[k])
-          return log(true, displayName, `${k} changed`);
-      }
-      for (let k in nextProps) {
-        if (props[k] !== nextProps[k])
-          return log(true, displayName, `${k} changed`);
-      }
-      return false;
-    }
     render() {
       return statelessComponent(this.props);
     }
   }
   return React.forwardRef((props, ref) => (
-    <PureComponent {...props} forwardedRef={ref} />
+    <Component {...props} forwardedRef={ref} />
   ));
 }
 

@@ -18,7 +18,7 @@ import {
 import {hover, track} from '../lib/behaviors';
 import {humanizeLink, trimPathEnd} from '../lib/strings';
 
-import {Animate} from 'react-rebound';
+import {Animate} from '../react-rebound';
 import {Column} from '../ui/layout';
 import {Image} from '../ui/image';
 import {Piece} from '../ui/piece';

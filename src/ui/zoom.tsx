@@ -1,12 +1,15 @@
+import * as history from '../lib/history';
+
+import {Block} from '../stylistic-elements';
 import React from 'react';
 import {connect} from '../ducts';
-import {Block} from '../stylistic-elements';
 import {linear} from '../lib/math';
-import * as history from '../lib/history';
 import {trimPathEnd} from '../lib/strings';
 
 function distance(a, b) {
-  return Math.sqrt((a[0] - b[0]) * (a[0] - b[0]) + (a[1] - b[1]) * (a[1] - b[1]));
+  return Math.sqrt(
+    (a[0] - b[0]) * (a[0] - b[0]) + (a[1] - b[1]) * (a[1] - b[1])
+  );
 }
 
 function midPoint(a, b) {
@@ -26,16 +29,17 @@ function zoomPx(zoom, px, original) {
 function getTouches(event) {
   const touches = [];
   for (let i = 0; i < event.touches.length; i++) {
-    touches.push([event.touches.item(i).clientX, event.touches.item(i).clientY])
+    touches.push([
+      event.touches.item(i).clientX,
+      event.touches.item(i).clientY
+    ]);
   }
   return touches;
 }
 
-@connect
-export class Zoom extends React.Component {
-
-  constructor() {
-    super();
+export class ZoomClass extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {loaded: false, hover: null, zoom: 1, origin: null};
     this.previousTouches = [];
   }
@@ -44,35 +48,35 @@ export class Zoom extends React.Component {
     this.setState({origin: [this.props.width / 2, this.props.height / 2]});
   }
 
-  onMouseMove = (event) => {
+  onMouseMove = event => {
     const bw = this.props.get('browser.width');
     const w = this.props.width;
-    if ((event.clientX < (bw - w) / 2) ||
-        (event.clientX > bw - (bw - w) / 2)) {
+    if (event.clientX < (bw - w) / 2 || event.clientX > bw - (bw - w) / 2) {
       this.setState({hover: null});
     } else {
-      this.setState({hover: [event.clientX, event.clientY]})
+      this.setState({hover: [event.clientX, event.clientY]});
     }
   };
 
-  onMouseLeave = (event) => {
+  onMouseLeave = event => {
     this.setState({hover: null});
   };
 
-  onTouchMove = (event) => {
+  onTouchMove = event => {
     const touches = getTouches(event);
     if (!this.previousTouches) {
       this.previousTouches = touches;
       return;
     }
-    if (touches.length !== this.previousTouches.length) return this.onTouchEnd();
+    if (touches.length !== this.previousTouches.length)
+      return this.onTouchEnd();
 
     if (touches.length === 2) {
       const [a0, b0] = this.previousTouches;
       const [a1, b1] = touches;
       const m0 = midPoint(a0, b0);
       const m1 = midPoint(a1, b1);
-      const zoom = this.state.zoom * distance(a1, b1) / distance(a0, b0);
+      const zoom = (this.state.zoom * distance(a1, b1)) / distance(a0, b0);
       if (zoom < 0.8) {
         const href = trimPathEnd(this.props.get('path'));
         history.pushState(href);
@@ -82,9 +86,9 @@ export class Zoom extends React.Component {
       this.setState({
         zoom,
         origin: [
-          this.state.origin[0] - (m1[0] - m0[0]) * 2 / this.state.zoom,
-          this.state.origin[1] - (m1[1] - m0[1]) * 2 / this.state.zoom,
-        ],
+          this.state.origin[0] - ((m1[0] - m0[0]) * 2) / this.state.zoom,
+          this.state.origin[1] - ((m1[1] - m0[1]) * 2) / this.state.zoom
+        ]
       });
       event.preventDefault();
       this.previousTouches = touches;
@@ -93,14 +97,14 @@ export class Zoom extends React.Component {
       const [b] = touches;
       this.setState({
         origin: [
-          this.state.origin[0] - (b[0] - a[0]) * 2 / this.state.zoom,
-          this.state.origin[1] - (b[1] - a[1]) * 2 / this.state.zoom,
-        ],
+          this.state.origin[0] - ((b[0] - a[0]) * 2) / this.state.zoom,
+          this.state.origin[1] - ((b[1] - a[1]) * 2) / this.state.zoom
+        ]
       });
       this.previousTouches = touches;
       event.preventDefault();
     } else if (this.previousTouches) {
-      this.onTouchEnd()
+      this.onTouchEnd();
     }
   };
 
@@ -113,7 +117,17 @@ export class Zoom extends React.Component {
   };
 
   render() {
-    const {children, width, height, pxWidth, pxHeight, originalWidth, originalHeight, get, ...props} = this.props;
+    const {
+      children,
+      width,
+      height,
+      pxWidth,
+      pxHeight,
+      originalWidth,
+      originalHeight,
+      get,
+      ...props
+    } = this.props;
     const {hover, loaded, zoom, origin} = this.state;
     const image = React.Children.only(children);
 
@@ -128,23 +142,42 @@ export class Zoom extends React.Component {
         onTouchMove={this.onTouchMove}
         onTouchEnd={this.onTouchEnd}
         height={height}
-        {...props}>
+        {...props}
+      >
         {React.cloneElement(image, {
           width: hover ? originalWidth : width,
           height: hover ? originalHeight : height,
-          pxWidth: (hover && loaded) ? originalWidth : zoomPx(zoom, pxWidth, originalWidth),
-          pxHeight: (hover && loaded) ? originalHeight : zoomPx(zoom, pxHeight, originalHeight),
+          pxWidth:
+            hover && loaded
+              ? originalWidth
+              : zoomPx(zoom, pxWidth, originalWidth),
+          pxHeight:
+            hover && loaded
+              ? originalHeight
+              : zoomPx(zoom, pxHeight, originalHeight),
           top: 0,
           left: hover ? 0 : '50%',
-          translateX: hover ? linear((w - width) / 2, 0, w - (w - width) / 2, w - originalWidth, hover[0]) : (-width / 2),
-          translateY: hover ? linear(0, 0, height, - originalHeight + height, hover[1]) : 0,
-          translateZ: (zoom !== 1) ? null : 0,
+          translateX: hover
+            ? linear(
+                (w - width) / 2,
+                0,
+                w - (w - width) / 2,
+                w - originalWidth,
+                hover[0]
+              )
+            : -width / 2,
+          translateY: hover
+            ? linear(0, 0, height, -originalHeight + height, hover[1])
+            : 0,
+          translateZ: zoom !== 1 ? null : 0,
           transformOrigin: origin ? origin.map(x => x + 'px').join(' ') : null,
           onLoad: this.onLoad,
           scaleX: zoom,
-          scaleY: zoom,
+          scaleY: zoom
         })}
       </Block>
     );
   }
 }
+
+export const Zoom = connect(ZoomClass);

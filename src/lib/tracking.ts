@@ -5,7 +5,7 @@ let initialized = false;
 
 function ga(...args) {
   if (process.env.NODE_ENV !== 'production') {
-    console.info(args);
+    console.debug(args);
   }
   ga.q.push(args);
 }

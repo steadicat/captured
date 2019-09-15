@@ -2,14 +2,13 @@ import * as history from '../lib/history';
 
 import {Block, InlineBlock, ResetElement} from '../stylistic-elements';
 
-import {Animate} from 'react-rebound';
+import {Animate} from '../react-rebound';
 import React from 'react';
 import component from '../lib/component';
 import {connect} from '../ducts';
 import {hover} from '../lib/behaviors';
 
-@connect
-export class Link extends React.Component {
+class LinkClass extends React.Component {
   onLinkClick = event => {
     if (event.shiftKey || event.metaKey || event.superKey || event.controlKey)
       return;
@@ -23,7 +22,7 @@ export class Link extends React.Component {
   };
 
   render() {
-    const {$, get, ...props} = this.props;
+    const {get, ...props} = this.props;
     return (
       <ResetElement
         tag="a"
@@ -36,20 +35,22 @@ export class Link extends React.Component {
   }
 }
 
+export const Link = connect(LinkClass);
+
 export const TextLink = hover(
-  component('TextLink', ({$, get, hovered, ...props}) => (
+  component('TextLink', ({get, hovered, ...props}) => (
     <Animate color={hovered ? [230, 60, 34] : [0, 0, 0]}>
       <Link fontWeight="bold" {...props} />
     </Animate>
   ))
 );
 
-export const Button = component('Button', ({$, get, ...props}) => (
-  <InlineBlock role="button" cursor="pointer" {...props} />
+export const Button = component('Button', ({get, ref, ...props}) => (
+  <InlineBlock role="button" cursor="pointer" {...props} ref={ref} />
 ));
 
 export const MainButton = hover(
-  component('MainButton', ({$, get, hovered, ...props}) => (
+  component('MainButton', ({get, hovered, ...props}) => (
     <Animate scaleX={hovered ? 1.1 : 1} scaleY={hovered ? 1.1 : 1}>
       <Button
         lineHeight={12}
@@ -70,21 +71,21 @@ export const MainButton = hover(
   ))
 );
 
-export const Input = component('Input', ({label, $, get, ...props}) => (
+export const Input = component('Input', ({label, get, ...props}) => (
   <ResetElement tag="input" type="text" placeholder={label} {...props} />
 ));
 
-export const List = component('List', ({$, get, ...props}) => (
+export const List = component('List', ({get, ...props}) => (
   <ResetElement tag="ul" {...props} />
 ));
 
-export const ListItem = component('ListItem', ({$, get, ...props}) => (
+export const ListItem = component('ListItem', ({get, ...props}) => (
   <ResetElement tag="li" {...props} />
 ));
 
 export const Close = component(
   'Close',
-  ({color = '#444', width = 46, height = 46, $, get, ...props}) => (
+  ({color = '#444', width = 46, height = 46, get, ...props}) => (
     <InlineBlock
       tag="svg"
       viewBox="0 0 46 46"
@@ -101,7 +102,7 @@ export const Close = component(
 
 export const Arrow = component(
   'Arrow',
-  ({color = '#fff', width = 46, height = 46, $, get, ...props}) => (
+  ({color = '#fff', width = 46, height = 46, get, ...props}) => (
     <InlineBlock
       tag="svg"
       viewBox="0 0 46 46"
@@ -119,7 +120,7 @@ export const Arrow = component(
 
 export const Modal = component(
   'Modal',
-  ({$, get, autoWidth = false, children, ...props}) => (
+  ({get, autoWidth = false, children, ...props}) => (
     <Block
       position="fixed"
       top={0}

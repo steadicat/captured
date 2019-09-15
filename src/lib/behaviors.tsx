@@ -1,16 +1,15 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
+
 import ReactDOM from 'react-dom';
 import {connect} from '../ducts';
 import {getWindowScrollY} from './scroll';
 
 export function hover(Component) {
-  return class Hover extends React.Component {
-    constructor() {
-      super();
+  class Hover extends React.Component {
+    constructor(props) {
+      super(props);
       this.state = {hovered: false};
     }
-
-    static pure = true;
 
     onMouseEnter = () => {
       this.setState({hovered: true});
@@ -26,16 +25,22 @@ export function hover(Component) {
     }
 
     render() {
+      const {forwardedRef, ...props} = this.props;
       return (
         <Component
-          {...this.props}
+          {...props}
           hovered={this.state.hovered}
           onMouseEnter={this.onMouseEnter}
           onMouseLeave={this.onMouseLeave}
+          ref={forwardedRef}
         />
       );
     }
-  };
+  }
+
+  return forwardRef((props, ref) => {
+    return <Hover {...props} forwardedRef={ref} />;
+  });
 }
 
 export function track(Component) {
@@ -54,8 +59,6 @@ export function track(Component) {
         bottom: scrollY + bottom
       });
     }
-
-    static pure = true;
 
     render() {
       return <Component {...this.props} />;
