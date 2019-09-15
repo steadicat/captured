@@ -1,8 +1,11 @@
 import React from 'react';
 
-const context = React.createContext({});
+export const context = React.createContext({});
 
-export default class Root extends React.Component {
+export default class Root extends React.Component<{
+  get: () => void;
+  actions: {};
+}> {
   render() {
     return (
       <context.Provider value={this.props}>
