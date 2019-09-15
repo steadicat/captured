@@ -33,10 +33,9 @@ const config = {
   JS_MAIN: prod ? getJSMain() : '/captured.js',
   API_URL: prod ? '/api' : 'http://localhost:8080/api',
   IMAGES_URL: prod ? '/api/images' : 'http://localhost:8080/api/images',
-  STRIPE_KEY:
-    /*prod
+  STRIPE_KEY: prod
     ? 'pk_live_yYzi1T1jphRUyeL1xu9PwdVr'
-    :*/ 'pk_test_Ngkeht8dNP1Nm71uEYG9tS2Z',
+    : 'pk_test_Ngkeht8dNP1Nm71uEYG9tS2Z',
   IMAGES: getImages()
 };
 

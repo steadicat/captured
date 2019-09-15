@@ -42,6 +42,6 @@ buildhtml:
 	NODE_ENV=production $(NODE) -T build.ts
 
 deploy: buildassets buildhtml buildconfig
-	cd app && gcloud app deploy --project thecapturedproject --version 1 --no-promote
+	cd app && gcloud app deploy --project thecapturedproject --version softcover --no-promote
 
 .PHONY: deps clean devhtml devassets devapi dev lint images buildassets buildhtml buildconfig deploy
