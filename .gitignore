@@ -8,3 +8,4 @@ config.json
 /etc/local.js
 /etc/google-cloud-api.json
 app.yaml
+/node_modules/
