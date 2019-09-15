@@ -1,17 +1,15 @@
 package images
 
 import (
-	"config"
 	"fmt"
-	"golang.org/x/oauth2/google"
-	"golang.org/x/oauth2/jwt"
+	"net/http"
+	"web"
+
+	"google.golang.org/api/iterator"
 	"google.golang.org/appengine"
 	"google.golang.org/appengine/blobstore"
 	"google.golang.org/appengine/image"
-	"google.golang.org/cloud"
 	"google.golang.org/cloud/storage"
-	"net/http"
-	"web"
 )
 
 type ImageListResponse struct {
@@ -25,18 +23,16 @@ func ImageListHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	conf := &jwt.Config{
-		Email:      config.Get(c, "CLOUD_STORAGE_EMAIL"),
-		PrivateKey: []byte(config.Get(c, "CLOUD_STORAGE_PRIVATE_KEY")),
-		Scopes: []string{
-			"https://www.googleapis.com/auth/devstorage.full_control",
-		},
-		TokenURL: google.JWTTokenURL,
+	client, err := storage.NewClient(c)
+	if err != nil {
+		web.SendError(c, w, err, 500, "Could not create client")
+		return
 	}
+	defer client.Close()
+
 	var query *storage.Query
-	hc := conf.Client(c)
-	cc := cloud.NewContext(appengine.AppID(c), hc)
-	objects, err := storage.ListObjects(cc, "thecapturedproject", query)
+	bucket := client.Bucket("thecapturedproject")
+	objects := bucket.Objects(c, query)
 	if err != nil {
 		web.SendError(c, w, err, 500, "Could not list images")
 		return
@@ -46,7 +42,11 @@ func ImageListHandler(w http.ResponseWriter, r *http.Request) {
 		Images: map[string]string{},
 	}
 
-	for _, object := range objects.Results {
+	for {
+		object, err := objects.Next()
+		if err == iterator.Done {
+			break
+		}
 		blobKey, err := blobstore.BlobKeyForFile(c, fmt.Sprintf("/gs/thecapturedproject/%s", object.Name))
 		if err != nil {
 			web.LogError(c, err, fmt.Sprintf("Image %s ot found in blobstore", object.Name))

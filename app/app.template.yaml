@@ -30,15 +30,4 @@ error_handlers:
 
 skip_files:
 - ^(.*/)?\..*$
-- ^Makefile$
-- ^package\.json$
-- ^node_modules/.*$
-- ^src/.*$
-- ^etc/.*$
-- ^misc/.*$
-- '^[^/]*\.js$'
-- '^[^/]*\.yaml$'
-- '^[^/]*\.md$'
-- ^.*\.sublime-project$
-- ^.*\.sublime-workspace$
 

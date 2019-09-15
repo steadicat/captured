@@ -4,12 +4,13 @@ import (
 	"config"
 	"email"
 	"encoding/json"
+	"net/http"
+	"web"
+
 	"github.com/stripe/stripe-go"
 	"github.com/stripe/stripe-go/client"
 	"google.golang.org/appengine"
 	"google.golang.org/appengine/urlfetch"
-	"net/http"
-	"web"
 )
 
 type SoldResponse struct {
@@ -58,21 +59,21 @@ func PaymentHandler(w http.ResponseWriter, r *http.Request) {
 	sc := client.New(config.Get(c, "STRIPE_KEY"), stripe.NewBackends(urlfetch.Client(c)))
 
 	shipping := &stripe.ShippingParams{
-		Name: args.ShippingName,
+		Name: &args.ShippingName,
 		Address: &stripe.AddressParams{
-			Line1:      args.ShippingAddressLine1,
-			Line2:      args.ShippingAddressLine2,
-			City:       args.ShippingAddressCity,
-			State:      args.ShippingAddressState,
-			PostalCode: args.ShippingAddressZIP,
-			Country:    args.ShippingAddressCountry,
+			Line1:      &args.ShippingAddressLine1,
+			Line2:      &args.ShippingAddressLine2,
+			City:       &args.ShippingAddressCity,
+			State:      &args.ShippingAddressState,
+			PostalCode: &args.ShippingAddressZIP,
+			Country:    &args.ShippingAddressCountry,
 		},
 	}
 
 	customer, err := sc.Customers.New(&stripe.CustomerParams{
-		Email:  token.Email,
-		Desc:   args.BillingName,
-		Source: &stripe.SourceParams{Token: token.ID},
+		Email:       &token.Email,
+		Description: &args.BillingName,
+		Source:      &stripe.SourceParams{Token: &token.ID},
 	})
 
 	if err != nil {
@@ -80,14 +81,17 @@ func PaymentHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	usd := "usd"
+	sku := "sku"
+	book := "book"
 	order, err := sc.Orders.New(&stripe.OrderParams{
-		Currency: "usd",
-		Customer: customer.ID,
+		Currency: &usd,
+		Customer: &customer.ID,
 		Shipping: shipping,
 		Items: []*stripe.OrderItemParams{
 			&stripe.OrderItemParams{
-				Type:   "sku",
-				Parent: "book",
+				Type:   &sku,
+				Parent: &book,
 			},
 		},
 	})
@@ -101,7 +105,7 @@ func PaymentHandler(w http.ResponseWriter, r *http.Request) {
 		web.LogError(c, err, "Error incrementing sold counter")
 	}
 
-	err = email.SendReceipt(c, args.BillingName, token.Email, order.Shipping)
+	err = email.SendReceipt(c, args.BillingName, token.Email, *order.Shipping)
 	if err != nil {
 		web.LogError(c, err, "Error sending receipt")
 	}
@@ -137,18 +141,18 @@ func OrdersHandler(w http.ResponseWriter, r *http.Request) {
 
 	params := &stripe.OrderListParams{
 		ListParams: stripe.ListParams{
-			Single: true,
-			End:    lastKey,
+			Single:       true,
+			EndingBefore: &lastKey,
 		},
 	}
 
 	status := r.Form.Get("status")
 	if status != "" && status != "all" {
 		params = &stripe.OrderListParams{
-			Status: stripe.OrderStatus(status),
+			Status: &status,
 			ListParams: stripe.ListParams{
-				Single: true,
-				End:    lastKey,
+				Single:       true,
+				EndingBefore: &lastKey,
 			},
 		}
 	}
@@ -159,15 +163,15 @@ func OrdersHandler(w http.ResponseWriter, r *http.Request) {
 	response.Orders = []*ShortOrder{}
 
 	for iter.Next() {
-		if iter.Order().Status != stripe.StatusCanceled {
+		if stripe.OrderStatus(iter.Order().Status) != stripe.OrderStatusCanceled {
 			o := iter.Order()
 			response.Orders = append(response.Orders, &ShortOrder{
 				ID:       o.ID,
 				Created:  o.Created,
-				Status:   o.Status,
-				Shipping: o.Shipping,
+				Status:   stripe.OrderStatus(o.Status),
+				Shipping: stripe.Shipping(*o.Shipping),
 				Customer: o.Customer,
-				Meta:     o.Meta,
+				Meta:     o.Metadata,
 			})
 		}
 	}
@@ -188,57 +192,34 @@ func ChargeHandler(w http.ResponseWriter, r *http.Request) {
 	customerID := r.Form.Get("customerID")
 
 	_, err := sc.Orders.Pay(orderID, &stripe.OrderPayParams{
-		Customer: customerID,
+		Customer: &customerID,
 	})
 	if err != nil {
-		stripeErr := err.(*stripe.Error)
+		//stripeErr := err.(*stripe.Error)
 		web.LogError(c, err, "Error from Stripe")
 
-		switch stripeErr.Code {
-		case stripe.IncorrectNum:
-			fallthrough
-		case stripe.InvalidNum:
-			fallthrough
-		case stripe.InvalidExpM:
-			fallthrough
-		case stripe.InvalidExpY:
-			fallthrough
-		case stripe.InvalidCvc:
-			fallthrough
-		case stripe.ExpiredCard:
-			fallthrough
-		case stripe.IncorrectCvc:
-			fallthrough
-		case stripe.IncorrectZip:
-			fallthrough
-		case stripe.CardDeclined:
-
-			customer, err := sc.Customers.Get(customerID, nil)
-			if err != nil {
-				web.SendError(c, w, err, 500, "Error getting customer")
-				return
-			}
-
-			_, err = sc.Orders.Update(orderID, &stripe.OrderUpdateParams{
-				Status: stripe.StatusCanceled,
-			})
-			if err != nil {
-				web.SendError(c, w, err, 500, "Error marking order as cancelled")
-				return
-			}
-
-			err = email.SendPaymentDeclinedNotification(c, customer.Desc, customer.Email)
-			if err != nil {
-				web.SendError(c, w, err, 500, "Error sending payment declined email")
-			}
-
-			web.SendJSON(c, w, ChargeResponse{Success: false})
-			return
-
-		default:
-			web.SendError(c, w, err, 500, "Error charging card")
+		customer, err := sc.Customers.Get(customerID, nil)
+		if err != nil {
+			web.SendError(c, w, err, 500, "Error getting customer")
 			return
 		}
+
+		status := string(stripe.OrderStatusCanceled)
+		_, err = sc.Orders.Update(orderID, &stripe.OrderUpdateParams{
+			Status: &status,
+		})
+		if err != nil {
+			web.SendError(c, w, err, 500, "Error marking order as cancelled")
+			return
+		}
+
+		err = email.SendPaymentDeclinedNotification(c, customer.Description, customer.Email)
+		if err != nil {
+			web.SendError(c, w, err, 500, "Error sending payment declined email")
+		}
+
+		web.SendJSON(c, w, ChargeResponse{Success: false})
+		return
 
 	}
 
@@ -253,10 +234,11 @@ func ShipHandler(w http.ResponseWriter, r *http.Request) {
 	orderID := r.Form.Get("orderID")
 	trackingNumber := r.Form.Get("trackingNumber")
 
+	status := string(stripe.OrderStatusFulfilled)
 	order, err := sc.Orders.Update(orderID, &stripe.OrderUpdateParams{
-		Status: stripe.StatusFulfilled,
+		Status: &status,
 		Params: stripe.Params{
-			Meta: map[string]string{"tracking_number": trackingNumber},
+			Metadata: map[string]string{"tracking_number": trackingNumber},
 		},
 	})
 	if err != nil {
@@ -268,7 +250,7 @@ func ShipHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		web.LogError(c, err, "Error fetching customer info for email")
 	} else {
-		err = email.SendShippingNotification(c, customer.Desc, customer.Email, order.Shipping, trackingNumber)
+		err = email.SendShippingNotification(c, customer.Description, customer.Email, *order.Shipping, trackingNumber)
 		if err != nil {
 			web.LogError(c, err, "Error sending shipping notification")
 		}
@@ -276,4 +258,3 @@ func ShipHandler(w http.ResponseWriter, r *http.Request) {
 
 	web.SendJSON(c, w, ChargeResponse{Success: true})
 }
-
