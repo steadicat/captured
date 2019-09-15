@@ -1,7 +1,7 @@
 /* eslint no-var: 0, node: true */
 var path = require('path');
 var webpack = require('webpack');
-var config = require('../etc/config');
+var config = require('./etc/config');
 var AssetsPlugin = require('assets-webpack-plugin');
 
 var debug = process.env.NODE_ENV != 'production';
@@ -22,7 +22,7 @@ module.exports = {
         test: /\.(ts|tsx)$/,
         loader: 'ts-loader',
         exclude: /node_modules/,
-        options: { transpileOnly: true }
+        options: {transpileOnly: true}
       }
     ]
   },
@@ -42,15 +42,15 @@ module.exports = {
   devtool: debug && 'inline-source-map',
   plugins: [
     !debug &&
-      new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"production"' }),
+      new webpack.DefinePlugin({'process.env.NODE_ENV': '"production"'}),
     !profile &&
       !debug &&
       new webpack.optimize.UglifyJsPlugin({
         sourceMap: false,
         comments: false,
-        compress: { warnings: false }
+        compress: {warnings: false}
       }),
-    !debug && new AssetsPlugin({ path: './assets', filename: 'manifest.json' }),
+    !debug && new AssetsPlugin({path: './assets', filename: 'manifest.json'}),
     debug && new webpack.HotModuleReplacementPlugin(),
     !debug && new webpack.optimize.DedupePlugin()
   ].filter(function(x) {
