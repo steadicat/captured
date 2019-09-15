@@ -27,11 +27,11 @@ const StatusSelector = component(
   )
 );
 
-const Message = component('Message', ({get, ...props}) => (
+const Message = component('Message', ({get, actions, ...props}) => (
   <Block textAlign="center" {...props} padding={48} />
 ));
 
-const AdminButton = component('AdminButton', ({get, ...props}) => (
+const AdminButton = component('AdminButton', ({get, actions, ...props}) => (
   <MainButton
     paddingTop={7}
     paddingBottom={6}

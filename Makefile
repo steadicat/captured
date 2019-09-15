@@ -30,18 +30,18 @@ lint:
 	$(NODE_BIN)/eslint $(JS_DIR)
 
 profileassets:
-	NODE_ENV=production $(NODE_BIN)/webpack --config etc/webpack.config.js --profile --json > stats.json
+	NODE_ENV=production $(NODE_BIN)/webpack --profile --json > stats.json
 
 images:
 	curl https://thecapturedproject.com/api/images -o app/assets/images.json
 
 buildassets:
-	NODE_ENV=production $(NODE_BIN)/webpack --config etc/webpack.config.js
+	NODE_ENV=production $(NODE_BIN)/webpack
 
 buildhtml:
 	NODE_ENV=production $(NODE) -T build.ts
 
 deploy: buildassets buildhtml buildconfig
-	cd app && gcloud app deploy --project thecapturedproject --no-promote
+	cd app && gcloud app deploy --project thecapturedproject --version 1 --no-promote
 
 .PHONY: deps clean devhtml devassets devapi dev lint images buildassets buildhtml buildconfig deploy

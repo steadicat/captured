@@ -49,7 +49,7 @@ export const Animate = React.forwardRef(
   ) => {
     const ref = React.useRef<HTMLElement>();
     const animating = React.useRef(false);
-    const [, setState] = React.useState(null);
+    const [, setState] = React.useState({});
     const latestChildren = React.useRef(children);
     latestChildren.current = children;
 
@@ -64,7 +64,7 @@ export const Animate = React.forwardRef(
       onStart() {
         animating.current = true;
         if (typeof latestChildren.current === 'function') {
-          setState(null); // Trigger a re-render
+          setState({}); // Trigger a re-render
         }
 
         onStart && onStart();
@@ -72,7 +72,7 @@ export const Animate = React.forwardRef(
       onEnd() {
         animating.current = false;
         if (typeof latestChildren.current === 'function') {
-          setState(null); // Trigger a re-render
+          setState({}); // Trigger a re-render
         }
 
         onEnd && onEnd();

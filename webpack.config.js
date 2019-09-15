@@ -8,6 +8,7 @@ var debug = process.env.NODE_ENV != 'production';
 var profile = process.env.PROFILE == 'true';
 
 module.exports = {
+  mode: debug ? 'development' : 'production',
   entry: ['./src/captured'],
   module: {
     rules: [
@@ -25,7 +26,7 @@ module.exports = {
   output: {
     library: 'Captured',
     filename: debug ? 'captured.js' : 'captured-[hash].js',
-    path: path.join(__dirname, '..', config.ASSETS_DIR + '/'),
+    path: path.join(__dirname, config.ASSETS_DIR + '/'),
     publicPath: config.ASSETS_URL + '/',
     pathinfo: debug && !profile
   },
@@ -36,16 +37,9 @@ module.exports = {
   plugins: [
     !debug &&
       new webpack.DefinePlugin({'process.env.NODE_ENV': '"production"'}),
-    !profile &&
-      !debug &&
-      new webpack.optimize.UglifyJsPlugin({
-        sourceMap: false,
-        comments: false,
-        compress: {warnings: false}
-      }),
-    !debug && new AssetsPlugin({path: './assets', filename: 'manifest.json'}),
-    debug && new webpack.HotModuleReplacementPlugin(),
-    !debug && new webpack.optimize.DedupePlugin()
+    !debug &&
+      new AssetsPlugin({path: './app/assets', filename: 'manifest.json'}),
+    debug && new webpack.HotModuleReplacementPlugin()
   ].filter(function(x) {
     return !!x;
   })

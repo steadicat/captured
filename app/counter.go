@@ -1,11 +1,10 @@
-package store
+package api
 
 import (
 	"golang.org/x/net/context"
 	"google.golang.org/appengine/datastore"
 	"google.golang.org/appengine/log"
 	"google.golang.org/appengine/memcache"
-	"web"
 )
 
 type Counter struct {
@@ -14,7 +13,7 @@ type Counter struct {
 
 func getSoldCounter(c context.Context) int {
 	var cachedCounter int
-	_, err := memcache.JSON.Get(c, "sold", &cachedCounter)
+	_, err := memcache.JSON.Get(c, Get(c, "COUNTER_ID"), &cachedCounter)
 	if err == nil {
 		log.Infof(c, "[counter] Cache hit")
 		return cachedCounter
@@ -22,31 +21,31 @@ func getSoldCounter(c context.Context) int {
 
 	if err != memcache.ErrCacheMiss {
 		log.Infof(c, "[counter] Unexpected error")
-		web.LogError(c, err, "Error accessing counter in memcache")
+		LogError(c, err, "Error accessing counter in memcache")
 	} else {
 		log.Infof(c, "[counter] Cache miss")
 	}
 
 	sold := new(Counter)
-	key := datastore.NewKey(c, "Counter", "sold", 0, nil)
+	key := datastore.NewKey(c, "Counter", Get(c, "COUNTER_ID"), 0, nil)
 	err = datastore.Get(c, key, sold)
 	if err != nil && err != datastore.ErrNoSuchEntity {
-		web.LogError(c, err, "Error reading counter from datastore")
+		LogError(c, err, "Error reading counter from datastore")
 		return 0
 	}
 
 	err = memcache.JSON.Set(c, &memcache.Item{
-		Key:    "sold",
+		Key:    Get(c, "COUNTER_ID"),
 		Object: &sold.Value,
 	})
 	if err != nil {
-		web.LogError(c, err, "Error storing counter in memcache")
+		LogError(c, err, "Error storing counter in memcache")
 	}
 	return sold.Value
 }
 
 func incrementSoldCounter(c context.Context) error {
-	_, err := memcache.IncrementExisting(c, "sold", 1)
+	_, err := memcache.IncrementExisting(c, Get(c, "COUNTER_ID"), 1)
 	if err != nil {
 		if err == datastore.ErrNoSuchEntity {
 			log.Infof(c, "[counter] Cache miss when incrementing")
@@ -57,7 +56,7 @@ func incrementSoldCounter(c context.Context) error {
 
 	sold := new(Counter)
 	err = datastore.RunInTransaction(c, func(c context.Context) error {
-		key := datastore.NewKey(c, "Counter", "sold", 0, nil)
+		key := datastore.NewKey(c, "Counter", Get(c, "COUNTER_ID"), 0, nil)
 		err := datastore.Get(c, key, sold)
 		if err != nil && err != datastore.ErrNoSuchEntity {
 			return err

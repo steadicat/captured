@@ -1,9 +1,8 @@
-package images
+package api
 
 import (
 	"fmt"
 	"net/http"
-	"web"
 
 	"google.golang.org/api/iterator"
 	"google.golang.org/appengine"
@@ -19,13 +18,13 @@ type ImageListResponse struct {
 func ImageListHandler(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
 	if r.Method != "GET" {
-		web.SendError(c, w, nil, 405, "Method not supported")
+		SendError(c, w, nil, 405, "Method not supported")
 		return
 	}
 
 	client, err := storage.NewClient(c)
 	if err != nil {
-		web.SendError(c, w, err, 500, "Could not create client")
+		SendError(c, w, err, 500, "Could not create client")
 		return
 	}
 	defer client.Close()
@@ -34,7 +33,7 @@ func ImageListHandler(w http.ResponseWriter, r *http.Request) {
 	bucket := client.Bucket("thecapturedproject")
 	objects := bucket.Objects(c, query)
 	if err != nil {
-		web.SendError(c, w, err, 500, "Could not list images")
+		SendError(c, w, err, 500, "Could not list images")
 		return
 	}
 
@@ -49,17 +48,17 @@ func ImageListHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		blobKey, err := blobstore.BlobKeyForFile(c, fmt.Sprintf("/gs/thecapturedproject/%s", object.Name))
 		if err != nil {
-			web.LogError(c, err, fmt.Sprintf("Image %s ot found in blobstore", object.Name))
+			LogError(c, err, fmt.Sprintf("Image %s ot found in blobstore", object.Name))
 		}
 
 		url, err := image.ServingURL(c, blobKey, &image.ServingURLOptions{
 			Secure: true,
 		})
 		if err != nil {
-			web.LogError(c, err, fmt.Sprintf("Could not serve image %s", object.Name))
+			LogError(c, err, fmt.Sprintf("Could not serve image %s", object.Name))
 		}
 		response.Images[object.Name] = url.String()
 	}
 
-	web.SendJSON(c, w, response)
+	SendJSON(c, w, response)
 }

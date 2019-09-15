@@ -209,6 +209,7 @@ export const Home = component('Home', ({get, actions, ...props}) => (
       <Header trackKey="" />
       <Footer trackKey="act" />
       <Toolbar />
+      <Block transformX="-50%" />
     </Block>
   </DefaultFont>
 ));

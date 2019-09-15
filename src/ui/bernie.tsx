@@ -2,7 +2,7 @@ import {InlineBlock} from '../stylistic-elements';
 import React from 'react';
 import component from '../lib/component';
 
-export const Bernie = component('Bernie', ({get, ...props}) => (
+export const Bernie = component('Bernie', ({get, actions, ...props}) => (
   <InlineBlock tag="svg" viewBox="0 300 1000 320" {...props}>
     <path
       id="bottom_swoosh"

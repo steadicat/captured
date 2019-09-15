@@ -78,11 +78,11 @@ export const Input = component('Input', ({label, get, ...props}) => (
   <ResetElement tag="input" type="text" placeholder={label} {...props} />
 ));
 
-export const List = component('List', ({get, ...props}) => (
+export const List = component('List', ({get, actions, ...props}) => (
   <ResetElement tag="ul" {...props} />
 ));
 
-export const ListItem = component('ListItem', ({get, ...props}) => (
+export const ListItem = component('ListItem', ({get, actions, ...props}) => (
   <ResetElement tag="li" {...props} />
 ));
 

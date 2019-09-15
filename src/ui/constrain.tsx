@@ -3,7 +3,7 @@ import {ResetElement} from '../stylistic-elements';
 import component from '../lib/component';
 import {isExpanded} from '../ui/gallerylayout';
 
-export const Body = component('Body', ({get, ...props}) => (
+export const Body = component('Body', ({get, actions, ...props}) => (
   <ResetElement
     tag="body"
     overflow={isExpanded(get('path')) ? 'hidden' : null}

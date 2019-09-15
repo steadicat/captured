@@ -3,7 +3,7 @@ import {Element, InlineBlock} from '../stylistic-elements';
 import React from 'react';
 import component from '../lib/component';
 
-export const Column = component('Column', ({get, ...props}) => (
+export const Column = component('Column', ({get, actions, ...props}) => (
   <InlineBlock verticalAlign="top" boxSizing="border-box" {...props} />
 ));
 

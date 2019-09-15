@@ -1,8 +1,6 @@
-application: thecapturedproject
-version: 1
 runtime: go
 api_version: go1
-default_expiration: "5m"
+default_expiration: "1m"
 
 handlers:
 - url: /api/(orders|charge|ship)

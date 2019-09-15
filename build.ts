@@ -1,13 +1,15 @@
 /* eslint-env node */
 /* eslint no-console: 0, no-var: 0 */
-var fs = require('fs');
-var path = require('path');
-var mkdirp = require('mkdirp');
-var ducts = require('./src/ducts');
-var ReactDOMServer = require('react-dom/server');
-var Page = require('./src/ui/page');
-var actions = require('./src/actions');
-var data = require('./src/data');
+
+import * as Page from './src/ui/page';
+import * as ReactDOMServer from 'react-dom/server';
+import * as actions from './src/actions';
+import * as ducts from './src/ducts';
+import * as fs from 'fs';
+import * as mkdirp from 'mkdirp';
+import * as path from 'path';
+
+import data from './src/data';
 
 var paths = {
   '/': 'app/assets/index.html',

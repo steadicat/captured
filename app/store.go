@@ -1,16 +1,12 @@
-package store
+package api
 
 import (
-	"config"
-	"email"
 	"encoding/json"
 	"net/http"
-	"web"
 
 	"github.com/stripe/stripe-go"
 	"github.com/stripe/stripe-go/client"
 	"google.golang.org/appengine"
-	"google.golang.org/appengine/log"
 	"google.golang.org/appengine/urlfetch"
 )
 
@@ -41,7 +37,7 @@ type PaymentResponse struct {
 func SoldHandler(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
 	sold := getSoldCounter(c)
-	web.SendJSON(c, w, SoldResponse{Sold: sold})
+	SendJSON(c, w, SoldResponse{Sold: sold})
 }
 
 func PaymentHandler(w http.ResponseWriter, r *http.Request) {
@@ -50,14 +46,14 @@ func PaymentHandler(w http.ResponseWriter, r *http.Request) {
 	body := new(PaymentRequestBody)
 	err := decoder.Decode(&body)
 	if err != nil {
-		web.SendError(c, w, err, 400, "Could not parse payment information")
+		SendError(c, w, err, 400, "Could not parse payment information")
 		return
 	}
 
 	token := body.Token
 	args := body.Args
 
-	sc := client.New(config.Get(c, "STRIPE_KEY"), stripe.NewBackends(urlfetch.Client(c)))
+	sc := client.New(Get(c, "STRIPE_KEY"), stripe.NewBackends(urlfetch.Client(c)))
 
 	shipping := &stripe.ShippingParams{
 		Name: &args.ShippingName,
@@ -78,13 +74,13 @@ func PaymentHandler(w http.ResponseWriter, r *http.Request) {
 	})
 
 	if err != nil {
-		web.SendError(c, w, err, 500, "Error saving customer to Stripe")
+		SendError(c, w, err, 500, "Error saving customer to Stripe")
 		return
 	}
 
 	usd := "usd"
 	sku := "sku"
-	book := "book-softcover"
+	book := Get(c, "SKU")
 	order, err := sc.Orders.New(&stripe.OrderParams{
 		Currency: &usd,
 		Customer: &customer.ID,
@@ -97,21 +93,21 @@ func PaymentHandler(w http.ResponseWriter, r *http.Request) {
 		},
 	})
 	if err != nil {
-		web.SendError(c, w, err, 500, "Error saving order to Stripe")
+		SendError(c, w, err, 500, "Error saving order to Stripe")
 		return
 	}
 
 	err = incrementSoldCounter(c)
 	if err != nil {
-		web.LogError(c, err, "Error incrementing sold counter")
+		LogError(c, err, "Error incrementing sold counter")
 	}
 
-	err = email.SendReceipt(c, args.BillingName, token.Email, *order.Shipping)
+	err = SendReceipt(c, args.BillingName, token.Email, *order.Shipping)
 	if err != nil {
-		web.LogError(c, err, "Error sending receipt")
+		LogError(c, err, "Error sending receipt")
 	}
 
-	web.SendJSON(c, w, PaymentResponse{Ok: true})
+	SendJSON(c, w, PaymentResponse{Ok: true})
 }
 
 type OrdersResponse struct {
@@ -129,9 +125,9 @@ type ShortOrder struct {
 
 func OrdersHandler(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
-	sc := client.New(config.Get(c, "STRIPE_KEY"), stripe.NewBackends(urlfetch.Client(c)))
+	sc := client.New(Get(c, "STRIPE_KEY"), stripe.NewBackends(urlfetch.Client(c)))
 
-	lastKey := "or_178jDNKpn8lOrcLs15hXSTL8"
+	lastKey := Get(c, "FIRST_ORDER_ID")
 
 	r.ParseForm()
 
@@ -163,18 +159,18 @@ func OrdersHandler(w http.ResponseWriter, r *http.Request) {
 	var response OrdersResponse
 	response.Orders = []*ShortOrder{}
 
+	sku := Get(c, "SKU")
 	for iter.Next() {
 		o := iter.Order()
 		if stripe.OrderStatus(o.Status) == stripe.OrderStatusCanceled {
 			continue
 		}
 		ignore := true
-		log.Warningf(c, "[debug] (%+v)", o.Items[0].Parent)
 		for _, item := range o.Items {
 			if item.Parent == nil {
 				continue
 			}
-			if item.Parent.ID == "book-softcover" {
+			if item.Parent.ID == sku {
 				ignore = false
 				break
 			}
@@ -192,7 +188,7 @@ func OrdersHandler(w http.ResponseWriter, r *http.Request) {
 		})
 	}
 
-	web.SendJSON(c, w, response)
+	SendJSON(c, w, response)
 }
 
 type ChargeResponse struct {
@@ -201,7 +197,7 @@ type ChargeResponse struct {
 
 func ChargeHandler(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
-	sc := client.New(config.Get(c, "STRIPE_KEY"), stripe.NewBackends(urlfetch.Client(c)))
+	sc := client.New(Get(c, "STRIPE_KEY"), stripe.NewBackends(urlfetch.Client(c)))
 
 	r.ParseForm()
 	orderID := r.Form.Get("orderID")
@@ -212,11 +208,11 @@ func ChargeHandler(w http.ResponseWriter, r *http.Request) {
 	})
 	if err != nil {
 		//stripeErr := err.(*stripe.Error)
-		web.LogError(c, err, "Error from Stripe")
+		LogError(c, err, "Error from Stripe")
 
 		customer, err := sc.Customers.Get(customerID, nil)
 		if err != nil {
-			web.SendError(c, w, err, 500, "Error getting customer")
+			SendError(c, w, err, 500, "Error getting customer")
 			return
 		}
 
@@ -225,26 +221,26 @@ func ChargeHandler(w http.ResponseWriter, r *http.Request) {
 			Status: &status,
 		})
 		if err != nil {
-			web.SendError(c, w, err, 500, "Error marking order as cancelled")
+			SendError(c, w, err, 500, "Error marking order as cancelled")
 			return
 		}
 
-		err = email.SendPaymentDeclinedNotification(c, customer.Description, customer.Email)
+		err = SendPaymentDeclinedNotification(c, customer.Description, customer.Email)
 		if err != nil {
-			web.SendError(c, w, err, 500, "Error sending payment declined email")
+			SendError(c, w, err, 500, "Error sending payment declined email")
 		}
 
-		web.SendJSON(c, w, ChargeResponse{Success: false})
+		SendJSON(c, w, ChargeResponse{Success: false})
 		return
 
 	}
 
-	web.SendJSON(c, w, ChargeResponse{Success: true})
+	SendJSON(c, w, ChargeResponse{Success: true})
 }
 
 func ShipHandler(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
-	sc := client.New(config.Get(c, "STRIPE_KEY"), stripe.NewBackends(urlfetch.Client(c)))
+	sc := client.New(Get(c, "STRIPE_KEY"), stripe.NewBackends(urlfetch.Client(c)))
 
 	r.ParseForm()
 	orderID := r.Form.Get("orderID")
@@ -258,19 +254,19 @@ func ShipHandler(w http.ResponseWriter, r *http.Request) {
 		},
 	})
 	if err != nil {
-		web.SendError(c, w, err, 500, "Error marking order as fulfilled")
+		SendError(c, w, err, 500, "Error marking order as fulfilled")
 		return
 	}
 
 	customer, err := sc.Customers.Get(order.Customer.ID, nil)
 	if err != nil {
-		web.LogError(c, err, "Error fetching customer info for email")
+		LogError(c, err, "Error fetching customer info for email")
 	} else {
-		err = email.SendShippingNotification(c, customer.Description, customer.Email, *order.Shipping, trackingNumber)
+		err = SendShippingNotification(c, customer.Description, customer.Email, *order.Shipping, trackingNumber)
 		if err != nil {
-			web.LogError(c, err, "Error sending shipping notification")
+			LogError(c, err, "Error sending shipping notification")
 		}
 	}
 
-	web.SendJSON(c, w, ChargeResponse{Success: true})
+	SendJSON(c, w, ChargeResponse{Success: true})
 }

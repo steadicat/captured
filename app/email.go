@@ -1,7 +1,6 @@
-package email
+package api
 
 import (
-	"config"
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
@@ -58,7 +57,7 @@ func send(c context.Context, message *PostmarkMessage) error {
 	}
 
 	req.Header.Add("Content-Type", "application/json")
-	req.Header.Add("X-Postmark-Server-Token", config.Get(c, "POSTMARK_KEY"))
+	req.Header.Add("X-Postmark-Server-Token", Get(c, "POSTMARK_KEY"))
 
 	res, err := client.Do(req)
 	log.Infof(c, "Postmark: %v %v %v", req, res, err)
