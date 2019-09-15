@@ -83,7 +83,7 @@ func PaymentHandler(w http.ResponseWriter, r *http.Request) {
 
 	usd := "usd"
 	sku := "sku"
-	book := "book"
+	book := "book-softcover"
 	order, err := sc.Orders.New(&stripe.OrderParams{
 		Currency: &usd,
 		Customer: &customer.ID,

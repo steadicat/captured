@@ -24,7 +24,7 @@ export function init(path) {
     title: 'Captured',
     sold: 0,
     total: 1000,
-    price: 40,
+    price: 30,
     browser: {
       width: 800,
       height: 600,

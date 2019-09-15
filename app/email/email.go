@@ -5,16 +5,17 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"github.com/stripe/stripe-go"
-	"golang.org/x/net/context"
-	"google.golang.org/appengine/log"
-	"google.golang.org/appengine/urlfetch"
 	"io/ioutil"
 	"mime"
 	"net/http"
 	"path/filepath"
 	"strings"
 	"time"
+
+	"github.com/stripe/stripe-go"
+	"golang.org/x/net/context"
+	"google.golang.org/appengine/log"
+	"google.golang.org/appengine/urlfetch"
 )
 
 type PostmarkMessageHeader struct {
@@ -101,7 +102,7 @@ func SendReceipt(c context.Context, name string, email string, shipping stripe.S
 		TemplateId: 5705,
 		TemplateModel: map[string]interface{}{
 			"date":          time.Now().Format("1/2/2006"),
-			"total":         "$40",
+			"total":         "$30",
 			"billing_name":  name,
 			"shipping_name": shipping.Name,
 			"address":       shipping.Address,
@@ -118,7 +119,7 @@ func SendShippingNotification(c context.Context, name string, email string, ship
 		TemplateId: 216881,
 		TemplateModel: map[string]interface{}{
 			"date":            time.Now().Format("1/2/2006"),
-			"total":           "$40",
+			"total":           "$30",
 			"billing_name":    name,
 			"shipping_name":   shipping.Name,
 			"address":         shipping.Address,
@@ -136,7 +137,7 @@ func SendPaymentDeclinedNotification(c context.Context, name string, email strin
 		TemplateId: 440161,
 		TemplateModel: map[string]interface{}{
 			"date":         time.Now().Format("1/2/2006"),
-			"total":        "$40",
+			"total":        "$30",
 			"billing_name": name,
 		},
 		Attachments: getAttachments(c),

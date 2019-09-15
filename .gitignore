@@ -1,11 +1,5 @@
-*.key
-*.crt
-*.pem
-*.csr
 assets
-misc
 config.json
-/etc/local.js
-/etc/google-cloud-api.json
+/local.js
 app.yaml
 /node_modules/
