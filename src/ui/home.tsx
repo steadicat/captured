@@ -122,17 +122,17 @@ export const Footer = track(
       >
         {get('sold') > 0
           ? get('sold') < 1000
-            ? `Limited run of softcover copies. ${get('sold')} of ${get(
-                'total'
-              )} copies sold.`
+            ? `Limited run of softcover copies. ${get('sold').toLocaleString(
+                'en-US'
+              )} of ${get('total').toLocaleString('en-US')} copies sold.`
             : 'The book is currently sold out. Orders placed now will be put on standby and only billed if copies become available.'
-          : 'Limited edition of 1000 softcover copies.'}
+          : 'Limited edition of 1,000 softcover copies.'}
       </Text>
       <Text
         marginTop={24}
         marginLeft="auto"
         marginRight="auto"
-        maxWidth={648}
+        maxWidth={538}
         paddingLeft={24}
         paddingRight={24}
       >
@@ -145,7 +145,7 @@ export const Footer = track(
         marginTop={12}
         marginLeft="auto"
         marginRight="auto"
-        maxWidth={648}
+        maxWidth={538}
         paddingLeft={24}
         paddingRight={24}
       >
@@ -163,7 +163,7 @@ export const Footer = track(
         marginBottom={48}
         marginLeft="auto"
         marginRight="auto"
-        maxWidth={648}
+        maxWidth={538}
         paddingLeft={24}
         paddingRight={24}
       >
