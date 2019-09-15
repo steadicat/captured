@@ -10,6 +10,7 @@ import (
 	"github.com/stripe/stripe-go"
 	"github.com/stripe/stripe-go/client"
 	"google.golang.org/appengine"
+	"google.golang.org/appengine/log"
 	"google.golang.org/appengine/urlfetch"
 )
 
@@ -130,7 +131,7 @@ func OrdersHandler(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
 	sc := client.New(config.Get(c, "STRIPE_KEY"), stripe.NewBackends(urlfetch.Client(c)))
 
-	lastKey := "or_17fQDrKpn8lOrcLslDTTOnWv"
+	lastKey := "or_178jDNKpn8lOrcLs15hXSTL8"
 
 	r.ParseForm()
 
@@ -163,17 +164,32 @@ func OrdersHandler(w http.ResponseWriter, r *http.Request) {
 	response.Orders = []*ShortOrder{}
 
 	for iter.Next() {
-		if stripe.OrderStatus(iter.Order().Status) != stripe.OrderStatusCanceled {
-			o := iter.Order()
-			response.Orders = append(response.Orders, &ShortOrder{
-				ID:       o.ID,
-				Created:  o.Created,
-				Status:   stripe.OrderStatus(o.Status),
-				Shipping: stripe.Shipping(*o.Shipping),
-				Customer: o.Customer,
-				Meta:     o.Metadata,
-			})
+		o := iter.Order()
+		if stripe.OrderStatus(o.Status) == stripe.OrderStatusCanceled {
+			continue
 		}
+		ignore := true
+		log.Warningf(c, "[debug] (%+v)", o.Items[0].Parent)
+		for _, item := range o.Items {
+			if item.Parent == nil {
+				continue
+			}
+			if item.Parent.ID == "book-softcover" {
+				ignore = false
+				break
+			}
+		}
+		if ignore {
+			continue
+		}
+		response.Orders = append(response.Orders, &ShortOrder{
+			ID:       o.ID,
+			Created:  o.Created,
+			Status:   stripe.OrderStatus(o.Status),
+			Shipping: stripe.Shipping(*o.Shipping),
+			Customer: o.Customer,
+			Meta:     o.Metadata,
+		})
 	}
 
 	web.SendJSON(c, w, response)
