@@ -1,10 +1,13 @@
-import raf from 'raf';
-import React, {MutableRefObject, CSSProperties} from 'react';
-import rebound, {Spring, SpringConfig} from 'rebound';
-import MultiSpring from './MultiSpring';
 import {AnimatableProps, toStyle} from './style';
+import React, {CSSProperties, MutableRefObject} from 'react';
+import rebound, {Spring, SpringConfig} from 'rebound';
 
-type SpringForProp<Prop extends keyof AnimatableProps> = AnimatableProps[Prop] extends number[]
+import MultiSpring from './MultiSpring';
+import raf from 'raf';
+
+type SpringForProp<
+  Prop extends keyof AnimatableProps
+> = AnimatableProps[Prop] extends number[]
   ? MultiSpring<AnimatableProps[Prop]>
   : Spring;
 
@@ -19,14 +22,16 @@ function usePersisted<Value>(value: Value) {
 function createSpring<Prop extends keyof AnimatableProps>(
   startValue: AnimatableProps[Prop],
   tension: number,
-  friction: number,
+  friction: number
 ) {
   let spring;
   if (Array.isArray(startValue)) {
     spring = new MultiSpring(springSystem, new SpringConfig(tension, friction));
     spring.setCurrentValue(startValue);
   } else {
-    spring = springSystem.createSpringWithConfig(new SpringConfig(tension, friction));
+    spring = springSystem.createSpringWithConfig(
+      new SpringConfig(tension, friction)
+    );
     spring.setCurrentValue((startValue as unknown) as number);
   }
   return spring as SpringForProp<Prop>;
@@ -44,7 +49,7 @@ export function useAnimation<Props extends keyof Partial<AnimatableProps>>(
     speedThreshold = 0.001,
     clamp = false,
     onStart,
-    onEnd,
+    onEnd
   }: {
     animate?: boolean;
     tension?: number;
@@ -55,7 +60,7 @@ export function useAnimation<Props extends keyof Partial<AnimatableProps>>(
     clamp?: boolean;
     onStart?: () => void;
     onEnd?: () => void;
-  } = {},
+  } = {}
 ) {
   const springs = React.useRef({} as {[Prop in Props]: SpringForProp<Prop>});
   const animating = React.useRef(0);
@@ -87,8 +92,9 @@ export function useAnimation<Props extends keyof Partial<AnimatableProps>>(
       const style = toStyle(currentValues);
       for (const p in style) {
         const prop = p as keyof CSSProperties;
-        ref.current.style[prop as Exclude<keyof CSSStyleDeclaration, 'length' | 'parentRule'>] =
-          style[prop];
+        ref.current.style[
+          prop as Exclude<keyof CSSStyleDeclaration, 'length' | 'parentRule'>
+        ] = style[prop];
       }
     }
 

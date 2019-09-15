@@ -1,4 +1,10 @@
-import {CondensedText, DefaultFont, LightCondensedText, Text} from '../ui/type';
+import {
+  BoldText,
+  CondensedText,
+  DefaultFont,
+  LightCondensedText,
+  Text
+} from '../ui/type';
 import {HeaderSubtitle, HeaderTitle} from '../ui/header';
 
 import {Block} from '../stylistic-elements';
@@ -116,12 +122,44 @@ export const Footer = track(
       >
         {get('sold') > 0
           ? get('sold') < 1000
-            ? `Limited edition. ${get('sold')} of ${get('total')} copies sold.`
-            : 'The limited edition book is currently sold out. Orders placed now will be put on standby and only billed if copies become available.'
-          : 'Limited edition of 1000 copies.'}
+            ? `Limited run of softcover copies. ${get('sold')} of ${get(
+                'total'
+              )} copies sold.`
+            : 'The book is currently sold out. Orders placed now will be put on standby and only billed if copies become available.'
+          : 'Limited edition of 1000 softcover copies.'}
       </Text>
       <Text
         marginTop={24}
+        marginLeft="auto"
+        marginRight="auto"
+        maxWidth={648}
+        paddingLeft={24}
+        paddingRight={24}
+      >
+        A limited run of 1,000{' '}
+        <BoldText tag="strong">softcover versions</BoldText> of the book are now
+        available for $30 (including shipping). These are for sale in the USA
+        only.
+      </Text>
+      <Text
+        marginTop={12}
+        marginLeft="auto"
+        marginRight="auto"
+        maxWidth={648}
+        paddingLeft={24}
+        paddingRight={24}
+      >
+        In 2016, 1,000 hardcover books (shown above) sold out in one week. All
+        profits went towards efforts to elect{' '}
+        <TextLink target="_blank" href="https://berniesanders.com/">
+          Bernie Sanders
+        </TextLink>{' '}
+        as&nbsp;president, since holding corporations responsible for their
+        crimes, reforming the criminal justice system, and removing corporate
+        control over government were pillars of his campaign.
+      </Text>
+      <Text
+        marginTop={12}
         marginBottom={48}
         marginLeft="auto"
         marginRight="auto"
@@ -129,14 +167,10 @@ export const Footer = track(
         paddingLeft={24}
         paddingRight={24}
       >
-        60-page, high-quality printed hardcover. All profits go towards efforts
-        to elect{' '}
-        <TextLink target="_blank" href="https://berniesanders.com/">
-          Bernie Sanders
-        </TextLink>{' '}
-        as&nbsp;president. Holding corporations responsible for their crimes,
-        reforming the criminal justice system, and removing corporate control
-        over government are pillars of his campaign.
+        All profits from this{' '}
+        <BoldText tag="strong">softcover version</BoldText> will be donated to
+        charities fighting to lessen corporate influence over campaigns and
+        government.
       </Text>
       <Block paddingBottom={96}>
         <TextLink

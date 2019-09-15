@@ -22,7 +22,7 @@ class LinkClass extends React.Component {
   };
 
   render() {
-    const {get, ...props} = this.props;
+    const {get, forwardedRef, ...props} = this.props;
     return (
       <ResetElement
         tag="a"
@@ -30,12 +30,15 @@ class LinkClass extends React.Component {
         style={{WebkitTapHighlightColor: 'transparent'}}
         onClick={this.onLinkClick}
         {...props}
+        ref={forwardedRef}
       />
     );
   }
 }
 
-export const Link = connect(LinkClass);
+export const Link = connect(
+  React.forwardRef((props, ref) => <LinkClass {...props} forwardedRef={ref} />)
+);
 
 export const TextLink = hover(
   component('TextLink', ({get, hovered, ...props}) => (

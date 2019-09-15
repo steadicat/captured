@@ -122,14 +122,6 @@ export const Animate = React.forwardRef(
         } else if (typeof child.ref === 'function') {
           child.ref(element);
         }
-        /*
-        console.log(forwardedRef);
-        if (forwardedRef && 'current' in forwardedRef) {
-          forwardedRef.current = element;
-        } else if (typeof forwardedRef === 'function') {
-          forwardedRef(element);
-        }
-        */
       }
     });
   }
