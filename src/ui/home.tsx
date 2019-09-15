@@ -1,14 +1,13 @@
 import {CondensedText, DefaultFont, LightCondensedText, Text} from '../ui/type';
 import {HeaderSubtitle, HeaderTitle} from '../ui/header';
-import {Link, TextLink} from '../ui/core';
 
-import {Bernie} from '../ui/bernie';
 import {Block} from '../stylistic-elements';
 import {Gallery} from '../ui/gallery';
 import {HoverBuyButton} from '../ui/buy';
 import {Image} from '../ui/image';
 import React from 'react';
 import {SocialLinks} from '../ui/social';
+import {TextLink} from '../ui/core';
 import {Toolbar} from '../ui/toolbar';
 import component from '../lib/component';
 import {linear} from '../lib/math';
@@ -33,21 +32,6 @@ export const Header = track(
       <Block tag="h2" display="none">
         People in prison drawing people who should be
       </Block>
-      {get('browser.mobile') && (
-        <Block
-          position="absolute"
-          zIndex={1}
-          top="72vh"
-          left={0}
-          right={0}
-          textAlign="center"
-        >
-          All profits go to help elect{' '}
-          <Link target="_blank" href="https://berniesanders.com/">
-            <Bernie height={16} />
-          </Link>
-        </Block>
-      )}
       <Block height="100vh" position="relative">
         <Block
           position="absolute"

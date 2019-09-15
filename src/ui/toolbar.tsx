@@ -1,12 +1,11 @@
-import {Block, InlineBlock} from '../stylistic-elements';
 import {CondensedText, SmallCaps} from '../ui/type';
-import {Link, TextLink} from '../ui/core';
 
 import {Animate} from '../react-rebound';
-import {Bernie} from '../ui/bernie';
+import {Block} from '../stylistic-elements';
 import {BuyButton} from '../ui/buy';
 import React from 'react';
 import {SocialButtons} from '../ui/social';
+import {TextLink} from '../ui/core';
 import {connect} from '../ducts';
 
 class ToolbarClass extends React.Component {
@@ -26,7 +25,6 @@ class ToolbarClass extends React.Component {
   render() {
     const {get, back, ...props} = this.props;
     const {hovered} = this.state;
-    console.log(get('browser.known'));
     return (
       <Animate
         scaleX={hovered ? 1.05 : 1}
@@ -71,27 +69,10 @@ class ToolbarClass extends React.Component {
             onMouseEnter={this.onMouseEnter}
             onMouseLeave={this.onMouseLeave}
             hovered={this.state.hovered}
-            marginLeft={
-              get('browser.mobile') ? 0 : get('browser.width') > 900 ? 200 : 0
-            }
+            marginLeft={16}
             paddingLeft={16}
             paddingRight={16}
           />
-          {!get('browser.mobile') && (
-            <InlineBlock
-              visibility={hovered ? 'hidden' : null}
-              paddingTop={7}
-              paddingBottom={8}
-              whiteSpace="nowrap"
-            >
-              {get('browser.width') > 900
-                ? 'All profits go to help elect'
-                : 'Help elect'}{' '}
-              <Link target="_blank" href="https://berniesanders.com/">
-                <Bernie height={16} />
-              </Link>
-            </InlineBlock>
-          )}
           <SmallCaps>
             <Block
               position="absolute"
