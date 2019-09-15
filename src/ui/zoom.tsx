@@ -1,6 +1,6 @@
 import React from 'react';
-import {connect} from 'ducts';
-import {Block} from 'stylistic-elements';
+import {connect} from '../ducts';
+import {Block} from '../stylistic-elements';
 import {linear} from '../lib/math';
 import * as history from '../lib/history';
 import {trimPathEnd} from '../lib/strings';

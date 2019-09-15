@@ -1,6 +1,6 @@
 import {ReactSVG} from 'react';
 
-declare module 'stylistic-elements' {
+declare module '../stylistic-elements' {
   type Tag = keyof React.ReactHTML | keyof ReactSVG;
   type Attributes =
     | React.HTMLAttributes<HTMLDivElement>

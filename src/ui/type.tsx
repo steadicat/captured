@@ -1,5 +1,5 @@
 import React from 'react';
-import {ResetElement} from 'stylistic-elements';
+import {ResetElement} from '../stylistic-elements';
 import component from '../lib/component';
 
 export const REGULAR = 'roboto, sans-serif';
@@ -12,7 +12,7 @@ export const DefaultFont = component('DefaultFont', ({children, ...props}) =>
     fontWeight: 300,
     lineHeight: 24,
     textRendering: 'optimizeLegibility',
-    color: '#444',
+    color: '#444'
   })
 );
 
@@ -22,7 +22,7 @@ export const SmallCaps = component('SmallCaps', ({children, ...props}) =>
     fontWeight: 300,
     textTransform: 'uppercase',
     letterSpacing: 0.5,
-    fontSize: '86%',
+    fontSize: '86%'
   })
 );
 
@@ -32,11 +32,11 @@ export const BoldSmallCaps = component('SmallCaps', ({children, ...props}) =>
     fontWeight: 700,
     textTransform: 'uppercase',
     letterSpacing: 0.5,
-    fontSize: '86%',
+    fontSize: '86%'
   })
 );
 
-export const PageTitle = component('PageTitle', (props) =>
+export const PageTitle = component('PageTitle', props => (
   <ResetElement
     tag="h1"
     fontFamily={CONDENSED}
@@ -45,9 +45,9 @@ export const PageTitle = component('PageTitle', (props) =>
     lineHeight={96}
     {...props}
   />
-);
+));
 
-export const PageSubtitle = component('PageSubtitle', (props) =>
+export const PageSubtitle = component('PageSubtitle', props => (
   <ResetElement
     tag="h2"
     fontFamily={CONDENSED}
@@ -56,9 +56,9 @@ export const PageSubtitle = component('PageSubtitle', (props) =>
     fontSize={20}
     {...props}
   />
-);
+));
 
-export const PageHeading = component('PageSubtitle', (props) =>
+export const PageHeading = component('PageSubtitle', props => (
   <ResetElement
     tag="h3"
     fontFamily={CONDENSED}
@@ -67,28 +67,25 @@ export const PageHeading = component('PageSubtitle', (props) =>
     fontSize={24}
     {...props}
   />
-);
+));
 
-export const Text = component('Text', (props) =>
+export const Text = component('Text', ({$, get, ...props}) => (
   <ResetElement tag="p" {...props} />
-);
+));
 
-export const BoldText = component('BoldText', (props) =>
+export const BoldText = component('BoldText', props => (
   <Text fontWeight={700} {...props} />
-);
+));
 
-export const CondensedText = component('CondensedText', props =>
+export const CondensedText = component('CondensedText', props => (
   <Text
     fontFamily={CONDENSED}
     fontWeight={700}
     textTransform="uppercase"
     {...props}
-  />);
+  />
+));
 
-export const LightCondensedText = component('CondensedText', props =>
-  <Text
-    fontFamily={CONDENSED}
-    fontWeight={300}
-    {...props}
-  />);
-
+export const LightCondensedText = component('CondensedText', props => (
+  <Text fontFamily={CONDENSED} fontWeight={300} {...props} />
+));

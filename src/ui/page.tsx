@@ -1,4 +1,4 @@
-import {Root, connect} from 'ducts';
+import {Root, connect} from '../ducts';
 
 import {Body} from '../ui/constrain';
 import React from 'react';
@@ -93,7 +93,7 @@ function trailingSlash(url) {
   return url + '/';
 }
 
-export const Page = component('Page', ({$, store, children}) => (
+export const Page = component('Page', ({$, get, store, children}) => (
   <html>
     <head>
       <title>{getTitle($('path'))}</title>
@@ -113,42 +113,42 @@ export const Page = component('Page', ({$, store, children}) => (
         rel="preload"
         as="font"
         type="font/woff2"
-        crossOrigin
+        crossOrigin="true"
         href="https://fonts.gstatic.com/s/roboto/v15/Hgo13k-tfSpn0qi1SFdUfZBw1xU1rKptJj_0jans920.woff2"
       />
       <link
         rel="preload"
         as="font"
         type="font/woff2"
-        crossOrigin
+        crossOrigin="true"
         href="https://fonts.gstatic.com/s/roboto/v15/d-6IYplOFocCacKzxwXSOJBw1xU1rKptJj_0jans920.woff2"
       />
       <link
         rel="preload"
         as="font"
         type="font/woff2"
-        crossOrigin
+        crossOrigin="true"
         href="https://fonts.gstatic.com/s/roboto/v15/7m8l7TlFO-S3VkhHuR0at4gp9Q8gbYrhqGlRav_IXfk.woff2"
       />
       <link
         rel="preload"
         as="font"
         type="font/woff2"
-        crossOrigin
+        crossOrigin="true"
         href="https://fonts.gstatic.com/s/robotocondensed/v13/b9QBgL0iMZfDSpmcXcE8nCqOJfobX9lrC1wFVe9k15E.woff2"
       />
       <link
         rel="preload"
         as="font"
         type="font/woff2"
-        crossOrigin
+        crossOrigin="true"
         href="https://fonts.gstatic.com/s/robotocondensed/v13/b9QBgL0iMZfDSpmcXcE8nPX2or14QGUHgbhSBV1Go0E.woff2"
       />
       <link
         rel="preload"
         as="font"
         type="font/woff2"
-        crossOrigin
+        crossOrigin="true"
         href="https://fonts.gstatic.com/s/robotocondensed/v13/mg0cGfGRUERshzBlvqxeAL8HwCiP7DYII36AlQZXXQeglnMp3_3A8V8Ai8YosRtX.woff2"
       />
       <link

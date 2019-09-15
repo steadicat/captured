@@ -14,7 +14,7 @@ export const Router = component('Router', ({get}) => {
 });
 
 
-import {Block} from 'stylistic-elements';
+import {Block} from '../stylistic-elements';
 import {DefaultFont, PageTitle} from '../ui/type';
 import {TextLink} from '../ui/core';
 

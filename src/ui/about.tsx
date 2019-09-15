@@ -1,7 +1,7 @@
 import React from 'react';
 import component from '../lib/component';
 import {track} from '../lib/behaviors';
-import {Block, InlineBlock, Inline} from 'stylistic-elements';
+import {Block, InlineBlock, Inline} from '../stylistic-elements';
 import {TextLink, Link, Close} from '../ui/core';
 import {Toolbar} from '../ui/toolbar';
 import {ResponsiveColumn} from '../ui/layout';

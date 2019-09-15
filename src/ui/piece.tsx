@@ -1,5 +1,5 @@
 import React from 'react';
-import {Block, ResetElement, InlineBlock, Inline} from 'stylistic-elements';
+import {Block, ResetElement, InlineBlock, Inline} from '../stylistic-elements';
 import {Animate} from 'react-rebound';
 import component from '../lib/component';
 import {track} from '../lib/behaviors';

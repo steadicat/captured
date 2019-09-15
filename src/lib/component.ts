@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect} from 'ducts';
+import {connect} from '../ducts';
 
 const DEBUG = process.env.NODE_ENV !== 'production';
 

@@ -1,10 +1,10 @@
 import * as script from '../lib/script';
 
-import {Block} from 'stylistic-elements';
+import {Block} from '../stylistic-elements';
 import {Button} from '../ui/core';
 import React from 'react';
 import config from '../../config';
-import {connect} from 'ducts';
+import {connect} from '../ducts';
 import superagent from 'superagent';
 
 @connect

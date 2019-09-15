@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {connect} from 'ducts';
+import {connect} from '../ducts';
 import {getWindowScrollY} from './scroll';
 
 export function hover(Component) {

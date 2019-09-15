@@ -1,6 +1,6 @@
 import React from 'react';
-import {connect} from 'ducts';
-import {Block, InlineBlock} from 'stylistic-elements';
+import {connect} from '../ducts';
+import {Block, InlineBlock} from '../stylistic-elements';
 import {BuyButton} from '../ui/buy';
 import {TextLink, Link} from '../ui/core';
 import {CondensedText, SmallCaps} from '../ui/type';

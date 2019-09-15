@@ -1,8 +1,8 @@
 import {Animate} from 'react-rebound';
-import {InlineBlock} from 'stylistic-elements';
+import {InlineBlock} from '../stylistic-elements';
 import React from 'react';
 import config from '../../config';
-import {connect} from 'ducts';
+import {connect} from '../ducts';
 
 function getImageOptions(get, w, h) {
   const ratio = get('browser.pixelRatio');

@@ -1,13 +1,13 @@
-import ReactDOM from 'react-dom';
-import mutatis from 'mutatis';
-import {createStore} from 'ducts';
 import * as actions from './actions';
-import {createPage} from './ui/page';
 import * as tracking from './lib/tracking';
+
+import ReactDOM from 'react-dom';
+import {createPage} from './ui/page';
+import {createStore} from './ducts';
+import mutatis from 'mutatis';
 
 export function init(data) {
   try {
-
     const {get, actions: boundActions} = createStore(mutatis(data), actions);
 
     /* global document */
@@ -31,7 +31,6 @@ export function init(data) {
         module.hot.accept();
       }
     }
-
   } catch (e) {
     if (process.env.NODE_ENV !== 'production') {
       throw e;
