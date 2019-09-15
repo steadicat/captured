@@ -108,6 +108,7 @@ export function useAnimation<Props extends keyof Partial<AnimatableProps>>(
       const value = props[prop];
       if (value === undefined) continue;
       let spring = springs.current[prop];
+      let newSpring = !spring;
       if (!spring) {
         spring = springs.current[prop] = createSpring(value, tension, friction);
         spring.setRestSpeedThreshold(speedThreshold);
@@ -123,6 +124,7 @@ export function useAnimation<Props extends keyof Partial<AnimatableProps>>(
         setTimeout(() => spring.setEndValue(value), delay);
       } else {
         spring.setEndValue(value);
+        if (newSpring) onSpringUpdate(value);
       }
     }
   });

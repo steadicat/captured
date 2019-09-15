@@ -1,10 +1,14 @@
-import React from 'react';
-import component from '../lib/component';
-import {Orders} from '../ui/orders';
-import {About} from '../ui/about';
-import {Home} from '../ui/home';
+import {DefaultFont, PageTitle} from '../ui/type';
 
-export const Router = component('Router', ({get}) => {
+import {About} from '../ui/about';
+import {Block} from '../stylistic-elements';
+import {Home} from '../ui/home';
+import {Orders} from '../ui/orders';
+import React from 'react';
+import {TextLink} from '../ui/core';
+import component from '../lib/component';
+
+export const Router = component('Router', ({get, actions}) => {
   //if (!get('shown')) return <Placeholder />;
   if (get('path') === '/notfound') return <NotFound />;
   if (get('path') === '/error') return <Error />;
@@ -14,11 +18,7 @@ export const Router = component('Router', ({get}) => {
 });
 
 
-import {Block} from '../stylistic-elements';
-import {DefaultFont, PageTitle} from '../ui/type';
-import {TextLink} from '../ui/core';
-
-const NotFound = component('NotFound', () =>
+const NotFound = component('NotFound', () => (
   <DefaultFont>
     <Block textAlign="center">
       <PageTitle marginTop="40vh" marginBottom={96}>
@@ -27,9 +27,9 @@ const NotFound = component('NotFound', () =>
       <TextLink href="/">Go Back</TextLink>
     </Block>
   </DefaultFont>
-);
+));
 
-const Error = component('Error', () =>
+const Error = component('Error', () => (
   <DefaultFont>
     <Block textAlign="center">
       <PageTitle marginTop="40vh" marginBottom={96}>
@@ -38,5 +38,4 @@ const Error = component('Error', () =>
       <TextLink href="/">Go Home</TextLink>
     </Block>
   </DefaultFont>
-);
-
+));

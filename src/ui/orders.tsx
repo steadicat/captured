@@ -170,7 +170,7 @@ export class OrdersClass extends React.Component {
   };
 
   render() {
-    const {get} = this.props;
+    const {get, actions} = this.props;
     return (
       <DefaultFont>
         <Block padding={24}>

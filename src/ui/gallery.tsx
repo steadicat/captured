@@ -37,7 +37,7 @@ function getPrefaceSize(get) {
   );
 }
 
-export const Gallery = component('Gallery', ({get}) => (
+export const Gallery = component('Gallery', ({get, actions}) => (
   <Block
     paddingLeft={
       margins(get('browser.width')) - gutter(get('browser.width')) / 2
