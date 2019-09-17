@@ -3,6 +3,7 @@ import * as history from '../lib/history';
 import {Block, InlineBlock, ResetElement} from '../stylistic-elements';
 
 import {Animate} from '../react-rebound';
+import {CONDENSED} from './type';
 import React from 'react';
 import component from '../lib/component';
 import {connect} from '../ducts';
@@ -51,6 +52,31 @@ export const TextLink = hover(
 export const Button = component('Button', ({get, ref, ...props}) => (
   <InlineBlock role="button" cursor="pointer" {...props} ref={ref} />
 ));
+
+export const HoverButtonLink = hover(
+  component('HoverButtonLink', ({get, hovered, ...props}) => (
+    <Animate scaleX={hovered ? 1.1 : 1} scaleY={hovered ? 1.1 : 1}>
+      <Link
+        lineHeight={12}
+        backgroundColor={hovered ? [230, 60, 34] : '#fff'}
+        color={hovered ? '#fff' : '#444'}
+        borderColor={hovered ? [230, 60, 34] : '#444'}
+        borderStyle="solid"
+        borderWidth={1}
+        translateZ={0}
+        paddingLeft={12}
+        paddingRight={12}
+        paddingTop={6}
+        paddingBottom={6}
+        fontSize={18}
+        fontFamily={CONDENSED}
+        fontWeight={700}
+        textDecoration="none"
+        {...props}
+      />
+    </Animate>
+  ))
+);
 
 export const MainButton = hover(
   component('MainButton', ({get, hovered, ...props}) => (

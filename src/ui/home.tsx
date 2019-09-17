@@ -5,6 +5,7 @@ import {
   LightCondensedText,
   Text
 } from '../ui/type';
+import {Button, HoverButtonLink, Link, TextLink} from '../ui/core';
 import {HeaderSubtitle, HeaderTitle} from '../ui/header';
 
 import {Block} from '../stylistic-elements';
@@ -13,7 +14,6 @@ import {HoverBuyButton} from '../ui/buy';
 import {Image} from '../ui/image';
 import React from 'react';
 import {SocialLinks} from '../ui/social';
-import {TextLink} from '../ui/core';
 import {Toolbar} from '../ui/toolbar';
 import component from '../lib/component';
 import {linear} from '../lib/math';
@@ -113,84 +113,62 @@ export const Footer = track(
       </Block>
       <HoverBuyButton />
       <Text
+        marginTop={12}
         marginLeft="auto"
         marginRight="auto"
-        marginTop={12}
-        maxWidth={548}
+        maxWidth={580}
         paddingLeft={24}
         paddingRight={24}
       >
-        {get('sold') > 0
-          ? get('sold') < 1000
-            ? `Limited run of softcover copies. ${get('sold').toLocaleString(
-                'en-US'
-              )} of ${get('total').toLocaleString('en-US')} copies sold.`
-            : 'The book is currently sold out. Orders placed now will be put on standby and only billed if copies become available.'
-          : 'Limited edition of 1,000 softcover copies.'}
+        {get('sold') >= 1000 ? (
+          'The book is currently sold out. Orders placed now will be put on standby and only billed if copies become available.'
+        ) : (
+          <>
+            A limited run of 1,000{' '}
+            <BoldText tag="strong">softcover versions</BoldText> of the book are
+            now available for $30&nbsp;(including&nbsp;shipping). These are for
+            sale in the USA only.
+          </>
+        )}
       </Text>
       <Text
         marginTop={24}
         marginLeft="auto"
         marginRight="auto"
-        maxWidth={538}
-        paddingLeft={24}
-        paddingRight={24}
-      >
-        A limited run of 1,000{' '}
-        <BoldText tag="strong">softcover versions</BoldText> of the book are now
-        available for $30 (including shipping). These are for sale in the USA
-        only.
-      </Text>
-      <Text
-        marginTop={12}
-        marginLeft="auto"
-        marginRight="auto"
-        maxWidth={538}
+        maxWidth={580}
         paddingLeft={24}
         paddingRight={24}
       >
         In 2016, 1,000 hardcover books (shown above) sold out in one week. All
-        profits went towards efforts to elect{' '}
-        <TextLink target="_blank" href="https://berniesanders.com/">
-          Bernie Sanders
-        </TextLink>{' '}
-        as&nbsp;president, since holding corporations responsible for their
-        crimes, reforming the criminal justice system, and removing corporate
-        control over government were pillars of his campaign.
+        profits went towards efforts to elect Bernie Sanders as&nbsp;president,
+        since holding corporations responsible for their crimes, reforming the
+        criminal justice system, and removing corporate control over government
+        were pillars of his campaign.
       </Text>
       <Text
         marginTop={12}
         marginBottom={48}
         marginLeft="auto"
         marginRight="auto"
-        maxWidth={538}
+        maxWidth={580}
         paddingLeft={24}
         paddingRight={24}
       >
         All profits from this{' '}
         <BoldText tag="strong">softcover version</BoldText> will be donated to
-        charities fighting to lessen corporate influence over campaigns and
-        government.
+        charities fighting to lessen corporate influence over political
+        campaigns and government.
       </Text>
       <Block paddingBottom={96}>
-        <TextLink
+        <HoverButtonLink
           href="/about"
           display="inline-block"
           verticalAlign="top"
           marginTop={13}
           marginBottom={13}
         >
-          <CondensedText
-            tag="span"
-            fontSize={18}
-            paddingTop={16}
-            paddingLeft={16}
-            paddingRight={16}
-            paddingBottom={16}
-          >
-            ABOUT THE PROJECT
-          </CondensedText>
-        </TextLink>
+          ABOUT THE PROJECT
+        </HoverButtonLink>
         <SocialLinks
           marginTop={0}
           marginBottom={12}
