@@ -1,6 +1,6 @@
 export CLOUDSDK_CORE_PROJECT=thecapturedproject
 
-node_modules: package.json
+node_modules: package.json yarn.lock
 	yarn install
 	touch node_modules
 
@@ -8,7 +8,7 @@ clean:
 	rm -rf app/assets/*.js app/assets/**/*.html
 
 devhtml: node_modules
-	NODE_ENV=build yarn run ts-node-dev --respawn --transpileOnly build.ts
+	NODE_ENV=build yarn run ts-node -T build.ts
 
 devassets: node_modules
 	yarn run webpack-dev-server --port 3000
