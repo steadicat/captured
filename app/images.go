@@ -1,14 +1,14 @@
-package api
+package main
 
 import (
 	"fmt"
 	"net/http"
 
+	"cloud.google.com/go/storage"
 	"google.golang.org/api/iterator"
 	"google.golang.org/appengine"
 	"google.golang.org/appengine/blobstore"
 	"google.golang.org/appengine/image"
-	"google.golang.org/cloud/storage"
 )
 
 type ImageListResponse struct {

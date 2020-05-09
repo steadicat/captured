@@ -1,14 +1,13 @@
-runtime: go
-api_version: go1
+runtime: go111
 default_expiration: "1m"
 
 handlers:
 - url: /api/(orders|charge|ship)
-  script: _go_app
+  script: auto
   secure: always
   login: admin
 - url: /api/.*
-  script: _go_app
+  script: auto
   secure: always
 - url: /captured-(.*)\.js
   mime_type: text/javascript; charset=UTF-8
@@ -26,6 +25,4 @@ handlers:
 error_handlers:
 - file: assets/error.html
 
-skip_files:
-- ^(.*/)?\..*$
 

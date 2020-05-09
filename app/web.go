@@ -1,12 +1,13 @@
-package api
+package main
 
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
+
 	"github.com/zenazn/goji/web"
 	"golang.org/x/net/context"
 	"google.golang.org/appengine/log"
-	"net/http"
 )
 
 type Context web.C
