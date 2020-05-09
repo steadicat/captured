@@ -1,47 +1,45 @@
-NODE_BIN=./node_modules/.bin
-NODE=$(NODE_BIN)/ts-node
-JS_DIR=src
+export CLOUDSDK_CORE_PROJECT=thecapturedproject
 
 node_modules: package.json
-	npm install
-
-deps: node_modules
-	mkdir -p assets
-
-buildconfig:
-	$(NODE) buildconfig.ts
+	yarn install
+	touch node_modules
 
 clean:
 	rm -rf app/assets/*.js app/assets/**/*.html
 
-devhtml:
-	NODE_ENV=build $(NODE_BIN)/ts-node-dev --respawn --transpileOnly build.ts
+devhtml: node_modules
+	NODE_ENV=build yarn run ts-node-dev --respawn --transpileOnly build.ts
 
-devassets:
-	$(NODE_BIN)/webpack-dev-server --port 3000
+devassets: node_modules
+	yarn run webpack-dev-server --port 3000
 
-devapi: buildconfig
-	/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/dev_appserver.py app
+devapi: app/app.yaml
+	cd app && go run main.go
 
 dev:
 	make devassets & make devhtml & make devapi
 
 lint:
-	$(NODE_BIN)/eslint $(JS_DIR)
+	yarn run eslint src
 
-profileassets:
-	NODE_ENV=production $(NODE_BIN)/webpack --profile --json > stats.json
+profileassets: node_modules
+	NODE_ENV=production yarn run webpack --profile --json > stats.json
 
-images:
+images: app/assets
 	curl https://thecapturedproject.com/api/images -o app/assets/images.json
 
-buildassets:
-	NODE_ENV=production $(NODE_BIN)/webpack
+app/assets: node_modules $(shell find src -type f)
+	mkdir -p app/assets
+	NODE_ENV=production yarn run webpack
+	touch app/assets
 
-buildhtml:
-	NODE_ENV=production $(NODE) -T build.ts
+app/app.yaml: node_modules app/assets app/app.template.yaml
+	yarn run ts-node buildconfig.ts
 
-deploy: buildassets buildhtml buildconfig
-	cd app && gcloud app deploy --project thecapturedproject --version softcover --no-promote
+buildhtml: node_modules
+	NODE_ENV=production yarn run ts-node -T build.ts
 
-.PHONY: deps clean devhtml devassets devapi dev lint images buildassets buildhtml buildconfig deploy
+deploy: app/assets buildhtml app/app.yaml
+	cd app && gcloud app deploy --no-promote
+
+.PHONY: deps clean devhtml devassets devapi dev lint images buildhtml deploy
