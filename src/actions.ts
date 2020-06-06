@@ -8,7 +8,7 @@ import {
   getThumbnailSize,
   idFromPath,
   isExpanded,
-  pieceById
+  pieceById,
 } from './ui/gallerylayout';
 
 import config from '../config';
@@ -17,7 +17,7 @@ import superagent from 'superagent';
 import throttle from './lib/throttle';
 import {trimPathEnd} from './lib/strings';
 
-export function init(path) {
+export function init(path: string) {
   return mutatis({
     path,
     main: config.JS_MAIN,
@@ -30,17 +30,17 @@ export function init(path) {
       height: 600,
       pixelRatio: 1,
       webp: false,
-      known: false
+      known: false,
     },
     positions: {},
     orders: {},
-    orderStatus: 'created'
+    orderStatus: 'created',
   });
 }
 
 /* global window, document, setInterval, setTimeout, clearTimeout */
 
-export function clientInit(get, actions) {
+export function clientInit(get: Get, actions: Actions) {
   webp.detectSupport(window.navigator.userAgent, actions.detectWebP);
 
   actions.requestSoldUpdate();
@@ -68,7 +68,7 @@ export function clientInit(get, actions) {
     .set('needsScroll', get('path') !== '/');
 }
 
-export function browserResize(get, actions) {
+export function browserResize(get: Get, actions: Actions) {
   const w = document.body.clientWidth;
   const h = Math.min(
     window.innerHeight,
@@ -80,26 +80,31 @@ export function browserResize(get, actions) {
     .set('browser.height', h);
 }
 
-export function detectWebP(get, actions, supported) {
+export function detectWebP(get, actions: Actions, supported) {
   return get().set('browser.webp', supported);
 }
 
-export function show(get, actions) {
+export function show(get: Get, actions: Actions) {
   return get().set('shown', true);
 }
 
-export function requestSoldUpdate(get, actions) {
+export function requestSoldUpdate(get: Get, actions: Actions) {
   superagent.get(`${config.API_URL}/sold`, (err, res) => {
     if (err) return console.warn(err);
     actions.updateSold(res.body.sold);
   });
 }
 
-export function updateSold(get, actions, sold) {
+export function updateSold(get: Get, actions: Actions, sold) {
   return get().set('sold', sold);
 }
 
-export function positionElement(get, actions, id, {top, bottom}) {
+export function positionElement(
+  get: Get,
+  actions: Actions,
+  id: string,
+  {top, bottom}: {top: number; bottom: number}
+) {
   let store = get();
   if (get('needsScroll') && idFromPath(get('path')) === id) {
     scroll.scrollTo(top, actions.scrollingDone);
@@ -108,11 +113,11 @@ export function positionElement(get, actions, id, {top, bottom}) {
   return store.set(`positions.${id}`, {top, bottom});
 }
 
-export function scrollingDone(get, actions) {
+export function scrollingDone(get: Get, actions: Actions) {
   return get().set('scrolling', false);
 }
 
-export function navigate(get, actions, path) {
+export function navigate(get: Get, actions: Actions, path: string) {
   const previousPath = get('path');
   const id = idFromPath(path);
   const position = get('positions')[id];
@@ -135,12 +140,10 @@ export function navigate(get, actions, path) {
     actions.collapseStarted(idFromPath(previousPath));
   }
   tracking.navigation(path);
-  return get()
-    .set('scrolling', scrolling)
-    .set('path', path);
+  return get().set('scrolling', scrolling).set('path', path);
 }
 
-export function keyDown(get, actions, event) {
+export function keyDown(get, actions: Actions, event) {
   if (event.keyCode === 27 && get('path') !== '/') {
     const href = trimPathEnd(get('path'));
     history.pushState(href);
@@ -151,14 +154,14 @@ export function keyDown(get, actions, event) {
 let expandEndTimeout;
 let scrollPromptTimeout;
 
-export function expandStarted(get, actions, id) {
+export function expandStarted(get, actions: Actions, id) {
   clearTimeout(expandEndTimeout);
   clearTimeout(scrollPromptTimeout);
   expandEndTimeout = setTimeout(actions.expandEnded, 600);
   return get().set('expanding', id);
 }
 
-export function expandEnded(get, actions) {
+export function expandEnded(get: Get, actions: Actions) {
   if (!get('expanding')) return;
   if (!get('scrollPromptDismissed')) {
     scrollPromptTimeout = setTimeout(actions.showScrollPrompt, 1000);
@@ -167,52 +170,46 @@ export function expandEnded(get, actions) {
   return get().set('expanding', null);
 }
 
-function enableScrollListener(get, actions) {
+function enableScrollListener(get: Get, actions: Actions) {
   let el = document.getElementById('scroll');
   if (el) {
     el.addEventListener('scroll', actions.cancelScrollPrompt);
   }
 }
 
-function disableScrollListener(get, actions) {
+function disableScrollListener(get: Get, actions: Actions) {
   let el = document.getElementById('scroll');
   if (el) {
     el.removeEventListener('scroll', actions.cancelScrollPrompt);
   }
 }
 
-export function collapseStarted(get, actions, id) {
+export function collapseStarted(get: Get, actions: Actions, id: string) {
   clearTimeout(expandEndTimeout);
   clearTimeout(scrollPromptTimeout);
   expandEndTimeout = setTimeout(actions.collapseEnded, 600);
   if (get('seeCrimesShown')) disableScrollListener(get, actions);
-  return get()
-    .set('expanding', id)
-    .set('seeCrimesShown', false);
+  return get().set('expanding', id).set('seeCrimesShown', false);
 }
 
-export function collapseEnded(get, actions) {
+export function collapseEnded(get: Get, actions: Actions) {
   if (!get('expanding')) return;
-  return get()
-    .set('expanding', null)
-    .set('scrollPromptDismissed', false);
+  return get().set('expanding', null).set('scrollPromptDismissed', false);
 }
 
-export function showScrollPrompt(get, actions) {
+export function showScrollPrompt(get: Get, actions: Actions) {
   if (get('scrollPromptDismissed')) return;
   enableScrollListener(get, actions);
   return get().set('seeCrimesShown', true);
 }
 
-export function cancelScrollPrompt(get, actions) {
+export function cancelScrollPrompt(get: Get, actions: Actions) {
   disableScrollListener(get, actions);
   clearTimeout(scrollPromptTimeout);
-  return get()
-    .set('scrollPromptDismissed', true)
-    .set('seeCrimesShown', false);
+  return get().set('scrollPromptDismissed', true).set('seeCrimesShown', false);
 }
 
-export function scrollToCrimes(get, actions) {
+export function scrollToCrimes(get: Get, actions: Actions) {
   const piece = pieceById(idFromPath(get('path')));
   let fullScreenHeight = getFullScreenSize(piece, get('browser'))[1];
   scroll.scrollElementTo(
@@ -220,32 +217,30 @@ export function scrollToCrimes(get, actions) {
     fullScreenHeight + 48,
     actions.scrollingDone
   );
-  return get()
-    .set('seeCrimesShown', false)
-    .set('scrollPromptDismissed', true);
+  return get().set('seeCrimesShown', false).set('scrollPromptDismissed', true);
 }
 
-export function stripeDialogRequested(get, actions) {
+export function stripeDialogRequested(get: Get, actions: Actions) {
   return get().set('stripeDialogRequested', true);
 }
 
-export function stripeDialogShown(get, actions) {
+export function stripeDialogShown(get: Get, actions: Actions) {
   return get().set('stripeDialogShown', true);
 }
 
-export function stripeDialogHidden(get, actions) {
+export function stripeDialogHidden(get: Get, actions: Actions) {
   return get()
     .set('stripeDialogShown', false)
     .set('stripeDialogRequested', false);
 }
 
-export function purchaseCompleted(get, actions) {
+export function purchaseCompleted(get: Get, actions: Actions) {
   setTimeout(actions.requestSoldUpdate, 1000);
 }
 
 function keyBy(key, list) {
   const res = {};
-  list.forEach(el => {
+  list.forEach((el) => {
     res[el[key]] = el;
   });
   return mutatis(res);
@@ -253,13 +248,13 @@ function keyBy(key, list) {
 
 /* global alert */
 
-export function fetchOrders(get, actions, before = null) {
+export function fetchOrders(get: Get, actions: Actions, before = null) {
   if (get('ordersLoading')) return;
   superagent.get(
     `${config.API_URL}/orders`,
     {
       status: get('orderStatus'),
-      before: before
+      before: before,
     },
     (err, res) => {
       if (err) return alert(err);
@@ -269,13 +264,13 @@ export function fetchOrders(get, actions, before = null) {
   return get().set('ordersLoading', true);
 }
 
-export function updateOrders(get, actions, orders) {
+export function updateOrders(get: Get, actions: Actions, orders) {
   return get()
     .set('orders', {...get('orders'), ...keyBy('id', orders)})
     .remove('ordersLoading');
 }
 
-export function chargeOrder(get, actions, orderID, customerID) {
+export function chargeOrder(get: Get, actions: Actions, orderID, customerID) {
   superagent
     .post(`${config.API_URL}/charge`)
     .query({orderID, customerID})
@@ -283,7 +278,7 @@ export function chargeOrder(get, actions, orderID, customerID) {
   return get().set(`orders.${orderID}.status`, 'charging');
 }
 
-export function orderCharged(get, actions, orderID, err, res) {
+export function orderCharged(get: Get, actions: Actions, orderID, err, res) {
   if (err || !res.body.success) {
     err && alert(err);
     return get().set(`orders.${orderID}.status`, 'failed');
@@ -291,7 +286,7 @@ export function orderCharged(get, actions, orderID, err, res) {
   return get().set(`orders.${orderID}.status`, 'paid');
 }
 
-export function shipOrder(get, actions, orderID, trackingNumber) {
+export function shipOrder(get: Get, actions: Actions, orderID, trackingNumber) {
   superagent
     .post(`${config.API_URL}/ship`)
     .query({orderID, trackingNumber})
@@ -299,7 +294,14 @@ export function shipOrder(get, actions, orderID, trackingNumber) {
   return get().set(`orders.${orderID}.status`, 'shipping');
 }
 
-export function orderShipped(get, actions, orderID, trackingNumber, err, res) {
+export function orderShipped(
+  get,
+  actions: Actions,
+  orderID,
+  trackingNumber,
+  err,
+  res
+) {
   if (err) {
     alert(err);
     return get().remove(`orders.${orderID}.status`, 'paid');
@@ -309,9 +311,47 @@ export function orderShipped(get, actions, orderID, trackingNumber, err, res) {
     .set(`orders.${orderID}.status`, 'fulfilled');
 }
 
-export function selectOrders(get, actions, status) {
+export function selectOrders(get: Get, actions: Actions, status) {
   setTimeout(actions.fetchOrders, 0);
-  return get()
-    .set('orders', {})
-    .set('orderStatus', status);
+  return get().set('orders', {}).set('orderStatus', status);
 }
+
+type UncurriedAction<Action> = Action extends (
+  get: any,
+  actions: any,
+  ...args: infer Args
+) => infer ReturnValue
+  ? (...args: Args) => ReturnValue
+  : void;
+
+export type Get = {
+  <Value>(key?: string, defaultValue?: Value, subscriber?: () => void): unknown;
+  subscribe(f: () => void): void;
+  unsubscribe(f: () => void): void;
+};
+
+export type Actions = {
+  init: UncurriedAction<typeof init>;
+  clientInit: UncurriedAction<typeof clientInit>;
+  browserResize: UncurriedAction<typeof browserResize>;
+  detectWebP: UncurriedAction<typeof detectWebP>;
+  show: UncurriedAction<typeof show>;
+  keyDown: UncurriedAction<typeof keyDown>;
+  requestSoldUpdate: UncurriedAction<typeof requestSoldUpdate>;
+  showScrollPrompt: UncurriedAction<typeof showScrollPrompt>;
+  scrollingDone: UncurriedAction<typeof scrollingDone>;
+  expandStarted: UncurriedAction<typeof expandStarted>;
+  collapseStarted: UncurriedAction<typeof collapseStarted>;
+  collapseEnded: UncurriedAction<typeof collapseEnded>;
+  cancelScrollPrompt: UncurriedAction<typeof cancelScrollPrompt>;
+  navigate: UncurriedAction<typeof navigate>;
+  purchaseCompleted: UncurriedAction<typeof purchaseCompleted>;
+  keyBy: UncurriedAction<typeof keyBy>;
+  fetchOrders: UncurriedAction<typeof fetchOrders>;
+  updateOrders: UncurriedAction<typeof updateOrders>;
+  chargeOrder: UncurriedAction<typeof chargeOrder>;
+  orderCharged: UncurriedAction<typeof orderCharged>;
+  shipOrder: UncurriedAction<typeof shipOrder>;
+  orderShipped: UncurriedAction<typeof orderShipped>;
+  selectOrders: UncurriedAction<typeof selectOrders>;
+};

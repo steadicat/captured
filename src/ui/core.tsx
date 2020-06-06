@@ -5,114 +5,126 @@ import {Block, InlineBlock, ResetElement} from '../stylistic-elements';
 import {Animate} from '../react-rebound';
 import {CONDENSED} from './type';
 import React from 'react';
-import component from '../lib/component';
-import {connect} from '../ducts';
 import {hover} from '../lib/behaviors';
+import {Actions} from '../actions';
+import {TagProps} from 'stylistic';
+import component from '../lib/component';
 
-class LinkClass extends React.Component {
-  onLinkClick = event => {
-    if (event.shiftKey || event.metaKey || event.superKey || event.controlKey)
-      return;
-    const {href} = this.props;
-    if (!/^http(s?):\/\//.test(href) && !/^mailto:/.test(href)) {
-      event.stopPropagation();
-      event.preventDefault();
-      history.pushState(href);
-      this.props.actions.navigate(href);
-    }
-  };
+export const Link = component<TagProps<'a'> & {href: string}>(
+  'Link',
+  ({get, actions, href, ...props}, ref) => {
+    const onLinkClick = React.useCallback((event) => {
+      if (event.shiftKey || event.metaKey || event.superKey || event.controlKey)
+        return;
+      if (!/^http(s?):\/\//.test(href) && !/^mailto:/.test(href)) {
+        event.stopPropagation();
+        event.preventDefault();
+        history.pushState(href);
+        actions.navigate(href);
+      }
+    }, []);
 
-  render() {
-    const {get, forwardedRef, ...props} = this.props;
     return (
       <ResetElement
         tag="a"
         cursor="pointer"
         style={{WebkitTapHighlightColor: 'transparent'}}
-        onClick={this.onLinkClick}
+        href={href}
+        onClick={onLinkClick}
         {...props}
-        ref={forwardedRef}
+        ref={ref}
       />
     );
   }
-}
-
-export const Link = connect(
-  React.forwardRef((props, ref) => <LinkClass {...props} forwardedRef={ref} />)
 );
 
 export const TextLink = hover(
-  component('TextLink', ({get, hovered, ...props}) => (
-    <Animate color={hovered ? [230, 60, 34] : [0, 0, 0]}>
-      <Link fontWeight="bold" {...props} />
-    </Animate>
-  ))
+  component<{hovered: boolean} & TagProps<'a'>>(
+    'TextLink',
+    ({get, hovered, ...props}) => (
+      <Animate color={hovered ? [230, 60, 34] : [0, 0, 0]}>
+        <Link fontWeight="bold" {...props} />
+      </Animate>
+    )
+  )
 );
 
-export const Button = component('Button', ({get, ref, ...props}) => (
+export const Button = component<{}>('Button', ({get, ...props}, ref) => (
   <InlineBlock role="button" cursor="pointer" {...props} ref={ref} />
 ));
 
 export const HoverButtonLink = hover(
-  component('HoverButtonLink', ({get, hovered, ...props}) => (
-    <Animate scaleX={hovered ? 1.1 : 1} scaleY={hovered ? 1.1 : 1}>
-      <Link
-        lineHeight={12}
-        backgroundColor={hovered ? [230, 60, 34] : '#fff'}
-        color={hovered ? '#fff' : '#444'}
-        borderColor={hovered ? [230, 60, 34] : '#444'}
-        borderStyle="solid"
-        borderWidth={1}
-        translateZ={0}
-        paddingLeft={12}
-        paddingRight={12}
-        paddingTop={6}
-        paddingBottom={6}
-        fontSize={18}
-        fontFamily={CONDENSED}
-        fontWeight={700}
-        textDecoration="none"
-        {...props}
-      />
-    </Animate>
-  ))
+  component<{hovered: boolean}>(
+    'HoverButtonLink',
+    ({get, hovered, ...props}) => (
+      <Animate scaleX={hovered ? 1.1 : 1} scaleY={hovered ? 1.1 : 1}>
+        <Link
+          lineHeight={12}
+          backgroundColor={hovered ? [230, 60, 34] : '#fff'}
+          color={hovered ? '#fff' : '#444'}
+          borderColor={hovered ? [230, 60, 34] : '#444'}
+          borderStyle="solid"
+          borderWidth={1}
+          translateZ={0}
+          paddingLeft={12}
+          paddingRight={12}
+          paddingTop={6}
+          paddingBottom={6}
+          fontSize={18}
+          fontFamily={CONDENSED}
+          fontWeight={700}
+          textDecoration="none"
+          {...props}
+        />
+      </Animate>
+    )
+  )
 );
 
 export const MainButton = hover(
-  component('MainButton', ({get, hovered, ...props}) => (
-    <Animate scaleX={hovered ? 1.1 : 1} scaleY={hovered ? 1.1 : 1}>
-      <Button
-        lineHeight={12}
-        backgroundColor={hovered ? [230, 60, 34] : '#fff'}
-        color={hovered ? '#fff' : null}
-        borderColor={hovered ? '#e52' : '#444'}
-        borderStyle="solid"
-        borderWidth={1}
-        translateZ={0}
-        paddingLeft={48}
-        paddingRight={48}
-        paddingTop={16}
-        paddingBottom={16}
-        textTransform="uppercase"
-        {...props}
-      />
-    </Animate>
-  ))
+  component<{hovered: boolean} & TagProps<'button'>>(
+    'MainButton',
+    ({get, hovered, ...props}) => (
+      <Animate scaleX={hovered ? 1.1 : 1} scaleY={hovered ? 1.1 : 1}>
+        <Button
+          lineHeight={12}
+          backgroundColor={hovered ? [230, 60, 34] : '#fff'}
+          color={hovered ? '#fff' : null}
+          borderColor={hovered ? '#e52' : '#444'}
+          borderStyle="solid"
+          borderWidth={1}
+          translateZ={0}
+          paddingLeft={48}
+          paddingRight={48}
+          paddingTop={16}
+          paddingBottom={16}
+          textTransform="uppercase"
+          {...props}
+        />
+      </Animate>
+    )
+  )
 );
 
-export const Input = component('Input', ({label, get, actions, ...props}) => (
-  <ResetElement tag="input" type="text" placeholder={label} {...props} />
-));
+export const Input = component<{label: string}>(
+  'Input',
+  ({label, get, actions, ...props}) => (
+    <ResetElement tag="input" type="text" placeholder={label} {...props} />
+  )
+);
 
-export const List = component('List', ({get, actions, ...props}) => (
+export const List = component<{}>('List', ({get, actions, ...props}) => (
   <ResetElement tag="ul" {...props} />
 ));
 
-export const ListItem = component('ListItem', ({get, actions, ...props}) => (
-  <ResetElement tag="li" {...props} />
-));
+export const ListItem = component<{}>(
+  'ListItem',
+  ({get, actions, ...props}) => <ResetElement tag="li" {...props} />
+);
 
-export const Close = component(
+export const Close = component<
+  {color?: string; width?: number; height?: number} & TagProps<'svg'>
+>(
   'Close',
   ({color = '#444', width = 46, height = 46, get, actions, ...props}) => (
     <InlineBlock
@@ -129,7 +141,11 @@ export const Close = component(
   )
 );
 
-export const Arrow = component(
+export const Arrow = component<{
+  color?: string;
+  width?: number;
+  height?: number;
+}>(
   'Arrow',
   ({color = '#fff', width = 46, height = 46, get, actions, ...props}) => (
     <InlineBlock
@@ -147,7 +163,7 @@ export const Arrow = component(
   )
 );
 
-export const Modal = component(
+export const Modal = component<{autoWidth?: boolean}>(
   'Modal',
   ({get, autoWidth = false, children, ...props}) => (
     <Block
@@ -161,7 +177,7 @@ export const Modal = component(
       {...props}
     >
       <Block
-        width={autoWidth ? null : get('browser.mobile') ? '100%' : '80%'}
+        width={autoWidth ? undefined : get('browser.mobile') ? '100%' : '80%'}
         maxWidth={800}
         paddingLeft={24}
         paddingRight={24}

@@ -1,15 +1,25 @@
 import * as React from 'react';
 
 import {context} from './Root';
+import {Get} from '../actions';
 
 let DEBUG = false;
 export function enableRenderLogging(enabled = true) {
   DEBUG = enabled;
 }
 
-export default function connect(Component) {
-  function Connect({forwardedRef, ...props}) {
-    const {get, actions} = React.useContext(context);
+export type ConnectedProps<Actions extends {} = {}> = {
+  get: Get;
+  actions: Actions;
+};
+
+export default function connect<Actions, Props extends {}>(
+  Component: React.ComponentType<
+    Props & ConnectedProps<Actions> & {children?: React.ReactNode}
+  >
+) {
+  const Connect = React.forwardRef(function Connect(props: Props, ref) {
+    const {get, actions} = React.useContext(context) as ConnectedProps<Actions>;
 
     const [, setState] = React.useState({});
     const update = React.useCallback(() => {
@@ -30,10 +40,10 @@ export default function connect(Component) {
         {...props}
         get={getWithSubscriber}
         actions={actions}
-        ref={forwardedRef}
+        ref={ref}
       />
     );
-  }
+  });
 
   const displayName =
     Component.displayName || Component.name || 'StatelessComponent';
@@ -41,6 +51,6 @@ export default function connect(Component) {
   Connect.displayName = `Connect(${displayName})`;
 
   return React.forwardRef((props, ref) => {
-    return <Connect {...props} forwardedRef={ref} />;
+    return <Connect {...props} ref={ref} />;
   });
 }

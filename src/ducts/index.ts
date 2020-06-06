@@ -31,9 +31,11 @@ let request;
 
 function notify(state, prevStore) {
   request = null;
-  subscribers.forEach(subscriber => {
+  subscribers.forEach((subscriber) => {
     const keys = Array.from(subscriber.__keys);
-    if (keys.some(key => getKey(state.store, key) !== getKey(prevStore, key))) {
+    if (
+      keys.some((key) => getKey(state.store, key) !== getKey(prevStore, key))
+    ) {
       if (typeof subscriber === 'function') {
         subscriber(getKey(state.store, keys[0]));
       } else if (typeof document !== 'undefined') {
@@ -67,9 +69,9 @@ const syncActionsStack = [];
 
 export function bindActions(actions, state) {
   const boundActions = {};
-  Object.keys(actions).forEach(function(k) {
+  Object.keys(actions).forEach(function (k) {
     const action = actions[k];
-    boundActions[k] = function(...args) {
+    boundActions[k] = function (...args) {
       if (process.env.NODE_ENV !== 'production') {
         syncActionsStack.unshift({caller: k, callees: []});
         DEBUG && console.info(`Action ${k}`, ...args);
@@ -119,7 +121,7 @@ export function createStore(store = {}, actions = {}) {
     return getKey(state.store, key, defaultValue);
   }
 
-  get.unsubscribe = listener => {
+  get.unsubscribe = (listener) => {
     subscribers.delete(listener);
   };
 
