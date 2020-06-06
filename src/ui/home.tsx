@@ -3,7 +3,7 @@ import {
   CondensedText,
   DefaultFont,
   LightCondensedText,
-  Text
+  Text,
 } from '../ui/type';
 import {Button, HoverButtonLink, Link, TextLink} from '../ui/core';
 import {HeaderSubtitle, HeaderTitle} from '../ui/header';
@@ -154,10 +154,12 @@ export const Footer = track(
         paddingLeft={24}
         paddingRight={24}
       >
-        All profits from this{' '}
-        <BoldText tag="strong">softcover version</BoldText> will be donated to
-        charities fighting to lessen corporate influence over political
-        campaigns and government.
+        All profits from this softcover version will be donated to{' '}
+        <TextLink href="https://www.brooklynbailfund.org/">
+          The Brooklyn Community Bail Fund
+        </TextLink>
+        , an organization that helps victims of our racist and unjust legal
+        system.
       </Text>
       <Block paddingBottom={96}>
         <HoverButtonLink

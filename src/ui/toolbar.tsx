@@ -1,7 +1,7 @@
 import {CondensedText, SmallCaps} from '../ui/type';
 
 import {Animate} from '../react-rebound';
-import {Block} from '../stylistic-elements';
+import {Block, InlineBlock} from '../stylistic-elements';
 import {BuyButton} from '../ui/buy';
 import React from 'react';
 import {SocialButtons} from '../ui/social';
@@ -69,13 +69,25 @@ class ToolbarClass extends React.Component {
             onMouseEnter={this.onMouseEnter}
             onMouseLeave={this.onMouseLeave}
             hovered={this.state.hovered}
-            marginLeft={16}
+            marginLeft={get('browser.mobile') ? 16 : 144}
             paddingLeft={16}
             paddingRight={16}
+            display="inline-block"
           />
+          {!get('browser.mobile') && (
+            <SmallCaps>
+              <InlineBlock
+                fontSize={18}
+                color={this.state.hovered ? '#fff' : null}
+              >
+                ALL PROFIT GOES TO BROOKLYN BAIL FUND
+              </InlineBlock>
+            </SmallCaps>
+          )}
           <SmallCaps>
             <Block
               position="absolute"
+              top={0}
               right={0}
               display={hovered ? 'none' : 'inline-block'}
             >
