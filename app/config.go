@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 
 	"golang.org/x/net/context"
+	"google.golang.org/appengine"
 	"google.golang.org/appengine/log"
 	"google.golang.org/appengine/memcache"
 )
@@ -26,10 +27,19 @@ func Get(c context.Context, key string) string {
 		log.Infof(c, "[config] Cache miss for %s", key)
 	}
 
-	data, err = ioutil.ReadFile("config.json")
-	if err != nil {
-		LogError(c, err, "Error reading config data")
-		return ""
+	if appengine.IsDevAppServer() {
+		data, err = ioutil.ReadFile("config.dev.json")
+		if err != nil {
+			LogError(c, err, "Error reading config data")
+			return ""
+		}
+	} else {
+		data, err = ioutil.ReadFile("config.json")
+		if err != nil {
+			LogError(c, err, "Error reading config data")
+			return ""
+		}
+
 	}
 
 	err = memcache.Add(c, &memcache.Item{

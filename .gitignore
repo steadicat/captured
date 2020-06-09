@@ -1,5 +1,6 @@
 assets
 config.json
+config.dev.json
 /local.js
 app.yaml
 /node_modules/
