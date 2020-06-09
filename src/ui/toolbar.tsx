@@ -25,11 +25,13 @@ class ToolbarClass extends React.Component {
   render() {
     const {get, back, ...props} = this.props;
     const {hovered} = this.state;
+    const compact = get('browser.width') <= 820;
+    const height = compact ? 89 : 45;
     return (
       <Animate
         scaleX={hovered ? 1.05 : 1}
         scaleY={hovered ? 1.05 : 1}
-        translateY={get('browser.known') ? 0 : 46}
+        translateY={get('browser.known') ? 0 : height + 1}
       >
         <Block
           position="fixed"
@@ -44,7 +46,7 @@ class ToolbarClass extends React.Component {
           borderColor={hovered ? [230, 60, 34] : '#444'}
           translateY={46}
           transformOrigin="50% 100%"
-          height={45}
+          height={height}
           {...props}
         >
           <TextLink
@@ -73,22 +75,6 @@ class ToolbarClass extends React.Component {
             paddingRight={16}
             display="inline-block"
           />
-          {get('browser.width') > 820 && (
-            <CondensedText
-              display="inline-block"
-              fontSize={18}
-              fontWeight="bold"
-              verticalAlign="middle"
-              paddingLeft={get('browser.mobile') ? 4 : 12}
-              borderLeftStyle="solid"
-              borderLeftWidth={1}
-              borderColor={hovered ? '#fff' : '#444'}
-              color={this.state.hovered ? '#fff' : null}
-              lineHeight={12}
-            >
-              ALL PROFIT GOES TO THE BROOKLYN BAIL FUND
-            </CondensedText>
-          )}
           <SmallCaps>
             <Block
               position="absolute"
@@ -107,6 +93,19 @@ class ToolbarClass extends React.Component {
               />
             </Block>
           </SmallCaps>
+          {compact && (
+            <CondensedText
+              display="block"
+              fontSize={18}
+              fontWeight="bold"
+              color={this.state.hovered ? '#fff' : null}
+              lineHeight={12}
+              paddingTop={16}
+              paddingBottom={16}
+            >
+              ALL PROFIT GOES TO THE BROOKLYN BAIL FUND
+            </CondensedText>
+          )}
         </Block>
       </Animate>
     );

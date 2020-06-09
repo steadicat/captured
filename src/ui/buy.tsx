@@ -44,6 +44,21 @@ export const BuyButton = component(
       >
         ${get('price')}
       </CondensedText>
+      {get('browser.width') > 820 && (
+        <CondensedText
+          display="inline-block"
+          fontSize={18}
+          fontWeight="bold"
+          verticalAlign="middle"
+          marginLeft={get('browser.mobile') ? 4 : 12}
+          paddingLeft={get('browser.mobile') ? 4 : 12}
+          borderLeftStyle="solid"
+          borderLeftWidth={1}
+          borderColor={hovered ? '#fff' : '#444'}
+        >
+          ALL PROFIT GOES TO THE BROOKLYN BAIL FUND
+        </CondensedText>
+      )}
     </Pay>
   )
 );
