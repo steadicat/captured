@@ -36,7 +36,7 @@ const config = {
   STRIPE_KEY: prod
     ? 'pk_live_yYzi1T1jphRUyeL1xu9PwdVr'
     : 'pk_test_Ngkeht8dNP1Nm71uEYG9tS2Z',
-  IMAGES: getImages()
+  IMAGES: getImages(),
 };
 
 const local = getLocalConfig();

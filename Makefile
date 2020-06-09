@@ -14,7 +14,7 @@ devassets: node_modules
 	yarn run webpack-dev-server --port 3000
 
 devapi: app/app.yaml
-	cd app && go run main.go
+	cd app && /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/dev_appserver.py .
 
 dev:
 	make devassets & make devhtml & make devapi

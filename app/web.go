@@ -23,6 +23,17 @@ func SendError(c context.Context, w http.ResponseWriter, err error, code int, me
 
 func SendJSON(c context.Context, w http.ResponseWriter, response interface{}) {
 	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(200)
+	encoder := json.NewEncoder(w)
+	err := encoder.Encode(response)
+	if err != nil {
+		SendError(c, w, err, 500, "Error encoding JSON response")
+	}
+}
+
+func SendJSONError(c context.Context, w http.ResponseWriter, code int, response interface{}) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(code)
 	encoder := json.NewEncoder(w)
 	err := encoder.Encode(response)
 	if err != nil {

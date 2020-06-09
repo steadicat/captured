@@ -12,23 +12,34 @@ class PayClass extends React.Component {
     script.load('https://checkout.stripe.com/checkout.js');
   }
 
-  onClick = event => {
+  onClick = (event) => {
     const {get, actions} = this.props;
     event.stopPropagation();
     actions.stripeDialogRequested();
-    script.load('https://checkout.stripe.com/checkout.js', function() {
+    script.load('https://checkout.stripe.com/checkout.js', function () {
       /* global require */
       const handler = require('StripeCheckout').configure({
         key: config.STRIPE_KEY,
-        token: function(token, args) {
+        token: function (token, args) {
           superagent
             .post(`${config.API_URL}/pay`)
             .send({token, args})
             .end((err, res) => {
-              if (err) return console.warn(err);
+              if (err) {
+                if (
+                  err.response &&
+                  err.response.body &&
+                  err.response.body.ok === false
+                ) {
+                  alert(err.response.body.message);
+                } else {
+                  alert(err);
+                }
+                return console.warn(err);
+              }
               actions.purchaseCompleted();
             });
-        }
+        },
       });
       handler.open({
         name: get('sold') >= 1000 ? 'Join the Waitlist' : 'Buy the Book',
@@ -40,7 +51,7 @@ class PayClass extends React.Component {
         allowRememberMe: false,
         shippingAddress: true,
         opened: actions.stripeDialogShown,
-        closed: actions.stripeDialogHidden
+        closed: actions.stripeDialogHidden,
       });
     });
   };

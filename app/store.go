@@ -34,6 +34,11 @@ type PaymentResponse struct {
 	Ok bool `json:"ok"`
 }
 
+type ErrorResponse struct {
+	Ok      bool   `json:"ok"`
+	Message string `json:"message"`
+}
+
 func SoldHandler(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
 	sold := getSoldCounter(c)
@@ -52,6 +57,11 @@ func PaymentHandler(w http.ResponseWriter, r *http.Request) {
 
 	token := body.Token
 	args := body.Args
+
+	if args.ShippingAddressCountry != "United States" {
+		SendJSONError(c, w, 400, ErrorResponse{Ok: false, Message: "Sorry, we are currently only shipping to the US. Your card will not be charged."})
+		return
+	}
 
 	sc := client.New(Get(c, "STRIPE_KEY"), stripe.NewBackends(urlfetch.Client(c)))
 
@@ -86,7 +96,7 @@ func PaymentHandler(w http.ResponseWriter, r *http.Request) {
 		Customer: &customer.ID,
 		Shipping: shipping,
 		Items: []*stripe.OrderItemParams{
-			&stripe.OrderItemParams{
+			{
 				Type:   &sku,
 				Parent: &book,
 			},
