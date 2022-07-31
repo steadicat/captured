@@ -111,7 +111,7 @@ export const Footer = track(
           height={Math.round((bookWidth(get) * 2148) / 5098)}
         />
       </Block>
-      <HoverBuyButton />
+      {/* <HoverBuyButton /> */}
       <Text
         marginTop={12}
         marginLeft="auto"
@@ -120,7 +120,8 @@ export const Footer = track(
         paddingLeft={24}
         paddingRight={24}
       >
-        {get('sold') >= 1000 ? (
+        The book is currently sold out.
+        {/* {get('sold') >= 1000 ? (
           'The book is currently sold out. Orders placed now will be put on standby and only billed if copies become available.'
         ) : (
           <>
@@ -129,7 +130,7 @@ export const Footer = track(
             now available for $30&nbsp;(including&nbsp;shipping). These are for
             sale in the USA only.
           </>
-        )}
+        )} */}
       </Text>
       <Text
         marginTop={24}
@@ -145,7 +146,7 @@ export const Footer = track(
         criminal justice system, and removing corporate control over government
         were pillars of his campaign.
       </Text>
-      <Text
+      {/* <Text
         marginTop={12}
         marginBottom={48}
         marginLeft="auto"
@@ -160,7 +161,7 @@ export const Footer = track(
         </TextLink>
         , an organization that helps victims of our racist and unjust legal
         system.
-      </Text>
+      </Text> */}
       <Block paddingBottom={96}>
         <HoverButtonLink
           href="/about"

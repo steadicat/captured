@@ -25,12 +25,12 @@ class ToolbarClass extends React.Component {
   render() {
     const {get, back, ...props} = this.props;
     const {hovered} = this.state;
-    const compact = get('browser.width') <= 820;
+    const compact = false; // get('browser.width') <= 820;
     const height = compact ? 89 : 45;
     return (
       <Animate
-        scaleX={hovered ? 1.05 : 1}
-        scaleY={hovered ? 1.05 : 1}
+        // scaleX={hovered ? 1.05 : 1}
+        // scaleY={hovered ? 1.05 : 1}
         translateY={get('browser.known') ? 0 : height + 1}
       >
         <Block
@@ -66,7 +66,7 @@ class ToolbarClass extends React.Component {
               {back ? 'Back' : 'About'}
             </CondensedText>
           </TextLink>
-          <BuyButton
+          {/* <BuyButton
             borderWidth={0}
             onMouseEnter={this.onMouseEnter}
             onMouseLeave={this.onMouseLeave}
@@ -74,7 +74,7 @@ class ToolbarClass extends React.Component {
             paddingLeft={16}
             paddingRight={16}
             display="inline-block"
-          />
+          /> */}
           <SmallCaps>
             <Block
               position="absolute"
@@ -93,7 +93,7 @@ class ToolbarClass extends React.Component {
               />
             </Block>
           </SmallCaps>
-          {compact && (
+          {/* {compact && (
             <CondensedText
               display="block"
               fontSize={18}
@@ -105,7 +105,7 @@ class ToolbarClass extends React.Component {
             >
               ALL PROFIT GOES TO THE BROOKLYN BAIL FUND
             </CondensedText>
-          )}
+          )} */}
         </Block>
       </Animate>
     );

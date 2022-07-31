@@ -10,7 +10,7 @@ import {connect} from '../ducts';
 import {hover} from '../lib/behaviors';
 
 class LinkClass extends React.Component {
-  onLinkClick = event => {
+  onLinkClick = (event) => {
     if (event.shiftKey || event.metaKey || event.superKey || event.controlKey)
       return;
     const {href} = this.props;
@@ -23,7 +23,7 @@ class LinkClass extends React.Component {
   };
 
   render() {
-    const {get, forwardedRef, ...props} = this.props;
+    const {get, forwardedRef, actions, ...props} = this.props;
     return (
       <ResetElement
         tag="a"
